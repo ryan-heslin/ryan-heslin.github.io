@@ -2,36 +2,36 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on A Hugo website</title>
-    <link>https://www.ryan-heslin.github.io/post/</link>
+    <link>/post/</link>
     <description>Recent content in Posts on A Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.ryan-heslin.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Triumph and Travesty: My Journey toward All 50 Stars in Advent of Code 2021</title>
-      <link>https://www.ryan-heslin.github.io/2022/06/02/triumph-and-travesty-my-journey-toward-all-50-stars-in-advent-of-code-2021/</link>
+      <link>/2022/06/02/triumph-and-travesty-my-journey-toward-all-50-stars-in-advent-of-code-2021/</link>
       <pubDate>Thu, 02 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://www.ryan-heslin.github.io/2022/06/02/triumph-and-travesty-my-journey-toward-all-50-stars-in-advent-of-code-2021/</guid>
+      <guid>/2022/06/02/triumph-and-travesty-my-journey-toward-all-50-stars-in-advent-of-code-2021/</guid>
       <description>This post contains spoilers for some 2021 Advent of Code puzzles. Proceed at your own risk.
 If you haven’t heard of Advent of Code, it’s well worth your time to check out. Created and maintained by software engineer Eric Wastl, it’s an annual event involving an advent calendar of Christmas-themed programming challenges. Anyone can participate for free, anonymously if they like. A new puzzle is released on each of the first 25 days of December, starting out simple and gradually increasing in difficulty.</description>
     </item>
     
     <item>
       <title>R tricks I wish I&#39;d known as a beginner</title>
-      <link>https://www.ryan-heslin.github.io/2022/05/29/r-tricks-i-wish-id-known-as-a-beginner/</link>
+      <link>/2022/05/29/r-tricks-i-wish-id-known-as-a-beginner/</link>
       <pubDate>Sun, 29 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://www.ryan-heslin.github.io/2022/05/29/r-tricks-i-wish-id-known-as-a-beginner/</guid>
+      <guid>/2022/05/29/r-tricks-i-wish-id-known-as-a-beginner/</guid>
       <description>a.sourceLine { display: inline-block; line-height: 1.25; } a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; } a.sourceLine:empty { height: 1.2em; } .sourceCode { overflow: visible; } code.sourceCode { white-space: pre; position: relative; } div.sourceCode { margin: 1em 0; } pre.sourceCode { margin: 0; } @media screen { div.sourceCode { overflow: auto; } } @media print { code.sourceCode { white-space: pre-wrap; } a.sourceLine { text-indent: -1em; padding-left: 1em; } } pre.</description>
     </item>
     
     <item>
       <title>Hello, world!</title>
-      <link>https://www.ryan-heslin.github.io/2022/05/21/hello-world/</link>
+      <link>/2022/05/21/hello-world/</link>
       <pubDate>Sat, 21 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://www.ryan-heslin.github.io/2022/05/21/hello-world/</guid>
+      <guid>/2022/05/21/hello-world/</guid>
       <description>Welcome to my new blog! My name is Ryan Heslin, and I just graduated with a master’s degree in data science from American University. As I do for most of my side projects, I’ve defined goals for this one. Naturally, I’ve made them just clear enough that I can plausibly deny working on this thing is procrastination. serves goals I’ve defined just clearly that enough I can plausibly deny working on it is procrastination.</description>
     </item>
     
