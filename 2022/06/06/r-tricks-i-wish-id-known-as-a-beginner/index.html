@@ -196,7 +196,7 @@ it’s still good to know.</p>
 #     names(object) &lt;- nm
 #     object
 # }
-# &lt;bytecode: 0x561abad38d68&gt;
+# &lt;bytecode: 0x55ae8d83efe8&gt;
 # &lt;environment: namespace:stats&gt;</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r source"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">tapply</a></code></pre></div>
 <pre class="output"><code># function (X, INDEX, FUN = NULL, ..., default = NA, simplify = TRUE) 
@@ -242,7 +242,7 @@ it’s still good to know.</p>
 #     }
 #     ansmat
 # }
-# &lt;bytecode: 0x561abd8f7268&gt;
+# &lt;bytecode: 0x55ae903fa5b8&gt;
 # &lt;environment: namespace:base&gt;</code></pre>
 <p>In my experience, beginners often don’t think to do this, perhaps because they don’t grasp that functions are first-class objects that can be interacted with.</p>
 <p>We have to do a little more work if the function in question is actually an S3 generic, or is not exported from the package it belongs to. In the first case, we can use the fact that S3 methods are generally
@@ -284,7 +284,7 @@ named <code>genericname.classname</code>:</p>
 #     }
 #     invisible(x)
 # }
-# &lt;bytecode: 0x561ab9c74200&gt;
+# &lt;bytecode: 0x55ae8c77a590&gt;
 # &lt;environment: namespace:base&gt;</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r source"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">mean.default</a></code></pre></div>
 <pre class="output"><code># function (x, trim = 0, na.rm = FALSE, ...) 
@@ -311,7 +311,7 @@ named <code>genericname.classname</code>:</p>
 #     }
 #     .Internal(mean(x))
 # }
-# &lt;bytecode: 0x561ab9b49be8&gt;
+# &lt;bytecode: 0x55ae8c64ff78&gt;
 # &lt;environment: namespace:base&gt;</code></pre>
 <p>In the second case, we can use
 the <code>:::</code> function, <code>::</code>’s nosier cousin, to access a non-exported object:</p>
@@ -327,7 +327,7 @@ the <code>:::</code> function, <code>::</code>’s nosier cousin, to access a no
 #         out
 #     }
 # }
-# &lt;bytecode: 0x561abbf73fd0&gt;
+# &lt;bytecode: 0x55ae8ea77208&gt;
 # &lt;environment: namespace:tidyselect&gt;</code></pre>
 <p>It’s seldom a good idea to <em>use</em> non-exported functions, because they probably weren’t exported for a reason!</p>
 <p>Of course, for primitives and certain special functions,
