@@ -6,7 +6,16 @@
     <description>Recent content on A Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 06 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ghost in the Machine: The Remnant of R&#39;s Past That Haunts it Still</title>
+      <link>/2022/06/12/ghost-in-the-machine-the-remnant-of-rs-past-that-haunts-it-still/</link>
+      <pubDate>Sun, 12 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/06/12/ghost-in-the-machine-the-remnant-of-rs-past-that-haunts-it-still/</guid>
+      <description>a.sourceLine { display: inline-block; line-height: 1.25; } a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; } a.sourceLine:empty { height: 1.2em; } .sourceCode { overflow: visible; } code.sourceCode { white-space: pre; position: relative; } div.sourceCode { margin: 1em 0; } pre.sourceCode { margin: 0; } @media screen { div.sourceCode { overflow: auto; } } @media print { code.sourceCode { white-space: pre-wrap; } a.sourceLine { text-indent: -1em; padding-left: 1em; } } pre.</description>
+    </item>
+    
     <item>
       <title>R tricks I wish I&#39;d known as a beginner</title>
       <link>/2022/06/06/r-tricks-i-wish-id-known-as-a-beginner/</link>
