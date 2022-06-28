@@ -1,0 +1,76 @@
+---
+title: "Triumph and Travesty: Earning All 50 Stars in Advent of Code 2021"
+author: "Ryan Heslin"
+date: "2022-06-27"
+categories: ["R"]
+urlcolor: "blue"
+params:
+    title: "Triumph and Travesty: Earning All 50 Stars in Advent of Code 2021"
+---
+
+
+_This post contains spoilers for some 2021 Advent of Code puzzles. Proceed at your own risk_.
+
+If you haven't heard of [Advent of Code](https://adventofcode.com/), it's well worth
+your time to check out. Created and maintained by software engineer Eric Wastl,
+Advent of Code (AoC for short) is an annual event involving an advent calendar of Christmas-themed programming challenges.
+Anyone can participate for free, anonymously if they like.
+A new puzzle is released on each of the first 25 days of December. They start
+simple and gradually increase in difficulty. Elite players compete for spots on the
+official leaderboard of the fastest solutions, but most (myself included) just aim to solve the puzzles. Each
+puzzle(with one exception) awards two "gold stars" when completed, providing a way to track your progress.
+
+The puzzles themselves take the form of well-posed problems, connected through a whimsical yuletide narrative.
+This year's edition sent players to the ocean depths in a submarine to retrieve the lost keys to Santa's sleigh. Along the way, they encountered treacherous currents, labyrinthine caves, and
+a whole lot of obstreperous sea creatures - all of which could only be overcome with some creative programming
+(Half the fun is recognizing the classical computer science problems underneath the intentonally silly presentation).
+Each puzzle consists of two parts. The first part states the problem, with any necessary rules, and
+offers a plaintext input (randomly generated for each player) to work from. If the player submits the
+correct answer, they receive a gold star...and updated instructions with a new version of the problem to solve. It usually adds a new constraint or asks the player to interpret the input in a different way; depending on the problem and the player's approach for part 1, overcoming it could take anything from changing a single line to starting from scratch. Submitting the correct answer for the second part earns another gold star and completes that
+day's puzzle. (The lone exception to the standard format is the Christmas Day puzzle, which differs in a way I won't spoil). Players can use whatever language and strategy they like; some solve
+puzzles in absurd (or do I mean awesome) languages like [Rockstar](https://codewithrockstar.com/), or
+impose tough constraints, because they can.
+
+The puzzles test a wide variety of programming techniques, from recursion to
+graph traversal to regular expressions. The problem statements are all "fair" - there
+are no hidden rules or lawyerly gotchas - but even a subtle misunderstanding can cost
+you hours of frustrating debugging (just like real life!). With no constraints and no expectation
+to write production-quality code, you're free to tackle each problem as you see fit, limited
+only by your knowledge and creativity.
+
+I stumbled across AoC in late 2020, a pivotal time in my life. Perhaps a month before, realizing
+I liked programming a lot more than policy analysis, I had
+decided to convert my masters degree from public policy to data science. With enough experience in R
+to feel (over)confident in my programming skills, I dove in without
+hesitation and spent much of that holiday break absorbed in the puzzles. Tackling such beautifully abstract
+problems, with no pressure and no shame in failing, was bliss; I enjoyed even the frustration.
+Realizing R was ill-suited for many of the puzzles, I switched to Python, learning it as I went.
+I only ever solved some of the puzzles, and those in amateurish fashion (look [here](https://github.com/ryan-heslin/aoc2020) if you're morbidly curious), but I became a much better programmer for it. Having had so much fun, I resolved to come back next year truly prepared.
+
+When December 2021 came, I threw myself into the puzzles. (I probably should have spent more time studying for exams instead, but this questionable time allocation thankfully didn't hurt my GPA). The first few days came easily, aside from day 3, for which I kludged together an overcomplicated solution involving bitshifting. I switched between R and Python, preferring R for problems involving matrices and similar structures and Python where iteration was emphasized. Once again, I learned plenty along the way: queues for day 6, optimization for day 7, complex numbers as coordinates for day 11. For longer than I expected, I
+managed not to fall a day behind.
+
+But that couldn't last. I got badly stuck on part 2 of day 14 (which was not a hard problem, in hindsight). The end came on day 15, a tough problem involving graph traversal. I stalled out after hours of work, until a post on the subreddit pointed me toward [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm). After writing probably the worst implementation of all time and letting my computer chug along for about an hour, I claimed both gold stars. But I had almost burnt myself out. The remaining puzzles (aside from a few easier "breather" problems) seemed impossible, and I ceased trying to keep up. Determined to keep going, I gutted my way through day 16, completing it only after spending hours looking in the wrong places for a simple bug. I knew then I had to stop.
+
+I had done better than I had expected; 50 stars seemed within reach. After taking a few days off, I knocked
+out a few of the easier puzzles, leaving thirty-odd stars secured. But then the spring semester started,
+depriving me of free time. Somehow, I still managed to complete the very challenging day 24, guided by a kind user on the Python discord. After that, as the holidays became a distant memory, Advent of Code fell to the bottom of my priorities.
+
+That is, until I graduated. Without a job, and itching to work on something that didn't involve complex data manipulation, I picked up where I had left off. The first puzzles fell with surprising ease: day 18, after some crude but effective string processing; day 19, after browsing the [subreddit](https://www.reddit.com/r/adventofcode/) for tips; and even part 2 of day 21, completed after I spent half an hour fiddling with code I hadn't touched for five months (when does that ever happen?). Day 22 stumped me for a while, so I asked for advice on the subreddit and followed a set-theory approach that ended up yielding a very elegant solution. That left just day 23: finding the optimal strategy for a simple puzzle that would be very, very hard to solve programatically. I dimly remembered some post on the subreddit recommending the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm). Knowing it was always smart to work out the problem with pen and paper before writing any code, I
+sketched out a game board, cut up some sticky notes to use as tokens, and set to work. I solved part 1 easily enough this way, so for the hell of it I tried again on part 2, which posed the same problem on an expanded game board.
+A few failed attempts later, I nearly gave up; I had learned the hard way how easily "just one more try" turns into a few hours of futile coding. But that time, I didn't. When I entered my answer, I saw for the last time the familiar message:
+
+```
+You have solved part 2 of this puzzle! It provides one gold star.
+```
+
+It came as an anticlimax; I would not have to code that A* nightmare after all. Perversely, I felt cheated.
+Maybe I _had_ cheated. The official description of Advent of Code entreats you to solve puzzles in "any programming language you like," after all. Was I violating the spirit of the event by avoiding a programmatic solution entirely? Perhaps. The thought nags at me, so I suspect I'll come back to this problem eventually, when I'm more confident in graph traversal algorithms. But still, I had all 50 stars, a feat that had seemed impossible just a year before.
+
+Viewed one way, this is a trivial achievement: writing throwaway code to solve toy problems invented to kill time over in the weeks before Christmas. Viewed another way, it's legitimately impressive. I solved all 25 of these puzzles in the time I could spare, just to sharpen my skills and indulge my love of the art of programming. I think it's enough to say that grad students my age have found worse diversions. Either way, I emphasize that I had plenty of help: people on the subreddit and other forums to guide me, tutorials to consult, and above all the knowledge that many other people persevered through the same frustrations and got to 50 stars.
+
+I'll probably be back next year, of course. I'll have a lot less time to devote,  since I expect to have a job by then. I don't know if I'll grind out all 50 stars again, now that I've done it already. But I do  know that any time I spend on Advent of Code won't be wasted, and I'll be a better programmer for it.
+
+I just hope there aren't as many graphs this time.
+
+My repository for Advent of Code 2021: (https://github.com/ryan-heslin/AoC2021)[https://github.com/ryan-heslin/AoC2021]

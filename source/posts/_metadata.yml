@@ -1,0 +1,33 @@
+# options specified here will apply to all posts in this folder
+
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+freeze: false
+
+# Enable banner style title blocks
+title-block-banner: true
+format:
+    html:
+        anchor-sections: true
+        code-tools:
+            source: true
+            toggle: false
+            caption: none
+        code-block-bg: "#AFC7DE"
+        code-block-border-left: "#BA6670"
+        code-link: true
+        df-print: "paged"
+        highlight-style: arrow
+        smooth-scroll: true
+        style: "quarto.css"
+knitr:
+    opts_chunk:
+            class.output : "output"
+            class.source : "source"
+            collapse : false
+            comment : "--"
+            fig.align : "center"
+            fig.pos : ""
+            highlight : true
+            tidy : "styler"
+            warning : false

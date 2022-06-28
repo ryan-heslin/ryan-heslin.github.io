@@ -1,0 +1,189 @@
+---
+title: "`r params$title`"
+author: "Ryan Heslin"
+date: "2022-06-12"
+categories: ["R"]
+tags: ["R Markdown"]
+urlcolor: "blue"
+output:
+  blogdown::html_page:
+    highlight: "kate"
+    df_print: "paged"
+params:
+    title: "Ghost in the Machine: The Remnant of R's Past That Haunts it Still"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  class.output = "output",
+  class.source = "source",
+  collapse = FALSE,
+  comment = "#",
+  fig.align = "center",
+  fig.pos = "",
+  highlight = TRUE,
+  tidy = "styler",
+  warning = FALSE
+)
+```
+
+As programming languages go, R isn't particularly old: its first public release came in 
+early 2000 (see [https://www.stat.auckland.ac.nz/~ihaka/downloads/Massey.pdf](https://www.stat.auckland.ac.nz/~ihaka/downloads/Massey.pdf) for more details). 
+
+(I can't help but pause here to relay the account the linked presentation gives of R's origins. 
+It all began with this hallway conversation between Ross Ihaka and Robert Gentleman in the University of Auckland around 1990):
+<blockquote cite="https://www.stat.auckland.ac.nz/~ihaka/downloads/Massey.pdf">
+Gentleman: “Let’s write some software.”
+Ihaka: “Sure, that sounds like fun.”
+</blockquote>
+
+But as many users know, its roots 
+go back further. R was developed from the language S, created in the 1970s by a team led by John Chambers at Bell Labs.
+Those were the glory days of Bell Labs, when the language C and the Unix ecosystem were developed. Like a modern palace built on the foundations of an ancient one, 
+R bears many traces of its lineage. Syntax is very similar, many features are backward-compatible, 
+and the documentation for some functions even refers to resources about S rather than R. 
+(Try `?sum`, for one example). 
+
+One of those traces, harder to observe but certainly still present, is also one of R's
+most unusual (and, in some quarters, derided) features: an emphasis on convenience 
+in interactive use.  Interpreted languages typically support interactivity in some way, since the ability to run a snippet of code and instantly get results is 
+one of their greatest advantages over compiled languages. But S was designed primarily for interactive data exploration, and R has retained that capability as a design focus. 
+In areas great and small, from core design 
+choices to implementation quirks, R makes it 
+as easy as possible to bang out code in the console and see what happens. That makes it a fast, flexible tool for exploring data and following hunches. It also strews mines in the path of anyone programming in the language without detailed knowledge of the 
+language's nuances. 
+
+A few examples will make this painfully clear.
+
+# Partial Matching, Complete Headache
+
+Can you spot the problem with this call? It runs correctly:
+```{r}
+rep(1:3, length = 10)
+```
+
+but is missing something. The relevant argument of `rep` is actually called `length.out`, not `length`, but R's partial argument matching saves us, since `length` is a shortened form of `length.out`. 
+
+This is nice to have when typing code in the console. But relying on partial argument matching in scripts is a _very_ bad idea. 
+
+Suppose you're working with a package that includes some functions with annoyingly long argument names. All that typing is annoying, so you decide you may as well save some keystrokes:
+```{r}
+foo <- function(xyzabc = 0, abcxyz) {
+  rnorm(100, mean = xyzabc, sd = abcxyz)
+}
+foo(abc = 2)
+```
+
+All seems well. But then a version update adds a new argument:
+
+```{r, error = TRUE }
+foo <- function(abcabc = 100, xyzabc = 0, abcxyz) {
+  rnorm(abcabc, mean = xyzabc, sd = abcxyz)
+}
+foo(abc = 2)
+```
+
+R throws an error, unable to find an unambiguous match. (Imagine how painful this would be to debug if R defaulted to the first match instead). The way to avoid this scenario is simple: never rely on partial argument matching in permanent code. Nonetheless, many packages do. You can identify offenders yourself by setting the `warnPartialMatchArgs` option: 
+
+```{r, warning = TRUE }
+options(warnPartialMatchArgs = TRUE)
+foo <- function(xyzabc = 0, abcxyz) {
+  rnorm(100, mean = xyzabc, sd = abcxyz)
+}
+foo(abc = 2)
+```
+
+# When Simplification Complicates
+
+R is an example of a weakly typed language with dynamic typing. That means data types are 
+known only at runtime, not before, and that the language will try to coerce disparate 
+types to a common type instead of throwing an error. That means the interpreter will happily run code like
+
+```{r}
+paste(mtcars, 1)
+```
+
+`paste` just coerces everything to character, no matter how ludicrous the results. This behavior can trip you up, but it's not truly insidious. 
+
+Unfortunately, R sometimes changes types under your nose. Suppose we write a function, `subset2`. It takes as argument a data frame, and two  functions that take a data frame as argument. It filters the data column-wise using `col_f`, then rowwise using `row_f`.  
+
+```{r}
+subset2 <- function(df, col_f, row_f) {
+  df <- df[, col_f(df)]
+  df[row_f(df), ]
+}
+subset2(mtcars, \(x) colSums(x) > 500, \(x) rowSums(x) > 500)
+```
+
+That seems to work. (Deadly words!) But what if my finger had slipped when I typed `500`?
+
+```{r, error = TRUE}
+subset2 <- function(df, col_f, row_f) {
+  df <- df[row_f, col_f(df)]
+  df[row_f(df), ]
+}
+subset2(mtcars, \(x) colSums(x) > 5000, \(x) rowSums(x) > 500)
+```
+
+What happened? Only one column of `mtcars`, `disp`, has a column sum greater than 5000. And what happens if you select a single column with array-style indexing?
+
+```{r}
+mtcars[, "disp"]
+```
+
+R helpfully simplifies to an atomic vector. We can fix our function by disabling this behavior: 
+
+```{r}
+subset3 <- function(df, col_f, row_f) {
+  df <- df[, col_f(df), drop = FALSE]
+  df[row_f(df), ]
+}
+subset3(mtcars, \(x) colSums(x) > 5000, \(x) rowSums(x) > 500)
+```
+
+or, even more sensibly, using list subsetting (single brackets, no comma), which never simplifies.
+
+This behavior isn't indefensible. It's consistent with how subsetting works on arrays (which are usually atomic vectors). In interactive use, it's convenient, since then you're usually interested in the data a column contains, not the object containing it. But automatic simplification is easily missed and potentially destructive, and the way to avoid it can be found only if you carefully read the documentation. 
+
+# Brevity is the Soul of Bugs
+
+Suppose you have the following vector: 
+```{r}
+x <- c(1, 4, 7, NA, -9, NA)
+```
+
+R is strict about missing values, but not about logical constants. `T` and `F` can be used as abbreviations for `TRUE` and `FALSE`, respectively. The following is a valid way of taking the mean: 
+
+```{r}
+mean(x, na.rm = T)
+```
+
+Likewise, with `F` for `FALSE`:
+
+```{r}
+mtcars[1:5, "cyl", drop = F]
+```
+
+What's the harm in this? While `TRUE` and `FALSE` are reserved words, the abbreviations _aren't_. Let's say your colleague creates a variable `T`, making sure to use uppercase to avoid masking the `t` function: 
+
+```{r}
+T <- pt(2, df = 10)
+```
+
+This code now fails in a confusing way:   
+```{r}
+mean(x, na.rm = T)
+```
+
+The reason for this feature, as before, is clear: it's convenient in interactive use. The problem with it is equally clear: it's suicidal in programmatic use.
+
+# Conclusion 
+
+The theme here is obvious: features that save a few keystrokes in interactive use can cause maddening bugs if carelessly used in production code. You need familiarity with the language and some degree of vigilance to avoid the pitfalls, and everyone slips now and again. 
+
+The longer I've spent with R, the more convinced I've become that R has outgrown these features. R was designed as an environment for interactive data exploration, statistical testing, and graphical displays, but today it can do so much more: serve Web apps, query remote databases, render just about any document (even this one) with Rmarkdown, and many other uses. 
+But to fulfill these sophisticated use cases, you have to carefully avoid traps like the ones discussed here. That fact has probably spurred some organizations to use Python instead, since it lacks these quirks. So R's design emphasis on interactivity may limit its growth. 
+
+Moreover, the benefits these features deliver are scant. The three behaviors I describe - partial argumetn matching, logical abbreviations, and `drop = FALSE` save a bit of typing (or, in the last case, an extra step of data manipulation). That doesn't balance the potential harm they can cause in production code, especially when modern IDEs (and Vim or Emacs, of course) support autocompletion, obviating the need for abbreviated code.  
+
+Don't get me wrong. R remains a powerful, expressive language built on solid design principles. It's my first choice for any kind of data manipulation, and I still find it fun and satisfying to use. But some of its behaviors are more at home in its past than its future.

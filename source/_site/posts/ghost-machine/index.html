@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.587">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Ryan Heslin">
+<meta name="dcterms.date" content="2022-06-12">
+<title>source2 - Ghost in the Machine: The Remnant of R’s Past That Haunts it Still</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script><link rel="stylesheet" href="../../styles.css">
+</head>
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">source2</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ryan-heslin"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.linkedin.com/in/ryan-heslin/">LinkedIn</a>
+  </li>  
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title">Ghost in the Machine: The Remnant of R’s Past That Haunts it Still</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">R</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Ryan Heslin </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 12, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content"><p>As programming languages go, R isn’t particularly old: its first public release came in early 2000 (see <a href="https://www.stat.auckland.ac.nz/~ihaka/downloads/Massey.pdf">https://www.stat.auckland.ac.nz/~ihaka/downloads/Massey.pdf</a> for more details).</p>
+<p>But as many users know, its roots go back further. R was developed from the language S, created in the 1970s by a team led by John Chambers at Bell Labs. Those were the glory days of Bell Labs, when the language C and the Unix ecosystem were developed. Like a modern palace built on the foundations of an ancient one, R bears many traces of its lineage. Syntax is very similar, many features are backward-compatible, and the documentation for some functions even refers to resources about S rather than R. (Try <code><a href="https://rdrr.io/r/base/sum.html">?sum</a></code>, for one example).</p>
+(I can’t help but pause here to relay the account the linked presentation gives of R’s origins. It all began with this hallway conversation between Ross Ihaka and Robert Gentleman in the University of Auckland around 1990):
+<blockquote cite="https://www.stat.auckland.ac.nz/~ihaka/downloads/Massey.pdf" class="blockquote">
+<p>Gentleman: “Let’s write some software.”</p>
+Ihaka: “Sure, that sounds like fun.”
+</blockquote>
+<p>One of those traces, harder to observe but certainly still present, is also one of R’s most unusual (and, in some quarters, derided) features: an emphasis on convenience in interactive use. Interpreted languages typically support interactivity in some way, since the ability to run a snippet of code and instantly get results is one of their greatest advantages over compiled languages. But S was designed primarily for interactive data exploration, and R has retained that capability as a design focus. In areas great and small, from core design choices to implementation quirks, R makes it as easy as possible to bang out code in the console and see what happens. That makes it a fast, flexible tool for exploring data and following hunches. It also strews mines in the path of anyone programming in the language without detailed knowledge of the language’s nuances.</p>
+<p>A few examples will make this painfully clear.</p>
+<section id="partial-matching-complete-headache" class="level1"><h1>Partial Matching, Complete Headache</h1>
+<p>Can you spot the problem with this call? It runs correctly:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, length <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>#  [1] 1 2 3 1 2 3 1 2 3 1</code></pre>
+</div>
+</div>
+<p>but is missing something. The relevant argument of <code>rep</code> is actually called <code>length.out</code>, not <code>length</code>, but R’s partial argument matching saves us, since <code>length</code> is a shortened form of <code>length.out</code>.</p>
+<p>This is nice to have when typing code in the console. But relying on partial argument matching in scripts is a <em>very</em> bad idea.</p>
+<p>Suppose you’re working with a package that includes some functions with annoyingly long argument names. All that typing is annoying, so you decide you may as well save some keystrokes:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">foo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">xyzabc</span> <span class="op">=</span> <span class="fl">0</span>, <span class="va">abcxyz</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span> <span class="va">xyzabc</span>, sd <span class="op">=</span> <span class="va">abcxyz</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="fu">foo</span><span class="op">(</span>abc <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>#   [1] -0.14474116  0.60098400  1.77240352
+#   [4]  0.07552998  4.06271749 -0.99315419
+#   [7] -1.24795229  1.39565334  2.50941028
+#  [10] -1.66780542  3.44713522  1.36669916
+#  [13] -5.13004628  2.47213587  0.63734525
+#  [16] -0.86644790 -1.22877238  4.46518917
+#  [19]  0.46514057 -4.38870838 -3.31432202
+#  [22]  1.28751540  1.43645686  1.03016272
+#  [25] -1.46558565 -0.19242195 -2.29547817
+#  [28] -0.95430432 -0.26223280  0.16231707
+#  [31] -0.08693140  0.90372904 -1.40034291
+#  [34]  1.26599067  2.18735411  0.99803618
+#  [37]  3.07951554  0.83043784 -0.65003870
+#  [40]  2.92633028 -0.27119565  1.95976091
+#  [43] -0.25653569  1.75980168 -0.02588017
+#  [46]  2.31197826  1.52636633  3.23602650
+#  [49] -2.11676069  2.56483030 -0.82413891
+#  [52]  2.05583079  2.22936478 -0.38320255
+#  [55]  0.07851028  2.17687505  0.70388209
+#  [58] -1.26790658  0.42781730  4.52662406
+#  [61] -0.49113158  1.20855002 -2.67378841
+#  [64] -2.04772648  1.37055174  4.75281979
+#  [67]  3.46696729  2.64157506  1.10505959
+#  [70] -2.77335804  0.75957179  0.19798221
+#  [73] -2.64202385  1.12738387 -3.76460136
+#  [76] -4.04009812  3.22998849 -0.14824327
+#  [79]  2.32877615 -2.87373698  1.13775440
+#  [82] -0.19276204 -1.42852480  1.72392764
+#  [85]  0.18617880 -0.67445383 -1.01115807
+#  [88]  2.80865536  3.67030721  2.73264110
+#  [91] -1.67572170 -1.67201970  3.13888669
+#  [94]  0.37635108  2.64136787 -3.60612529
+#  [97]  0.16009487  1.17835581 -3.18485573
+# [100] -0.48225909</code></pre>
+</div>
+</div>
+<p>All seems well. But then a version update adds a new argument:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">foo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">abcabc</span> <span class="op">=</span> <span class="fl">100</span>, <span class="va">xyzabc</span> <span class="op">=</span> <span class="fl">0</span>, <span class="va">abcxyz</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">abcabc</span>, mean <span class="op">=</span> <span class="va">xyzabc</span>, sd <span class="op">=</span> <span class="va">abcxyz</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="fu">foo</span><span class="op">(</span>abc <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code># Error in foo(abc = 2): argument 1 matches multiple formal arguments</code></pre>
+</div>
+</div>
+<p>R throws an error, unable to find an unambiguous match. (Imagine how painful this would be to debug if R defaulted to the first match instead). The way to avoid this scenario is simple: never rely on partial argument matching in permanent code. Nonetheless, many packages do. You can identify offenders yourself by setting the <code>warnPartialMatchArgs</code> option:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>warnPartialMatchArgs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">foo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">xyzabc</span> <span class="op">=</span> <span class="fl">0</span>, <span class="va">abcxyz</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span> <span class="va">xyzabc</span>, sd <span class="op">=</span> <span class="va">abcxyz</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="fu">foo</span><span class="op">(</span>abc <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code># Warning in foo(abc = 2): partial argument match of
+# 'abc' to 'abcxyz'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>#   [1] -1.49209845  1.29374610  2.10655430
+#   [4] -2.46554082  0.77219392  4.55184661
+#   [7]  2.09607612 -0.65605598  2.98195327
+#  [10] -3.61324047 -2.10469131  1.46815883
+#  [13]  1.42885713  1.26783208 -0.98660407
+#  [16]  3.26310085  0.43267919 -0.99724576
+#  [19] -0.10387582 -3.39533192  0.34481954
+#  [22] -2.33029951 -0.82982764 -2.59024130
+#  [25] -2.51084567  1.60920444 -1.08659350
+#  [28] -0.65095317 -0.56080247 -0.63018084
+#  [31] -1.33646967 -1.50325893  5.27733498
+#  [34] -0.03347026  0.54488149 -4.06958089
+#  [37]  0.53471234  2.03376266  3.40786502
+#  [40] -0.17759090 -0.17269618  2.93694468
+#  [43]  2.86638716  1.92171014  0.24707007
+#  [46]  4.29372663 -0.03245688 -7.08713552
+#  [49] -2.16781531  2.39506551 -0.55521261
+#  [52]  3.74523071  2.04100590 -2.88010660
+#  [55] -2.48939465 -0.11250115  4.13564503
+#  [58]  2.20762650  1.85722658 -2.52413990
+#  [61]  2.82209540  3.03046316  1.01166664
+#  [64] -1.36816545 -0.38622786  1.53998808
+#  [67] -2.45684346 -0.53905991 -1.06812189
+#  [70] -3.24106753 -2.81848521  0.01300385
+#  [73] -1.14859251 -1.23841294 -3.68442207
+#  [76]  2.17728593  3.15462924 -1.09098558
+#  [79]  3.97432042 -1.08402861  0.41058885
+#  [82] -2.15592606  0.14744014 -2.44377688
+#  [85]  0.10866241 -3.82142430 -1.34148332
+#  [88] -1.97324816  2.08501731  5.96818710
+#  [91]  0.08131418  0.95967279  2.01514880
+#  [94]  2.63792355 -2.12218413  1.89934421
+#  [97] -3.23250031 -0.13825823 -2.76841778
+# [100] -2.93338630</code></pre>
+</div>
+</div>
+</section><section id="when-simplification-complicates" class="level1"><h1>When Simplification Complicates</h1>
+<p>R is an example of a weakly typed language with dynamic typing. That means data types are known only at runtime, not before, and that the language will try to coerce disparate types to a common type instead of throwing an error. That means the interpreter will happily run code like</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fl">1</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>#  [1] "c(21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4) 1"                    
+#  [2] "c(6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4) 1"                                                                                                            
+#  [3] "c(160, 160, 108, 258, 360, 225, 360, 146.7, 140.8, 167.6, 167.6, 275.8, 275.8, 275.8, 472, 460, 440, 78.7, 75.7, 71.1, 120.1, 318, 304, 350, 400, 79, 120.3, 95.1, 351, 145, 301, 121) 1"                       
+#  [4] "c(110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205, 215, 230, 66, 52, 65, 97, 150, 150, 245, 175, 66, 91, 113, 264, 175, 335, 109) 1"                                                     
+#  [5] "c(3.9, 3.9, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3.92, 3.07, 3.07, 3.07, 2.93, 3, 3.23, 4.08, 4.93, 4.22, 3.7, 2.76, 3.15, 3.73, 3.08, 4.08, 4.43, 3.77, 4.22, 3.62, 3.54, 4.11) 1"                  
+#  [6] "c(2.62, 2.875, 2.32, 3.215, 3.44, 3.46, 3.57, 3.19, 3.15, 3.44, 3.44, 4.07, 3.73, 3.78, 5.25, 5.424, 5.345, 2.2, 1.615, 1.835, 2.465, 3.52, 3.435, 3.84, 3.845, 1.935, 2.14, 1.513, 3.17, 2.77, 3.57, 2.78) 1"  
+#  [7] "c(16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20, 22.9, 18.3, 18.9, 17.4, 17.6, 18, 17.98, 17.82, 17.42, 19.47, 18.52, 19.9, 20.01, 16.87, 17.3, 15.41, 17.05, 18.9, 16.7, 16.9, 14.5, 15.5, 14.6, 18.6) 1"
+#  [8] "c(0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1) 1"                                                                                                            
+#  [9] "c(1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1) 1"                                                                                                            
+# [10] "c(4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 5, 4) 1"                                                                                                            
+# [11] "c(4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2, 2, 4, 2, 1, 2, 2, 4, 6, 8, 2) 1"</code></pre>
+</div>
+</div>
+<p><code>paste</code> just coerces everything to character, no matter how ludicrous the results. This behavior can trip you up, but it’s not truly insidious.</p>
+<p>Unfortunately, R sometimes changes types under your nose. Suppose we write a function, <code>subset2</code>. It takes as argument a data frame, and two functions that take a data frame as argument. It filters the data column-wise using <code>col_f</code>, then rowwise using <code>row_f</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">subset2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">col_f</span>, <span class="va">row_f</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span>, <span class="fu">col_f</span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">]</span>
+  <span class="va">df</span><span class="op">[</span><span class="fu">row_f</span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, <span class="op">]</span>
+<span class="op">}</span>
+<span class="fu">subset2</span><span class="op">(</span><span class="va">mtcars</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">500</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">500</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mpg"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["disp"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["hp"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["qsec"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"18.7","2":"360","3":"175","4":"17.02","_rn_":"Hornet Sportabout"},{"1":"14.3","2":"360","3":"245","4":"15.84","_rn_":"Duster 360"},{"1":"10.4","2":"472","3":"205","4":"17.98","_rn_":"Cadillac Fleetwood"},{"1":"10.4","2":"460","3":"215","4":"17.82","_rn_":"Lincoln Continental"},{"1":"14.7","2":"440","3":"230","4":"17.42","_rn_":"Chrysler Imperial"},{"1":"15.5","2":"318","3":"150","4":"16.87","_rn_":"Dodge Challenger"},{"1":"13.3","2":"350","3":"245","4":"15.41","_rn_":"Camaro Z28"},{"1":"19.2","2":"400","3":"175","4":"17.05","_rn_":"Pontiac Firebird"},{"1":"15.8","2":"351","3":"264","4":"14.50","_rn_":"Ford Pantera L"},{"1":"15.0","2":"301","3":"335","4":"14.60","_rn_":"Maserati Bora"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>That seems to work. (Deadly words!) But what if my finger had slipped when I typed <code>500</code>?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">subset2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">col_f</span>, <span class="va">row_f</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span><span class="va">row_f</span>, <span class="fu">col_f</span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">]</span>
+  <span class="va">df</span><span class="op">[</span><span class="fu">row_f</span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, <span class="op">]</span>
+<span class="op">}</span>
+<span class="fu">subset2</span><span class="op">(</span><span class="va">mtcars</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">5000</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">500</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code># Error in xj[i]: invalid subscript type 'closure'</code></pre>
+</div>
+</div>
+<p>What happened? Only one column of <code>mtcars</code>, <code>disp</code>, has a column sum greater than 5000. And what happens if you select a single column with array-style indexing?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mtcars</span><span class="op">[</span>, <span class="st">"disp"</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>#  [1] 160.0 160.0 108.0 258.0 360.0 225.0 360.0
+#  [8] 146.7 140.8 167.6 167.6 275.8 275.8 275.8
+# [15] 472.0 460.0 440.0  78.7  75.7  71.1 120.1
+# [22] 318.0 304.0 350.0 400.0  79.0 120.3  95.1
+# [29] 351.0 145.0 301.0 121.0</code></pre>
+</div>
+</div>
+<p>R helpfully simplifies to an atomic vector. We can fix our function by disabling this behavior:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">subset3</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">col_f</span>, <span class="va">row_f</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span>, <span class="fu">col_f</span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>
+  <span class="va">df</span><span class="op">[</span><span class="fu">row_f</span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, <span class="op">]</span>
+<span class="op">}</span>
+<span class="fu">subset3</span><span class="op">(</span><span class="va">mtcars</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">5000</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">500</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code># numeric(0)</code></pre>
+</div>
+</div>
+<p>or, even more sensibly, using list subsetting (single brackets, no comma), which never simplifies.</p>
+<p>This behavior isn’t indefensible. It’s consistent with how subsetting works on arrays (which are usually atomic vectors). In interactive use, it’s convenient, since then you’re usually interested in the data a column contains, not the object containing it. But automatic simplification is easily missed and potentially destructive, and the way to avoid it can be found only if you carefully read the documentation.</p>
+</section><section id="brevity-is-the-soul-of-bugs" class="level1"><h1>Brevity is the Soul of Bugs</h1>
+<p>Suppose you have the following vector:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">7</span>, <span class="cn">NA</span>, <span class="op">-</span><span class="fl">9</span>, <span class="cn">NA</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>R is strict about missing values, but not about logical constants. <code>T</code> and <code>F</code> can be used as abbreviations for <code>TRUE</code> and <code>FALSE</code>, respectively. The following is a valid way of taking the mean:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code># [1] 0.75</code></pre>
+</div>
+</div>
+<p>Likewise, with <code>F</code> for <code>FALSE</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="st">"cyl"</span>, drop <span class="op">=</span> <span class="cn">F</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["cyl"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"6","_rn_":"Mazda RX4"},{"1":"6","_rn_":"Mazda RX4 Wag"},{"1":"4","_rn_":"Datsun 710"},{"1":"6","_rn_":"Hornet 4 Drive"},{"1":"8","_rn_":"Hornet Sportabout"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>What’s the harm in this? While <code>TRUE</code> and <code>FALSE</code> are reserved words, the abbreviations <em>aren’t</em>. Let’s say your colleague creates a variable <code>T</code>, making sure to use uppercase to avoid masking the <code>t</code> function:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="fl">2</span>, df <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This code now fails in a confusing way:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code># [1] NA</code></pre>
+</div>
+</div>
+<p>The reason for this feature, as before, is clear: it’s convenient in interactive use. The problem with it is equally clear: it’s suicidal in programmatic use.</p>
+</section><section id="conclusion" class="level1"><h1>Conclusion</h1>
+<p>The theme here is obvious: features that save a few keystrokes in interactive use can cause maddening bugs if carelessly used in production code. You need familiarity with the language and some degree of vigilance to avoid the pitfalls, and everyone slips now and again.</p>
+<p>The longer I’ve spent with R, the more convinced I’ve become that R has outgrown these features. R was designed as an environment for interactive data exploration, statistical testing, and graphical displays, but today it can do so much more: serve Web apps, query remote databases, render just about any document (even this one) with Rmarkdown or Quarto, and many other uses. But to fulfill these sophisticated use cases, you have to carefully avoid traps like the ones discussed here. That fact has probably spurred some organizations to use Python instead, since it lacks these quirks. So R’s design emphasis on interactivity may limit its growth.</p>
+<p>Moreover, the benefits these features deliver are scant. The three behaviors I describe - partial argument matching, logical abbreviations, and <code>drop = FALSE</code> save a bit of typing (or, in the last case, an extra step of data manipulation). That doesn’t balance the potential harm they can cause in production code, especially when modern IDEs (and Vim or Emacs, of course) support autocompletion, obviating the need for abbreviated code.</p>
+<p>Don’t get me wrong. R remains a powerful, expressive language built on solid design principles. It’s my first choice for any kind of data manipulation, and I still find it fun and satisfying to use. But some of its behaviors are more at home in its past than its future.</p>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb26" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Ghost in the Machine: The Remnant of R's Past That Haunts it Still"</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Ryan Heslin"</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2022-06-12"</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> ["R"]</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="an">params:</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">    title: "Ghost in the Machine: The Remnant of R's Past That Haunts it Still"</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>As programming languages go, R isn't particularly old: its first public release came in</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>early 2000 (see <span class="co">[</span><span class="ot">https://www.stat.auckland.ac.nz/~ihaka/downloads/Massey.pdf</span><span class="co">](https://www.stat.auckland.ac.nz/~ihaka/downloads/Massey.pdf)</span> for more details).</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>But as many users know, its roots</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>go back further. R was developed from the language S, created in the 1970s by a team led by John Chambers at Bell Labs.</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>Those were the glory days of Bell Labs, when the language C and the Unix ecosystem were developed. Like a modern palace built on the foundations of an ancient one,</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>R bears many traces of its lineage. Syntax is very similar, many features are backward-compatible,</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>and the documentation for some functions even refers to resources about S rather than R.</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>(Try <span class="in">`?sum`</span>, for one example).</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>(I can't help but pause here to relay the account the linked presentation gives of R's origins.</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>It all began with this hallway conversation between Ross Ihaka and Robert Gentleman in the University of Auckland around 1990):</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;blockquote</span> <span class="er">cite</span><span class="ot">=</span><span class="st">"https://www.stat.auckland.ac.nz/~ihaka/downloads/Massey.pdf"</span><span class="kw">&gt;</span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>Gentleman: “Let’s write some software.”</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>Ihaka: “Sure, that sounds like fun.”</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/blockquote&gt;</span></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>One of those traces, harder to observe but certainly still present, is also one of R's</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>most unusual (and, in some quarters, derided) features: an emphasis on convenience</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>in interactive use.  Interpreted languages typically support interactivity in some way, since the ability to run a snippet of code and instantly get results is</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>one of their greatest advantages over compiled languages. But S was designed primarily for interactive data exploration, and R has retained that capability as a design focus.</span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>In areas great and small, from core design</span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>choices to implementation quirks, R makes it</span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>as easy as possible to bang out code in the console and see what happens. That makes it a fast, flexible tool for exploring data and following hunches. It also strews mines in the path of anyone programming in the language without detailed knowledge of the</span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>language's nuances.</span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>A few examples will make this painfully clear.</span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a><span class="fu"># Partial Matching, Complete Headache</span></span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a>Can you spot the problem with this call? It runs correctly:</span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">length =</span> <span class="dv">10</span>)</span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a>but is missing something. The relevant argument of <span class="in">`rep`</span> is actually called <span class="in">`length.out`</span>, not <span class="in">`length`</span>, but R's partial argument matching saves us, since <span class="in">`length`</span> is a shortened form of <span class="in">`length.out`</span>.</span>
+<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a>This is nice to have when typing code in the console. But relying on partial argument matching in scripts is a _very_ bad idea.</span>
+<span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a>Suppose you're working with a package that includes some functions with annoyingly long argument names. All that typing is annoying, so you decide you may as well save some keystrokes:</span>
+<span id="cb26-55"><a href="#cb26-55" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-56"><a href="#cb26-56" aria-hidden="true" tabindex="-1"></a>foo <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">xyzabc =</span> <span class="dv">0</span>, abcxyz) {</span>
+<span id="cb26-57"><a href="#cb26-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> xyzabc, <span class="at">sd =</span> abcxyz)</span>
+<span id="cb26-58"><a href="#cb26-58" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-59"><a href="#cb26-59" aria-hidden="true" tabindex="-1"></a><span class="fu">foo</span>(<span class="at">abc =</span> <span class="dv">2</span>)</span>
+<span id="cb26-60"><a href="#cb26-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-61"><a href="#cb26-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-62"><a href="#cb26-62" aria-hidden="true" tabindex="-1"></a>All seems well. But then a version update adds a new argument:</span>
+<span id="cb26-63"><a href="#cb26-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-64"><a href="#cb26-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, error = TRUE}</span></span>
+<span id="cb26-65"><a href="#cb26-65" aria-hidden="true" tabindex="-1"></a>foo <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">abcabc =</span> <span class="dv">100</span>, <span class="at">xyzabc =</span> <span class="dv">0</span>, abcxyz) {</span>
+<span id="cb26-66"><a href="#cb26-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(abcabc, <span class="at">mean =</span> xyzabc, <span class="at">sd =</span> abcxyz)</span>
+<span id="cb26-67"><a href="#cb26-67" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-68"><a href="#cb26-68" aria-hidden="true" tabindex="-1"></a><span class="fu">foo</span>(<span class="at">abc =</span> <span class="dv">2</span>)</span>
+<span id="cb26-69"><a href="#cb26-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-70"><a href="#cb26-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-71"><a href="#cb26-71" aria-hidden="true" tabindex="-1"></a>R throws an error, unable to find an unambiguous match. (Imagine how painful this would be to debug if R defaulted to the first match instead). The way to avoid this scenario is simple: never rely on partial argument matching in permanent code. Nonetheless, many packages do. You can identify offenders yourself by setting the <span class="in">`warnPartialMatchArgs`</span> option:</span>
+<span id="cb26-72"><a href="#cb26-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-73"><a href="#cb26-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, warning = TRUE}</span></span>
+<span id="cb26-74"><a href="#cb26-74" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">warnPartialMatchArgs =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-75"><a href="#cb26-75" aria-hidden="true" tabindex="-1"></a>foo <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">xyzabc =</span> <span class="dv">0</span>, abcxyz) {</span>
+<span id="cb26-76"><a href="#cb26-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> xyzabc, <span class="at">sd =</span> abcxyz)</span>
+<span id="cb26-77"><a href="#cb26-77" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-78"><a href="#cb26-78" aria-hidden="true" tabindex="-1"></a><span class="fu">foo</span>(<span class="at">abc =</span> <span class="dv">2</span>)</span>
+<span id="cb26-79"><a href="#cb26-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-80"><a href="#cb26-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-81"><a href="#cb26-81" aria-hidden="true" tabindex="-1"></a><span class="fu"># When Simplification Complicates</span></span>
+<span id="cb26-82"><a href="#cb26-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-83"><a href="#cb26-83" aria-hidden="true" tabindex="-1"></a>R is an example of a weakly typed language with dynamic typing. That means data types are</span>
+<span id="cb26-84"><a href="#cb26-84" aria-hidden="true" tabindex="-1"></a>known only at runtime, not before, and that the language will try to coerce disparate</span>
+<span id="cb26-85"><a href="#cb26-85" aria-hidden="true" tabindex="-1"></a>types to a common type instead of throwing an error. That means the interpreter will happily run code like</span>
+<span id="cb26-86"><a href="#cb26-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-89"><a href="#cb26-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-90"><a href="#cb26-90" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(mtcars, <span class="dv">1</span>)</span>
+<span id="cb26-91"><a href="#cb26-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-92"><a href="#cb26-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-93"><a href="#cb26-93" aria-hidden="true" tabindex="-1"></a><span class="in">`paste`</span> just coerces everything to character, no matter how ludicrous the results. This behavior can trip you up, but it's not truly insidious.</span>
+<span id="cb26-94"><a href="#cb26-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-95"><a href="#cb26-95" aria-hidden="true" tabindex="-1"></a>Unfortunately, R sometimes changes types under your nose. Suppose we write a function, <span class="in">`subset2`</span>. It takes as argument a data frame, and two  functions that take a data frame as argument. It filters the data column-wise using <span class="in">`col_f`</span>, then rowwise using <span class="in">`row_f`</span>.</span>
+<span id="cb26-96"><a href="#cb26-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-99"><a href="#cb26-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-100"><a href="#cb26-100" aria-hidden="true" tabindex="-1"></a>subset2 <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col_f, row_f) {</span>
+<span id="cb26-101"><a href="#cb26-101" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> df[, <span class="fu">col_f</span>(df)]</span>
+<span id="cb26-102"><a href="#cb26-102" aria-hidden="true" tabindex="-1"></a>  df[<span class="fu">row_f</span>(df), ]</span>
+<span id="cb26-103"><a href="#cb26-103" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-104"><a href="#cb26-104" aria-hidden="true" tabindex="-1"></a><span class="fu">subset2</span>(mtcars, \(x) <span class="fu">colSums</span>(x) <span class="sc">&gt;</span> <span class="dv">500</span>, \(x) <span class="fu">rowSums</span>(x) <span class="sc">&gt;</span> <span class="dv">500</span>)</span>
+<span id="cb26-105"><a href="#cb26-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-106"><a href="#cb26-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-107"><a href="#cb26-107" aria-hidden="true" tabindex="-1"></a>That seems to work. (Deadly words!) But what if my finger had slipped when I typed <span class="in">`500`</span>?</span>
+<span id="cb26-108"><a href="#cb26-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-109"><a href="#cb26-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, error = TRUE}</span></span>
+<span id="cb26-110"><a href="#cb26-110" aria-hidden="true" tabindex="-1"></a>subset2 <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col_f, row_f) {</span>
+<span id="cb26-111"><a href="#cb26-111" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> df[row_f, <span class="fu">col_f</span>(df)]</span>
+<span id="cb26-112"><a href="#cb26-112" aria-hidden="true" tabindex="-1"></a>  df[<span class="fu">row_f</span>(df), ]</span>
+<span id="cb26-113"><a href="#cb26-113" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-114"><a href="#cb26-114" aria-hidden="true" tabindex="-1"></a><span class="fu">subset2</span>(mtcars, \(x) <span class="fu">colSums</span>(x) <span class="sc">&gt;</span> <span class="dv">5000</span>, \(x) <span class="fu">rowSums</span>(x) <span class="sc">&gt;</span> <span class="dv">500</span>)</span>
+<span id="cb26-115"><a href="#cb26-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-116"><a href="#cb26-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-117"><a href="#cb26-117" aria-hidden="true" tabindex="-1"></a>What happened? Only one column of <span class="in">`mtcars`</span>, <span class="in">`disp`</span>, has a column sum greater than 5000. And what happens if you select a single column with array-style indexing?</span>
+<span id="cb26-118"><a href="#cb26-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-121"><a href="#cb26-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-122"><a href="#cb26-122" aria-hidden="true" tabindex="-1"></a>mtcars[, <span class="st">"disp"</span>]</span>
+<span id="cb26-123"><a href="#cb26-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-124"><a href="#cb26-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-125"><a href="#cb26-125" aria-hidden="true" tabindex="-1"></a>R helpfully simplifies to an atomic vector. We can fix our function by disabling this behavior:</span>
+<span id="cb26-126"><a href="#cb26-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-129"><a href="#cb26-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-130"><a href="#cb26-130" aria-hidden="true" tabindex="-1"></a>subset3 <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col_f, row_f) {</span>
+<span id="cb26-131"><a href="#cb26-131" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> df[, <span class="fu">col_f</span>(df), drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb26-132"><a href="#cb26-132" aria-hidden="true" tabindex="-1"></a>  df[<span class="fu">row_f</span>(df), ]</span>
+<span id="cb26-133"><a href="#cb26-133" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-134"><a href="#cb26-134" aria-hidden="true" tabindex="-1"></a><span class="fu">subset3</span>(mtcars, \(x) <span class="fu">colSums</span>(x) <span class="sc">&gt;</span> <span class="dv">5000</span>, \(x) <span class="fu">rowSums</span>(x) <span class="sc">&gt;</span> <span class="dv">500</span>)</span>
+<span id="cb26-135"><a href="#cb26-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-136"><a href="#cb26-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-137"><a href="#cb26-137" aria-hidden="true" tabindex="-1"></a>or, even more sensibly, using list subsetting (single brackets, no comma), which never simplifies.</span>
+<span id="cb26-138"><a href="#cb26-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-139"><a href="#cb26-139" aria-hidden="true" tabindex="-1"></a>This behavior isn't indefensible. It's consistent with how subsetting works on arrays (which are usually atomic vectors). In interactive use, it's convenient, since then you're usually interested in the data a column contains, not the object containing it. But automatic simplification is easily missed and potentially destructive, and the way to avoid it can be found only if you carefully read the documentation.</span>
+<span id="cb26-140"><a href="#cb26-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-141"><a href="#cb26-141" aria-hidden="true" tabindex="-1"></a><span class="fu"># Brevity is the Soul of Bugs</span></span>
+<span id="cb26-142"><a href="#cb26-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-143"><a href="#cb26-143" aria-hidden="true" tabindex="-1"></a>Suppose you have the following vector:</span>
+<span id="cb26-146"><a href="#cb26-146" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-147"><a href="#cb26-147" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">7</span>, <span class="cn">NA</span>, <span class="sc">-</span><span class="dv">9</span>, <span class="cn">NA</span>)</span>
+<span id="cb26-148"><a href="#cb26-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-149"><a href="#cb26-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-150"><a href="#cb26-150" aria-hidden="true" tabindex="-1"></a>R is strict about missing values, but not about logical constants. <span class="in">`T`</span> and <span class="in">`F`</span> can be used as abbreviations for <span class="in">`TRUE`</span> and <span class="in">`FALSE`</span>, respectively. The following is a valid way of taking the mean:</span>
+<span id="cb26-151"><a href="#cb26-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-154"><a href="#cb26-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-155"><a href="#cb26-155" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">na.rm =</span> T)</span>
+<span id="cb26-156"><a href="#cb26-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-157"><a href="#cb26-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-158"><a href="#cb26-158" aria-hidden="true" tabindex="-1"></a>Likewise, with <span class="in">`F`</span> for <span class="in">`FALSE`</span>:</span>
+<span id="cb26-159"><a href="#cb26-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-162"><a href="#cb26-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-163"><a href="#cb26-163" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="st">"cyl"</span>, drop <span class="ot">=</span> F]</span>
+<span id="cb26-164"><a href="#cb26-164" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-165"><a href="#cb26-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-166"><a href="#cb26-166" aria-hidden="true" tabindex="-1"></a>What's the harm in this? While <span class="in">`TRUE`</span> and <span class="in">`FALSE`</span> are reserved words, the abbreviations _aren't_. Let's say your colleague creates a variable <span class="in">`T`</span>, making sure to use uppercase to avoid masking the <span class="in">`t`</span> function:</span>
+<span id="cb26-167"><a href="#cb26-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-170"><a href="#cb26-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-171"><a href="#cb26-171" aria-hidden="true" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="fu">pt</span>(<span class="dv">2</span>, <span class="at">df =</span> <span class="dv">10</span>)</span>
+<span id="cb26-172"><a href="#cb26-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-173"><a href="#cb26-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-174"><a href="#cb26-174" aria-hidden="true" tabindex="-1"></a>This code now fails in a confusing way:</span>
+<span id="cb26-177"><a href="#cb26-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-178"><a href="#cb26-178" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">na.rm =</span> T)</span>
+<span id="cb26-179"><a href="#cb26-179" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-180"><a href="#cb26-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-181"><a href="#cb26-181" aria-hidden="true" tabindex="-1"></a>The reason for this feature, as before, is clear: it's convenient in interactive use. The problem with it is equally clear: it's suicidal in programmatic use.</span>
+<span id="cb26-182"><a href="#cb26-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-183"><a href="#cb26-183" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
+<span id="cb26-184"><a href="#cb26-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-185"><a href="#cb26-185" aria-hidden="true" tabindex="-1"></a>The theme here is obvious: features that save a few keystrokes in interactive use can cause maddening bugs if carelessly used in production code. You need familiarity with the language and some degree of vigilance to avoid the pitfalls, and everyone slips now and again.</span>
+<span id="cb26-186"><a href="#cb26-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-187"><a href="#cb26-187" aria-hidden="true" tabindex="-1"></a>The longer I've spent with R, the more convinced I've become that R has outgrown these features. R was designed as an environment for interactive data exploration, statistical testing, and graphical displays, but today it can do so much more: serve Web apps, query remote databases, render just about any document (even this one) with Rmarkdown, and many other uses.</span>
+<span id="cb26-188"><a href="#cb26-188" aria-hidden="true" tabindex="-1"></a>But to fulfill these sophisticated use cases, you have to carefully avoid traps like the ones discussed here. That fact has probably spurred some organizations to use Python instead, since it lacks these quirks. So R's design emphasis on interactivity may limit its growth.</span>
+<span id="cb26-189"><a href="#cb26-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-190"><a href="#cb26-190" aria-hidden="true" tabindex="-1"></a>Moreover, the benefits these features deliver are scant. The three behaviors I describe - partial argumetn matching, logical abbreviations, and <span class="in">`drop = FALSE`</span> save a bit of typing (or, in the last case, an extra step of data manipulation). That doesn't balance the potential harm they can cause in production code, especially when modern IDEs (and Vim or Emacs, of course) support autocompletion, obviating the need for abbreviated code.</span>
+<span id="cb26-191"><a href="#cb26-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-192"><a href="#cb26-192" aria-hidden="true" tabindex="-1"></a>Don't get me wrong. R remains a powerful, expressive language built on solid design principles. It's my first choice for any kind of data manipulation, and I still find it fun and satisfying to use. But some of its behaviors are more at home in its past than its future.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

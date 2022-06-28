@@ -1,0 +1,17 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Verso"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/ryan-heslin
+      - text: LinkedIn
+        href: https://www.linkedin.com/in/ryan-heslin/
+format:
+  html:
+    theme: cosmo
+    css: styles.css

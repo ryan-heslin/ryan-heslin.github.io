@@ -1,0 +1,264 @@
+---
+title: "Programatically Creating Accessor Functions for R6 Objects"
+author: "Ryan Heslin"
+date: "2022-06-25"
+categories: ["R"]
+tags: ["metaprogramming"]
+params:
+    title: "Programatically Creating Accessor Functions for R6 Objects"
+---
+
+One nice feature of R6 objects is active fields. Normally, to expose a field to
+the user, you have pass it to the `public` argument of the `R6Class` constructor.
+That makes it accessible, but also permits the user to meddle with it.
+
+
+```{r}
+library(R6)
+
+unprotected <- R6Class(
+  classname = "unprotected",
+  public = list(foo = 1, bar = 2, baz = 3)
+)
+example <- unprotected$new()
+example$foo
+example$foo <- 2
+example$foo
+```
+
+Fields can be protected by sending them to `private` instead, but that blocks the
+user from accessing them. The solution is
+to create an `active` field. This creates an active binding: a special form of R
+function that can be used to return a value
+if called with no arguments and to bind a value if called with one. We can use
+this capability to create an accessor function that blocks users from changing values:
+
+
+```{r, error = TRUE}
+protected <- R6Class(
+  classname = "example",
+  public = list(
+    bar = 2, baz = 3,
+    initialize = function(foo) private$.foo <- foo
+  ),
+  private = list(.foo = NULL),
+  active = list(foo = function(value) {
+    if (missing(value)) {
+      return(private$.foo)
+    } else {
+      stop("Hands off!")
+    }
+  })
+)
+
+example <- protected$new(foo = 1)
+example$foo
+example$foo <- 2
+```
+
+(See [chapter 14 of Advanced R](https://adv-r.hadley.nz/r6.html) for more details).
+
+This is all simple enough, but there's an obvious problem: what if we have a lot
+of attributes to protect? We could dodge the
+problem by combining them into a single list
+attribute, or just copy-paste the same function with
+different attribute names. But those
+options aren't always attractive. I recently
+confronted this problem while working on
+an elaborate subclass of `torch::dataset`,
+which organizes data for neural networks.
+I decided to rifle through my bag of functional programming tricks in search of a solution.
+
+# First Attempt: Function Factory
+
+Since each active field requires a function, a function factory was an obvious approach. It's simple to implement:
+
+```{r}
+accessor_factory <- function(field) {
+  force(field)
+  function(value) {
+    if (missing(value)) {
+      return(private[["field"]])
+    } else {
+      stop("Hands off ", field, "!")
+    }
+  }
+}
+```
+
+(The real version used a less jocular error message, but I need to have my fun somehow).
+Because R has lexical scope, `field` is bound in the manufactured function's enclosing
+environment, so when executed it should look there and find it.
+
+But it doesn't work.
+
+```{r, error = TRUE}
+
+protected <- R6Class(
+  classname = "example",
+  public = list(
+    bar = 2, baz = 3,
+    initialize = function(foo) private$.foo <- foo
+  ),
+  private = list(.foo = NULL),
+  active = list(foo = accessor_factory(".foo"))
+)
+example <- protected$new(1)
+example$foo
+example$foo <- 2
+```
+
+Either R core sneaked support for dynamic scope into the last major version, or the `R6Class` constructor was doing something funny. Checking the source code found the offending line:
+
+
+```{r, eval = FALSE }
+generator_funs <- assign_func_envs(generator_funs, generator)
+```
+The constructor modified the environments of function fields (a trick I also resorted to while writing a different subclass, but that's another story). Relying on scope
+wouldn't help, but what would?
+
+# Second Attempt: `as.function`
+
+My next idea was to use R's obscure but powerful function constructor, `as.function`. It has a strange implementation: it takes a list, interpreting all elements except the last as name-value pairs for arguments (with an empty value slot designating an argument with no default). The last element should be an expression defining
+the function body. This is what I wrote:
+
+
+```{r}
+accessor_factory <- function(field) {
+  force(field)
+  code <- substitute(
+    {
+      if (missing(value)) {
+        return(private[[field]])
+      } else {
+        stop(sQuote(field), " is read-only")
+      }
+    },
+    list(field = field)
+  )
+  as.function(eval(substitute(
+    alist(value = , code),
+    list(code = code)
+  )),
+  envir = globalenv()
+  )
+}
+```
+
+This code demands some explanation.
+The idea is to return a function with the
+value of `field` _already substituted_, not
+set at runtime.
+The first step uses `substitute` to replace
+the symbol `field` with the value passed to the function (i.e., the name of the target attribute). The result forms
+the body of the manufactured function. I
+have to call `substitute` _again_ to substitute this expression into the call to `alist` passed to `as.function`, because `alist` quotes its arguments. That expression
+actually creates the function we need. (See why most people consider me weird for liking metaprogramming?).
+
+
+```{r, error = TRUE}
+
+protected <- R6Class(
+  classname = "example",
+  public = list(
+    bar = 2, baz = 3,
+    initialize = function(foo) private$.foo <- foo
+  ),
+  private = list(.foo = NULL),
+  active = list(foo = accessor_factory(".foo"))
+)
+example <- protected$new(1)
+example$foo
+example$foo <- 2
+```
+
+This works. But can we do better?
+
+# Third Attempt: Body Substitution
+
+R features assignment functions to modify all
+three parts of a closure: formal arguments,
+body, and environment. We're interested in creating a set of functions with slightly different bodies, so pairing `body<-` with `substitute` is a natural approach. It's a lot more
+readable than my last attempt, too. The classic
+double-substitute trick for substituting the
+result of an expression comes from Advanced R.
+
+```{r}
+substitute_body <- function(fn, mapping){
+    body(fn) <- eval(substitute(substitute(temp, mapping), list(temp = body(fn)))
+    )
+    fn
+}
+
+template <- function(value){
+        if(missing(value)){
+                return(private[[field]])
+            }else{
+                stop(sQuote(field), " is read-only")
+            }
+    }
+substitute_body(template, mapping = list(field = "test"))
+```
+
+Victory! Well, almost. To make this truly useful, we need a wrapper function to
+create a list of accessors from field names.
+Thankfully, that's much easier than figuring out the substitution.
+
+```{r}
+set_active_fields <- function(fields) {
+  out <- lapply(fields, function(x) substitute_body(fn = template,
+  mapping = list(field = x)))
+  names(out) <- gsub("^\\.", "", fields)
+  out
+}
+
+```
+
+A bog-standard use of `lapply` does the job, with the annoying complication of removing leading dots from the names
+of private fields.
+
+We can even go one step further and write a wrapper to `R6Class` to automatically create accessors from a list of private attributes.
+
+```{r}
+with_accessors <- function(classname = NULL,
+                           public,
+                           private,
+                           inherit = NULL, lock_objects = TRUE,
+                           class = TRUE,
+                           portable = TRUE, lock_class = FALSE,
+                           cloneable = TRUE,
+                           parent_env = (function() parent.frame())()) {
+  force(parent_env)
+  active <- set_active_fields(names(private))
+  R6Class(
+    classname = classname, public = public,
+    private = NULL, active = active,
+    inherit = inherit, lock_objects = lock_objects,
+    class = class,
+    portable = portable,
+    lock_class = lock_class,
+    cloneable = cloneable,
+    parent_env = parent_env
+  )
+}
+```
+
+```{r, error = TRUE }
+public <- list(initialize = function(foo) {
+  private$.foo <<- foo
+})
+private <- list(.foo = NULL, .bar = 2, .baz = 3)
+protected <- with_accessors("example", public = public, private = private)
+
+example <- protected$new(foo = 1)
+example$foo
+example$bar
+example$baz
+example$foo <- 2
+example$baz <- 5
+```
+
+Note that because of the indirection, I have to use `<<-` in `initialize`. I
+also have to make `parent_env` the execution environment of the wrapper, which is the caller environment of `R6Class` here. There may also be other nasty surprises buried in this use of reference semantics. Still, this was a fun
+diversion, and proof of how much power
+R grants the user over environments and evaluation.

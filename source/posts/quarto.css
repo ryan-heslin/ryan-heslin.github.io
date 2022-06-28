@@ -1,0 +1,17 @@
+h1, h2, h3, h4 {
+  text-align: center;
+}
+
+
+.source {
+    /* Rmarkdown code chunk */
+   background-color: #ffe6b3;
+   font-size 20 px;
+}
+
+.output {
+    /* Rmarkdown chunk output */
+   background-color: "white";
+   border: 2px dashed black;
+   font-size 20 px;
+}

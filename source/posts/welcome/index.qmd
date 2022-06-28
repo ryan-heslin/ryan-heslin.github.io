@@ -1,0 +1,22 @@
+---
+title: "Hello, world!"
+author: "Ryan Heslin"
+date: "2022-05-27"
+categories: ["news"]
+tags: ["R Markdown"]
+---
+
+Welcome to my new blog!
+My name is Ryan Heslin, and I've just graduated with a master's degree in data science
+from American University. As I do for most of my side projects, I've defined goals for this one. Naturally, I've made those goals sound _just_ compelling enough that I can plausibly deny that working on this thing is procrastination.
+
+Those goals are:
+
+1. Engage with the wider R community.
+2. Share some of the R esoterica I've learned
+3. Learn a web framework, as a first step toward more sophisticated web design
+4. Practice writing, which
+   I find satisfies me the same way coding does
+
+I plan to mostly write about R and other data science topics, though I might broaden scope later on.
+If you've found your way here, I hope at least you're entertained for a little while.
