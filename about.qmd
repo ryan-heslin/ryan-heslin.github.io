@@ -4,16 +4,35 @@ image: profile.jpg
 about:
   template: jolla
   links:
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com
+      href: https://linkedin.com/in/ryan-heslin
     - icon: github
       text: Github
-      href: https://github.com
+      href: https://github.com/ryan-heslin
+format:
+    html:
+        css: styles.css
 
 ---
 
-About this blog
+# Welcome
+Welcome to my blog! My name is Ryan Heslin, and I recently graduated from
+American University with a master's in data science. While I work in Python
+and a few other languages, my main (and favorite) is R. For now, I'll devote this
+blog to my musings (or ramblings, if you feel uncharitable) on R and other topics
+related to data science.
+
+# Why the Name?
+Naming things really is as hard as cache invalidation. I spent a long time casting about for something
+to call the site before hitting on Verso. It means the reverse side of a
+physical document, such as the left-hand page of a book. That definition attracted me
+because I aim to make this blog like a good anthology: you can visit any page and find
+something short but worth reading.
+As a publishing term derived from Italian, it has a pleasingly archaic resonance similar to "quarto",
+the namesake of the file format this site's documents are written in. Most important,
+it's got an R.
+
+Verso was built with [Quarto](https://quarto.org/) and deployed using Github Pages with
+a GitHub workflow from [https://github.com/pommevilla/quarto-render](https://github.com/pommevilla/quarto-render). A previous version of this site was built with rendered Rmarkdown and the
+`blogdown` R package.
