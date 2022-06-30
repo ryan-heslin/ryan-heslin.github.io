@@ -73,4 +73,4 @@ I'll probably be back next year, of course. I'll have a lot less time to devote,
 
 I just hope there aren't as many graphs this time.
 
-My repository for Advent of Code 2021: (https://github.com/ryan-heslin/AoC2021)[https://github.com/ryan-heslin/AoC2021]
+My repository for Advent of Code 2021: [https://github.com/ryan-heslin/AoC2021](https://github.com/ryan-heslin/AoC2021)

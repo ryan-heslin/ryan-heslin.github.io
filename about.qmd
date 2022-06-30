@@ -26,7 +26,7 @@ related to data science.
 # Why the Name?
 Naming things really is as hard as cache invalidation. I spent a long time casting about for something
 to call the site before hitting on Verso. It means the reverse side of a
-physical document, such as the left-hand page of a book. That definition attracted me
+physical document, such as the left-hand page of a book. The word attracted me
 because I aim to make this blog like a good anthology: you can visit any page and find
 something short but worth reading.
 As a publishing term derived from Italian, it has a pleasingly archaic resonance similar to "quarto",
@@ -34,5 +34,5 @@ the namesake of the file format this site's documents are written in. Most impor
 it's got an R.
 
 Verso was built with [Quarto](https://quarto.org/) and deployed using Github Pages with
-a GitHub workflow from [https://github.com/pommevilla/quarto-render](https://github.com/pommevilla/quarto-render). A previous version of this site was built with rendered Rmarkdown and the
+a GitHub workflow developed by [pommevilla](https://github.com/pommevilla/quarto-render). A previous version of this site was built with rendered Rmarkdown and the
 `blogdown` R package.

@@ -1,6 +1,5 @@
-# TBD
+# Verso
 
-This repository contains the source files for my blog, TBD.
+This repository contains the source files for my blog, Verso.
 You can visit it at [https://ryan-heslin.github.io/](https://ryan-heslin.github.io/).
-I use [R Markdown](https://rmarkdown.rstudio.com/) to render posts with the [blogdown](https://www.google.com/search?client=firefox-b-1-d&q=blogdown) package, [Hugo](https://gohugo.io/)
-to build the site, and [Github Pages](https://pages.github.com/) for deployment.
+I use [Quarto](https://quarto.org/) to render posts and [Github Pages](https://pages.github.com/) for deployment. I use a GitHub workflow developed by [pommevilla](https://github.com/pommevilla/quarto-render).
