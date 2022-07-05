@@ -65,9 +65,9 @@ ul.task-list{list-style: none;}
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -142,7 +142,7 @@ ul.task-list{list-style: none;}
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(4)</span></div><div class="category" data-category="news">news <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(5)</span></div><div class="category" data-category="news">news <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -155,7 +155,49 @@ ul.task-list{list-style: none;}
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="R" data-listing-date-sort="1656302400000" data-listing-file-modified-sort="1656419947530" data-listing-reading-time-sort="7.205">
+<div class="quarto-post image-right" data-index="0" data-categories="R" data-listing-date-sort="1656993600000" data-listing-file-modified-sort="1657064825307" data-listing-reading-time-sort="0.575">
+<div class="thumbnail">
+<p><a href="./posts/that_kind_of_a_day/index.html"> <img src="./img/dotcase.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/that_kind_of_a_day/index.html">
+<h3 class="no-anchor listing-title">
+That Kind of a Day
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
+</div>
+</div>
+<a href="./posts/that_kind_of_a_day/index.html">
+<div class="listing-description">
+The <code>lintr</code> package, a widely used linter for R code, prefers that you use snake case for object names. That includes R core:
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/that_kind_of_a_day/index.html">
+<div class="listing-date">
+Jul 5, 2022
+</div>
+<div class="listing-author">
+Ryan Heslin
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="R" data-listing-date-sort="1656302400000" data-listing-file-modified-sort="1656419947530" data-listing-reading-time-sort="7.205">
+<div class="thumbnail">
+<a href="./posts/triumph-travesty/index.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/triumph-travesty/index.html"></a></p>
+</div>
 <div class="body">
 <a href="./posts/triumph-travesty/index.html">
 <h3 class="no-anchor listing-title">
@@ -187,7 +229,14 @@ Ryan Heslin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="R" data-listing-date-sort="1656129600000" data-listing-file-modified-sort="1656375866196" data-listing-reading-time-sort="7.185">
+<div class="quarto-post image-right" data-index="2" data-categories="R" data-listing-date-sort="1656129600000" data-listing-file-modified-sort="1656375866196" data-listing-reading-time-sort="7.185">
+<div class="thumbnail">
+<a href="./posts/R6-active/index.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/R6-active/index.html"></a></p>
+</div>
 <div class="body">
 <a href="./posts/R6-active/index.html">
 <h3 class="no-anchor listing-title">
@@ -219,7 +268,14 @@ Ryan Heslin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="R" data-listing-date-sort="1655524800000" data-listing-file-modified-sort="1656375816934" data-listing-reading-time-sort="3.26">
+<div class="quarto-post image-right" data-index="3" data-categories="R" data-listing-date-sort="1655524800000" data-listing-file-modified-sort="1656375816934" data-listing-reading-time-sort="3.26">
+<div class="thumbnail">
+<a href="./posts/lesser-known/index.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/lesser-known/index.html"></a></p>
+</div>
 <div class="body">
 <a href="./posts/lesser-known/index.html">
 <h3 class="no-anchor listing-title">
@@ -251,7 +307,14 @@ Ryan Heslin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="R" data-listing-date-sort="1655006400000" data-listing-file-modified-sort="1656376108441" data-listing-reading-time-sort="6.165">
+<div class="quarto-post image-right" data-index="4" data-categories="R" data-listing-date-sort="1655006400000" data-listing-file-modified-sort="1656630964521" data-listing-reading-time-sort="6.165">
+<div class="thumbnail">
+<a href="./posts/ghost-machine/index.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/ghost-machine/index.html"></a></p>
+</div>
 <div class="body">
 <a href="./posts/ghost-machine/index.html">
 <h3 class="no-anchor listing-title">
@@ -283,7 +346,14 @@ Ryan Heslin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="news" data-listing-date-sort="1653624000000" data-listing-file-modified-sort="1656376099074" data-listing-reading-time-sort="0.67">
+<div class="quarto-post image-right" data-index="5" data-categories="news" data-listing-date-sort="1653624000000" data-listing-file-modified-sort="1656376099074" data-listing-reading-time-sort="0.67">
+<div class="thumbnail">
+<a href="./posts/welcome/index.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/welcome/index.html"></a></p>
+</div>
 <div class="body">
 <a href="./posts/welcome/index.html">
 <h3 class="no-anchor listing-title">

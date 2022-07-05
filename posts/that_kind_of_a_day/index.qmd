@@ -1,0 +1,23 @@
+---
+title: "That Kind of a Day"
+author: "Ryan Heslin"
+date: "2022-07-05"
+categories: ["R"]
+params:
+    title: "That Kind of a Day"
+---
+
+The `lintr` package, a widely used [linter](https://en.wikipedia.org/wiki/Lint_(software)) for R code, prefers that you use snake
+case for object names. That includes R core:
+
+![](/img/dotcase.png){fig-alt="Too bad the base namespace is locked"}
+
+In fairness, `is.numeric` _ought_ to be called `is_numeric`, because dots are
+supposed to be reserved for S3 methods. R breaks this rule all the time, leading to
+names like `as.data.frame.data.frame`. R updates are named after _Peanuts_ strips;
+getting dinged by the linter for using a base function is something
+that would happen to Charlie Brown if he ever took up programming.
+
+As you might guess from the traceback thirty calls deep on the right of the screen,
+this wasn't a great day. But I can't help but smile when I see a linter commit
+heresy.
