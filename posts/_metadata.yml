@@ -16,8 +16,10 @@ format:
         code-block-bg: "#AFC7DE"
         code-block-border-left: "#BA6670"
         code-link: true
+        code-overflow: wrap
         df-print: "paged"
         highlight-style: arrow
+        linkcolor: "#d44a6c"
         smooth-scroll: true
         style: "quarto.css"
 knitr:

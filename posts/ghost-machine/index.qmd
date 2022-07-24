@@ -32,7 +32,7 @@ one of their greatest advantages over compiled languages. But S was designed pri
 In areas great and small, from core design
 choices to implementation quirks, R makes it
 as easy as possible to bang out code in the console and see what happens. That makes it a fast, flexible tool for exploring data and following hunches. It also strews mines in the path of anyone programming in the language without detailed knowledge of the
-language's nuances.
+its nuances.
 
 A few examples will make this painfully clear.
 
@@ -165,6 +165,7 @@ The theme here is obvious: features that save a few keystrokes in interactive us
 The longer I've spent with R, the more convinced I've become that R has outgrown these features. R was designed as an environment for interactive data exploration, statistical testing, and graphical displays, but today it can do so much more: serve Web apps, query remote databases, render just about any document (even this one) with Rmarkdown or Quarto, and many other uses.
 But to fulfill these sophisticated use cases, you have to carefully avoid traps like the ones discussed here. Some organizations have no doubt avoided the problem by switching to Python. So R's design emphasis on interactivity may limit its growth.
 
-Moreover, the benefits these features deliver are scant. The three behaviors I describe - partial argument matching, logical abbreviations, and `drop = FALSE` save a bit of typing (or, in the last case, an extra step of data manipulation). That doesn't balance the potential harm they can cause in production code, especially when modern IDEs (and Vim or Emacs, of course) support autocompletion, obviating the need for abbreviated code.
+Moreover, the benefits these features deliver are scant. The three behaviors I describe - partial argument matching, logical abbreviations, and `drop = FALSE` save a bit of typing (or, in the last case, an extra step of data manipulation). A few key strokes saved here and there adds up quickly, and the savings 
+may have been significant in the days when users were limited to R's basic `readline` prompt. But that doesn't balance the potential harm they can cause in production code today, especially when modern IDEs (and Vim or Emacs, of course) support autocompletion, obviating the need for abbreviated code.
 
 Don't get me wrong. R remains a powerful, expressive language built on solid design principles. It's my first choice for any kind of data manipulation, and I still find it fun and satisfying to use. But some of its behaviors are more at home in its past than its future.

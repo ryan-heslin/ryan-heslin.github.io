@@ -101,7 +101,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
-  "copy-button": false,
+  "copy-button": true,
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
@@ -196,9 +196,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p>The <code>lintr</code> package, a widely used <a href="https://en.wikipedia.org/wiki/Lint_(software)">linter</a> for R code, prefers that you use snake case for object names. That includes R core:</p>
+<p>The <code>lintr</code> package, a widely used <a href="https://en.wikipedia.org/wiki/Lint_(software)">linter</a> for R code, prefers that you use snake case for object names. “You” includes R core:</p>
 <p><img src="../../img/dotcase.png" class="img-fluid" alt="Too bad the base namespace is locked"></p>
-<p>In fairness, <code>is.numeric</code> <em>ought</em> to be called <code>is_numeric</code>, because dots are supposed to be reserved for S3 methods. R breaks this rule all the time, leading to names like <code>as.data.frame.data.frame</code>. R updates are named after <em>Peanuts</em> strips; getting dinged by the linter for using a base function is something that would happen to Charlie Brown if he ever took up programming.</p>
+<p>In fairness, <code>is.numeric</code> <em>ought</em> to be called <code>is_numeric</code>, because dots are supposed to be reserved for S3 methods. R breaks this rule all the time, leading to names like <code>as.data.frame.data.frame</code>. R updates are named after <em>Peanuts</em> strips; getting dinged by the linter for using a base function is something that would happen to Charlie Brown if he ever took up programming. Apparently, whatever method <code>lintr</code> uses to exempt base function names from linting doesn’t work when those function names are arguments to another function.</p>
 <p>As you might guess from the traceback thirty calls deep on the right of the screen, this wasn’t a great day. But I can’t help but smile when I see a linter commit heresy.</p>
 
 
@@ -346,7 +346,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>The <span class="in">`lintr`</span> package, a widely used <span class="co">[</span><span class="ot">linter</span><span class="co">]</span>(https://en.wikipedia.org/wiki/Lint_(software)) for R code, prefers that you use snake</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>case for object names. That includes R core:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>case for object names. "You" includes R core:</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="al">![](/img/dotcase.png)</span>{fig-alt="Too bad the base namespace is locked"}</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
@@ -354,11 +354,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>supposed to be reserved for S3 methods. R breaks this rule all the time, leading to</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>names like <span class="in">`as.data.frame.data.frame`</span>. R updates are named after _Peanuts_ strips;</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>getting dinged by the linter for using a base function is something</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>that would happen to Charlie Brown if he ever took up programming.</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>As you might guess from the traceback thirty calls deep on the right of the screen,</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>this wasn't a great day. But I can't help but smile when I see a linter commit</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>heresy.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>that would happen to Charlie Brown if he ever took up programming. Apparently, </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>whatever method <span class="in">`lintr`</span> uses to exempt base function names from linting </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>doesn't work when those function names are arguments to another function.</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>As you might guess from the traceback thirty calls deep on the right of the screen,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>this wasn't a great day. But I can't help but smile when I see a linter commit</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>heresy.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

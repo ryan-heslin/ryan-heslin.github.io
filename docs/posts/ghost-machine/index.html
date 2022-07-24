@@ -96,7 +96,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
-  "copy-button": false,
+  "copy-button": true,
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
@@ -184,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Gentleman: “Let’s write some software.”</p>
 Ihaka: “Sure, that sounds like fun.”
 </blockquote>
-<p>One of those traces, harder to observe but certainly still present, is also one of R’s most unusual (and, in some quarters, derided) features: an emphasis on convenience in interactive use. Interpreted languages typically support interactivity in some way, since the ability to run a snippet of code and instantly get results is one of their greatest advantages over compiled languages. But S was designed primarily for interactive data exploration, and R has retained that capability as a design focus. In areas great and small, from core design choices to implementation quirks, R makes it as easy as possible to bang out code in the console and see what happens. That makes it a fast, flexible tool for exploring data and following hunches. It also strews mines in the path of anyone programming in the language without detailed knowledge of the language’s nuances.</p>
+<p>One of those traces, harder to observe but certainly still present, is also one of R’s most unusual (and, in some quarters, derided) features: an emphasis on convenience in interactive use. Interpreted languages typically support interactivity in some way, since the ability to run a snippet of code and instantly get results is one of their greatest advantages over compiled languages. But S was designed primarily for interactive data exploration, and R has retained that capability as a design focus. In areas great and small, from core design choices to implementation quirks, R makes it as easy as possible to bang out code in the console and see what happens. That makes it a fast, flexible tool for exploring data and following hunches. It also strews mines in the path of anyone programming in the language without detailed knowledge of the its nuances.</p>
 <p>A few examples will make this painfully clear.</p>
 <section id="partial-matching-complete-headache" class="level1"><h1>Partial Matching, Complete Headache</h1>
 <p>Can you spot the problem with this call? It runs correctly:</p>
@@ -203,40 +203,40 @@ Ihaka: “Sure, that sounds like fun.”
 <span class="op">}</span>
 <span class="fu">foo</span><span class="op">(</span>abc <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="output"><code>--   [1] -0.443964442  1.644466037  0.215357339
---   [4] -1.932861903  1.397759186  2.012269341
---   [7]  3.190389967  2.116685521  0.525834899
---  [10]  2.753072605 -0.103551024  3.435777496
---  [13] -1.617815399 -5.067108043  1.134081702
---  [16]  0.267101193  3.447414919 -1.011445837
---  [19]  2.257799607 -0.828379375  0.532292091
---  [22]  1.345862161  0.622656474 -0.007469392
---  [25] -1.440829625 -0.791462002  1.249521110
---  [28] -2.927541274 -0.297662719  0.610998652
---  [31] -0.864413045  2.574437523 -1.596591053
---  [34] -1.339854036 -1.032586851 -1.162130914
---  [37] -0.184147552  2.289951588 -0.679605737
---  [40] -0.136274557  1.205095771  1.705466304
---  [43] -0.966060062  1.627931372 -0.159621302
---  [46]  1.934604216 -2.013066692  1.182100768
---  [49] -1.024746303 -2.039319721 -2.509004126
---  [52] -1.678366662  1.623043102  0.613222217
---  [55]  1.878325768 -3.450599791 -1.277483942
---  [58] -2.497090172 -1.149373275 -3.247314671
---  [61]  1.722353975  2.550388749  1.957009900
---  [64]  1.769012586  0.747911846 -1.317315144
---  [67] -1.438577193  1.360096642 -4.855465849
---  [70] -4.727577210  3.921326107  0.635450316
---  [73]  4.846315925  0.797312216  0.681817327
---  [76]  1.303588395 -0.911105422  1.206897826
---  [79] -0.912302594 -1.689210779  0.839000415
---  [82] -3.125864649  2.497356871 -2.559731734
---  [85]  1.014820913 -3.069701252  1.428927558
---  [88]  0.151114148 -3.632520769  1.499206216
---  [91]  0.888523431  0.278593560  0.168931440
---  [94] -1.203557506 -0.393071112 -3.065517934
---  [97]  0.170529612  2.448285877 -3.274277062
--- [100] -1.535615397</code></pre>
+<pre class="output"><code>--   [1]  1.60784600 -0.28332696 -2.68339772
+--   [4] -0.97811854 -2.74928524  1.31957016
+--   [7]  0.32922534 -1.08315667 -1.50589515
+--  [10]  0.98918300 -3.17747184  1.99151126
+--  [13]  2.60763139  0.69229587 -2.76274748
+--  [16] -0.96303381 -1.44803533  1.84556945
+--  [19] -0.81592243 -0.75302902 -1.33240284
+--  [22]  0.72362869  0.03919712  4.05784247
+--  [25]  2.84797753  4.05384603  0.97102862
+--  [28] -1.47198915 -2.24145163  1.09990916
+--  [31] -0.76887036  2.94205474  1.17920461
+--  [34]  0.38265603  0.26396697 -1.11324127
+--  [37] -0.44898761 -2.15374805 -0.40600849
+--  [40] -1.99064664 -1.36308728  0.04300545
+--  [43]  0.98936748  1.85845999 -4.03429557
+--  [46]  1.16318865 -0.68219564  1.91816815
+--  [49] -1.11138745 -0.28835475 -2.31381054
+--  [52]  6.06948537 -2.97849707 -3.65897815
+--  [55] -4.74854175 -2.06035839 -0.33581644
+--  [58]  0.44230595 -1.76429442 -1.07269103
+--  [61]  0.82221567  0.87206673  0.66863945
+--  [64] -1.99780369  2.51445595 -0.35014562
+--  [67]  5.61740297 -4.29486284 -5.00962302
+--  [70] -2.75393976 -1.00942037  3.22099420
+--  [73] -0.03007575  2.26935891 -2.55428142
+--  [76] -1.67027014 -1.69678336 -2.29822514
+--  [79] -1.07389963  1.46274179  1.30442067
+--  [82]  0.90591975  0.23813753 -0.04949726
+--  [85]  0.35523114  2.46807752  2.60051710
+--  [88] -1.30444301 -1.85784877  3.01847177
+--  [91]  3.99010997 -0.74659429 -0.40723281
+--  [94] -1.80221160 -1.33857722 -1.64106332
+--  [97]  3.76025838  0.72754900  4.52153759
+-- [100] -0.65337604</code></pre>
 </div>
 </div>
 <p>All seems well. But then a version update adds a new argument:</p>
@@ -261,40 +261,40 @@ Ihaka: “Sure, that sounds like fun.”
 -- 'abc' to 'abcxyz'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre class="output"><code>--   [1]  2.336808903  1.820098341 -1.194619159
---   [4]  0.268816728  0.518367408 -1.663394129
---   [7]  2.334882469 -5.558431856  1.061081281
---  [10]  0.658209842  1.299264932 -1.294700251
---  [13] -2.406592322 -0.206201013  2.581091615
---  [16] -1.925857162 -3.079149075  0.106306109
---  [19]  0.681733515  0.787472569 -2.447612747
---  [22] -4.485919980 -0.548740034  0.767021324
---  [25]  1.469721203 -2.022882069  0.774362875
---  [28]  1.566693840  1.180301930  0.779079649
---  [31] -0.267731393  0.212475852 -2.842422663
---  [34] -5.072604126  2.140241579 -3.275725182
---  [37]  0.382002799  0.487049284 -0.183890481
---  [40] -0.629370307  0.868813457  2.242965261
---  [43]  1.032036121  1.475084162  0.251337404
---  [46] -2.269091150  0.928592063  0.817676269
---  [49]  0.299891126 -1.246083376 -1.182153667
---  [52]  1.628080361 -0.330940407  0.955332385
---  [55]  3.069881226  0.386997184 -3.064631721
---  [58] -0.001125780 -0.262613776  1.888660767
---  [61]  2.087279531 -1.679519912 -2.326006194
---  [64] -0.747577955  2.702889356 -3.033432451
---  [67]  2.989113455 -1.814303843  0.002426838
---  [70]  0.052368404  2.017826514  1.820814755
---  [73] -2.729045023 -2.559358222 -1.028261588
---  [76]  2.298964642 -3.082768751  1.466247129
---  [79]  1.119353135  0.486926827 -1.112440293
---  [82]  2.778915858  0.197662815  0.715607227
---  [85] -1.453568701 -0.204265519  3.956515815
---  [88]  2.047236078  0.722142147 -0.697765000
---  [91] -2.304173296  0.290503913 -1.606751914
---  [94]  0.138377927 -0.129924516  1.963666499
---  [97] -1.232296934  0.724689054 -0.924147749
--- [100]  0.902555274</code></pre>
+<pre class="output"><code>--   [1] -2.90910687 -1.75983124 -2.84573877
+--   [4]  2.38963067  1.02172116  1.23824421
+--   [7]  0.06490486  3.44720389 -1.66977585
+--  [10]  1.31204270 -0.61688176 -0.08218886
+--  [13] -0.82454272  1.39594562 -0.69870277
+--  [16] -0.40845155  3.80354059  2.75820997
+--  [19]  1.77865379  1.85322942  0.31243254
+--  [22] -2.53505938  1.14454771 -1.88517921
+--  [25] -2.41296606  1.93532751  0.01184471
+--  [28]  0.15201069  0.93308411  0.21504232
+--  [31] -1.39161958  1.39531601 -1.69289852
+--  [34]  1.48573579  2.81184430  2.65435537
+--  [37]  0.43013149  2.04963819 -1.94403523
+--  [40]  0.74223518 -0.26627586 -0.64066041
+--  [43] -1.12382857  2.54601852  0.39375376
+--  [46] -0.93745477  1.45699733 -0.63046236
+--  [49] -1.37097779 -2.00768150  1.02472469
+--  [52]  0.98430035  2.14546454 -1.03143738
+--  [55]  1.55546158 -2.27585987  0.92772691
+--  [58]  2.28985346  1.56374888 -4.40591180
+--  [61] -2.51092965  0.79870783  5.93200756
+--  [64] -2.23097751  2.94973584  1.93467481
+--  [67]  0.60454131 -0.32644389 -0.00806626
+--  [70] -3.44827169 -1.19315405  4.51856477
+--  [73] -3.61903825  0.17175140 -0.91237022
+--  [76] -2.15213958 -0.32419657  1.46098131
+--  [79] -1.52238638 -0.30442095  0.42219996
+--  [82]  0.07373639 -1.43111522  0.20639773
+--  [85]  1.15967917  0.40548887 -0.24359704
+--  [88] -2.37237476 -1.66047872  1.31082727
+--  [91]  0.44480435  0.27090783  0.98031957
+--  [94] -2.40380070 -1.15413017  0.74407613
+--  [97]  1.88393881  0.18560786 -1.14951424
+-- [100]  2.99245465</code></pre>
 </div>
 </div>
 </section><section id="when-simplification-complicates" class="level1"><h1>When Simplification Complicates</h1>
@@ -406,7 +406,7 @@ Ihaka: “Sure, that sounds like fun.”
 </section><section id="conclusion" class="level1"><h1>Conclusion</h1>
 <p>The theme here is obvious: features that save a few keystrokes in interactive use can cause maddening bugs if carelessly used in production code. You need familiarity with the language and some degree of vigilance to avoid the pitfalls, and everyone slips now and again.</p>
 <p>The longer I’ve spent with R, the more convinced I’ve become that R has outgrown these features. R was designed as an environment for interactive data exploration, statistical testing, and graphical displays, but today it can do so much more: serve Web apps, query remote databases, render just about any document (even this one) with Rmarkdown or Quarto, and many other uses. But to fulfill these sophisticated use cases, you have to carefully avoid traps like the ones discussed here. Some organizations have no doubt avoided the problem by switching to Python. So R’s design emphasis on interactivity may limit its growth.</p>
-<p>Moreover, the benefits these features deliver are scant. The three behaviors I describe - partial argument matching, logical abbreviations, and <code>drop = FALSE</code> save a bit of typing (or, in the last case, an extra step of data manipulation). That doesn’t balance the potential harm they can cause in production code, especially when modern IDEs (and Vim or Emacs, of course) support autocompletion, obviating the need for abbreviated code.</p>
+<p>Moreover, the benefits these features deliver are scant. The three behaviors I describe - partial argument matching, logical abbreviations, and <code>drop = FALSE</code> save a bit of typing (or, in the last case, an extra step of data manipulation). A few key strokes saved here and there adds up quickly, and the savings may have been significant in the days when users were limited to R’s basic <code>readline</code> prompt. But that doesn’t balance the potential harm they can cause in production code today, especially when modern IDEs (and Vim or Emacs, of course) support autocompletion, obviating the need for abbreviated code.</p>
 <p>Don’t get me wrong. R remains a powerful, expressive language built on solid design principles. It’s my first choice for any kind of data manipulation, and I still find it fun and satisfying to use. But some of its behaviors are more at home in its past than its future.</p>
 
 
@@ -576,7 +576,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>In areas great and small, from core design</span>
 <span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>choices to implementation quirks, R makes it</span>
 <span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>as easy as possible to bang out code in the console and see what happens. That makes it a fast, flexible tool for exploring data and following hunches. It also strews mines in the path of anyone programming in the language without detailed knowledge of the</span>
-<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>language's nuances.</span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>its nuances.</span>
 <span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>A few examples will make this painfully clear.</span>
 <span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a></span>
@@ -709,9 +709,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb26-187"><a href="#cb26-187" aria-hidden="true" tabindex="-1"></a>The longer I've spent with R, the more convinced I've become that R has outgrown these features. R was designed as an environment for interactive data exploration, statistical testing, and graphical displays, but today it can do so much more: serve Web apps, query remote databases, render just about any document (even this one) with Rmarkdown or Quarto, and many other uses.</span>
 <span id="cb26-188"><a href="#cb26-188" aria-hidden="true" tabindex="-1"></a>But to fulfill these sophisticated use cases, you have to carefully avoid traps like the ones discussed here. Some organizations have no doubt avoided the problem by switching to Python. So R's design emphasis on interactivity may limit its growth.</span>
 <span id="cb26-189"><a href="#cb26-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-190"><a href="#cb26-190" aria-hidden="true" tabindex="-1"></a>Moreover, the benefits these features deliver are scant. The three behaviors I describe - partial argument matching, logical abbreviations, and <span class="in">`drop = FALSE`</span> save a bit of typing (or, in the last case, an extra step of data manipulation). That doesn't balance the potential harm they can cause in production code, especially when modern IDEs (and Vim or Emacs, of course) support autocompletion, obviating the need for abbreviated code.</span>
-<span id="cb26-191"><a href="#cb26-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-192"><a href="#cb26-192" aria-hidden="true" tabindex="-1"></a>Don't get me wrong. R remains a powerful, expressive language built on solid design principles. It's my first choice for any kind of data manipulation, and I still find it fun and satisfying to use. But some of its behaviors are more at home in its past than its future.</span>
+<span id="cb26-190"><a href="#cb26-190" aria-hidden="true" tabindex="-1"></a>Moreover, the benefits these features deliver are scant. The three behaviors I describe - partial argument matching, logical abbreviations, and <span class="in">`drop = FALSE`</span> save a bit of typing (or, in the last case, an extra step of data manipulation). A few key strokes saved here and there adds up quickly, and the savings </span>
+<span id="cb26-191"><a href="#cb26-191" aria-hidden="true" tabindex="-1"></a>may have been significant in the days when users were limited to R's basic <span class="in">`readline`</span> prompt. But that doesn't balance the potential harm they can cause in production code today, especially when modern IDEs (and Vim or Emacs, of course) support autocompletion, obviating the need for abbreviated code.</span>
+<span id="cb26-192"><a href="#cb26-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-193"><a href="#cb26-193" aria-hidden="true" tabindex="-1"></a>Don't get me wrong. R remains a powerful, expressive language built on solid design principles. It's my first choice for any kind of data manipulation, and I still find it fun and satisfying to use. But some of its behaviors are more at home in its past than its future.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

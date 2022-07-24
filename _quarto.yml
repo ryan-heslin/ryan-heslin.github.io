@@ -11,6 +11,9 @@ website:
         href: https://github.com/ryan-heslin
       - text: LinkedIn
         href: https://www.linkedin.com/in/ryan-heslin/
+  search:
+    collapse-after: 3
+    copy-button: true
 format:
   html:
     theme: cosmo
