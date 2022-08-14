@@ -1,0 +1,198 @@
+---
+title: "Chasing A*: Completing Advent of Code 2021, Once and For All "
+author: "Ryan Heslin"
+date: "2022-08-14"
+categories: ["Advent of Code", "Python"]
+urlcolor: "blue"
+execute:
+    enabled: false
+---
+
+_This post contains spoilers for the day 23 puzzle of Advent of Code 2021._
+
+In an earlier post, I related my long but successful effort to obtain every last star in [Advent of Code](https://adventofcode.com/)'s 2021 edition. 
+It ended in surprising anticlimax when I solved [day 23](https://adventofcode.com/2021/day/23), a puzzle that looked daunting 
+to tackle with code, using paper, pen, and some cut-up sticky notes. I 
+could have stopped there. I should have stopped there. But good stories don't end 
+with an anticlimax, and the feeling that I had somehow cheated nagged at me. 
+With plenty of free time as I hunted for a job, I decided to solve the puzzle 
+the right way.
+
+# The Problem
+
+Day 23's puzzle is a variant of the classic [Towers of Hanoi](https://en.wikipedia.org/wiki/Tower_of_Hanoi).
+Instead of disks, the puzzle has players move different types of [amphipod](https://en.wikipedia.org/wiki/Amphipoda), in keeping with the year's ocean theme. More 
+importantly, the goal is to move each amphipod of each type into the 
+correct "side room" connected to the main board, or "hall", as efficiently as possible. 
+The second part of the puzzle doubles the number of amphipods, making it much tougher to solve 
+by hand. 
+
+A post on the [subreddit](https://www.reddit.com/r/adventofcode/comments/wl873a/aoc_and_professional_developers/) suggested using the A* ("A star") algorithm. [A*]()https://en.wikipedia.org/wiki/A*_search_algorithm) is a classic pathfinding algorithm that finds the shortest path between two 
+given nodes of a [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)). Implementations use a function called `d` to measure distances 
+between nodes, and a heuristic function called `h` to estimate the distance between 
+a node and the goal. The algorithm is mathematically certain to return the 
+correct path if `h` never overestimates the distance to the goal. 
+
+In the problem at hand, the nodes were clearly game states (legal configurations 
+of the board). Two nodes shared a connection if one could be reached from 
+the other by a legal move (luckily, no legal moves are reversible, so the graph 
+is acyclic --- no loops are possible). The puzzle required the only the minimal cost of completing the 
+game, not the actual sequence of moves, which further simplified things. 
+
+Still, I faced several hard tasks: 
+
+1. Create a data structure capable of representing any valid game state 
+2. Implement `d` (to measure distances between nodes) and `h` (to conservatively 
+estimate any node's distance from the goal). 
+3. Write an `A_star` function that used these routines to find the minimal cost
+
+# Into the Fray
+
+As is usual with Advent of Code, the first task was parsing the input.
+This was my raw input: 
+
+```
+#############
+#...........#
+###A#D#A#B###
+  #B#C#D#C#
+  #########
+```
+I made the crucial decision to represent positions on the board as tuples of `(x, y)` coordinates.
+Since I was using Python, I decided to use a zero-based index, with the leftmost hall space as the `x` origin and the bottom side room spaces as the `y` origin. So the leftmost `A` amphipod on the board above would be located at `(2, 2)`. I would have made my life much easier if I had used complex numbers instead of tuples of real numbers. In any 
+case, I wrote a crude function to map each 
+amphipod type to a set containing its positions: 
+
+```{python, eval = FALSE }
+def parse(inp, xmax=10):
+    stripped = inp[2 : (len(inp) - 1)]
+    ymax = len(stripped)
+    stripped.reverse()
+    stripped = list(zip(*stripped))
+    stripped = stripped[1 : (xmax + 1)]
+    mapping = {i: set() for i in range(4)}
+    for i in range(min(ends) + 2, max(ends) - 1, 2):
+        this = stripped[i]
+        for j in range(ymax):
+            val = values_map[this[j]]
+            mapping[val].add((i, j))  # Add position to set
+
+    return mapping, ymax
+```
+
+Then I wrote a complicated function I'll spare you. It computed, for each pair of coordinates it was legal to move between, the spaces spanning them. 
+That way, I could allow moves only after confirming that that space wasn't blocked. 
+
+Next came designing an object to represent game states. It should own `h` 
+and `d`, the second of which would take another game state as argument. 
+I decided it should also be responsible for finding adjacent nodes and 
+creating objects to represent them. I decided to call the class `State`.
+
+From here, my work only got kludgier. `State` ended up mapping each amphipod type to a set of the positions it occupied as well as tracking the occupants of each side room - a redundancy I couldn't seem to avoid. 
+From there, `d` and `h` were surprisingly simple. 
+`d` would only ever be called on states that 
+differed by the position of just one amphipod, so 
+all I had to do was find the two coordinate tuples that disagreed in the instances' coordinate sets, measure the distance between them, and multiply by the cost of moving the relevant amphipod type one space. `h` was a bit trickier, but hardly brutal  --- I just computed the distance from each amphipod to the target side room, a simple approach  that would never underestimate the true cost.
+
+The real bear turned out to be finding the valid neighbors of each instance. It took me an embarrassingly long time to figure out the rules:
+
+1. Amphipods in side rooms may only move out if they are in the side room of the wrong type, or if an amphipod of the wrong type is positioned behind them.
+
+2. Amphipods in side rooms that meet one or both criteria can move to any hall space to which the path is clear, or the innermost open space of their side room if it complies with rule 4. 
+
+3. Amphipods in hall rooms may only move into the side room of their type, and only if a path to it is clear.
+
+4. A side room may only admit amphipods if it either contains no amphipods or only amphipods of its type. 
+
+Translating these directives into conditions was pure hell, and the result turned into 
+pure write-only code. Here's a representative excerpt:
+
+```{python, eval = FALSE}
+if coord[0] in self.sides_idx:
+    x_type = self.side_idx2type(coord[0])
+    if (x_type == k and self.sides[k]["completed"]) or (
+            coord[1] < self.ymax - 1
+            and self.sides[x_type]["room"][coord[1] + 1] is not None
+            ):
+        continue
+```
+
+Somehow, I finished it.
+
+That left only the `A_star` function that did the real work. Translating Wikipedia's pseudocode for the algorithm into Python was simple:
+
+```{python, eval = FALSE}
+def A_star(start, goal, debug=False):
+    start_k = hash(start)
+    open_set = {start_k: start}
+
+    # For node k, node preceding it on cheapest known path to k
+    came_from = {}
+
+    # g_score[k] is cost of cheapest known path to k
+    g_score = defaultdict(lambda: inf)
+    g_score[start_k] = 0
+    # gscore[k] + k.h() - best estimate of total cost (default to infinity if node unknown)
+    f_score = defaultdict(lambda: inf)
+    f_score[start_k] = g_score[start_k] + start.h()
+
+    while open_set:
+        min_cost = inf
+        # h = hash
+        for h, node in open_set.items():
+            score = f_score[h]
+            this_cost = min(min_cost, score)
+            if this_cost < min_cost and h in open_set.keys():
+                current = node
+                # print(current)
+                # print("\n")
+                if current == goal:
+                    return g_score[hash(current)]  # Cheapest cost to goal
+                min_cost = this_cost
+        current_k = hash(current)
+        current.find_neighbors()
+        if debug:
+            print(hash(current))
+            print(current)
+            print("-------------------\n")
+            for n in current.neighbors:
+                print(n)
+                print(current.d(n))
+            input("Continue: ")
+            print("\n\n\n")
+        open_set.pop(current_k)
+        for neighbor in current.neighbors:
+            # print(neighbor.neighbors)
+
+            # Distance from start to neighbor through current
+            g_score_new = g_score[current_k] + current.d(neighbor)
+            # print(f"distance: {current.d(neighbor)}")
+            # print(neighbor)
+            neighbor_k = hash(neighbor)
+            # This path to neighbor cheaper than any known, so record it
+            if g_score_new < g_score[neighbor_k]:
+                came_from[neighbor_k] = current
+                # New estimate of cost from this neighbor
+                # Forgot this line
+                g_score[neighbor_k] = g_score_new
+                f_score[neighbor_k] = g_score_new + neighbor.h()
+                if neighbor not in open_set.values():
+                    open_set[neighbor_k] = neighbo
+```
+My only addition, naturally, was a debug mode.
+Then came the really hard part.
+
+I spent an embarrassing amount of time in the debugger getting everything to work correctly. 
+I fell into in a dispiriting loop of scanning output for evidence of bugs, stepping through 
+the debugger to track them down, and making painstaking changes to fix them. I came close to giving up, 
+and several times regretted starting. Then, one fine July Monday morning, I saw the code spit out a plausible-looking answer. Not expecting success, 
+I checked the Advent of Code website and gasped when I saw it was correct.
+
+I wasn't home free; my inefficient kludge algorithm might well be too slow for the second half of the problem. I modified `State` to handle 
+a larger game board, crossed my fingers, and ran the script again. It took a few minutes longer, but it spit out the correct answer for part 2. I had done it. 
+
+I savored the feeling of blissful triumph, knowing it would not last. I might have just finished the worst implementation of `A*` of all time, 
+but it was _my_ implementation, and it solved the problem. Somehow, writing your own intricate kludge is far more satisfying then copying someone else's elegant solution. In any case, I was 
+at last done: I had finished all 25 puzzles for Advent of Code 2021 by myself. Perhaps an 
+achievement in pointlessness, but an achievement nonetheless.
+

@@ -2,7 +2,7 @@
 title: "Triumph and Travesty: Earning All 50 Stars in Advent of Code 2021"
 author: "Ryan Heslin"
 date: "2022-06-27"
-categories: ["R"]
+categories: ["R", "Python", "Advent of Code"]
 urlcolor: "blue"
 params:
     title: "Triumph and Travesty: Earning All 50 Stars in Advent of Code 2021"
