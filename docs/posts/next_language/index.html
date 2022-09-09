@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.587">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Ryan Heslin">
+<meta name="dcterms.date" content="2022-09-08">
+<title>Verso - The Data Science Language of the Future</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": true,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../../styles.css">
+</head>
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Verso</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ryan-heslin"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.linkedin.com/in/ryan-heslin/">LinkedIn</a>
+  </li>  
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title">The Data Science Language of the Future</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">R</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Ryan Heslin </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 8, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content"><p>R, for all its warts, has most of the features I want from a data science language. It’s powerful, and typically fun to use. But, like all languages, it is neither perfect nor likely to be widely used forever. (I doubt it will enjoy </p>
+<p>To discuss a next-generation language, we need to establish what makes R so great to begin with. On reflection, I identified three key ingredients:</p>
+<ol type="1">
+<li>
+<em>Vector types and vectorized functions</em>. As John Chambers says, if it exists in R, it’s a vector. R doesn’t have any true scalar types; there are only vectors of varying lengths. The rationale is obvious: converting between scalar and vector types would add complexity for little gain, make analysis and data tidying a pain. Anyone who’s ever spent an hour deriving the ordinary least squares estimators by elementary algebra and calculus, and then done it in a few lines with linear algebra, will know what I mean.</li>
+</ol>
+<p>But vectorization has benefits beyond mathematical convenience. (For now, let’s use Hadley Wickham’s working definition of a vectorized function: <span class="math inline">\(f(x[[i]]) = f(x)[[i]]\)</span>). It abstracts away the iteration involved in operations, freeing you to think of functions as acting on each element independently. This results in compact, readable code:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">letters</span>, <span class="st">" is letter #"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, <span class="st">" of the alphabet"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>--  [1] "a is letter #1 of the alphabet" 
+--  [2] "b is letter #2 of the alphabet" 
+--  [3] "c is letter #3 of the alphabet" 
+--  [4] "d is letter #4 of the alphabet" 
+--  [5] "e is letter #5 of the alphabet" 
+--  [6] "f is letter #6 of the alphabet" 
+--  [7] "g is letter #7 of the alphabet" 
+--  [8] "h is letter #8 of the alphabet" 
+--  [9] "i is letter #9 of the alphabet" 
+-- [10] "j is letter #10 of the alphabet"
+-- [11] "k is letter #11 of the alphabet"
+-- [12] "l is letter #12 of the alphabet"
+-- [13] "m is letter #13 of the alphabet"
+-- [14] "n is letter #14 of the alphabet"
+-- [15] "o is letter #15 of the alphabet"
+-- [16] "p is letter #16 of the alphabet"
+-- [17] "q is letter #17 of the alphabet"
+-- [18] "r is letter #18 of the alphabet"
+-- [19] "s is letter #19 of the alphabet"
+-- [20] "t is letter #20 of the alphabet"
+-- [21] "u is letter #21 of the alphabet"
+-- [22] "v is letter #22 of the alphabet"
+-- [23] "w is letter #23 of the alphabet"
+-- [24] "x is letter #24 of the alphabet"
+-- [25] "y is letter #25 of the alphabet"
+-- [26] "z is letter #26 of the alphabet"</code></pre>
+</div>
+</div>
+<p>In base Python or most other languages, this would require a <code>for</code> loop that kept track of letters and indices, resulting in less readable code and a greater likelihood of mistakes. Better still, R features convenience functions like <code>colMeans</code> that operate at a higher level of abstraction: data frames or arrays, which are versatile generalizations of simple atomic vectors. These capabilities let you ignore implementation details of iteration and write nicely abstract code.</p>
+<p>Vectorization is hardly unique to R, but I don’t know of another language<br>
+as fundamentally vector-oriented. Our ideal successor language should emulate R in this area.</p>
+<ol start="2" type="1">
+<li><em>Expressive data manipulation</em></li>
+</ol>
+<p>Too often, the actual “science” of data science, like dessert after a big feast, is dwarfed by what came before: data tidying, missing value imputation, transformation, and<br>
+everything else required to get messy input into a form that can be analyzed. If a data pipeline doesn’t exist, this can become far more daunting than the analysis itself. No language is better suited for the job than R. A skilled user can achieve even elaborate transformations in ten or twenty lines. With practice, the feeling of power becomes almost addictive. Using another language feels like putting on heavy gloves before tying your shoelaces.</p>
+<p>R’s expressive, powerful data manipulation interface grants it this power. It also makes R hard to learn. You can often find five or six obvious, correct ways to do even a simple task, like obtaining the fourth element of the <code>mtcars</code> columns <code>cyl</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mtcars</span><span class="op">$</span><span class="va">cyl</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>-- [1] 6</code></pre>
+</div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mtcars</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>-- [1] 6</code></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mtcars</span><span class="op">[</span><span class="fl">4</span>, <span class="st">"cyl"</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>-- [1] 6</code></pre>
+</div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mtcars</span><span class="op">[[</span><span class="st">"cyl"</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>-- [1] 6</code></pre>
+</div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mtcars</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span>, <span class="st">"cyl"</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>-- [1] 6</code></pre>
+</div>
+</div>
+<p>A successor to R might develop a smaller set of operators, and smooth out some oddities (like <code>drop = FALSE</code>). But it should not go too far in this Emphasizing readability and separating tasks into different functions, as <code>dplyr</code> has done, would make code more readable and easier to debug, but also more verbose. Too radical a departure from R’s approach would fail to replicate what makes it special.</p>
+<ol start="3" type="1">
+<li><em>Metaprogramming</em></li>
+</ol>
+<p>The other two areas I identify are widely cited as strengths of R. This one, though, is esoteric. While almost all R users take advantage of the features that power metaprogramming, many without knowing it, few use them extensively. It’s easy (and sometimes advisable) even for experienced users to avoid invoking it directly. Still, it distinguishes R from most other languages, and rests on bold design decisions made long before the language’s inception.</p>
+<p>“Metaprogramming”, as used in the R community, means writing programs that treat R code as data - programming on programs, in other words. It utilizes R’s highly developed capabilities for partial expression substitution, controlled evaluation, and environment manipulation. Books could be written about this topic, and <a href="https://adv-r.hadley.nz/meta-big-picture.html">Advanced R</a> covers it in detail.</p>
+<p>As a basic example, have you ever wondered why most calls to <code>library</code> in R scripts look like <code><a href="https://rdrr.io/r/base/library.html">library(package)</a></code>, not <code><a href="https://rdrr.io/r/base/library.html">library("package")</a></code>? The latter is legal, but seldom used. Most functions will throw an error if passed the name of a nonexistent object:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="va">d</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>-- Error in eval(expr, envir, enclos): object 'd' not found</code></pre>
+</div>
+</div>
+<p>But certain functions capture their inputs directly, <em>without</em> evaluating them, and then evaluate them in a different context. This is called “quoting”, since it captures the syntax of code while ignoring the semantics the way quoting natural language does. The implementation, known as non-standard evaluation, powers much of R’s interface. One prominent example is formulas: a compact mini-language for specifying a statistical relationship to modeling functions. Because the formula is quoted and evaluated in the context of a data frame, the user can provide bare variable names, making for a clean, simple interface:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">*</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>-- 
+-- Call:
+-- lm(formula = mpg ~ wt + cyl * disp, data = mtcars)
+-- 
+-- Coefficients:
+-- (Intercept)           wt          cyl  
+--    49.55195     -2.73695     -3.00543  
+--        disp     cyl:disp  
+--    -0.08670      0.01107</code></pre>
+</div>
+</div>
+<p>The <code>tidyverse</code> takes this idea much further. Its functions rely on <a href="https://dplyr.tidyverse.org/articles/programming.html">tidy evaluation</a>, an elaborate framework for selecting and modifying variables within “data masks.” In the end, R is really a statistics-oriented descendant of Lisp with more conventional syntax. Many of these ideas - expressions as data, expression substitution, and even optional prefix syntax - come from that immortal language.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">`+`</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>-- [1] 4</code></pre>
+</div>
+</div>
+<p>All this power comes with serious drawbacks - serious enough that it can be reasonably argued that non-standard evaluation is a bad paradigm. Manipulating expressions means code loses referential transparency (evaluating the same if variable names are changed). Controlled evaluation requires programmers to think about environment inheritance, creating the potential for a host of subtle bugs. Functions that quote some of their arguments but not all, or accept quoted and nonquoted forms of the same argument (like <code>library</code>), are harder to use. In the end, all this indirection makes code harder to write and reason about (hence the need for a vignette on simply programming with <code>dplyr</code>). I think the tradeoff is worthwhile; the convenience and flexibility of non-standard evaluation are too valuable to abandon. But unlike the other two characteristics I outlined above, a strong case can be made otherwise.</p>
+<p>In short, a successor to R should contain R’s most powerful features: vector types and vectorized functions, a terse but expressive subsetting syntax, and support for expression manipulation and controlled evaluation.</p>
+<section id="improving-on-rs-weaknesses" class="level1"><h1>Improving on R’s Weaknesses</h1>
+<p>R is not without faults. The problems listed below are more annoying than serious, but they stem from design decisions made long ago that can no longer be easily reversed. A successor language should avoid those mistakes.</p>
+<section id="finicky-interface" class="level2"><h2 class="anchored" data-anchor-id="finicky-interface">Finicky Interface</h2>
+<p>R’s user interface, in places, in harder to learn and use than necessary. It uses conventions inconsistently, exposes too much detail to the user, and contains too many “gotchas” that cause confusing errors you can only avoid with experience.</p>
+<p>One of the unwritten rules of programming is that inconsistency should not exist without reason. If you write a class <code>Foo</code> with methods called <code>bar_bar</code>, <code>baz_baz</code>, and <code>quxQux</code>, your users will wonder why you used camelCase for just one method every time they try to call the logically expected but nonexistent <code>qux_qux</code>. If you put a data frame argument at the head of one function’s argument list but the tail of another’s, they will wonder why every time they forget which is which. Only constant attention in design can avoid inconsistencies like these, but the best designs do so.</p>
+<p>R violates the principle in many places. One trivial but well-known example is the way S3 methods are written <code>generic.class</code> (e.g., <code>mean.default</code>), yet dots are used all the time in the names of functions, including S3 generics. The many exceptions (<code>t.test</code>, <code>all.vars</code>, …) thwart a potentially useful convention. Unlike the other functionals, <code>mapply</code> has the function as the first argument, not the second, and the <code>simplify</code> and <code>use.names</code> arguments are<br>
+actually <code>SIMPLIFY</code> and <code>USE.NAMES</code> (not without reason, but good luck remembering). <code>ave</code> and <code>tapply</code> do similar things, but <code>ave</code> uses <code>...</code> for grouping factors, while <code>tapply</code> reserves it for arguments to the <code>FUN</code> argument. Once you notice one of these seams in the design, you can’t unsee it.</p>
+<p>R sometimes contains unnecessary complexity. Interfaces often have complicated semantics, and functions sometimes feature multiple operating modes. For instance, there are two slightly different functions for doing principal components analysis, differing in the algorithm used. The function <code>diag</code> has four distinct uses (five, if you count <code>diag&lt;-</code> as part of the same interface). Most troubling to me are the heavily overloaded arguments of certain functions. Consider this passage from the help for <code>get</code>:</p>
+<pre><code>The ‘pos’ argument can specify the environment in which to look
+     for the object in any of several ways: as a positive integer (the
+     position in the ‘search’ list); as the character string name of an
+     element in the search list; or as an ‘environment’ (including
+     using ‘sys.frame’ to access the currently active function calls).
+     The default of ‘-1’ indicates the current environment of the call
+     to ‘get’. The ‘envir’ argument is an alternative way to specify an
+     environment.</code></pre>
+<p>I count three possible types for <code>pos</code>, all with different meanings, a default value with a special meaning, and another argument that does exactly the same thing for one type. (Plus a suggestion to use call stack introspection, which I’ll leave to braver programmers than me).</p>
+<p>Trying to memorize the intricacies of an interface like this is a fool’s errand: at some point, you’ll get it wrong and cause a nasty bug. That leaves no recourse but referring to the documentation each time you use the function, and nothing makes an interface more annoying to use.</p>
+<p>Another offender is factors. Factors represent categorical variables by mapping integer codes to levels. Simple idea, but so many potential errors come from this fact. Something as simple as naively concatenating a factor causes disaster:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"d"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>-- [1] "1" "2" "3" "d"</code></pre>
+</div>
+</div>
+<p>Attempting to do factor arithmetic only triggers a warning, despite being nonsense (Note also that the factor warning preempts the “mismatched object lengths” warning this would normally trigger):</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x</span> <span class="op">+</span> <span class="fl">3</span><span class="op">:</span><span class="fl">6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>-- [1] NA NA NA NA</code></pre>
+</div>
+</div>
+<p>Worst of all, and not widely known: R’s lexical sort order differs by system locale. (See <a href="https://stackoverflow.com/questions/31772185/language-dependent-sorting-with-r">here</a> for an example). When creating a factor, R defaults to ordering the levels lexically. Good luck with that reproducible research!</p>
+<p>Individually, these criticisms are trivial. I don’t mean to cast them as evidence of incompetence or carelessness by the language designers. I have written much worse interfaces to far simpler programs, so I know from experience how hard it is to implement and maintain a good one. But our successor language can do better by following the <code>tidyverse</code> and making “design for human users” a core principle.</p>
+</section><section id="very-weak-typing" class="level2"><h2 class="anchored" data-anchor-id="very-weak-typing">Very Weak Typing</h2>
+<p>Our new language should have dynamic typing. Static typing makes code easier to reason about and debug, especially in large applications, but it would be awkward to explore or transform data without quick, easy type conversions that can be done interactively. In its present form, I think R makes these conversions a little <em>too</em> easy. R is a weakly typed language: instead of disallowing operations with objects of disparate types, it casts them to a common type. Sometimes the result is predictable:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"abc"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>-- [1] "TRUE" "abc"</code></pre>
+</div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="cn">TRUE</span> <span class="op">+</span> <span class="fl">3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>-- [1] 4</code></pre>
+</div>
+</div>
+<p>But sometimes R will allow operations that have no sensible result:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"abc"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>--  [1] "c(21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4)abc"                    
+--  [2] "c(6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4)abc"                                                                                                            
+--  [3] "c(160, 160, 108, 258, 360, 225, 360, 146.7, 140.8, 167.6, 167.6, 275.8, 275.8, 275.8, 472, 460, 440, 78.7, 75.7, 71.1, 120.1, 318, 304, 350, 400, 79, 120.3, 95.1, 351, 145, 301, 121)abc"                       
+--  [4] "c(110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205, 215, 230, 66, 52, 65, 97, 150, 150, 245, 175, 66, 91, 113, 264, 175, 335, 109)abc"                                                     
+--  [5] "c(3.9, 3.9, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3.92, 3.07, 3.07, 3.07, 2.93, 3, 3.23, 4.08, 4.93, 4.22, 3.7, 2.76, 3.15, 3.73, 3.08, 4.08, 4.43, 3.77, 4.22, 3.62, 3.54, 4.11)abc"                  
+--  [6] "c(2.62, 2.875, 2.32, 3.215, 3.44, 3.46, 3.57, 3.19, 3.15, 3.44, 3.44, 4.07, 3.73, 3.78, 5.25, 5.424, 5.345, 2.2, 1.615, 1.835, 2.465, 3.52, 3.435, 3.84, 3.845, 1.935, 2.14, 1.513, 3.17, 2.77, 3.57, 2.78)abc"  
+--  [7] "c(16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20, 22.9, 18.3, 18.9, 17.4, 17.6, 18, 17.98, 17.82, 17.42, 19.47, 18.52, 19.9, 20.01, 16.87, 17.3, 15.41, 17.05, 18.9, 16.7, 16.9, 14.5, 15.5, 14.6, 18.6)abc"
+--  [8] "c(0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1)abc"                                                                                                            
+--  [9] "c(1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1)abc"                                                                                                            
+-- [10] "c(4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 5, 4)abc"                                                                                                            
+-- [11] "c(4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2, 2, 4, 2, 1, 2, 2, 4, 6, 8, 2)abc"</code></pre>
+</div>
+</div>
+<p>Moreover, R has no equivalent of Python’s type hinting system. If you want to enforce a specific type for function arguments, you have to do it manually:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r source code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>foo <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, z)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.character</span>(x)){</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">stop</span>(<span class="st">"x must be character"</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Many of the type-checking helpers like <code>is.character</code> have surprisingly complex behaviors that make them dangerous to rely on.</p>
+<p>R functions also do not always have stable return types. <code>sapply</code>, for example, can return a list, an array, an atomic vector, or even an empty list, depending on the input. Programming guides often recommend <code>lapply</code> or <code>vapply</code> instead, since they enforce stable return types, but many unwary users (including me, at various times) who did not know this have written subtly buggy code.</p>
+<p>R’s very weak typing accounts for much of the unpredictable behavior that makes it challenging to use in large applications. I think strict typing like Python’s would be excessive; operations like <code>paste(1:10, letters[1:10])</code> are too convenient to part with. But our successor language will dispense with some of the crazier implicit coercions R allows.</p>
+</section><section id="string-manipulation" class="level2"><h2 class="anchored" data-anchor-id="string-manipulation">String Manipulation</h2>
+<p>R’s string manipulation facilities leave something to be desired. In other languages, strings are array types or feature array-like subsetting. R, however, handles strings (i.e., the raw character data that make up the elements of character vectors) with an <a href="https://cran.r-project.org/doc/manuals/r-release/R-ints.html#SEXPTYPEs">internal type</a>. You can’t extract string elements the way you can in Python:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode py source code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">"A typical string"</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You have to use <code>substr</code> or <code>substring</code> (barely distinguishable functions again!)</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="st">"A typical string"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>-- [1] "A"</code></pre>
+</div>
+</div>
+<p>The rationale is obvious - the unpalatable alternative would be to implement character vectors as list-like recursive vectors - but it has annoying consequences for the interface, such as <code>strsplit</code> returning a list:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"This is a typical"</span>, <span class="st">"character vector"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">x</span>, split <span class="op">=</span> <span class="st">"\\s"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>-- [[1]]
+-- [1] "This"    "is"      "a"       "typical"
+-- 
+-- [[2]]
+-- [1] "character" "vector"</code></pre>
+</div>
+</div>
+<p>But these are quibbles. The real problem is the regular expression interface. This is the only part of base R I actively dislike. There are too many functions with terse, barely distinguishable names. (If you can remember the difference between <code>gregexpr</code> and <code>regexec</code> without looking it up, please teach me your secrets). Functions don’t use <a href="https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions">PCRE</a> by default, a fact I never remember until it causes an error. They return match data in awkward formats; <code>gregexpr</code>, for instance, returns a list of match start positions and lengths, making it difficult to extract the actual match data.</p>
+<p>Put together, these issues make working with regular expressions much more verbose and painful than necessary. The convoluted snippet below, copied from the documentation, does nothing more than create a matrix with the text from two capture groups. For comparison, Python’s <code>re</code> module contains a <code>groupdict</code> method that stores matches in an appropriate data structure automatically.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">notables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+  <span class="st">"  Ben Franklin and Jefferson Davis"</span>,
+  <span class="st">"\tMillard Fillmore"</span>
+<span class="op">)</span>
+<span class="co"># name groups 'first' and 'last'</span>
+<span class="va">name.rex</span> <span class="op">&lt;-</span> <span class="st">"(?&lt;first&gt;[[:upper:]][[:lower:]]+) (?&lt;last&gt;[[:upper:]][[:lower:]]+)"</span>
+<span class="op">(</span><span class="va">parsed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">regexpr</a></span><span class="op">(</span><span class="va">name.rex</span>, <span class="va">notables</span>, perl <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>-- [1] 3 2
+-- attr(,"match.length")
+-- [1] 12 16
+-- attr(,"index.type")
+-- [1] "chars"
+-- attr(,"useBytes")
+-- [1] TRUE
+-- attr(,"capture.start")
+--      first last
+-- [1,]     3    7
+-- [2,]     2   10
+-- attr(,"capture.length")
+--      first last
+-- [1,]     3    8
+-- [2,]     7    8
+-- attr(,"capture.names")
+-- [1] "first" "last"</code></pre>
+</div>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gregexpr</a></span><span class="op">(</span><span class="va">name.rex</span>, <span class="va">notables</span>, perl <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>-- [1] 2
+-- attr(,"match.length")
+-- [1] 16
+-- attr(,"index.type")
+-- [1] "chars"
+-- attr(,"useBytes")
+-- [1] TRUE
+-- attr(,"capture.start")
+--      first last
+-- [1,]     2   10
+-- attr(,"capture.length")
+--      first last
+-- [1,]     7    8
+-- attr(,"capture.names")
+-- [1] "first" "last"</code></pre>
+</div>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">parse.one</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">res</span>, <span class="va">result</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">result</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">{</span>
+      <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span>
+    <span class="op">}</span>
+    <span class="va">st</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"capture.start"</span><span class="op">)</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substring</a></span><span class="op">(</span><span class="va">res</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">st</span>, <span class="va">st</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"capture.length"</span><span class="op">)</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>
+  <span class="op">}</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"capture.names"</span><span class="op">)</span>
+  <span class="va">m</span>
+<span class="op">}</span>
+<span class="fu">parse.one</span><span class="op">(</span><span class="va">notables</span>, <span class="va">parsed</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="output"><code>--      first     last      
+-- [1,] "Ben"     "Franklin"
+-- [2,] "Millard" "Fillmore"</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode py source code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>notables <span class="op">&lt;-</span> [<span class="st">"Ben Franklin and Jefferson Davis"</span>,  <span class="st">"</span><span class="ch">\t</span><span class="st">Millard Fillmore"</span>]</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>[re.match(<span class="st">"(?P&lt;first&gt;[[:upper:]][[:lower:]]+) (?P&lt;last&gt;[[:upper:]][[:lower:]]+)"</span>, x).groupdict() <span class="cf">for</span> x <span class="kw">in</span> notables]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>(Is Fillmore’s inclusion a sly joke? He is chiefly notable for being a bottom-tier president).</p>
+<p>The excellent <code>stringr</code> package provides functions that fix all of these problems. But R users shouldn’t have to choose between taking a major dependency and foregoing easy string processing.</p>
+</section></section><section id="summing-up" class="level1"><h1>Summing Up</h1>
+<p>You should have a clear idea by now of the language I want. It relies on vector types and makes it easy to manipulate data. It uses some form of non-standard evaluation and offers powerful metaprogramming tools to interested users. Its interface judiciously hides complexity and contains few discrepancies and special cases. With an easy-to-use package system and thorough documentation, it will rapidly gain users and establish a productive, long-lasting community.</p>
+<p>That language sounds a lot like what the people behind <code>tidyverse</code> have already created. <code>tidyverse</code> expands and enhances R’s data manipulation capabilities, with particular attention to ease of use and rigorous implementation of non-standard evaluation. Perhaps most importantly, its developers update aggressively; they have made several complete overhauls of <code>dplyr</code>’s interface over the past few years. This means lots of breaking changes that make <code>tidyverse</code> infamously dangerous to use in production, but <code>tidyverse</code> advances and develops new ideas much more quickly than R itself. I think the tradeoff is worthwhile.</p>
+<p>It also sounds a little like <a href="https://julialang.org/">Julia</a>, a newer statistical language with metaprogramming support, vector types, and an emphasis on performance that is lacking in R.That emphasis, <a href="https://www.reddit.com/r/datascience/comments/m8wcnl/julia_vs_rpython/">some have observed</a>, gives it the potential to eliminate the “prototype in R/Python, program in C/C++” cycle that plagues machine learning research today. It has nowhere near R’s popularity or anything like its mature ecosystem, but users I’ve encountered speak highly of it. Will I be writing Julia ten years from now? Perhaps. But for now, R reigns supreme.</p>
+<p># TODO: Update this in 5 years to see how things shook out</p>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb43" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "The Data Science Language of the Future"</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Ryan Heslin"</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2022-09-08"</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> ["R"]</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="an">urlcolor:</span><span class="co"> "blue"</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>R, for all its warts, has most of the features I want from a data science </span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>language. It's powerful, and typically fun to use. But, like all languages, it is neither perfect nor likely to be widely used forever. (I doubt it will enjoy \em if that is the right word \em the endless afterlife of COBOL and its ilk). So I hope the (distant!) future will see statistical languages that replicate and refine R's strengths while improving its weaknesses. What should those languages look </span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>like?</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>To discuss a next-generation language, we need to establish what makes R so great to begin with. </span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>On reflection, I identified three key ingredients:</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>_Vector types and vectorized functions_. As John Chambers says, if it exists in R, it's a vector. </span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>R doesn't have any true scalar types; there are only vectors of varying lengths. </span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>The rationale is obvious: converting between scalar and vector types would add </span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>complexity for little gain,</span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>make analysis and data tidying a pain. Anyone who's ever spent an hour deriving the ordinary </span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>least squares estimators by elementary algebra and calculus, and then done it in a few lines </span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>with linear algebra, will know what I mean. </span>
+<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a>But vectorization has benefits beyond mathematical convenience. (For now, let's use </span>
+<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a>Hadley Wickham's working definition of a vectorized function: $f(x[<span class="co">[</span><span class="ot">i</span><span class="co">]</span>]) = f(x)[<span class="co">[</span><span class="ot">i</span><span class="co">]</span>]$).</span>
+<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a>It abstracts away the iteration involved in operations, freeing you to think of functions </span>
+<span id="cb43-27"><a href="#cb43-27" aria-hidden="true" tabindex="-1"></a>as acting on each element independently. This results in compact, readable code:</span>
+<span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-31"><a href="#cb43-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb43-32"><a href="#cb43-32" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(letters, <span class="st">" is letter #"</span>, <span class="fu">seq_along</span>(letters), <span class="st">" of the alphabet"</span>)</span>
+<span id="cb43-33"><a href="#cb43-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-34"><a href="#cb43-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-35"><a href="#cb43-35" aria-hidden="true" tabindex="-1"></a>In base Python or most other languages, this would require a <span class="in">`for`</span> loop that </span>
+<span id="cb43-36"><a href="#cb43-36" aria-hidden="true" tabindex="-1"></a>kept track of letters and indices, resulting in less readable code and a greater </span>
+<span id="cb43-37"><a href="#cb43-37" aria-hidden="true" tabindex="-1"></a>likelihood of mistakes. Better still, R features convenience functions like <span class="in">`colMeans`</span> that operate at a higher </span>
+<span id="cb43-38"><a href="#cb43-38" aria-hidden="true" tabindex="-1"></a>level of abstraction: data frames or arrays, which are versatile generalizations </span>
+<span id="cb43-39"><a href="#cb43-39" aria-hidden="true" tabindex="-1"></a>of simple atomic vectors. These capabilities let you ignore implementation </span>
+<span id="cb43-40"><a href="#cb43-40" aria-hidden="true" tabindex="-1"></a>details of iteration and write nicely abstract code.</span>
+<span id="cb43-41"><a href="#cb43-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-42"><a href="#cb43-42" aria-hidden="true" tabindex="-1"></a>Vectorization is hardly unique to R, but I don't know of another language  </span>
+<span id="cb43-43"><a href="#cb43-43" aria-hidden="true" tabindex="-1"></a>as fundamentally vector-oriented. Our ideal successor language should emulate </span>
+<span id="cb43-44"><a href="#cb43-44" aria-hidden="true" tabindex="-1"></a>R in this area.</span>
+<span id="cb43-45"><a href="#cb43-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-46"><a href="#cb43-46" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>_Expressive data manipulation_ </span>
+<span id="cb43-47"><a href="#cb43-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-48"><a href="#cb43-48" aria-hidden="true" tabindex="-1"></a>Too often, the actual "science" of data science, like dessert after a big feast, </span>
+<span id="cb43-49"><a href="#cb43-49" aria-hidden="true" tabindex="-1"></a>is dwarfed by what came before:</span>
+<span id="cb43-50"><a href="#cb43-50" aria-hidden="true" tabindex="-1"></a>data tidying, missing value imputation, transformation, and  </span>
+<span id="cb43-51"><a href="#cb43-51" aria-hidden="true" tabindex="-1"></a>everything else required to get messy input into a form that can be analyzed. If </span>
+<span id="cb43-52"><a href="#cb43-52" aria-hidden="true" tabindex="-1"></a>a data pipeline doesn't exist, this can become far more daunting than the analysis </span>
+<span id="cb43-53"><a href="#cb43-53" aria-hidden="true" tabindex="-1"></a>itself. No language is better suited for the job than R. A skilled </span>
+<span id="cb43-54"><a href="#cb43-54" aria-hidden="true" tabindex="-1"></a>user can achieve even elaborate transformations in ten or twenty lines. </span>
+<span id="cb43-55"><a href="#cb43-55" aria-hidden="true" tabindex="-1"></a>With practice, the feeling of power becomes almost addictive. Using another </span>
+<span id="cb43-56"><a href="#cb43-56" aria-hidden="true" tabindex="-1"></a>language feels like putting on heavy gloves before tying your shoelaces.</span>
+<span id="cb43-57"><a href="#cb43-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-58"><a href="#cb43-58" aria-hidden="true" tabindex="-1"></a>R's expressive, powerful data manipulation interface grants it this power. It also makes R hard to learn. You can often find five or six obvious,</span>
+<span id="cb43-59"><a href="#cb43-59" aria-hidden="true" tabindex="-1"></a>correct ways to do even a simple task, like obtaining the fourth element of the <span class="in">`mtcars`</span></span>
+<span id="cb43-60"><a href="#cb43-60" aria-hidden="true" tabindex="-1"></a>columns <span class="in">`cyl`</span>.</span>
+<span id="cb43-61"><a href="#cb43-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-64"><a href="#cb43-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb43-65"><a href="#cb43-65" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>cyl[[<span class="dv">4</span>]]</span>
+<span id="cb43-66"><a href="#cb43-66" aria-hidden="true" tabindex="-1"></a>mtcars[[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]]</span>
+<span id="cb43-67"><a href="#cb43-67" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="dv">4</span>, <span class="st">"cyl"</span>]</span>
+<span id="cb43-68"><a href="#cb43-68" aria-hidden="true" tabindex="-1"></a>mtcars[[<span class="st">"cyl"</span>]][[<span class="dv">4</span>]]</span>
+<span id="cb43-69"><a href="#cb43-69" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="fu">rownames</span>(mtcars)[[<span class="dv">4</span>]], <span class="st">"cyl"</span>]</span>
+<span id="cb43-70"><a href="#cb43-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-71"><a href="#cb43-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-72"><a href="#cb43-72" aria-hidden="true" tabindex="-1"></a>A successor to R might develop a smaller set of operators, and smooth </span>
+<span id="cb43-73"><a href="#cb43-73" aria-hidden="true" tabindex="-1"></a>out some oddities (like <span class="in">`drop = FALSE`</span>). </span>
+<span id="cb43-74"><a href="#cb43-74" aria-hidden="true" tabindex="-1"></a>But it should not go too far in this</span>
+<span id="cb43-75"><a href="#cb43-75" aria-hidden="true" tabindex="-1"></a>Emphasizing readability and separating tasks </span>
+<span id="cb43-76"><a href="#cb43-76" aria-hidden="true" tabindex="-1"></a>into different functions, </span>
+<span id="cb43-77"><a href="#cb43-77" aria-hidden="true" tabindex="-1"></a>as <span class="in">`dplyr`</span> has </span>
+<span id="cb43-78"><a href="#cb43-78" aria-hidden="true" tabindex="-1"></a>done, would make code more readable and easier to debug, but also more verbose. </span>
+<span id="cb43-79"><a href="#cb43-79" aria-hidden="true" tabindex="-1"></a>Too radical a departure from R's approach would fail to replicate what </span>
+<span id="cb43-80"><a href="#cb43-80" aria-hidden="true" tabindex="-1"></a>makes it special.</span>
+<span id="cb43-81"><a href="#cb43-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-82"><a href="#cb43-82" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>_Metaprogramming_ </span>
+<span id="cb43-83"><a href="#cb43-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-84"><a href="#cb43-84" aria-hidden="true" tabindex="-1"></a>The other two areas I identify are widely cited as strengths of R. This one, though, is esoteric. </span>
+<span id="cb43-85"><a href="#cb43-85" aria-hidden="true" tabindex="-1"></a>While almost all R users take advantage of the features that power metaprogramming, many without knowing it, few use them extensively. It's easy (and sometimes advisable) even for experienced users to avoid invoking it directly. Still, it distinguishes R from most other languages, and rests on bold design decisions made long before the language's inception.</span>
+<span id="cb43-86"><a href="#cb43-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-87"><a href="#cb43-87" aria-hidden="true" tabindex="-1"></a>"Metaprogramming", as used in the R community, means writing programs that treat R code as data - programming on programs, in other words. It utilizes R's highly developed capabilities for partial expression substitution, controlled evaluation, and environment manipulation. Books could be written about this topic, and <span class="co">[</span><span class="ot">Advanced R</span><span class="co">](https://adv-r.hadley.nz/meta-big-picture.html)</span> covers it in detail.</span>
+<span id="cb43-88"><a href="#cb43-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-89"><a href="#cb43-89" aria-hidden="true" tabindex="-1"></a>As a basic example, have you ever wondered why most calls to <span class="in">`library`</span> in R scripts look like <span class="in">`library(package)`</span>, not <span class="in">`library("package")`</span>? The latter is legal, but seldom used. Most functions will throw an error if passed the name of a nonexistent object: </span>
+<span id="cb43-90"><a href="#cb43-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-91"><a href="#cb43-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, error = TRUE }</span></span>
+<span id="cb43-92"><a href="#cb43-92" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, d)</span>
+<span id="cb43-93"><a href="#cb43-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-94"><a href="#cb43-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-95"><a href="#cb43-95" aria-hidden="true" tabindex="-1"></a>But certain functions capture their inputs directly, _without_ evaluating them, and then evaluate them in a different context. This is called "quoting", since it captures the syntax of code </span>
+<span id="cb43-96"><a href="#cb43-96" aria-hidden="true" tabindex="-1"></a>while ignoring the semantics the way quoting natural language does. The implementation, known as non-standard evaluation, powers much </span>
+<span id="cb43-97"><a href="#cb43-97" aria-hidden="true" tabindex="-1"></a>of R's interface. One prominent example is formulas: a compact mini-language for </span>
+<span id="cb43-98"><a href="#cb43-98" aria-hidden="true" tabindex="-1"></a>specifying a statistical relationship to modeling functions. </span>
+<span id="cb43-99"><a href="#cb43-99" aria-hidden="true" tabindex="-1"></a>Because the formula is quoted and evaluated in the context of a data frame, </span>
+<span id="cb43-100"><a href="#cb43-100" aria-hidden="true" tabindex="-1"></a>the user can provide bare variable names, making for a clean, simple interface: </span>
+<span id="cb43-101"><a href="#cb43-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-104"><a href="#cb43-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb43-105"><a href="#cb43-105" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(mpg <span class="sc">~</span> wt <span class="sc">+</span> cyl <span class="sc">*</span> disp, <span class="at">data =</span> mtcars)</span>
+<span id="cb43-106"><a href="#cb43-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-107"><a href="#cb43-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-108"><a href="#cb43-108" aria-hidden="true" tabindex="-1"></a>The <span class="in">`tidyverse`</span> takes this idea much further. Its functions rely on </span>
+<span id="cb43-109"><a href="#cb43-109" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">tidy evaluation</span><span class="co">](https://dplyr.tidyverse.org/articles/programming.html)</span>, an elaborate framework </span>
+<span id="cb43-110"><a href="#cb43-110" aria-hidden="true" tabindex="-1"></a>for selecting and modifying variables within "data masks." </span>
+<span id="cb43-111"><a href="#cb43-111" aria-hidden="true" tabindex="-1"></a>In the end, R is really a statistics-oriented descendant of Lisp with more conventional syntax. Many of these ideas - expressions as data, expression substitution, and even optional prefix syntax - come from that immortal language.</span>
+<span id="cb43-112"><a href="#cb43-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-115"><a href="#cb43-115" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb43-116"><a href="#cb43-116" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">+</span><span class="st">`</span>(<span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb43-117"><a href="#cb43-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-118"><a href="#cb43-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-119"><a href="#cb43-119" aria-hidden="true" tabindex="-1"></a>All this power comes with serious drawbacks - serious enough that it can be </span>
+<span id="cb43-120"><a href="#cb43-120" aria-hidden="true" tabindex="-1"></a>reasonably argued that non-standard evaluation is a bad paradigm. </span>
+<span id="cb43-121"><a href="#cb43-121" aria-hidden="true" tabindex="-1"></a>Manipulating expressions means code loses referential transparency (evaluating </span>
+<span id="cb43-122"><a href="#cb43-122" aria-hidden="true" tabindex="-1"></a>the same if variable names are changed). Controlled evaluation requires </span>
+<span id="cb43-123"><a href="#cb43-123" aria-hidden="true" tabindex="-1"></a>programmers to think about environment inheritance, creating the potential for a host </span>
+<span id="cb43-124"><a href="#cb43-124" aria-hidden="true" tabindex="-1"></a>of subtle bugs. Functions that quote some of their arguments but not all, or </span>
+<span id="cb43-125"><a href="#cb43-125" aria-hidden="true" tabindex="-1"></a>accept quoted and nonquoted forms of the same argument (like <span class="in">`library`</span>), are </span>
+<span id="cb43-126"><a href="#cb43-126" aria-hidden="true" tabindex="-1"></a>harder to use. In the end, all this indirection makes code harder to </span>
+<span id="cb43-127"><a href="#cb43-127" aria-hidden="true" tabindex="-1"></a>write and reason about (hence the need for a vignette on simply programming with <span class="in">`dplyr`</span>). </span>
+<span id="cb43-128"><a href="#cb43-128" aria-hidden="true" tabindex="-1"></a>I think the tradeoff is worthwhile; the convenience and flexibility of non-standard evaluation </span>
+<span id="cb43-129"><a href="#cb43-129" aria-hidden="true" tabindex="-1"></a>are too valuable to abandon. But unlike the other two characteristics I outlined </span>
+<span id="cb43-130"><a href="#cb43-130" aria-hidden="true" tabindex="-1"></a>above, a strong case can be made otherwise.</span>
+<span id="cb43-131"><a href="#cb43-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-132"><a href="#cb43-132" aria-hidden="true" tabindex="-1"></a>In short, a successor to R should contain R's most powerful features: vector types </span>
+<span id="cb43-133"><a href="#cb43-133" aria-hidden="true" tabindex="-1"></a>and vectorized functions, a terse but expressive subsetting syntax, and </span>
+<span id="cb43-134"><a href="#cb43-134" aria-hidden="true" tabindex="-1"></a>support for expression manipulation and controlled evaluation.</span>
+<span id="cb43-135"><a href="#cb43-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-136"><a href="#cb43-136" aria-hidden="true" tabindex="-1"></a><span class="fu"># Improving on R's Weaknesses</span></span>
+<span id="cb43-137"><a href="#cb43-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-138"><a href="#cb43-138" aria-hidden="true" tabindex="-1"></a>R is not without faults. The problems listed below are more annoying than </span>
+<span id="cb43-139"><a href="#cb43-139" aria-hidden="true" tabindex="-1"></a>serious, but they stem from design decisions made long ago that can no longer </span>
+<span id="cb43-140"><a href="#cb43-140" aria-hidden="true" tabindex="-1"></a>be easily reversed. A successor language should avoid those mistakes. </span>
+<span id="cb43-141"><a href="#cb43-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-142"><a href="#cb43-142" aria-hidden="true" tabindex="-1"></a><span class="fu">## Finicky Interface</span></span>
+<span id="cb43-143"><a href="#cb43-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-144"><a href="#cb43-144" aria-hidden="true" tabindex="-1"></a>R's user interface, in places, in harder to learn and use than necessary. </span>
+<span id="cb43-145"><a href="#cb43-145" aria-hidden="true" tabindex="-1"></a>It uses conventions inconsistently, exposes too much detail to the user, </span>
+<span id="cb43-146"><a href="#cb43-146" aria-hidden="true" tabindex="-1"></a>and contains too many "gotchas" that cause confusing errors you can </span>
+<span id="cb43-147"><a href="#cb43-147" aria-hidden="true" tabindex="-1"></a>only avoid with experience.</span>
+<span id="cb43-148"><a href="#cb43-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-149"><a href="#cb43-149" aria-hidden="true" tabindex="-1"></a>One of the unwritten rules of programming </span>
+<span id="cb43-150"><a href="#cb43-150" aria-hidden="true" tabindex="-1"></a>is that inconsistency should not exist without reason. If you write a class <span class="in">`Foo`</span> with methods called </span>
+<span id="cb43-151"><a href="#cb43-151" aria-hidden="true" tabindex="-1"></a><span class="in">`bar_bar`</span>, <span class="in">`baz_baz`</span>, and <span class="in">`quxQux`</span>, your users will wonder why you used camelCase for just one method every time they try to call the logically expected but nonexistent  <span class="in">`qux_qux`</span>. If you </span>
+<span id="cb43-152"><a href="#cb43-152" aria-hidden="true" tabindex="-1"></a>put a data frame argument at the head of one function's argument list but the </span>
+<span id="cb43-153"><a href="#cb43-153" aria-hidden="true" tabindex="-1"></a>tail of another's, they will wonder why every time they forget which is which. Only</span>
+<span id="cb43-154"><a href="#cb43-154" aria-hidden="true" tabindex="-1"></a>constant attention in design can avoid inconsistencies like these, but the best designs do so.</span>
+<span id="cb43-155"><a href="#cb43-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-156"><a href="#cb43-156" aria-hidden="true" tabindex="-1"></a>R violates the principle in many places. </span>
+<span id="cb43-157"><a href="#cb43-157" aria-hidden="true" tabindex="-1"></a>One trivial but well-known example is the way S3 methods are written <span class="in">`generic.class`</span> (e.g., <span class="in">`mean.default`</span>), yet dots are used all </span>
+<span id="cb43-158"><a href="#cb43-158" aria-hidden="true" tabindex="-1"></a>the time in the names of functions, including </span>
+<span id="cb43-159"><a href="#cb43-159" aria-hidden="true" tabindex="-1"></a>S3 generics. The many exceptions (<span class="in">`t.test`</span>, <span class="in">`all.vars`</span>, ...) thwart a potentially useful convention.</span>
+<span id="cb43-160"><a href="#cb43-160" aria-hidden="true" tabindex="-1"></a>Unlike the other functionals, <span class="in">`mapply`</span> has the function as the first argument, not the second, and the <span class="in">`simplify`</span> and <span class="in">`use.names`</span> arguments are  </span>
+<span id="cb43-161"><a href="#cb43-161" aria-hidden="true" tabindex="-1"></a>actually <span class="in">`SIMPLIFY`</span> and <span class="in">`USE.NAMES`</span> (not without reason, but good luck remembering).</span>
+<span id="cb43-162"><a href="#cb43-162" aria-hidden="true" tabindex="-1"></a><span class="in">`ave`</span> and <span class="in">`tapply`</span> do similar things, but </span>
+<span id="cb43-163"><a href="#cb43-163" aria-hidden="true" tabindex="-1"></a><span class="in">`ave`</span> uses <span class="in">`...`</span> for grouping factors, while <span class="in">`tapply`</span> reserves it for arguments to the <span class="in">`FUN`</span> argument. </span>
+<span id="cb43-164"><a href="#cb43-164" aria-hidden="true" tabindex="-1"></a>Once you notice one of these seams in the design, you can't unsee it.</span>
+<span id="cb43-165"><a href="#cb43-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-166"><a href="#cb43-166" aria-hidden="true" tabindex="-1"></a>R sometimes contains unnecessary complexity. </span>
+<span id="cb43-167"><a href="#cb43-167" aria-hidden="true" tabindex="-1"></a>Interfaces often have complicated semantics, and functions sometimes feature multiple operating modes.</span>
+<span id="cb43-168"><a href="#cb43-168" aria-hidden="true" tabindex="-1"></a>For instance, there are two slightly different functions </span>
+<span id="cb43-169"><a href="#cb43-169" aria-hidden="true" tabindex="-1"></a>for doing principal components analysis, differing in the algorithm used. </span>
+<span id="cb43-170"><a href="#cb43-170" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`diag`</span> has four distinct uses </span>
+<span id="cb43-171"><a href="#cb43-171" aria-hidden="true" tabindex="-1"></a>(five, if you count <span class="in">`diag&lt;-`</span> as part of the same interface). Most troubling to me are </span>
+<span id="cb43-172"><a href="#cb43-172" aria-hidden="true" tabindex="-1"></a>the heavily overloaded arguments of certain </span>
+<span id="cb43-173"><a href="#cb43-173" aria-hidden="true" tabindex="-1"></a>functions. Consider this passage from the help for <span class="in">`get`</span>: </span>
+<span id="cb43-174"><a href="#cb43-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-175"><a href="#cb43-175" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-176"><a href="#cb43-176" aria-hidden="true" tabindex="-1"></a><span class="in">The ‘pos’ argument can specify the environment in which to look</span></span>
+<span id="cb43-177"><a href="#cb43-177" aria-hidden="true" tabindex="-1"></a><span class="in">     for the object in any of several ways: as a positive integer (the</span></span>
+<span id="cb43-178"><a href="#cb43-178" aria-hidden="true" tabindex="-1"></a><span class="in">     position in the ‘search’ list); as the character string name of an</span></span>
+<span id="cb43-179"><a href="#cb43-179" aria-hidden="true" tabindex="-1"></a><span class="in">     element in the search list; or as an ‘environment’ (including</span></span>
+<span id="cb43-180"><a href="#cb43-180" aria-hidden="true" tabindex="-1"></a><span class="in">     using ‘sys.frame’ to access the currently active function calls).</span></span>
+<span id="cb43-181"><a href="#cb43-181" aria-hidden="true" tabindex="-1"></a><span class="in">     The default of ‘-1’ indicates the current environment of the call</span></span>
+<span id="cb43-182"><a href="#cb43-182" aria-hidden="true" tabindex="-1"></a><span class="in">     to ‘get’. The ‘envir’ argument is an alternative way to specify an</span></span>
+<span id="cb43-183"><a href="#cb43-183" aria-hidden="true" tabindex="-1"></a><span class="in">     environment.</span></span>
+<span id="cb43-184"><a href="#cb43-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-185"><a href="#cb43-185" aria-hidden="true" tabindex="-1"></a>I count three possible types for <span class="in">`pos`</span>, all with different meanings, a default value with a special meaning, and another argument that does exactly the same thing for one type. (Plus a suggestion to use call stack introspection, which I'll leave to braver programmers than me). </span>
+<span id="cb43-186"><a href="#cb43-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-187"><a href="#cb43-187" aria-hidden="true" tabindex="-1"></a>Trying to memorize the intricacies of an interface like this is a fool's errand: at some point, you'll get it wrong and cause a nasty bug. That leaves no recourse but referring to </span>
+<span id="cb43-188"><a href="#cb43-188" aria-hidden="true" tabindex="-1"></a>the documentation each time you use the function, and nothing makes an interface more annoying to use.</span>
+<span id="cb43-189"><a href="#cb43-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-190"><a href="#cb43-190" aria-hidden="true" tabindex="-1"></a>Another offender is factors. Factors represent categorical variables by mapping integer codes to levels. Simple idea, but so many potential errors come from this fact. Something as simple as naively concatenating a factor causes disaster: </span>
+<span id="cb43-191"><a href="#cb43-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-194"><a href="#cb43-194" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb43-195"><a href="#cb43-195" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</span>
+<span id="cb43-196"><a href="#cb43-196" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span>))</span>
+<span id="cb43-197"><a href="#cb43-197" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(x, <span class="st">"d"</span>)</span>
+<span id="cb43-198"><a href="#cb43-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-199"><a href="#cb43-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-200"><a href="#cb43-200" aria-hidden="true" tabindex="-1"></a>Attempting to do factor arithmetic only triggers a warning, despite being nonsense</span>
+<span id="cb43-201"><a href="#cb43-201" aria-hidden="true" tabindex="-1"></a>(Note also that the factor warning preempts the "mismatched object lengths" warning this would normally trigger):</span>
+<span id="cb43-204"><a href="#cb43-204" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb43-205"><a href="#cb43-205" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb43-206"><a href="#cb43-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-207"><a href="#cb43-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-208"><a href="#cb43-208" aria-hidden="true" tabindex="-1"></a>Worst of all, and not widely known: R's lexical sort order differs by system locale. (See <span class="co">[</span><span class="ot">here</span><span class="co">](https://stackoverflow.com/questions/31772185/language-dependent-sorting-with-r)</span> for an example). When creating a factor, R defaults to ordering the levels lexically. Good luck with that reproducible research! </span>
+<span id="cb43-209"><a href="#cb43-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-210"><a href="#cb43-210" aria-hidden="true" tabindex="-1"></a>Individually, these criticisms are trivial. </span>
+<span id="cb43-211"><a href="#cb43-211" aria-hidden="true" tabindex="-1"></a>I don't mean to cast them as evidence of incompetence or carelessness by the language designers. I have written much worse interfaces to far simpler programs, so I know from experience how hard it is to implement and maintain a good one. But our successor language can do better by following the <span class="in">`tidyverse`</span> and making "design for human users" a </span>
+<span id="cb43-212"><a href="#cb43-212" aria-hidden="true" tabindex="-1"></a>core principle. </span>
+<span id="cb43-213"><a href="#cb43-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-214"><a href="#cb43-214" aria-hidden="true" tabindex="-1"></a><span class="fu">## Very Weak Typing</span></span>
+<span id="cb43-215"><a href="#cb43-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-216"><a href="#cb43-216" aria-hidden="true" tabindex="-1"></a>Our new language should have dynamic typing. Static typing makes code easier to reason about and debug, especially in large applications, but it would be awkward to explore or transform data without quick, easy type conversions that can be done interactively. </span>
+<span id="cb43-217"><a href="#cb43-217" aria-hidden="true" tabindex="-1"></a>In its present form, I think R makes these conversions a little _too_ easy. R is a weakly typed language: instead of disallowing operations with objects of disparate types, it casts them to a common type. Sometimes the result is predictable: </span>
+<span id="cb43-218"><a href="#cb43-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-221"><a href="#cb43-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb43-222"><a href="#cb43-222" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="st">"abc"</span>)</span>
+<span id="cb43-223"><a href="#cb43-223" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">+</span> <span class="dv">3</span></span>
+<span id="cb43-224"><a href="#cb43-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-225"><a href="#cb43-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-226"><a href="#cb43-226" aria-hidden="true" tabindex="-1"></a>But sometimes R will allow operations that have no sensible result: </span>
+<span id="cb43-227"><a href="#cb43-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-230"><a href="#cb43-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb43-231"><a href="#cb43-231" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(mtcars, <span class="st">"abc"</span>)</span>
+<span id="cb43-232"><a href="#cb43-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-233"><a href="#cb43-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-234"><a href="#cb43-234" aria-hidden="true" tabindex="-1"></a>Moreover, R has no equivalent of Python's type hinting system. If you want to enforce </span>
+<span id="cb43-235"><a href="#cb43-235" aria-hidden="true" tabindex="-1"></a>a specific type for function arguments, you have to do it manually: </span>
+<span id="cb43-236"><a href="#cb43-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-237"><a href="#cb43-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-238"><a href="#cb43-238" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
+<span id="cb43-239"><a href="#cb43-239" aria-hidden="true" tabindex="-1"></a>foo <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, z)</span>
+<span id="cb43-240"><a href="#cb43-240" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.character</span>(x)){</span>
+<span id="cb43-241"><a href="#cb43-241" aria-hidden="true" tabindex="-1"></a>        <span class="fu">stop</span>(<span class="st">"x must be character"</span>)</span>
+<span id="cb43-242"><a href="#cb43-242" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb43-243"><a href="#cb43-243" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
+<span id="cb43-244"><a href="#cb43-244" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-245"><a href="#cb43-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-246"><a href="#cb43-246" aria-hidden="true" tabindex="-1"></a>Many of the type-checking helpers like <span class="in">`is.character`</span> have surprisingly </span>
+<span id="cb43-247"><a href="#cb43-247" aria-hidden="true" tabindex="-1"></a>complex behaviors that make them dangerous to rely on.</span>
+<span id="cb43-248"><a href="#cb43-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-249"><a href="#cb43-249" aria-hidden="true" tabindex="-1"></a>R functions also do not always have stable return types. <span class="in">`sapply`</span>, for example, can return a list, an array, an atomic vector, or even an empty list, depending on the input. Programming guides often recommend <span class="in">`lapply`</span> or <span class="in">`vapply`</span> instead, since they enforce stable return types, but many unwary users (including me, at various times) who did not know this have written subtly buggy code. </span>
+<span id="cb43-250"><a href="#cb43-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-251"><a href="#cb43-251" aria-hidden="true" tabindex="-1"></a>R's very weak typing accounts for much of the </span>
+<span id="cb43-252"><a href="#cb43-252" aria-hidden="true" tabindex="-1"></a>unpredictable behavior that makes it challenging to use in large applications. I think strict typing like Python's would be excessive; operations like <span class="in">`paste(1:10, letters[1:10])`</span> are too convenient to part with. But our successor language will dispense with some of the crazier implicit coercions R allows.</span>
+<span id="cb43-253"><a href="#cb43-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-254"><a href="#cb43-254" aria-hidden="true" tabindex="-1"></a><span class="fu">## String Manipulation</span></span>
+<span id="cb43-255"><a href="#cb43-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-256"><a href="#cb43-256" aria-hidden="true" tabindex="-1"></a>R's string manipulation facilities leave something to be </span>
+<span id="cb43-257"><a href="#cb43-257" aria-hidden="true" tabindex="-1"></a>desired. In other languages, strings are array types or feature array-like </span>
+<span id="cb43-258"><a href="#cb43-258" aria-hidden="true" tabindex="-1"></a>subsetting. R, however, handles strings (i.e., the raw character data that make up the elements of character vectors) with an <span class="co">[</span><span class="ot">internal type</span><span class="co">](https://cran.r-project.org/doc/manuals/r-release/R-ints.html#SEXPTYPEs)</span>. You can't extract string elements the way you can in Python: </span>
+<span id="cb43-259"><a href="#cb43-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-262"><a href="#cb43-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{py}</span></span>
+<span id="cb43-263"><a href="#cb43-263" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">"A typical string"</span></span>
+<span id="cb43-264"><a href="#cb43-264" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">0</span>]</span>
+<span id="cb43-265"><a href="#cb43-265" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-266"><a href="#cb43-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-267"><a href="#cb43-267" aria-hidden="true" tabindex="-1"></a>You have to use <span class="in">`substr`</span> or <span class="in">`substring`</span> (barely distinguishable functions again!)</span>
+<span id="cb43-268"><a href="#cb43-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-271"><a href="#cb43-271" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb43-272"><a href="#cb43-272" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"A typical string"</span></span>
+<span id="cb43-273"><a href="#cb43-273" aria-hidden="true" tabindex="-1"></a><span class="fu">substr</span>(x, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb43-274"><a href="#cb43-274" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-275"><a href="#cb43-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-276"><a href="#cb43-276" aria-hidden="true" tabindex="-1"></a>The rationale is obvious - the unpalatable alternative would be to implement character </span>
+<span id="cb43-277"><a href="#cb43-277" aria-hidden="true" tabindex="-1"></a>vectors as list-like recursive vectors - but it has annoying consequences for the </span>
+<span id="cb43-278"><a href="#cb43-278" aria-hidden="true" tabindex="-1"></a>interface, such as <span class="in">`strsplit`</span> returning a list:</span>
+<span id="cb43-279"><a href="#cb43-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-282"><a href="#cb43-282" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb43-283"><a href="#cb43-283" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"This is a typical"</span>, <span class="st">"character vector"</span>)</span>
+<span id="cb43-284"><a href="#cb43-284" aria-hidden="true" tabindex="-1"></a><span class="fu">strsplit</span>(x, <span class="at">split =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">s"</span>)</span>
+<span id="cb43-285"><a href="#cb43-285" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-286"><a href="#cb43-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-287"><a href="#cb43-287" aria-hidden="true" tabindex="-1"></a>But these are quibbles. The real problem is the regular expression interface. </span>
+<span id="cb43-288"><a href="#cb43-288" aria-hidden="true" tabindex="-1"></a>This is the only part of base R I actively dislike.</span>
+<span id="cb43-289"><a href="#cb43-289" aria-hidden="true" tabindex="-1"></a>There are too many functions with terse, barely distinguishable names. (If you can remember the difference between <span class="in">`gregexpr`</span> and <span class="in">`regexec`</span> without looking it up, please teach me your secrets). Functions don't use <span class="co">[</span><span class="ot">PCRE</span><span class="co">](https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions)</span> by default, a fact I never remember until it causes an error. They return match data </span>
+<span id="cb43-290"><a href="#cb43-290" aria-hidden="true" tabindex="-1"></a>in awkward formats; <span class="in">`gregexpr`</span>, for instance, returns a list of match start positions </span>
+<span id="cb43-291"><a href="#cb43-291" aria-hidden="true" tabindex="-1"></a>and lengths, making it difficult to extract the actual match data. </span>
+<span id="cb43-292"><a href="#cb43-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-293"><a href="#cb43-293" aria-hidden="true" tabindex="-1"></a>Put together, these issues make working with regular expressions much more verbose and painful than necessary. The convoluted snippet below, copied from the documentation, does nothing more than create a matrix with the text from two capture groups. </span>
+<span id="cb43-294"><a href="#cb43-294" aria-hidden="true" tabindex="-1"></a>For comparison, Python's <span class="in">`re`</span> module contains a <span class="in">`groupdict`</span> method that stores matches in an appropriate data structure automatically.</span>
+<span id="cb43-295"><a href="#cb43-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-298"><a href="#cb43-298" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb43-299"><a href="#cb43-299" aria-hidden="true" tabindex="-1"></a>notables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"  Ben Franklin and Jefferson Davis"</span>,</span>
+<span id="cb43-300"><a href="#cb43-300" aria-hidden="true" tabindex="-1"></a>              <span class="st">"</span><span class="sc">\t</span><span class="st">Millard Fillmore"</span>)</span>
+<span id="cb43-301"><a href="#cb43-301" aria-hidden="true" tabindex="-1"></a><span class="co"># name groups 'first' and 'last'</span></span>
+<span id="cb43-302"><a href="#cb43-302" aria-hidden="true" tabindex="-1"></a>name.rex <span class="ot">&lt;-</span> <span class="st">"(?&lt;first&gt;[[:upper:]][[:lower:]]+) (?&lt;last&gt;[[:upper:]][[:lower:]]+)"</span></span>
+<span id="cb43-303"><a href="#cb43-303" aria-hidden="true" tabindex="-1"></a>(parsed <span class="ot">&lt;-</span> <span class="fu">regexpr</span>(name.rex, notables, <span class="at">perl =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb43-304"><a href="#cb43-304" aria-hidden="true" tabindex="-1"></a><span class="fu">gregexpr</span>(name.rex, notables, <span class="at">perl =</span> <span class="cn">TRUE</span>)[[<span class="dv">2</span>]]</span>
+<span id="cb43-305"><a href="#cb43-305" aria-hidden="true" tabindex="-1"></a>parse.one <span class="ot">&lt;-</span> <span class="cf">function</span>(res, result) {</span>
+<span id="cb43-306"><a href="#cb43-306" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">seq_along</span>(res), <span class="cf">function</span>(i) {</span>
+<span id="cb43-307"><a href="#cb43-307" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(result[i] <span class="sc">==</span> <span class="sc">-</span><span class="dv">1</span>) <span class="fu">return</span>(<span class="st">""</span>)</span>
+<span id="cb43-308"><a href="#cb43-308" aria-hidden="true" tabindex="-1"></a>    st <span class="ot">&lt;-</span> <span class="fu">attr</span>(result, <span class="st">"capture.start"</span>)[i, ]</span>
+<span id="cb43-309"><a href="#cb43-309" aria-hidden="true" tabindex="-1"></a>    <span class="fu">substring</span>(res[i], st, st <span class="sc">+</span> <span class="fu">attr</span>(result, <span class="st">"capture.length"</span>)[i, ] <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb43-310"><a href="#cb43-310" aria-hidden="true" tabindex="-1"></a>  }))</span>
+<span id="cb43-311"><a href="#cb43-311" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(m) <span class="ot">&lt;-</span> <span class="fu">attr</span>(result, <span class="st">"capture.names"</span>)</span>
+<span id="cb43-312"><a href="#cb43-312" aria-hidden="true" tabindex="-1"></a>  m</span>
+<span id="cb43-313"><a href="#cb43-313" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb43-314"><a href="#cb43-314" aria-hidden="true" tabindex="-1"></a><span class="fu">parse.one</span>(notables, parsed)</span>
+<span id="cb43-315"><a href="#cb43-315" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-316"><a href="#cb43-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-319"><a href="#cb43-319" aria-hidden="true" tabindex="-1"></a><span class="in">```{py}</span></span>
+<span id="cb43-320"><a href="#cb43-320" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re </span>
+<span id="cb43-321"><a href="#cb43-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-322"><a href="#cb43-322" aria-hidden="true" tabindex="-1"></a>notables <span class="op">&lt;-</span> [<span class="st">"Ben Franklin and Jefferson Davis"</span>,  <span class="st">"</span><span class="ch">\t</span><span class="st">Millard Fillmore"</span>]</span>
+<span id="cb43-323"><a href="#cb43-323" aria-hidden="true" tabindex="-1"></a>[re.match(<span class="st">"(?P&lt;first&gt;[[:upper:]][[:lower:]]+) (?P&lt;last&gt;[[:upper:]][[:lower:]]+)"</span>, x).groupdict() <span class="cf">for</span> x <span class="kw">in</span> notables]</span>
+<span id="cb43-324"><a href="#cb43-324" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-325"><a href="#cb43-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-326"><a href="#cb43-326" aria-hidden="true" tabindex="-1"></a>(Is Fillmore's inclusion a sly joke? He is chiefly notable for being a bottom-tier president).</span>
+<span id="cb43-327"><a href="#cb43-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-328"><a href="#cb43-328" aria-hidden="true" tabindex="-1"></a>The excellent <span class="in">`stringr`</span> package provides functions that fix all of these problems. But R users shouldn't have to choose between taking a major dependency and foregoing easy string processing.</span>
+<span id="cb43-329"><a href="#cb43-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-330"><a href="#cb43-330" aria-hidden="true" tabindex="-1"></a><span class="fu"># Summing Up</span></span>
+<span id="cb43-331"><a href="#cb43-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-332"><a href="#cb43-332" aria-hidden="true" tabindex="-1"></a>You should have a clear idea by now of the language I want. It relies on vector types and makes it easy to manipulate data. It uses some form of non-standard evaluation and </span>
+<span id="cb43-333"><a href="#cb43-333" aria-hidden="true" tabindex="-1"></a>offers powerful metaprogramming tools to interested users. Its interface judiciously hides complexity and contains few discrepancies and special cases. With an easy-to-use package system and thorough documentation, it will rapidly gain users and establish a productive, long-lasting community.</span>
+<span id="cb43-334"><a href="#cb43-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-335"><a href="#cb43-335" aria-hidden="true" tabindex="-1"></a>That language sounds a lot like what the people behind <span class="in">`tidyverse`</span> have </span>
+<span id="cb43-336"><a href="#cb43-336" aria-hidden="true" tabindex="-1"></a>already created. <span class="in">`tidyverse`</span> expands and enhances R's data manipulation </span>
+<span id="cb43-337"><a href="#cb43-337" aria-hidden="true" tabindex="-1"></a>capabilities, with particular attention to ease of use and rigorous </span>
+<span id="cb43-338"><a href="#cb43-338" aria-hidden="true" tabindex="-1"></a>implementation of non-standard evaluation. Perhaps most importantly,</span>
+<span id="cb43-339"><a href="#cb43-339" aria-hidden="true" tabindex="-1"></a>its developers update aggressively; they have made several complete </span>
+<span id="cb43-340"><a href="#cb43-340" aria-hidden="true" tabindex="-1"></a>overhauls of <span class="in">`dplyr`</span>'s interface over the past few years. This </span>
+<span id="cb43-341"><a href="#cb43-341" aria-hidden="true" tabindex="-1"></a>means lots of breaking changes that make <span class="in">`tidyverse`</span> infamously dangerous to use </span>
+<span id="cb43-342"><a href="#cb43-342" aria-hidden="true" tabindex="-1"></a>in production, but <span class="in">`tidyverse`</span> advances and develops new ideas much </span>
+<span id="cb43-343"><a href="#cb43-343" aria-hidden="true" tabindex="-1"></a>more quickly than R itself. I think the tradeoff is worthwhile.</span>
+<span id="cb43-344"><a href="#cb43-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-345"><a href="#cb43-345" aria-hidden="true" tabindex="-1"></a>It also sounds a little like <span class="co">[</span><span class="ot">Julia</span><span class="co">](https://julialang.org/)</span>, a newer statistical language with metaprogramming support, vector types, and an emphasis on performance that is lacking in R.That emphasis, <span class="co">[</span><span class="ot">some have observed</span><span class="co">](https://www.reddit.com/r/datascience/comments/m8wcnl/julia_vs_rpython/)</span>, gives it the potential to eliminate the "prototype in R/Python, program in C/C++" cycle that </span>
+<span id="cb43-346"><a href="#cb43-346" aria-hidden="true" tabindex="-1"></a>plagues machine learning research today. It has nowhere near R's </span>
+<span id="cb43-347"><a href="#cb43-347" aria-hidden="true" tabindex="-1"></a>popularity or anything like its mature ecosystem, but users I've encountered speak highly of it. Will I be writing Julia ten years from now? Perhaps. But for now, R reigns supreme.</span>
+<span id="cb43-348"><a href="#cb43-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-349"><a href="#cb43-349" aria-hidden="true" tabindex="-1"></a><span class="sc">\#</span> TODO: Update this in <span class="in">`r 2027 - as.integer(format(Sys.Date(), "%Y"))`</span> years to see how things shook out</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
