@@ -1,0 +1,106 @@
+---
+title: "What I Wish I'd Known Going into Advent of Code"
+author: "Ryan Heslin"
+date: "2022-09-25"
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+You've probably guessed by now that I really like [Advent of Code](https://adventofcode.com/), 
+Eric Wastl's annual collection of Christmas-themed programming puzzles. Even 
+ignoring the puzzles, the experience is alluring. The silly 
+but surprisingly elaborate narrative tying the puzzles together, the burgeoning 
+community, the steady increase in difficulty, and the soothing blue-and-gold design 
+of the site all combine to make the event something special. 
+But the puzzles are the main event, so you ought to know something about them 
+before diving in.
+
+With a hundred-odd stars across three years, I thought I'd 
+offer some advice. 
+
+To have an enjoyable experience, I don't think you need anything more than 
+familiarity with at least one programming language. You certainly don't need 
+formal computer science education, knowledge of math theory, or any experience 
+with competitive programming, though all those things are helpful. You just need 
+to be effective at taking a problem statement, coming up with a plan to solve 
+it, and translating that plan into code. None of that is easy, but Advent of 
+Code is a great way to practice.
+
+Here are some less obvious pointers.
+
+_Be absolutely sure you understand what is being asked._ The puzzles often  
+contain complicated rules with subtle but important edge cases. The text 
+is usually careful to note these; if not, they often appear in the examples 
+provided. Still, Wastl has remarked that there is always at least one player 
+who ignores each sentence of the puzzle text. More times than I can count, I've wasted 
+time on unworkable solutions after missing some crucial nuance. Don't be like 
+me. Don't start solving a puzzle until you've resolved all your questions about 
+how you should interpret the input, and remember that an extra minute spent skimming the puzzle text 
+could save you an hour of fruitless coding.
+
+_Resist the temptation to pre-solve the second part._ 
+
+_I'd better make this code robust to handle the second part,_ you tell yourself. 
+_I'll look so clever when I solve it just by tweaking a parameter in my solution 
+to the first part!_
+Stop right there. The whole point of the second part is that you can't plan for it. 
+It could take any one of dozens of forms - asking for the highest of something 
+instead of the lowest, removing a constraint that made the problem simpler, 
+imposing a new constraint that makes it more complicated,
+or even asking you to use the input in a completely different way. Beyond wrapping 
+your code in functions or classes you can reuse, you can't prepare for all 
+these scenarios.  
+
+The exception is puzzles whose first parts tell you to ignore some part of the input. 
+In that case, the second part is sure to use the full input, and the increase 
+in scale could well break a naive but inefficient algorithm that works on the 
+first part.
+
+_Look out for some recurring themes_
+175 puzzles in, Wastl still manages to avoid merely recycling old puzzles. 
+But naturally, the same kinds of problem crop up again and again, albeit always 
+with a fresh variation or two. Expect to see at least one of the following: 
+
+* Evaluating and parsing a made-up [assembly language](https://en.wikipedia.org/wiki/Assembly_language)
+* Finding the shortest path on a [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics))
+* String manipulation, possibly involving [regular expressions](https://en.wikipedia.org/wiki/Regular_expression)
+* Some application of [combinatorics](https://en.wikipedia.org/wiki/Combinatorics)
+* A variation on [Conway's game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
+
+Puzzles become a lot less daunting when you can relate them to familiar concepts. 
+Moreover, these are all well-studied problems in computer science, so you 
+can easily find advice or pseudocode for useful algorithms if you get stuck.
+
+_Be lazy._ 
+Efficient code does as little work as possible. Advent of Code doesn't expect 
+you to aggressively optimize your code, but it does reward finding clever 
+ways to avoid unnecessary computations. If you're trying combinations of 
+values to look for the answer, for instance, you can greatly speed up 
+your code if you find an easy way to filter combinations that can't possibly 
+yield the right answer. In a similar vein, resist the urge to just simulate a puzzle that asks for the outcome 
+of a game or process. If you can think of a way to compute the answer directly, 
+your code will probably run much faster. 
+
+Advent of Code isn't intended to require dirty optimization hacks, but it 
+does test your ability to think of subtler approaches than brute force.
+
+_Don't make it into work._ 
+Advent of Code is, above all, fun \em a chance to write code that solves 
+silly problems about made-up Yuletide adventures. Of course, it's also an 
+opportunity to practice writing good code to diverse specifications, but that's 
+secondary. Don't stress about efficiency, style, or refactoring; nobody is 
+going to hound you for breaking code quality guidelines on Christmas puzzles. 
+
+And if you get stuck, do something else for awhile - you'll get that star 
+eventually. It's not a sign you're dumb or bad at coding; the puzzles are devised 
+by a clever software engineer to challenge an audience largely composed 
+of software engineers, after all. (That doesn't mean _I'm_ not dumb, mind you - 
+you just have to look elsewhere for proof).
+
+If you're unsure whether to take part, just give it a try. I did, and the 
+experience spurred me to learn new languages and start thinking seriously about the 
+code I wrote. The first puzzle 
+of each year is usually simple, and you're not obliged to continue if 
+you don't enjoy it.
+I hope you found this advice useful, or at least entertaining. See you in 
+December!

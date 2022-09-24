@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/aoc_advice/index.html",
       "/posts/next_language/index.html",
       "/posts/a_star/index.html",
       "/posts/that_kind_of_a_day/index.html",
