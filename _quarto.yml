@@ -16,5 +16,5 @@ website:
     copy-button: true
 format:
   html:
-    theme: cosmo
+    theme: journal
     css: styles.css

@@ -28,7 +28,8 @@ Code is a great way to practice.
 
 Here are some less obvious pointers.
 
-_Be absolutely sure you understand what is being asked._ The puzzles often  
+_Be absolutely sure you understand what is being asked._ 
+Puzzles often  
 contain complicated rules with subtle but important edge cases. The text 
 is usually careful to note these; if not, they often appear in the examples 
 provided. Still, Wastl has remarked that there is always at least one player 
@@ -43,13 +44,13 @@ _Resist the temptation to pre-solve the second part._
 _I'd better make this code robust to handle the second part,_ you tell yourself. 
 _I'll look so clever when I solve it just by tweaking a parameter in my solution 
 to the first part!_
-Stop right there. The whole point of the second part is that you can't plan for it. 
+Stop right there. The whole point of the second part is that you _can't_ plan for it. 
 It could take any one of dozens of forms - asking for the highest of something 
 instead of the lowest, removing a constraint that made the problem simpler, 
 imposing a new constraint that makes it more complicated,
 or even asking you to use the input in a completely different way. Beyond wrapping 
 your code in functions or classes you can reuse, you can't prepare for all 
-these scenarios.  
+these scenarios.
 
 The exception is puzzles whose first parts tell you to ignore some part of the input. 
 In that case, the second part is sure to use the full input, and the increase 
@@ -59,7 +60,7 @@ first part.
 _Look out for some recurring themes_
 175 puzzles in, Wastl still manages to avoid merely recycling old puzzles. 
 But naturally, the same kinds of problem crop up again and again, albeit always 
-with a fresh variation or two. Expect to see at least one of the following: 
+with a fresh variation or two. Expect to see at least one appearance each of the following: 
 
 * Evaluating and parsing a made-up [assembly language](https://en.wikipedia.org/wiki/Assembly_language)
 * Finding the shortest path on a [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics))
@@ -85,7 +86,7 @@ Advent of Code isn't intended to require dirty optimization hacks, but it
 does test your ability to think of subtler approaches than brute force.
 
 _Don't make it into work._ 
-Advent of Code is, above all, fun \em a chance to write code that solves 
+Advent of Code is, above all, fun - a chance to write code that solves 
 silly problems about made-up Yuletide adventures. Of course, it's also an 
 opportunity to practice writing good code to diverse specifications, but that's 
 secondary. Don't stress about efficiency, style, or refactoring; nobody is 

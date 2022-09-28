@@ -7,7 +7,7 @@ urlcolor: "blue"
 ---
 
 R, for all its warts, has most of the features I want from a data science 
-language. It's powerful, and typically fun to use. But, like all languages, it is neither perfect nor likely to be widely used forever. (I doubt it will enjoy \em if that is the right word \em the endless afterlife of COBOL and its ilk). So I hope the (distant!) future will see statistical languages that replicate and refine R's strengths while improving its weaknesses. What should those languages look 
+language. It's powerful, surprisingly versatile, and usually fun to use. But, like all languages, it is neither perfect nor likely to be widely used forever. (I doubt it will enjoy - if that is the right word - the endless afterlife of COBOL and its ilk). So I hope the (distant!) future will see statistical languages that replicate and refine R's strengths while improving its weaknesses. What should those languages look 
 like?
 
 To discuss a next-generation language, we need to establish what makes R so great to begin with. 
@@ -220,7 +220,7 @@ a specific type for function arguments, you have to do it manually:
 
 
 ```{r, eval = FALSE}
-foo <- function(x, y, z)
+foo <- function(x, y, z){
 if(!is.character(x)){
         stop("x must be character")
     }
@@ -241,7 +241,7 @@ R's string manipulation facilities leave something to be
 desired. In other languages, strings are array types or feature array-like 
 subsetting. R, however, handles strings (i.e., the raw character data that make up the elements of character vectors) with an [internal type](https://cran.r-project.org/doc/manuals/r-release/R-ints.html#SEXPTYPEs). You can't extract string elements the way you can in Python: 
 
-```{py}
+```{python}
 x = "A typical string"
 x[0]
 ```
@@ -290,11 +290,11 @@ parse.one <- function(res, result) {
 parse.one(notables, parsed)
 ```
 
-```{py}
+```{python}
 import re 
 
-notables <- ["Ben Franklin and Jefferson Davis",  "\tMillard Fillmore"]
-[re.match("(?P<first>[[:upper:]][[:lower:]]+) (?P<last>[[:upper:]][[:lower:]]+)", x).groupdict() for x in notables]
+notables = ["Ben Franklin and Jefferson Davis",  "\tMillard Fillmore"]
+[re.match(".*(?P<first>[A-Z][a-z]+).*(?P<last>[A-Z][a-z]+)", x).groupdict() for x in notables]
 ```
 
 (Is Fillmore's inclusion a sly joke? He is chiefly notable for being a bottom-tier president).
