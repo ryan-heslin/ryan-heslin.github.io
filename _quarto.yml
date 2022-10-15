@@ -1,7 +1,6 @@
 project:
   type: website
   output-dir: docs
-
 website:
   title: "Verso"
   navbar:
@@ -18,3 +17,5 @@ format:
   html:
     theme: journal
     css: styles.css
+execute: 
+  freeze: auto
