@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.587">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -55,7 +60,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -68,7 +73,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -98,7 +103,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": true,
@@ -130,9 +135,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <a class="navbar-brand" href="../../index.html">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Verso</span>
-  </a>
+    </a>
+  </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -220,6 +227,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   #B#C#D#C#
   #########</code></pre>
 <p>I made the crucial decision to represent positions on the board as tuples of <code>(x, y)</code> coordinates. Since I was using Python, I decided to use a zero-based index, with the leftmost hall space as the <code>x</code> origin and the bottom side room spaces as the <code>y</code> origin. So the leftmost <code>A</code> amphipod on the board above would be located at <code>(2, 2)</code>. I would have made my life much easier if I had used complex numbers instead of tuples of real numbers. In any case, I wrote a crude function to map each amphipod type to a set containing its positions:</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse(inp, xmax<span class="op">=</span><span class="dv">10</span>):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    stripped <span class="op">=</span> inp[<span class="dv">2</span> : (<span class="bu">len</span>(inp) <span class="op">-</span> <span class="dv">1</span>)]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    ymax <span class="op">=</span> <span class="bu">len</span>(stripped)</span>
@@ -234,6 +242,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            mapping[val].add((i, j))  <span class="co"># Add position to set</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mapping, ymax</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Then I wrote a complicated function I’ll spare you. It computed, for each pair of coordinates it was legal to move between, the spaces spanning them. That way, I could allow moves only after confirming that that space wasn’t blocked.</p>
 <p>Next came designing an object to represent game states. It should own <code>h</code> and <code>d</code>, the second of which would take another game state as argument. I decided it should also be responsible for finding adjacent nodes and creating objects to represent them. I decided to call the class <code>State</code>.</p>
 <p>From here, my work only got kludgier. <code>State</code> ended up mapping each amphipod type to a set of the positions it occupied as well as tracking the occupants of each side room - a redundancy I couldn’t seem to avoid. From there, <code>d</code> and <code>h</code> were surprisingly simple. <code>d</code> would only ever be called on states that differed by the position of just one amphipod, so all I had to do was find the two coordinate tuples that disagreed in the instances’ coordinate sets, measure the distance between them, and multiply by the cost of moving the relevant amphipod type one space. <code>h</code> was a bit trickier, but hardly brutal — I just computed the distance from each amphipod to the target side room, a simple approach that would never underestimate the true cost.</p>
@@ -245,6 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>A side room may only admit amphipods if it either contains no amphipods or only amphipods of its type.</p></li>
 </ol>
 <p>Translating these directives into conditions was pure hell, and the result turned into pure write-only code. Here’s a representative excerpt:</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> coord[<span class="dv">0</span>] <span class="kw">in</span> <span class="va">self</span>.sides_idx:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    x_type <span class="op">=</span> <span class="va">self</span>.side_idx2type(coord[<span class="dv">0</span>])</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (x_type <span class="op">==</span> k <span class="kw">and</span> <span class="va">self</span>.sides[k][<span class="st">"completed"</span>]) <span class="kw">or</span> (</span>
@@ -252,8 +262,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            <span class="kw">and</span> <span class="va">self</span>.sides[x_type][<span class="st">"room"</span>][coord[<span class="dv">1</span>] <span class="op">+</span> <span class="dv">1</span>] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            ):</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Somehow, I finished it.</p>
 <p>That left only the <code>A_star</code> function that did the real work. Translating Wikipedia’s pseudocode for the algorithm into Python was simple:</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> A_star(start, goal, debug<span class="op">=</span><span class="va">False</span>):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    start_k <span class="op">=</span> <span class="bu">hash</span>(start)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    open_set <span class="op">=</span> {start_k: start}</span>
@@ -310,6 +322,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>                f_score[neighbor_k] <span class="op">=</span> g_score_new <span class="op">+</span> neighbor.h()</span>
 <span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> neighbor <span class="kw">not</span> <span class="kw">in</span> open_set.values():</span>
 <span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>                    open_set[neighbor_k] <span class="op">=</span> neighbo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>My only addition, naturally, was a debug mode. Then came the really hard part.</p>
 <p>I spent an embarrassing amount of time in the debugger getting everything to work correctly. I fell into in a dispiriting loop of scanning output for evidence of bugs, stepping through the debugger to track them down, and making painstaking changes to fix them. I came close to giving up, and several times regretted starting. Then, one fine July Monday morning, I saw the code spit out a plausible-looking answer. Not expecting success, I checked the Advent of Code website and gasped when I saw it was correct.</p>
 <p>I wasn’t home free; my inefficient kludge algorithm might well be too slow for the second half of the problem. I modified <code>State</code> to handle a larger game board, crossed my fingers, and ran the script again. It took a few minutes longer, but it spit out the correct answer for part 2. I had done it.</p>
@@ -323,6 +336,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -423,7 +454,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);

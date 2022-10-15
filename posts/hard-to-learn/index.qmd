@@ -1,0 +1,162 @@
+---
+title: "Is R Hard to Learn?"
+author: "Ryan Heslin"
+date: "2022-10-15"
+categories: ["R"]
+urlcolor: "blue"
+---
+
+R has something of a reputation for being hard to learn. 
+[Many](https://r4stats.com/articles/why-r-is-hard-to-learn/) have 
+speculated about the reasons why. With the possible 
+exception of C, I can't think of another 
+language widely regarded in the same way. R is pointer-free (at least at the user level) and has 
+much more forgiving typing, so 
+why the similarly bad reputation?
+
+I think there is some truth to these claims: some features of R do
+make it unusually daunting for beginners. But the more important reason is that 
+people often must 
+learn R with little support or without much knowledge of programming.
+Learning the first language is hard; tutorials or teachers that present it 
+the wrong way make it even harder.
+
+While I have extensive experience working with R beginners, I 
+have no hard data, and speak as a mostly self-taught programmer. 
+So tune your skepticism level accordingly.
+
+# My Own Experience 
+
+R was the first programming language I learned seriously. I learned some 
+Java many years earlier in computer science class in high school, and a 
+little Python from a college course, but in neither case did I set out to 
+master the language and use it in my career. When I began learning R in early 
+2020, I planned to become a policy analyst after grad school; knowing a 
+programming language would give me an advantage in that field. I considered learning 
+Python instead, but I decided on R after maybe two minutes of thought because 
+it had a reputation for being hard to learn, and I wanted a challenge. 
+
+I had no idea what I was getting into, of course. I dived into a too-advanced 
+tutorial that used `tidyverse` without even comprehending the difference 
+between it and R itself. (I believe it's [this one](https://datacarpentry.org/r-socialsci/03-dplyr-tidyr/index.html), though back then it used an older version of the `tidyverse` API).
+I gave up after a few hours, hopelessly confused. Further attempts went no better. 
+I decided programming was beyond me, and put R aside.
+
+Then, in the surreal early months of the pandemic, I returned to it. I 
+worked through different tutorials, this time going more slowly this time and no longer expecting rapid progress.
+(Would I have given up for good if the pandemic had not unexpectedly afforded 
+me months of free time? Perhaps.) Intrigued by R's plotting capabilities, I started making visualizations of 
+pandemic-related data. (It was hard to think of anything else; the circumstances had 
+not yet come to feel normal). As I began to encounter nontrivial problems, I realized enjoyed working through them. I remember spending hours fussing over a regular expression 
+to extract county names from a column, or trying to transform data frames so 
+I could plot them properly. (This was in the `gather`-`spread` days, so it was not 
+easy!). 
+
+I would not recommend this awkward, roundabout approach to learning the language, but a 
+few months of it made me a competent user by the time grad school began, giving me a foundation 
+to build on when I tackled more advanced topics.
+
+# My Theory
+
+Would the learning process have been easier had I chosen Python? 
+Some aspects of R do make it harder to learn than comparable languages.
+One reason is that in R, unlike in Python, there is never one right way to 
+do something. R comes with so many powerful functions (perhaps too many) that 
+even simple problems can reasonably solved in many different ways. Veteran R 
+users treasure this 
+expressiveness, but it makes the learner's task harder. How can you learn the way to 
+do something when there _is_ no one way to do it? When the repurposed 
+StackOverflow solutions you patch together use different idioms whose 
+merits you lack the knowledge to compare? When tutorials give contradictory advice? 
+Only through experience, and 
+there are no shortcuts to that.
+
+Another cause is R's well-known inconsistencies and quirks, which I have discussed 
+before. Its often unfriendly error messages, like the infamous 
+"improper subset of object of type closure", make working through obstacles 
+harder than necessary.
+
+But I suspect the main reason for the perceived difficulty lies not in the 
+language itself, but in the circumstances of the learning. Effective 
+programming takes particular skills, and R learners are unlikely to have 
+had the experiences that develop them.
+
+Writing code demands a kind of focused aggression. You start (or should) 
+by devising a plan to achieve a technical goal. As you execute it 
+by writing, modifying, and testing code, you quickly run into unexpected 
+obstacles: confusing error messages, problems in code construction you can't 
+immediately solve, and perhaps changing requirements. You fight your way 
+through, skimming documentation or StackOverflow for advice and experimenting 
+with code. The experience tests your knowledge of the language and ability 
+to analyze, but also your resourcefulness and determination.
+With sometimes painful experience, you develop the capacity to resolve errors 
+relatively quickly, strong attention to detail, a knack for avoiding problems that stymied you in the past, 
+and above all the will to persevere and turn half-formed ideas into useful code.
+
+But developing these abilities takes time and effort, and they don't make you immune 
+to frustration. I write this on a Friday, having spent much of the week trying to do 
+a programming assignment in [Racket](https://racket-lang.org/), a language new to me.
+I spent more hours than I'd like to admit struggling with the syntax until 
+suddenly, unaccountably, it started to make sense. Even though I had more 
+than two years of experience and knew Racket had _simpler_ syntax rules than 
+most languages, it took time before I could write and read it fluently. 
+
+The problem is that many, if not most, R learners have yet to make that 
+effort, because they are new to programming. Think of an
+undergrad social science student taking a methods course, 
+or a data analyst accustomed to Excel or SAS learning a new tool for their job.
+Learners of this kind have little or no programming experience or computer science 
+education.
+The routine I described above is completely foreign to the first group. While 
+the second group might have experience solving technical problems in their tool 
+of choice, they do not know the idiom of a true programming language. 
+So asking them to write nontrivial code is like throwing raw recruits into 
+combat without sending them through basic training. Knowing this, designers 
+of computer science programs typically start the major off with a "how to code"
+class that gently introduces naive students to programming (and typically in 
+a general-purpose language like Python, not a specialized one like R). Learning from 
+the ground up without that kind of instruction, or at least a knowledgeable 
+mentor, is far harder - and impossible without strong motivation.
+
+Nor are they likely to know that making frequent errors is _normal_.
+For novices, unused to a programming 
+language's demands for absolute correctness, the early weeks 
+can feel like an endless stream of mistakes: misspelled variable names, 
+dangling parentheses, incorrect function calls. Even experienced programmers slip up 
+now and again
+(literally two minutes before I wrote 
+this, I lost points on an assignment submission because I put an extra letter 
+in the name of a required function). For newcomers, even writing correct syntax 
+is taxing. If not instructed otherwise, or exposed 
+to people having the same problem, many will start to think, as I once did, _it means something 
+is wrong with them_. 
+
+In short, compared to other languages, the people asked to learn R are unusually likely to lack the background and support that make learning 
+a new language relatively painless. It's no wonder, then, that R has become 
+known for being "hard to learn." 
+
+# The Implications
+
+This reputation threatens the language's future. Being "hard to learn" can 
+discourage enterprises an educators from using R or scare people away from 
+trying to learn it themselves. Over time, as competitors like Python 
+make usability improvements, R might decline in popularity if it fails to do the same. 
+The situation is hardly desperate. There are almost embarrassingly many 
+free tutorials available. The [swirl](https://swirlstats.com/) package provides interactive lessons. Thousands of package developers, not to mention R core, work hard to 
+improve existing interfaces and root out bugs.  
+But all of us who are experienced in R have a part to play. We can assist 
+novices who come to us for help or advice, strive to write high-quality code ourselves, 
+and above all remember that it was once very hard for us, too.
+
+(Caveat to all the above: a cursory search didn't find any research comparing the difficulty of learning 
+of different languages. I would be interested to read any if it existed, since 
+I have no hard data to support or disprove my claims).
+
+So if you're just starting out with R? Don't go too fast or expect instant 
+comprehension. Find an interesting problem you think you can solve to 
+keep up your motivation. Have faith that your skills will improve with practice. 
+Publish your code in some form, to seek feedback and demonstrate your growing proficiency.
+View your work as a creative outlet and an opportunity to refine your 
+skill in solving problems.
+You don't have to like it, or even programming in general, but there's a good 
+chance you'll find you do.

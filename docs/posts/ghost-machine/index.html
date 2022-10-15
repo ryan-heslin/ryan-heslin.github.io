@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.587">
+<meta name="generator" content="quarto-1.1.251">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Ryan Heslin">
 <meta name="dcterms.date" content="2022-06-12">
@@ -10,10 +10,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -52,7 +57,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -65,7 +70,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -94,7 +99,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": true,
   "collapse-after": 3,
@@ -120,9 +125,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
-      <a class="navbar-brand" href="../../index.html">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Verso</span>
-  </a>
+    </a>
+  </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -203,40 +210,40 @@ Ihaka: “Sure, that sounds like fun.”
 <span class="op">}</span>
 <span class="fu">foo</span><span class="op">(</span>abc <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="output"><code>--   [1]  0.21568960  1.45999971  1.10359291
---   [4] -1.30200555  3.17223491  1.33562253
---   [7]  0.03823917  0.63919159 -3.66705727
---  [10]  2.69911257  2.05211283 -2.51452262
---  [13] -1.28136883  0.11150523  4.04446974
---  [16]  2.98729988 -1.32272973  1.81112430
---  [19] -0.94945545 -0.05797119  0.03027148
---  [22] -0.61693030  1.81194856 -0.47316450
---  [25] -2.03233060  0.36819023 -0.11433634
---  [28]  0.69745316 -1.59641666 -0.83445377
---  [31] -1.02733296  1.14439119  3.68908599
---  [34] -4.29425306  0.64393747 -4.48878943
---  [37]  0.84198003  0.44400857  0.43679650
---  [40] -2.74895529  3.53326045 -3.62858402
---  [43]  2.28226110 -1.31338956 -4.14889309
---  [46]  1.05945706 -0.03381360  0.96985393
---  [49]  0.01405702 -2.90439983 -0.65116498
---  [52]  1.17507853  2.30892954 -1.68866895
---  [55]  0.72246549  0.58221661 -3.59496585
---  [58] -1.49411781 -1.67787986 -1.16178334
---  [61] -1.80764244  1.95260504 -1.49236004
---  [64]  1.33631588  0.35961812  3.12517797
---  [67] -2.49155656 -2.41632541 -3.45484426
---  [70] -1.52901846 -0.90600316  3.11506403
---  [73]  0.20781185 -0.74303546 -1.44349124
---  [76]  0.69732603  3.24685854 -0.94081635
---  [79] -1.87546853 -2.55349705 -1.95924729
---  [82]  1.78223595 -2.00921559 -0.49048957
---  [85] -2.30453566 -1.96201745 -2.12737504
---  [88]  2.36019294  1.43670555 -0.42101426
---  [91]  0.46770122  0.91731790  1.14452255
---  [94] -1.68664269  1.10448660  0.93125117
---  [97]  2.00032002  0.34457605 -2.16782404
--- [100] -0.79980040</code></pre>
+<pre class="output"><code>--   [1]  0.115311897  5.140673789  1.521400215
+--   [4]  1.718233848  0.371381191  0.212770916
+--   [7] -0.511638749 -2.152585224  2.061683351
+--  [10]  2.245597693  2.228619236  0.312053257
+--  [13]  1.407991324 -0.007086766 -0.539999695
+--  [16] -0.397478369  0.268156241  1.749485749
+--  [19] -3.538672228  1.038578458 -4.228680077
+--  [22]  0.495888402  0.130839771  1.805816520
+--  [25]  2.516013148  0.757608608 -2.093940369
+--  [28] -0.129129437  2.829003537  2.415952113
+--  [31] -0.013808831  0.341267036 -1.178992169
+--  [34] -0.420654559  3.489785565 -0.730351235
+--  [37]  1.166157892 -3.473292902  4.933084179
+--  [40]  0.919386904 -0.321058204 -1.398136729
+--  [43] -2.118907325  1.605931124 -0.899636627
+--  [46] -1.751662918 -1.069588514 -0.313038810
+--  [49]  0.734396567  0.133692003 -0.526310695
+--  [52]  1.600204346  1.239264258 -2.905701060
+--  [55] -0.962255561  2.222825059  1.060775863
+--  [58]  1.222832552 -1.315969498  2.118740070
+--  [61]  1.682238818 -2.580606577 -0.412083857
+--  [64]  0.330657007 -3.416482782  0.851277348
+--  [67]  0.362669794  1.376570105  1.734714886
+--  [70]  0.148203971 -0.595588571 -0.545624953
+--  [73] -1.774558544  3.283349190 -0.615663941
+--  [76]  1.580698156  2.314867263  1.572577325
+--  [79]  0.664158766 -1.717457336 -3.650146795
+--  [82]  1.146429731  2.572372232  1.380805852
+--  [85] -0.036499679  2.318341333  1.030055406
+--  [88] -0.471641832 -1.344681022  2.111712439
+--  [91]  1.247581729 -0.338463478 -4.524251783
+--  [94] -1.046892582  0.354169869 -0.817658042
+--  [97] -0.896111202  0.481961559 -1.856869026
+-- [100] -1.299176245</code></pre>
 </div>
 </div>
 <p>All seems well. But then a version update adds a new argument:</p>
@@ -261,40 +268,31 @@ Ihaka: “Sure, that sounds like fun.”
 -- 'abc' to 'abcxyz'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre class="output"><code>--   [1]  0.2226411936 -0.4505538309 -0.7222419695
---   [4] -3.1537025240  1.0027621056 -2.5086106867
---   [7] -2.5322042951  1.3284660444  1.3385534121
---  [10]  1.2556490887  0.9255714499  1.4189508080
---  [13]  3.8015238993  1.6156805094 -0.8075590330
---  [16] -2.6727684274 -0.9935527917  1.0832304299
---  [19]  0.6790134368  1.3365384748  1.3316617317
---  [22]  1.6992115703 -1.5136440670 -1.1893631672
---  [25] -0.1311025723  1.3879805236  0.4979383431
---  [28] -5.1691204874  1.6351727892  2.5427857284
---  [31]  4.6111965802  0.3418243604 -0.6111471272
---  [34]  1.0065838563  2.5935085678 -1.7341657819
---  [37] -2.0334440673 -0.3681836822  0.1757097749
---  [40]  1.0335777386  0.5416641161  1.5276741109
---  [43]  3.6437637989  0.2576532823 -4.0943953916
---  [46]  3.3504640478 -3.0657170406 -1.3338407656
---  [49]  0.4775468364 -5.0091935269 -1.5404491576
---  [52] -1.8534152185 -0.1747553105  0.7802676784
---  [55] -0.3136655681  1.8163700876 -0.7152454503
---  [58] -2.5216348149  0.4981152987  1.8719278762
---  [61] -2.3517144872 -2.1286013368  0.2140866494
---  [64] -1.7763786487  5.9568954652 -1.7957151663
---  [67]  0.3486519179 -2.1091582863 -3.1502057507
---  [70] -1.7327672386  0.6981450944 -3.2663646205
---  [73] -1.3039399566 -1.2860136676  0.5068212726
---  [76]  3.9314021322  1.3798762905  3.0408999493
---  [79]  2.3826782399 -3.4527983771 -0.2843151167
---  [82]  2.2409998910 -1.4167335130  4.0870212577
---  [85] -1.9014837119  0.5531158392 -1.3824224710
---  [88]  1.4345328468  0.9162659150  0.4317043787
---  [91]  0.1103286768  2.6965882292  1.7666302467
---  [94]  1.3981904244  2.9210212209 -0.1613758949
---  [97] -0.5981513185  0.0008592863  1.5151510828
--- [100]  0.3190810573</code></pre>
+<pre class="output"><code>--   [1] -3.3114438 -0.2339697  1.2041705 -0.4275153
+--   [5]  1.0489773 -0.3494165  1.7081481  0.7445528
+--   [9] -1.6714769 -1.5934301  1.2885050 -2.8648684
+--  [13] -0.7956856 -4.1682099  1.8432085 -0.1152253
+--  [17]  1.1455524 -1.1325589  3.2799875  2.7248827
+--  [21]  0.7914428 -1.9165668  0.4127789  1.5489406
+--  [25]  3.8900490  0.2898396 -0.1314152  0.1049818
+--  [29] -0.7153588  0.7765172  1.0043204  0.7665671
+--  [33]  2.0960847 -2.5412069 -3.6092407 -1.6440496
+--  [37]  1.7181977 -0.4110437 -0.6638590  2.2863888
+--  [41]  1.6615027  0.1802418 -0.8489513  2.9997397
+--  [45] -4.8652288 -1.6339450 -1.8251050  0.5312602
+--  [49]  1.0274212 -2.0342822  0.2674694  1.9542672
+--  [53]  3.3267609  1.7478825  1.3347181  1.6712949
+--  [57]  0.2302873 -0.1481300 -0.3577006  1.8858877
+--  [61] -1.8450395 -0.6072743 -2.0709869 -3.5556335
+--  [65]  3.7849141  3.8443782  0.9852197 -0.8691115
+--  [69]  0.4385904 -2.3924177 -0.2166004 -0.2529145
+--  [73]  0.7594209  0.4314946  4.2376580 -0.1864036
+--  [77]  1.2663504  2.4347438 -1.4915629  1.9172806
+--  [81]  3.0649816  1.0032917  0.1940415 -0.3298282
+--  [85]  0.3475422 -1.1212599  0.5303169  3.6368982
+--  [89] -2.4354748  0.6633740  3.2294855 -1.2620302
+--  [93]  4.9067364 -1.4491880 -2.5112710  0.9112715
+--  [97] -2.5901920  0.8151734 -2.1249319 -1.8247058</code></pre>
 </div>
 </div>
 </section><section id="when-simplification-complicates" class="level1"><h1>When Simplification Complicates</h1>
@@ -399,7 +397,7 @@ Ihaka: “Sure, that sounds like fun.”
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="output"><code>-- [1] NA</code></pre>
+<pre class="output"><code>-- [1] 0.75</code></pre>
 </div>
 </div>
 <p>The reason for this feature, as before, is clear: it’s convenient in interactive use. The problem with it is equally clear: it’s suicidal in programmatic use.</p>
@@ -414,6 +412,24 @@ Ihaka: “Sure, that sounds like fun.”
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -514,7 +530,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
