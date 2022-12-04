@@ -1,0 +1,176 @@
+---
+title: "Why I Use Neovim"
+author: "Ryan Heslin"
+date: "2022-12-04"
+categories: ["Neovim"]
+urlcolor: "blue"
+---
+
+# Introduction
+
+Right now, I do almost all my writing and programming using Neovim.
+It's not a typical choice for R users, who largely use RStudio, an excellent
+R-specialized IDE. I started with RStudio, but moved to Neovim after a bit more
+than a year, for reasons I'll explain below.
+
+My experience with Neovim was overdue for a full-length post. I spend
+most of each working day using it, and I've devoted much of my free time
+to maintaining and improving my setup. More than any of my other projects,
+it reflects my interests and creative abilities. So I'll start from the beginning
+and describe the long, strange journey that brought me here.
+
+# Taking the Plunge
+
+I first encountered Vim through MIT's [Missing Semester](https://missing.csail.mit.edu/2020/editors/),
+a free online course in programming tools. One of those tools was [Vim](https://www.vim.org/).
+Vim is a free text editor, developed and maintained since 1991 by Bram Moolenar.
+I had no experience with it, but knew it by reputation: very powerful and very hard to learn. I also considered Vim's main competitor, [Emacs](https://www.gnu.org/software/emacs/),
+another free text editor with an equally distinguished history and a very different
+design philosophy. "Nemesis" might be a better word: partisans of each editor
+have spent the last three decades arguing about which is better. At the time,
+I was neutral in that endless conflict, but I decided to try using Vim.
+With practice, Vim was supposed to make you much more productive, and
+who wouldn't want that?
+
+So I installed Vim and fumbled my way through Vimtutor, the built-in tutorial
+mode that demonstrates basic motion and editing commands. (If you're
+new to Vim, activate it with `:Tutor`). Then I
+tried doing my usual work in Vim. It went poorly.
+Using Vim for the first time feels like
+a nightmare. The complex, unfamiliar interface
+paralyzes you; even moving is hard.
+You try to escape, desperate to
+return to the familiarity of your old editor. You try every key
+combination you can think of, but nothing works; even quitting is a
+challenge. The experience is almost enough to scare you off from
+trying again
+
+A gentler introduction was necessary, I concluded. So I returned to my
+usual IDE, [RStudio](https://posit.co/products/open-source/rstudio/).
+RStudio delivers first-rate support for R coding, but it also has an
+unusually good set of Vim keybindings. So I turned them on and forced myself
+to use them. It was hard at first, but before long I got the hang of the commands.
+As I learned to delete whole words, move lines, and change visual selections,
+my productivity began to improve. But soon I craved more power than the
+keybindings gave me. I couldn't execute complex commands or use Vim's
+powerful regex implementation, because I was really just using a Vim-like
+interface for RStudio. I needed the real thing.
+
+That meant finding a plugin (what Vim calls user-created extensions) that supported an
+R REPL like RStudio's. I settled on [Nvim-R](https://github.com/jalvesaq/Nvim-R),
+which I still use. But Nvim-R was not designed for compatibility with Vim. Instead, it required
+a _variant_ of Vim: [Neovim](https://neovim.io/). Neovim, I learned,
+was a relatively new fork of Vim, promising an improved API, web embedding,
+Lua support, and other features that sounded exciting, though I hardly understood them
+Almost all Vim features were supported, but it implemented them by a different approach
+software.
+
+I tried setting up Neovim on my Windows machine, but I could not get it
+to work properly. It is possible to run Neovim on Windows machines, but
+I became so annoyed trying and failing to configure it that I turned to radical measures.
+It would be easier just to set up Neovim on a non-Windows machine, and the
+simplest way to do that was to install a virtual machine on my physical PC and
+then install Neovim there. So I downloaded
+[VirtualBox](https://www.virtualbox.org/) and fumbled my way through setting up an Ubuntu VM,
+choosing Ubuntu for its reputation as the most noob-friendly Linux distribution. I had no clue what
+I was doing, but somehow I got everything configured correctly.
+
+# Fun and Games
+
+Over the next few months, I slowly came to grips with my new editor. I
+installed the R packages I needed and got an R REPL working. I got a basic
+language server running, too, mostly by blindly copying from
+the [relevant plugin](https://github.com/neovim/nvim-lspconfig).
+(My current configuration, in sharp contrast, largely consists of _judicious_ copying
+from the plugin).
+I kept practicing the Vim motions, trying to avoid anti-patterns like using
+the arrow keys, until they became familiar. It was hard going. Many times,
+something would break and send me back to RStudio. But I persevered and
+began expanding my configuration to new languages, such as Python and Lua.
+In time, my original workflow seemed as alien as this new one once had.
+
+With time, Vim's interface becomes familiar, then indispensable. Once the
+motion commands become muscle memory, it becomes easy to execute even
+complex movements in just a few keystrokes. You decide what to do -
+say, "go three lines down, jump to the end of the sentence, go back two words,
+and yank eveything inside the parentheses" - and express it (`3j)2byi(`).
+The interface is fast, versatile, and useful for all kinds of text editing.
+Going back to the vim keybindings available in other editors feels like
+drinking diet soda instead of the regular kind - a passable imitation, but
+clearly not the real thing.
+
+Neovim is making the classic system even more powerful by integrating
+[TreeSitter](https://tree-sitter.github.io/tree-sitter/), a program
+that parses the [Abstract Syntax Tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
+of code in various languages. This makes it possible to use elements of
+language grammar as a basis of motion: you can select the expressions inside
+a function definition, or advance to the next branch of an `if-else` block.
+
+One of Neovim's headline features is a Lua API for VimScript, the
+specialized language Moolenar created for modifying and extending Vim.
+Vimscript does that job well enough, but is full of idiosyncrasies
+and has no applications outside Vim. I spent a little time learning it,
+but found it hard going.
+Lua, by contrast, was a joy to program in. Python is often billed
+as "interpretable pseudocode," but I think [Lua](https://www.lua.org/)
+comes even closer to that ideal. (Well, at least JIT-compiled pseudocode).
+I found that its minimalist design and simple syntax ideally suited
+to customizing Neovim's behavior. I had to stop myself from
+writing functions in my configuration files to solve interesting problems
+I encountered. The basic limits on Neovim's capabilities, I came to realize,
+were not any design constraints, but my own programming skill and imagination.
+
+# Taking Stock
+
+My decision to try a new editor had escalated into a months-long quest to
+create a new working environment and customize my workflow. Put that
+way, it seemed almost absurd, as if I had resolved to go running on
+weekends and ended up becoming a semi-pro triathlete. It had been fun,
+it had been frustrating, it had been an irresponsible use of time I should
+have devoted to planning my career, and I could not honestly say I regretted
+any of it. Nor was it wholly wasted. Without really intending
+to, I had learned a complex API and used it to write useful code. I
+almost completely replaced my old GUI-based workflow with the terminal.
+And Vim itself has its uses. In my last semester, I found myself, as
+practically every programmer has at some point, working on a mysterious server
+via SSH, with no access to my usual editor. I typed `which vim` hopefully,
+and had all I needed.
+
+Vim really did improve my productivity, I concluded. Using the fluid motion commands,
+powerful support for linewise transformations, and ease of integration with
+other shell tools, I could quickly carry out tasks I wouldn't have even thought
+to attempt with a conventional IDE. The feeling is intoxicating - in fact,
+too intoxicating. After a few months, I came to another realization: I
+spent much more time editing my configuration than I saved using it to do
+actual work. I am the type who would rather spend an hour finding an
+interesting way to automate a boring task than ten minutes actually doing it.
+And if that's procrastination, isn't it the same impulse that spurs us
+to invent new technologies? You be the judge.
+
+# Aside: Should I Have Gone with Emacs?
+
+The idea isn't ridiculous. I know little of Emacs,
+but I have heard it described as even more
+versatile and configurable than Vim. I think
+Vim's interface for text editing is superior
+(and so do a good number of Emacs users, considering the popularity of
+[EVIL mode](https://github.com/emacs-evil/evil)),
+but Emacs might have allowed me to indulge
+my configuration addiction even more shamelessly
+than Neovim. And, just as a McDonald's manager would probably concede
+that Burger King's onion rings are better, I
+have to admit that writing Emacs Lisp sounds more appealing than
+Lua-interfaced Vimscript.
+But I had to pick one editor, and I can't say I regret my choice.
+
+# Conclusion
+
+As I write this, I'm toying with five or six half-formed ideas for improving
+my Neovim configuration, some of which I might actually get around to
+implementing. It's strangely reassuring to have a project I can never finish.
+Of course, getting too attached to my elaborate configuration might
+prevent me from jumping ship if an even better editor appeared. But
+if this unending adventure has taught me anything, it's that adopting
+    superior tools, striving to master them, and customizing them
+to your heart's content is worth the investment. Still, for now, I'm
+happy where I am.

@@ -266,7 +266,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">example</span><span class="op">$</span><span class="va">foo</span> <span class="op">&lt;-</span> <span class="fl">2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>-- Error in .makeMessage(..., domain = domain): object 'field' not found</code></pre>
+<pre><code>-- Error in lapply(list(...), as.character): object 'field' not found</code></pre>
 </div>
 </div>
 <p>Either R core sneaked support for dynamic scope into the last major version, or the <code>R6Class</code> constructor was doing something funny. Checking the source code found the offending line:</p>
