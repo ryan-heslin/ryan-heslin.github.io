@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/aoc-2022/index.html",
       "/posts/use-neovim/index.html",
       "/posts/hard-to-learn/index.html",
       "/posts/aoc_advice/index.html",

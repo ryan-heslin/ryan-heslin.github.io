@@ -18,7 +18,7 @@ format:
         code-link: true
         code-overflow: wrap
         df-print: "paged"
-        highlight-style: arrow
+        highlight-style: kate
         linkcolor: "#d44a6c"
         smooth-scroll: true
         style: "quarto.css"

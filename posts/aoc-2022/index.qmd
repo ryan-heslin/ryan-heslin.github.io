@@ -18,11 +18,12 @@ I have much more experience than I did then.
 
 This year's narrative had the player assisting the Elves' expedition deep into
 the jungle, in search of a rare fruit that powers the reindeer's flight.
-This premise has lower stakes than most years, which require you to
+This premise has lower stakes than past years, which had you scrambling to
 prevent some catastrophe from ruining Christmas, but the change of pace is welcome.
+
 We all know the plot is just a device to string puzzle premises together,
 but I make special note of it because I think it's the secret to Advent of
-Code's popularity. Problems are just more _fun_ when framed with a silly scenario.
+Code's popularity. Problems are just more enjoyable when framed by a silly scenario.
 "Find the path on this unidirected graph maximizing this dynamic weighting function"
 is a work specification; "Find how to open the right valves to release as
 much pressure as possible so you and the herd of elephants following you can
@@ -32,6 +33,18 @@ escape the erupting volcano" is _fun_.
 style advice to name variables and functions in terms of the problem you are
 modeling, your code will teem with names like `ModulusMonkey` and `nearest_elf`).
 
+I set out to use as many languages as possible,
+even those I lacked confidence in. For the first week or so, I found this easier than expected. Even JavaScript, which I hadn't used seriously in a long time, I found simple enough to use.
+But it couldn't last. As the puzzles got tougher past day 10 or so, I found myself retreating to the familiarity of Python. Maybe I'll do better in this regard next year.
+
+Here's a plot showing my choice of language for each day with the cumulative line count:
+
+
+```{r}
+source("plot_lines.R")
+print(plot)
+```
+
 # Methods
 
 If this year had a theme, it was [Cartesian coordinates](https://en.wikipedia.org/wiki/Cartesian_coordinate_system). Every year has at least a few puzzles involving them,
@@ -40,9 +53,8 @@ with a clever twist, such as modeling falling shapes (Day 17) or computing
 three-dimensional surface areas (day 18).
 
 For these types of problems, I like to use a sparse map that
-stores only coordinates with some property of interest specified by the problem
-description. For day 18, for example, this was coordinates covered by a falling shape.
-I used to use tuples to represent coordinates, but now I use a tried-and-true hack: complex
+stores only coordinates with some property of interest. For day 18, for example, this was coordinates covered by a falling shape.
+I once used tuples to represent coordinates, but now I use a tried-and-true hack: complex
 numbers. Not only is this trick effective, it gives me the guilty thrill of
 using a workaround it would be reckless to use in production code.
 
@@ -93,7 +105,6 @@ I also encountered, or implemented for the first time, several other useful
 techniques: cycle detection, bit-encoding subsets, flood-filling, and more.
 I never come out of a year without at least a few new tricks.
 
-# Closing Thoughts
 
 My favorite puzzle was day 21. I solved it in R. Part 1 is fairly simple, requiring you
 to parse and evaluate a large expression recursively. Part 2 introduces
@@ -112,6 +123,8 @@ operation on the left-hand side until I had isolated the unknown.
 I learned later that several other approaches worked well, such as finding the solution
 by binary search or using complex-number hackery.
 It was fun and rewarding to work through, and the part 2 twist is a classic.
+
+# Closing Thoughts
 
 Overall, it was a fun and rewarding year, and I'm mostly pleased with my performance.
 I approached puzzles strategically instead of instinctively. I mostly picked the right data structures, and
