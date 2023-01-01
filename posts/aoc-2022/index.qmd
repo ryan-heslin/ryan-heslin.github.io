@@ -11,7 +11,7 @@ urlcolor: "blue"
 [Advent of Code 2022](https://adventofcode.com/2022) is over. After a few frantic
 weeks, I've completed both parts of all 25 puzzles.
 And, like most years, it was a wild ride, full of frustration and triumph in equal
-measure.
+measure. Eric Wastl and his team have once again delivered.
 When I wasn't coding, I was scanning documentation or trawling the [subreddit](https://www.reddit.com/r/adventofcode/) to  ~~look at memes~~ find suggestions for better algorithms.
 To my surprise, I managed to finish the whole calendar before the New Year. The year felt a little easier than 2021, though of course
 I have much more experience than I did then.
@@ -92,7 +92,7 @@ consider the mixed reception to [2018 day 15](https://adventofcode.com/2018/day/
 
 This year, the hard puzzles were hard because a straightforward approach could not solve them. Days 16 and 19, probably the hardest, presented
 tough pathfinding scenarios. You had to wrangle each input into a graph structure (possibly implicit),
-then find a way to reduce the problem space to a manageable size.
+then find a way to reduce the problem space to a manageable size that [brepth-first search](https://xkcd.com/2407/) could handle.
 Without some clever optimization, any solution would probably take much too long
 Both tasks involve lateral thinking and creativity; implementing Wikipedia's Dijkstra pseudocode wouldn't cut it.
 Some puzzles involved simulation, but not
