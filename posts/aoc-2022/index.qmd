@@ -12,7 +12,7 @@ urlcolor: "blue"
 weeks, I've completed both parts of all 25 puzzles.
 And, like most years, it was a wild ride, full of frustration and triumph in equal
 measure. Eric Wastl and his team have once again delivered.
-When I wasn't coding, I was scanning documentation or trawling the [subreddit](https://www.reddit.com/r/adventofcode/) to  ~~look at memes~~ find suggestions for better algorithms.
+When I wasn't coding, I was scanning documentation or trawling the [subreddit](https://www.reddit.com/r/adventofcode/) for hints.
 To my surprise, I managed to finish the whole calendar before the New Year. The year felt a little easier than 2021, though of course
 I have much more experience than I did then.
 
@@ -25,7 +25,7 @@ We all know the plot is just a device to string puzzle premises together,
 but I make special note of it because I think it's the secret to Advent of
 Code's popularity. Problems are just more enjoyable when framed by a silly scenario.
 "Find the path on this unidirected graph maximizing this dynamic weighting function"
-is a work specification; "Find how to open the right valves to release as
+is a work specification; "Find which valves to open release as
 much pressure as possible so you and the herd of elephants following you can
 escape the erupting volcano" is _fun_.
 
@@ -47,14 +47,14 @@ print(plot)
 
 # Methods
 
-If this year had a theme, it was [Cartesian coordinates](https://en.wikipedia.org/wiki/Cartesian_coordinate_system). Every year has at least a few puzzles involving them,
+If this year had a theme, it was [Cartesian coordinates](https://en.wikipedia.org/wiki/Cartesian_coordinate_system). They show up in at least a few puzzles each year,
 but they showed up again and again this year. The concept often appeared
-with a clever twist, such as modeling falling shapes (Day 17) or computing
+with a clever twist, such as modeling falling shapes (day 17) or computing
 three-dimensional surface areas (day 18).
 
 For these types of problems, I like to use a sparse map that
-stores only coordinates with some property of interest. For day 18, for example, this was coordinates covered by a falling shape.
-I once used tuples to represent coordinates, but now I use a tried-and-true hack: complex
+stores only coordinates that matter for the problem. For day 18, for example, this was coordinates covered by a falling shape.
+I once used tuples to represent even two-dimensional coordinates, but now I use a tried-and-true hack: complex
 numbers. Not only is this trick effective, it gives me the guilty thrill of
 using a workaround it would be reckless to use in production code.
 
@@ -69,8 +69,8 @@ Day 11 stymied me for a different reason: it could be solved a simple trick that
 I _just couldn't see_. Part 2 introduces a rule change that allows certain values
 to grow without bound. You have to recognize that they follow a cycle whose period
 is the lowest common multiple of divisors specified in the problem, then
-modulo divide by that value. This isn't too hard to figure out, but I didn't
-spend enough time planning an approach. I ended up finding the correct method
+modulo divide by that value. This isn't too hard to figure out, but I missed it
+because I attacked the problem without thinking it through. I ended up finding the correct method
 only after trying almost everything else. A little number theory would have saved me
 a lot of trouble.
 
@@ -81,8 +81,8 @@ there's nothing to analyze.
 
 I think the puzzle design this year was perhaps the best yet. Many puzzles
 were hard, some very hard, but none were complicated.
-The best-designed puzzles test insight and ability to to
-adapt a useful algorithm to a novel situation.
+I think good puzzles test two things: modeling the important features of a problem and to to
+adapting a standard algorithm to a novel situation.
 Those with complicated rules introduce an additional challenge: correctly implementing every
 detail of the specification. This rewards diligence more than insight and
 means even tiny mistakes will yield the wrong answer. Complication isn't _unfair per
@@ -104,7 +104,6 @@ the work it must have taken to refine a successful formula and make it still bet
 I also encountered, or implemented for the first time, several other useful
 techniques: cycle detection, bit-encoding subsets, flood-filling, and more.
 I never come out of a year without at least a few new tricks.
-
 
 My favorite puzzle was day 21. I solved it in R. Part 1 is fairly simple, requiring you
 to parse and evaluate a large expression recursively. Part 2 introduces

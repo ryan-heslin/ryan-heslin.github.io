@@ -1,0 +1,354 @@
+---
+title: "Lexical Scope: Who Does It Best?"
+author: "Ryan Heslin"
+date: "2023-01-18"
+categories: 
+urlcolor: "blue"
+---
+
+
+```{r, include = FALSE}
+render_chunk <- function(options, command){
+code <- paste(options$code, collapse = "\n")
+temp <- tempfile()
+writeLines(code, temp)
+result <- system2(c(command, temp), stdout = TRUE)
+print(result)
+knitr::engine_output(options, code, result)
+    }
+
+knitr::knit_engines$set(js = function(options) render_chunk(options, "js"))
+knitr::knit_engines$set(lua = function(options) render_chunk(options, "lua"))
+```
+
+# Introduction
+
+Most programming languages have some notion of scope: a frame of names bound to values.
+A program will involve many interlocking scopes, all associated with 
+constructs like functions and (in some languages) blocks.
+Each language has its own rules for managing
+scope. These rules determine how references to variable names are resolved at runtime. They typically organize scopes into
+a hierarchy and determine which scope "wins"
+when the same name exists in multiple
+scopes visible at a given time.
+An important part of scoping rules is what happens when a name is looked up in a scope where it is not bound to any object. As we will see, different languages have different 
+ways of handling this case. 
+
+A common pattern is called _lexical scope_.
+This means that objects, particularly functions, consider their parent scope to be
+the scope where they were defined. In a lexically scoped language,
+if a function can't find an object called
+`x` in its execution environment, 
+the interpreter or compiler would look next
+in whichever environment the function was
+defined in (often called the enclosing environment). This behavior has the
+advantage of consistency, since a given function's enclosing environment is the same
+no matter where the function is called.
+
+Languages with lexical scope often allow
+assignments in a function's enclosing environment.
+If a function is defined in the global environment, this is usually bad idea,
+since it violates the principle that functions should avoid unnecessary side
+effects. But side effects are no issue if that enclosing environment is
+_another_ function's execution environment. Suppose `f` is a function that returns a function
+`g` when called. `g`'s enclosing environment, the place it was defined,  is `f`'s execution environment. So any binding `g`
+makes in its enclosing environment when it is called is
+visible _only_ to subsequent calls to `g`!
+This fact makes it possible for functions
+to read and write a private cache, enabling a host of powerful programming techniques.
+
+This post compares the syntax several languages use for assignments in enclosing 
+scope. We'll implement a common pattern in each and contrast the 
+languages' very different means of supporting the same basic idea.
+
+That pattern is called [memoization](https://en.wikipedia.org/wiki/Memoization).
+It can be used to write functions that "remember" their result for a given
+input after computing it the first time. This approach trades performance for
+memory; used well, it can speed up code by saving the results of expensive 
+computations instead of repeating them.
+
+We'll compare how several popular languages approach lexical scope using a simple application called `neighbors`.
+`neighbors` is a function that returns a memoized function that finds the
+four non-diagonal neighbors of a point
+on a two-dimensional [Cartesian](https://en.wikipedia.org/wiki/Cartesian_coordinate_system) grid.
+Each time this function is called on a new point, it computes that point's neighbors and stores them in an associative data structure in its enclosing environment. Subsequent
+calls with the same argument find the cached value and return it, preventing repeated computation. While trivial, this technique
+might be useful on certain [Advent of Code](https://adventofcode.com) problems, where
+it might be necessary to check a point's neighbors many times.
+
+For simplicity, I make no attempt to verify that inputs as two-dimensional coordinates,
+which a real implementation would have to do.
+
+# Python
+
+We may as well start with good old Python.
+One of Python's core design principles is
+"explicit is better than implicit." So it is with lexical scope. If you want to
+modify a variable in the global environment from within a function (which you probably shouldn't),
+you have to use the `global` keyword:
+
+
+```{python}
+x = 5
+
+def modify():
+    global x
+    x = 6
+modify()
+print(x)
+```
+
+
+There is a different keyword, `nonlocal`, that should be used when the enclosing environemnt
+is a function's evaluation environment.
+Here is `neighbors` in Python:
+
+```{python}
+def neighbors():
+    memo = {}
+    def inner(x):
+        nonlocal memo
+        if x not in memo.keys():
+            memo[x] = ((x[0] - 1, x[1]),
+            (x[0] + 1, x[1]),
+            (x[0], x[1] - 1),
+            (x[0], x[1] + 1))
+        return memo[x]
+    return inner
+
+get_neighbors = neighbors()
+get_neighbors((2, 3))
+get_neighbors((1, 4))
+get_neighbors((2, 3))
+
+```
+
+This implementation shows off one of my favorite Python features: any immutable
+object can serve as a dict key, not just strings. We can just 
+use coordinates as indices.
+The use of keywords makes it impossible to use global data unless you really want to, but
+it's hardly elegant.
+
+I could have avoided most of the work above by just writing a function to
+compute neighbors and adding the `cache` decorator from the `functools` module.
+(In Python, decorators are functions that modify other functions. A special syntax
+exists for applying them). That would have memoized the function automatically.
+But I think it's instructive to demonstrate the concept in pure Python.
+
+# Bash
+
+Speaking of elegance, we'll now consider a language about as elegant
+as an [A-10](https://en.wikipedia.org/wiki/Fairchild_Republic_A-10_Thunderbolt_II): Bash.
+Bash is designed for interactively managing
+filesystems and operating systems, or
+writing scripts that do the same thing.
+Its syntax isn't pretty, but it's brutally
+effective in its role.
+
+But this pattern can't be implemented in Bash, so far as I know.
+Bash is dynamically scoped, not lexically scoped. That means
+a function that fails to find a variable in its local scope will next look in its
+_caller_'s scope, then the caller's caller's scope, and so on, instead of the scope
+where it was defined. If we tried to implement a Python-style `neighbors` in
+Bash like this:
+
+```{sh, eval = FALSE}
+
+neighbors(){
+    declare -A memo
+    local code='get_neighbors(){
+    local x="$1"
+    local y="$2"
+    local hash = "$x,$y"
+
+    if [ ! -v memo["$hash"] ]; then
+        local west="$(($x-1)),$y"
+        local east="$(($x+1)),$y"
+        local south="$x,$(($y -1))"
+        local north="$x,$(($y +1))"
+        memo+=(["$hash"]="$north-$east-$south-$west")
+    fi
+}'
+exec "$code"
+}
+```
+the function it returned (to be exact, the function generated by the code string it evaluated ) would not "remember" the `memo` array, because
+bindings in the scope where the array was defined would not be preserved.
+Even if we ignore that fact,  Bash is a bad choice for this problem because it doesn't support
+multidimensional arrays, so I had to resort to some ugly code to represent the coordinates
+as a string. Bash is indispensable in many situations, but not this one.
+
+# Lua
+
+Lua is a fast, lightweight scripting language. Though its design is minimalist,
+with simple syntax and few data structures,
+it does support lexical scope, enabling the
+usual functional programming tricks.
+
+```{lua}
+present_table = function(x)
+    result = {}
+    for i, tab in ipairs(x) do
+        result[i] = "{" .. table.concat(tab, ", ") .. "}"
+    end
+    return "{" .. table.concat(result, ", ") .. "}"
+end
+
+neighbors = function()
+    local memo = {}
+    return function(x)
+        local hash = table.concat(x, ",")
+        if memo[hash] == nil then
+            memo[hash] = {
+                { x[1] - 1, x[2] },
+                { x[1] + 1, x[2] },
+                { x[1], x[2] - 1 },
+                { x[1], x[2] + 1 },
+            }
+        end
+        return memo[hash]
+    end
+end
+
+get_neighbors = neighbors()
+print(present_table(get_neighbors({ 2, 3 })))
+print(present_table(get_neighbors({ 1, 4 })))
+print(present_table(get_neighbors({ 2, 3 })))
+```
+
+Lua automatically finds the `memo` table (what Lua calls its all-purpose record data structure) in the
+enclosing scope and modifies it. I had to write my own function to print tables, however, because Lua only prints a table's memory address by default. The only other
+wrinkle is that Lua makes variables global _by default_. You have to use the `local` keyword to bind variables
+in a function's execution scope (or make them local to a script). Since
+creating global variables from functions
+is usually a bad idea, I think it should be the other way around, as in Python, but that's a
+matter of preference.
+
+This snippet demonstrates another neat feature of Lua: looking up a nonexistent table
+index or unbound variable returns `nil` instead of an error, making it safe to
+test for index existence.
+
+# JavaScript
+
+Like Bash, JavaScript is respected
+for its usefulness and ubiquity rather than its
+    elegance. Say what you will about JavaScript's
+loose typing, design inconsistencies, and erratic syntax,
+it isn't Python that powers the modern Web.
+
+As in Lua, there's no need to use special
+syntax to write in the enclosing
+scope. But I do have to use JavaScript's declaration keywords, which have characteristically intricate rules. I need to use `let` inside the function instead of `const` to avoid creating global variables; `var` has yet another assignment behavior. Still, it's easy enough
+to express the functional idiom:
+
+```{js}
+function neighbors(){
+    let memo = {};
+
+    return function(x){
+        let hash = x.toString();
+        if(!(hash in memo)){
+            memo[hash] = [[x[0] -1, x[1]],
+            [x[0] + 1, x[1]],
+            [x[0], x[1] - 1],
+            [x[0], x[1] + 1]];
+        }
+        return memo[hash];
+    }
+}
+const get_neighbors = neighbors();
+console.log(get_neighbors([ 2, 3 ]));
+console.log(get_neighbors([ 1, 4 ]));
+console.log(get_neighbors([ 2, 3 ]));
+```
+
+# SQL
+
+Surprisingly, SQL provides
+the most elegant interface for functional
+programming. Strange as it sounds, its
+expressive, if finicky, declarative syntax
+enables powerful idioms. With creative use of `GROUP BY`
+clauses and certain window functions, it
+is possible to -
+
+Just kidding. But it probably is possible,
+albeit silly,
+to implement `neighbors` in procedural
+SQL.
+
+# R
+
+As in many things, I'm biased toward R because it was my first language. But
+I think R wins this comparison on the merits.
+
+R has the most elegant solution to writing in the enclosing environment.
+The regular assignment operator, `<-`, only ever binds in its caller environment
+(and yes, it technically is a function, so it's correct to speak of its caller environment). Instead, R implements assignment in enclosing
+environments using a _super_assignment
+operator, `<<-`. (In R, environments are first-class objects that record their parent
+environments). This operator checks the
+parent of the caller environment for a binding with the same name as the one being used, and overwrites that binding if it exists.
+If the name is not bound in the parent environment, it repeats this process for each
+parent of that environment, and finally binds the name in the global environment if it is
+not defined anywhere.
+
+This power can be used for evil, as in this snippet that modifies a global variable:
+
+```{r}
+f1 <- function(){
+        x <<-5
+    }
+f1()
+x
+```
+
+Or for good, as in this version of `neighbors`.
+It works because closures, the type R uses to implement most functions, record the environment
+where they were defined.
+
+```{r}
+neighbors <- function(){
+    memo <- new.env(hash = TRUE)
+    function(x){
+           hash  <- paste(as.character(x), collapse = "")
+           result <- tryCatch(get(hash, memo), error = function(e){
+                   result <- list(c(x[[1]] -1, x[[2]]),
+                   c(x[[1]] + 1, x[[2]]),
+                   c(x[[1]], x[[2]] -1),
+                   c(x[[1]], x[[2]] + 1))
+memo[[hash]] <<- result
+result
+           })
+               result
+        }
+
+    }
+get_neighbors <- neighbors()
+get_neighbors(c(2, 3))
+get_neighbors(c(1, 4))
+get_neighbors(c(2, 3))
+```
+
+Notice how `<<-` still works correctly,
+even embedded in an anonymous function passed as
+an error handler to `tryCatch`. The one
+annoyance is that numeric vectors can't
+be used as names.
+
+# Conclusion
+
+At the end of the day, broad techniques like memoization transcend any individual language.
+All the languages above (except Bash) make it relatively easy to use memoization.
+As with most programming concepts, translating the principles into any given
+language is much easier than understanding them in the first place. Still,
+the comparison here highlighted each language's character: Python's explicitness,
+Lua's simplicity, and R's lovable blend of elegance and jankiness.
+(Also worth noting: the languages featured each call their associative
+data structure something different).
+
+I like R's approach best. A special version of the assignment operator clearly
+signals that something unusual is being done, and it is visually distinct yet
+hard to type by accident. (RStudio, the premier R IDE, has a keyboard shortcut
+for `<-` that makes mistakenly typing `<<-` very unlikely). But which is
+your favorite?
