@@ -1,0 +1,154 @@
+---
+title: "What a Difference Two Years Makes"
+author: "Ryan Heslin"
+date: "2023-02-05"
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+_This post contains spoilers for day 19 of Advent of Code 2017._
+
+In the past few week, I've gone back and completed some [Advent of Code](https://adventofcode.com/) puzzles I never got around to finishing. While working through 2017, I
+came across [Day 19](https://adventofcode.com/2017/day/19).
+It asks you to traverse a line that extends across a map, with several
+changes of direction. In
+typical Advent of Code fashion, everything is presented as as a file of ASCII characters.
+(The title is also a [quality reference](https://en.wikipedia.org/wiki/Series_of_tubes).)
+
+I first attempted the puzzle in the summer of 2021, when I had no clue what I
+was doing. I plunged in without a plan, and the code got messier and messier.
+I thought it made sense to represent the map as a matrix, but it made
+keeping track of position complicated. I hadn't yet learned
+that nothing makes a puzzle harder than the wrong choice of data structure. I
+eventually hacked my way to a correct solution, but it was kludgy and slow. I felt exhausted rather than
+triumphant.
+
+I won't subject you to the whole script. The first lines, containing the helper
+functions I wrote, give enough of an impression:
+
+```{r}
+library(magrittr)
+
+index2coords <- function(X, index) {
+    c(
+        ifelse(index %% nrow(X) == 0, nrow(X), index %% nrow(X)),
+        index %% ncol(X) + 1
+    )
+}
+coords2index <- function(X, coords) {
+    coords[1] + nrow(X) * coords[2]
+}
+
+next_direction <- function(input, coords, last_dir, passed, steps) {
+    candidates <- surrounds(input, coords)
+    excludes <- c(
+        l = "r",
+        r = "l",
+        u = "d",
+        d = "u"
+    )
+    candidates <-
+        candidates[rownames(candidates) != excludes[last_dir], ]
+    next_dir <-
+        rownames(candidates[input[candidates] != " ", , drop = FALSE])
+    print(coords)
+    traverse(input,
+        coords,
+        dir = next_dir,
+        passed = passed,
+        steps = steps
+    )
+}
+surrounds <- function(input, coords) {
+    base <- c(1, -1, 0, 0)
+    adds <- cbind(base, rev(base))
+    out <- sweep(adds,
+        FUN = `+`,
+        STATS = c(coords),
+        MARGIN = 2
+    )
+    rownames(out) <- c("d", "u", "l", "r")
+    out[validate_coords(input, coords), ]
+}
+validate_coords <- function(input, coords) {
+    dims <- dim(input)
+    apply(coords, MARGIN = 1, function(x) {
+        all(x > 0 && x <= dims)
+    })
+}
+```
+
+Verbose and complicated.
+
+Wondering how I could do better, I found a concise Python solution to the puzzle.
+It cleverly used a dict of complex numbers to represent the map - a classic
+hack I had never though to use. I remembered the trick and moved on to to other
+problems.
+
+A few months shy of two years passed. Then, one morning,
+I came back to the puzzle. In about twenty leisurely minutes, I came
+up with this:
+
+```{python, eval = FALSE}
+from operator import attrgetter
+
+
+def parse(lines):
+    result = {}
+    for j, line in enumerate(lines):
+        for i, char in enumerate(line):
+            if char != " ":
+                result[complex(i, j)] = char
+    return result
+
+
+def neighbors(point):
+    return {
+        complex(point.real - 1, point.imag): -1 + 0j,
+        complex(point.real + 1, point.imag): 1 + 0j,
+        complex(point.real, point.imag - 1): 0 - 1j,
+        complex(point.real, point.imag + 1): 0 + 1j,
+    }
+
+
+with open("inputs/day19.txt") as f:
+    raw_input = f.read().splitlines()
+
+grid = parse(raw_input)
+position = min(grid.keys(), key=attrgetter("imag"))
+direction = 0 + 1j
+found = ""
+traversed = 0
+char = "-"
+
+while char:
+    last = position
+    position += direction
+    char = grid.get(position, "")
+    traversed += 1
+    if char.isalpha():
+        found += char
+    elif char == "+":
+        this_neighbors = neighbors(position)
+        for dest, dir in this_neighbors.items():
+            if grid.get(dest) and dest != last:
+                direction = dir
+                break
+
+print(found)
+print(traversed)
+```
+
+This is merely workmanlike, but compared to my original solution it may as well
+be the source for the [Apollo Guidance Computer](https://en.wikipedia.org/wiki/Apollo_Guidance_Computer). I implemented the complex-number approach, as I now know to do,
+and the code practically wrote itself. After parsing the map, I simply have to
+keep track of the position and direction of motion and update the motion one
+unit at a time. Changing directions at one of the junctions on the road
+the puzzle simulates just means checking neighbors for the road's continuation. I use the empty
+string to represent the end of the road and terminate the `while` loop.
+
+Looking back, I realized this puzzle wasn't really hard, at least for
+Advent of Code. (For an example of "hard", see [here](https://adventofcode.com/2020/day/20).
+I struggled the first time from inexperience.
+With experience, it came easily. So easily that it seems
+amazing the problem ever seemed hard.

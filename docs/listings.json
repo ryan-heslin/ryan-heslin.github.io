@@ -2,6 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/chatGPT-test/index.html",
+      "/posts/two-years/index.html",
       "/posts/lexical-scope/index.html",
       "/posts/aoc-2022/index.html",
       "/posts/use-neovim/index.html",
