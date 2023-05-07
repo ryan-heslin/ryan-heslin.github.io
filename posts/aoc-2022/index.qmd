@@ -6,6 +6,10 @@ categories: ["R"]
 urlcolor: "blue"
 ---
 
+<!-- ```{sh} -->
+<!-- [ -f 'line_counts.csv' ] || ../../scripts/count_all_repos.sh ../..'/data/line_counts.csv' -->
+<!-- ``` -->
+
 # Overview
 
 [Advent of Code 2022](https://adventofcode.com/2022) is over. After a few frantic
@@ -39,10 +43,11 @@ But it couldn't last. As the puzzles got tougher past day 10 or so, I found myse
 
 Here's a plot showing my choice of language for each day with the cumulative line count:
 
-
 ```{r}
-source("plot_lines.R")
-print(plot)
+source_env <- new.env()
+source_env$years <- 2022
+source_env$csv <- "../../data/line_counts.csv"
+source("../../scripts/plot_lines.R", local = source_env)
 ```
 
 # Methods

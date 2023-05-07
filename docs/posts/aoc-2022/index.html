@@ -184,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="overview" class="level1"><h1>Overview</h1>
+<main class="content quarto-banner-title-block" id="quarto-document-content"><!-- ```{sh} --><!-- [ -f 'line_counts.csv' ] || ../../scripts/count_all_repos.sh ../..'/data/line_counts.csv' --><!-- ``` --><section id="overview" class="level1"><h1>Overview</h1>
 <p><a href="https://adventofcode.com/2022">Advent of Code 2022</a> is over. After a few frantic weeks, I’ve completed both parts of all 25 puzzles. And, like most years, it was a wild ride, full of frustration and triumph in equal measure. Eric Wastl and his team have once again delivered. When I wasn’t coding, I was scanning documentation or trawling the <a href="https://www.reddit.com/r/adventofcode/">subreddit</a> for hints. To my surprise, I managed to finish the whole calendar before the New Year. The year felt a little easier than 2021, though of course I have much more experience than I did then.</p>
 <p>This year’s narrative had the player assisting the Elves’ expedition deep into the jungle, in search of a rare fruit that powers the reindeer’s flight. This premise has lower stakes than past years, which had you scrambling to prevent some catastrophe from ruining Christmas, but the change of pace is welcome.</p>
 <p>We all know the plot is just a device to string puzzle premises together, but I make special note of it because I think it’s the secret to Advent of Code’s popularity. Problems are just more enjoyable when framed by a silly scenario. “Find the path on this unidirected graph maximizing this dynamic weighting function” is a work specification; “Find which valves to open release as much pressure as possible so you and the herd of elephants following you can escape the erupting volcano” is <em>fun</em>.</p>
@@ -192,8 +192,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>I set out to use as many languages as possible, even those I lacked confidence in. For the first week or so, I found this easier than expected. Even JavaScript, which I hadn’t used seriously in a long time, I found simple enough to use. But it couldn’t last. As the puzzles got tougher past day 10 or so, I found myself retreating to the familiarity of Python. Maybe I’ll do better in this regard next year.</p>
 <p>Here’s a plot showing my choice of language for each day with the cumulative line count:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"plot_lines.R"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">plot</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">source_env</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/environment.html">new.env</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">source_env</span><span class="op">$</span><span class="va">years</span> <span class="op">&lt;-</span> <span class="fl">2022</span>
+<span class="va">source_env</span><span class="op">$</span><span class="va">csv</span> <span class="op">&lt;-</span> <span class="st">"../../data/line_counts.csv"</span>
+<span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"../../scripts/plot_lines.R"</span>, local <span class="op">=</span> <span class="va">source_env</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
@@ -377,134 +379,139 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="an">urlcolor:</span><span class="co"> "blue"</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu"># Overview</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Advent of Code 2022</span><span class="co">](https://adventofcode.com/2022)</span> is over. After a few frantic</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>weeks, I've completed both parts of all 25 puzzles.</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>And, like most years, it was a wild ride, full of frustration and triumph in equal</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>measure. Eric Wastl and his team have once again delivered.</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>When I wasn't coding, I was scanning documentation or trawling the <span class="co">[</span><span class="ot">subreddit</span><span class="co">](https://www.reddit.com/r/adventofcode/)</span> for hints.</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>To my surprise, I managed to finish the whole calendar before the New Year. The year felt a little easier than 2021, though of course</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>I have much more experience than I did then.</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>This year's narrative had the player assisting the Elves' expedition deep into</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>the jungle, in search of a rare fruit that powers the reindeer's flight.</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>This premise has lower stakes than past years, which had you scrambling to</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>prevent some catastrophe from ruining Christmas, but the change of pace is welcome.</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>We all know the plot is just a device to string puzzle premises together,</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>but I make special note of it because I think it's the secret to Advent of</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>Code's popularity. Problems are just more enjoyable when framed by a silly scenario.</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>"Find the path on this unidirected graph maximizing this dynamic weighting function"</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>is a work specification; "Find which valves to open release as</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>much pressure as possible so you and the herd of elephants following you can</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>escape the erupting volcano" is _fun_.</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>(One other amusing consequence of the narrative: if you follow the common</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>style advice to name variables and functions in terms of the problem you are</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>modeling, your code will teem with names like <span class="in">`ModulusMonkey`</span> and <span class="in">`nearest_elf`</span>).</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ```{sh} --&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- [ -f 'line_counts.csv' ] || ../../scripts/count_all_repos.sh ../..'/data/line_counts.csv' --&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ``` --&gt;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu"># Overview</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Advent of Code 2022</span><span class="co">](https://adventofcode.com/2022)</span> is over. After a few frantic</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>weeks, I've completed both parts of all 25 puzzles.</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>And, like most years, it was a wild ride, full of frustration and triumph in equal</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>measure. Eric Wastl and his team have once again delivered.</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>When I wasn't coding, I was scanning documentation or trawling the <span class="co">[</span><span class="ot">subreddit</span><span class="co">](https://www.reddit.com/r/adventofcode/)</span> for hints.</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>To my surprise, I managed to finish the whole calendar before the New Year. The year felt a little easier than 2021, though of course</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>I have much more experience than I did then.</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>This year's narrative had the player assisting the Elves' expedition deep into</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>the jungle, in search of a rare fruit that powers the reindeer's flight.</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>This premise has lower stakes than past years, which had you scrambling to</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>prevent some catastrophe from ruining Christmas, but the change of pace is welcome.</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>We all know the plot is just a device to string puzzle premises together,</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>but I make special note of it because I think it's the secret to Advent of</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>Code's popularity. Problems are just more enjoyable when framed by a silly scenario.</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>"Find the path on this unidirected graph maximizing this dynamic weighting function"</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>is a work specification; "Find which valves to open release as</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>much pressure as possible so you and the herd of elephants following you can</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>escape the erupting volcano" is _fun_.</span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>I set out to use as many languages as possible,</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>even those I lacked confidence in. For the first week or so, I found this easier than expected. Even JavaScript, which I hadn't used seriously in a long time, I found simple enough to use.</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>But it couldn't last. As the puzzles got tougher past day 10 or so, I found myself retreating to the familiarity of Python. Maybe I'll do better in this regard next year.</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>(One other amusing consequence of the narrative: if you follow the common</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>style advice to name variables and functions in terms of the problem you are</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>modeling, your code will teem with names like <span class="in">`ModulusMonkey`</span> and <span class="in">`nearest_elf`</span>).</span>
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>Here's a plot showing my choice of language for each day with the cumulative line count:</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"plot_lines.R"</span>)</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plot)</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="fu"># Methods</span></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>If this year had a theme, it was <span class="co">[</span><span class="ot">Cartesian coordinates</span><span class="co">](https://en.wikipedia.org/wiki/Cartesian_coordinate_system)</span>. They show up in at least a few puzzles each year,</span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>but they showed up again and again this year. The concept often appeared</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>with a clever twist, such as modeling falling shapes (day 17) or computing</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>three-dimensional surface areas (day 18).</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>I set out to use as many languages as possible,</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>even those I lacked confidence in. For the first week or so, I found this easier than expected. Even JavaScript, which I hadn't used seriously in a long time, I found simple enough to use.</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>But it couldn't last. As the puzzles got tougher past day 10 or so, I found myself retreating to the familiarity of Python. Maybe I'll do better in this regard next year.</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>Here's a plot showing my choice of language for each day with the cumulative line count:</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>source_env <span class="ot">&lt;-</span> <span class="fu">new.env</span>()</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>source_env<span class="sc">$</span>years <span class="ot">&lt;-</span> <span class="dv">2022</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>source_env<span class="sc">$</span>csv <span class="ot">&lt;-</span> <span class="st">"../../data/line_counts.csv"</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../scripts/plot_lines.R"</span>, <span class="at">local =</span> source_env)</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="fu"># Methods</span></span>
 <span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>For these types of problems, I like to use a sparse map that</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>stores only coordinates that matter for the problem. For day 18, for example, this was coordinates covered by a falling shape.</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>I once used tuples to represent even two-dimensional coordinates, but now I use a tried-and-true hack: complex</span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>numbers. Not only is this trick effective, it gives me the guilty thrill of</span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>using a workaround it would be reckless to use in production code.</span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>As always, a few problems frustrated me. Day 9 caught</span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>me off guard. It's tricky, but nothing terrible: each knot on the rope</span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>follows simple movement rules that you can infer by studying the example input.</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>Instead, I developed a complicated solution for part 1 that wouldn't</span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>generalize to part 2. The problem became easy when I took a break and realized</span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>all I had to do was keep each knot adjacent to its leading knot.</span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>Day 11 stymied me for a different reason: it could be solved a simple trick that</span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>I _just couldn't see_. Part 2 introduces a rule change that allows certain values</span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>to grow without bound. You have to recognize that they follow a cycle whose period</span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>is the lowest common multiple of divisors specified in the problem, then</span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>modulo divide by that value. This isn't too hard to figure out, but I missed it</span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>because I attacked the problem without thinking it through. I ended up finding the correct method</span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>only after trying almost everything else. A little number theory would have saved me</span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>a lot of trouble.</span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>I also got badly stuck on day 16, but that one was horrible for everyone, so</span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>there's nothing to analyze.</span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="fu"># Difficulty</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>If this year had a theme, it was <span class="co">[</span><span class="ot">Cartesian coordinates</span><span class="co">](https://en.wikipedia.org/wiki/Cartesian_coordinate_system)</span>. They show up in at least a few puzzles each year,</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>but they showed up again and again this year. The concept often appeared</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>with a clever twist, such as modeling falling shapes (day 17) or computing</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>three-dimensional surface areas (day 18).</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>For these types of problems, I like to use a sparse map that</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>stores only coordinates that matter for the problem. For day 18, for example, this was coordinates covered by a falling shape.</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>I once used tuples to represent even two-dimensional coordinates, but now I use a tried-and-true hack: complex</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>numbers. Not only is this trick effective, it gives me the guilty thrill of</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>using a workaround it would be reckless to use in production code.</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>As always, a few problems frustrated me. Day 9 caught</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>me off guard. It's tricky, but nothing terrible: each knot on the rope</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>follows simple movement rules that you can infer by studying the example input.</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>Instead, I developed a complicated solution for part 1 that wouldn't</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>generalize to part 2. The problem became easy when I took a break and realized</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>all I had to do was keep each knot adjacent to its leading knot.</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>Day 11 stymied me for a different reason: it could be solved a simple trick that</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>I _just couldn't see_. Part 2 introduces a rule change that allows certain values</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>to grow without bound. You have to recognize that they follow a cycle whose period</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>is the lowest common multiple of divisors specified in the problem, then</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>modulo divide by that value. This isn't too hard to figure out, but I missed it</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>because I attacked the problem without thinking it through. I ended up finding the correct method</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>only after trying almost everything else. A little number theory would have saved me</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>a lot of trouble.</span>
 <span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>I think the puzzle design this year was perhaps the best yet. Many puzzles</span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>were hard, some very hard, but none were complicated.</span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>I think good puzzles test two things: modeling the important features of a problem and to to</span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>adapting a standard algorithm to a novel situation.</span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>Those with complicated rules introduce an additional challenge: correctly implementing every</span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>detail of the specification. This rewards diligence more than insight and</span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>means even tiny mistakes will yield the wrong answer. Complication isn't _unfair per</span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>se, and most real software specifications are very complicated. But</span>
-<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>few people consider attending to minutiae the best part of programming;</span>
-<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>consider the mixed reception to <span class="co">[</span><span class="ot">2018 day 15</span><span class="co">](https://adventofcode.com/2018/day/15)</span>, which I'm not even brave enough to attempt.</span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>This year, the hard puzzles were hard because a straightforward approach could not solve them. Days 16 and 19, probably the hardest, presented</span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>tough pathfinding scenarios. You had to wrangle each input into a graph structure (possibly implicit),</span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>then find a way to reduce the problem space to a manageable size that <span class="co">[</span><span class="ot">brepth-first search</span><span class="co">](https://xkcd.com/2407/)</span> could handle.</span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>Without some clever optimization, any solution would probably take much too long</span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>Both tasks involve lateral thinking and creativity; implementing Wikipedia's Dijkstra pseudocode wouldn't cut it.</span>
-<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>Some puzzles involved simulation, but not</span>
-<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>with complicated rules; the difficulty instead came from understanding</span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>the subtleties in the interaction of simple rules (e.g., Day 9).</span>
-<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>Overall, the puzzles have become leaner but no less challenging. I appreciate</span>
-<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>the work it must have taken to refine a successful formula and make it still better.</span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>I also encountered, or implemented for the first time, several other useful</span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>techniques: cycle detection, bit-encoding subsets, flood-filling, and more.</span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>I never come out of a year without at least a few new tricks.</span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>My favorite puzzle was day 21. I solved it in R. Part 1 is fairly simple, requiring you</span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>to parse and evaluate a large expression recursively. Part 2 introduces</span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>a nasty escalation: one of the names referenced in the expression (the one labeled</span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>"humn", naturally, since the others refer to monkeys) is bound</span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>to an _unknown_ value, not a constant, and you have to solve for it.</span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>I've always liked expression manipulation. R, with its strong LISP influence,</span>
-<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>makes it easy to convert between R code, objects representing the code's</span>
-<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">abstract syntax tree</span><span class="co">](https://en.wikipedia.org/wiki/Abstract_syntax_tree)</span>,</span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>and <span class="co">[</span><span class="ot">S-expression-like</span><span class="co">](https://en.wikipedia.org/wiki/S-expression)</span> lists</span>
-<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>of functions and arguments. So I attacked part 2 by converting the equation to</span>
-<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>be solved into a nested list of S-expressions. Since the right side of the</span>
-<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>equation resolved to a constant, I could solve it by simply inverting each</span>
-<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>operation on the left-hand side until I had isolated the unknown.</span>
-<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>I learned later that several other approaches worked well, such as finding the solution</span>
-<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>by binary search or using complex-number hackery.</span>
-<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>It was fun and rewarding to work through, and the part 2 twist is a classic.</span>
-<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a><span class="fu"># Closing Thoughts</span></span>
-<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>Overall, it was a fun and rewarding year, and I'm mostly pleased with my performance.</span>
-<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>I approached puzzles strategically instead of instinctively. I mostly picked the right data structures, and</span>
-<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>avoided overengineering my solutions. I knew enough about pathfinding algorithms</span>
-<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>to get through the tougher puzzles. Don't get me wrong: I'm a long way</span>
-<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>from the people who can crank out an idiomatic Python solution that runs in 50 microseconds</span>
-<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>any given day. But I'm improving, and that pleases me.</span>
-<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>I had better learn the <span class="co">[</span><span class="ot">Chinese Remainder Theorem</span><span class="co">](https://en.wikipedia.org/wiki/Chinese_remainder_theorem)</span> before December 2023, though.</span>
-<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>Can't be too hard, right?</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>I also got badly stuck on day 16, but that one was horrible for everyone, so</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>there's nothing to analyze.</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="fu"># Difficulty</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>I think the puzzle design this year was perhaps the best yet. Many puzzles</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>were hard, some very hard, but none were complicated.</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>I think good puzzles test two things: modeling the important features of a problem and to to</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>adapting a standard algorithm to a novel situation.</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>Those with complicated rules introduce an additional challenge: correctly implementing every</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>detail of the specification. This rewards diligence more than insight and</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>means even tiny mistakes will yield the wrong answer. Complication isn't _unfair per</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>se, and most real software specifications are very complicated. But</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>few people consider attending to minutiae the best part of programming;</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>consider the mixed reception to <span class="co">[</span><span class="ot">2018 day 15</span><span class="co">](https://adventofcode.com/2018/day/15)</span>, which I'm not even brave enough to attempt.</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>This year, the hard puzzles were hard because a straightforward approach could not solve them. Days 16 and 19, probably the hardest, presented</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>tough pathfinding scenarios. You had to wrangle each input into a graph structure (possibly implicit),</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>then find a way to reduce the problem space to a manageable size that <span class="co">[</span><span class="ot">brepth-first search</span><span class="co">](https://xkcd.com/2407/)</span> could handle.</span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>Without some clever optimization, any solution would probably take much too long</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>Both tasks involve lateral thinking and creativity; implementing Wikipedia's Dijkstra pseudocode wouldn't cut it.</span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>Some puzzles involved simulation, but not</span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>with complicated rules; the difficulty instead came from understanding</span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>the subtleties in the interaction of simple rules (e.g., Day 9).</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>Overall, the puzzles have become leaner but no less challenging. I appreciate</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>the work it must have taken to refine a successful formula and make it still better.</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>I also encountered, or implemented for the first time, several other useful</span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>techniques: cycle detection, bit-encoding subsets, flood-filling, and more.</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>I never come out of a year without at least a few new tricks.</span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>My favorite puzzle was day 21. I solved it in R. Part 1 is fairly simple, requiring you</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>to parse and evaluate a large expression recursively. Part 2 introduces</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>a nasty escalation: one of the names referenced in the expression (the one labeled</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>"humn", naturally, since the others refer to monkeys) is bound</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>to an _unknown_ value, not a constant, and you have to solve for it.</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>I've always liked expression manipulation. R, with its strong LISP influence,</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>makes it easy to convert between R code, objects representing the code's</span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">abstract syntax tree</span><span class="co">](https://en.wikipedia.org/wiki/Abstract_syntax_tree)</span>,</span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>and <span class="co">[</span><span class="ot">S-expression-like</span><span class="co">](https://en.wikipedia.org/wiki/S-expression)</span> lists</span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>of functions and arguments. So I attacked part 2 by converting the equation to</span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>be solved into a nested list of S-expressions. Since the right side of the</span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>equation resolved to a constant, I could solve it by simply inverting each</span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>operation on the left-hand side until I had isolated the unknown.</span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>I learned later that several other approaches worked well, such as finding the solution</span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>by binary search or using complex-number hackery.</span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>It was fun and rewarding to work through, and the part 2 twist is a classic.</span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a><span class="fu"># Closing Thoughts</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>Overall, it was a fun and rewarding year, and I'm mostly pleased with my performance.</span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>I approached puzzles strategically instead of instinctively. I mostly picked the right data structures, and</span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>avoided overengineering my solutions. I knew enough about pathfinding algorithms</span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>to get through the tougher puzzles. Don't get me wrong: I'm a long way</span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>from the people who can crank out an idiomatic Python solution that runs in 50 microseconds</span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>any given day. But I'm improving, and that pleases me.</span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a>I had better learn the <span class="co">[</span><span class="ot">Chinese Remainder Theorem</span><span class="co">](https://en.wikipedia.org/wiki/Chinese_remainder_theorem)</span> before December 2023, though.</span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>Can't be too hard, right?</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
