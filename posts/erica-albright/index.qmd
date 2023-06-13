@@ -1,0 +1,125 @@
+---
+title: "Erica Albright was Right"
+author: "Ryan Heslin"
+date: "2023-06-13"
+categories: ["miscellany"]
+urlcolor: "blue"
+---
+
+[_The Social Network_](https://en.wikipedia.org/wiki/The_Social_Network),
+the classic David Fincher film about the founding of Facebook, opens with the [following
+exchange](https://www.youtube.com/watch?v=uvap4gEOC5I). It's a Tuesday night in autumn 2003. Mark Zuckerberg, a
+computer science sophomore at Harvard, is at a tavern on a date with the fictional Erica
+Albright:
+
+::: {.callout}
+Zuckerberg: Did you know there are more people with genius IQs living in China than
+there are people of any kind living in the United States?
+
+Albright: That can't possibly be true.
+
+Zuckerberg: It is.
+
+Albright: What would account for that?
+:::
+
+Albright's intuition is right, though Zuckerberg derails the conversation before she can
+challenge him further. Some calculations show that Zuckerberg's claim is ridiculous.
+
+# Establishing Numbers
+
+According to the World Bank, in 2003 China had [1.29 billion](https://data.worldbank.org/country/china?view=chart) people and the United States had
+[290,108,000](https://data.worldbank.org/country/united-states?view=chart) (rounding
+to the nearest hundred, not that it matters).
+
+While there are many ways to define genius,
+I'll use [intelligence quotient](https://en.wikipedia.org/wiki/Intelligence_quotient),
+a well-known measure that is easy to work with.
+IQ is typically described as normally distributed, with mean 100 and standard
+deviation about 15. There is no universally accepted cutoff for a "genius" IQ.
+To be charitable, I'll define it as 130 or greater, a mere two standard deviations
+above the mean.
+
+If we assume each country has the same theoretical IQ distribution, how many
+geniuses would we expect in each?
+
+# Calculations
+
+```{r}
+us_pop <- 290108000
+china_pop <- 1290000000
+mu <- 100
+sigma <- 15
+genius <- 130
+cutoff <- pnorm(genius, mu, sigma , lower.tail = FALSE)
+us_geniuses <- floor( cutoff * us_pop)
+china_geniuses <- floor(cutoff * china_pop)
+
+```
+
+The China-US ratio is `r round(china_pop / us_pop, 2)`, so under these assumptions
+China has that many times more geniuses.
+But the ratio of U.S. population to
+Chinese geniuses is `r round(us_pop /china_geniuses, 2)`. There would need
+to be almost 10 times more Chinese geniuses than there are under these assumptions for
+Zuckerberg to be correct. If we
+use a higher IQ score as the genius cutoff,
+the ratio gets even worse.
+
+There are infinitely many implausible IQ
+distributions that would justify Zuckerberg's claim.
+For simplicity, let us pose an optimization problem.
+Given China's actual population and a U.S. mean IQ of 100, how high
+must China's mean IQ be for Zuckerberg's claim to be correct?
+That is, what is the lowest mean IQ value
+for which the right tail area of the normal CDF is greater than
+the ratio of US to Chinese population?
+
+```{r}
+validate_mean <- function(mu){
+    floor(pnorm(genius, mu, sigma, lower.tail = FALSE) * china_pop)  > us_pop
+}
+grid <- seq(100, 150, 0.01)
+minimum <- min(grid[validate_mean(grid)])
+minimum
+```
+
+Zuckerberg's claim would
+require the average Chinese to have an IQ
+more than one standard deviation above the
+U.S. average. I couldn't find reliable
+IQ data for China, and intelligence
+is notoriously hard to measure. But for
+the claim to be true, the average
+Chinese would be more intelligent
+than about `r round(pnorm(minimum, mu, sigma) * 100, 1)`% of Americans, which is
+unbelievable.
+
+Supposing instead China has the same
+IQ distribution as the United States, how many Chinese would there have to be for Zuckerberg's claim to be correct? This can be solved algebraically:
+
+```{r}
+floor(us_pop/ cutoff + 1)
+```
+
+That is about 10 times the
+actual 2003 population of China.
+
+# Conclusion
+
+In fairness to the real Zuckerberg, this conversation is fictional, and
+I'm skeptical he would really have made the claim this post dissects. As a computer science
+sophomore at an elite university, he likely understood the properties of
+normal distributions well enough to know it was implausible. Or maybe the script
+means to imply that
+he's trying to impress a listener he thinks is naive with nonsense, as I've always interpreted Han Solo's  nonsensical boast in _Star Wars_ that the Millennium Falcon can make
+the Kessel Run in less than twelve [parsecs](https://en.wikipedia.org/wiki/Parsec).
+That would also explain why Zuckerberg keeps changing the subject whenever Albright
+presses him on the point.
+Either way, Albright is clearly right.
+
+One other note:
+During the hacking montage that follows the tavern scene, Zuckerberg says
+(in voiceover), "So it's definitely necessary to break out Emacs and modify that Perl script."
+As a Neovim user, I'm required to remind you it is _never_ necessary to break out
+Emacs. Editing bliss is always just a `which vim` away.
