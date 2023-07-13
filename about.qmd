@@ -34,5 +34,5 @@ the namesake of the file format this site's documents are written in. Most impor
 it's got an R.
 
 Verso was built with [Quarto](https://quarto.org/) and deployed using Github Pages with
-a GitHub workflow developed by [pommevilla](https://github.com/pommevilla/quarto-render). A previous version of this site was built with rendered Rmarkdown and the
+a standard Quarto [GitHub workflow](https://quarto.org/docs/publishing/github-pages.html#publish-command). A previous version of this site was built with rendered Rmarkdown and the
 `blogdown` R package.
