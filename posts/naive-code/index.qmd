@@ -1,0 +1,120 @@
+---
+title: "The Unexpected Pleasures of Naive Code"
+author: "Ryan Heslin"
+date: "2023-13-13"
+categories: ["miscellany"]
+urlcolor: "blue"
+---
+
+As a moderator of a technical Discord server, I've encountered 
+a lot of "naive" code. In computer science, a "naive" solution to a problem 
+is an obvious, straightforward approach someone with no special knowledge might 
+offer as a first attempt. Textbooks often present one before revealing a
+much more efficient, if less obvious, alternative. [Bubble sort](https://en.wikipedia.org/wiki/Bubble_sort) is 
+simple enough that a novice programmer might discover it themselves. 
+[Merge sort](https://en.wikipedia.org/wiki/Merge_sort) is much harder to understand 
+(at least if you're not [John von Neumann](https://en.wikipedia.org/wiki/John_von_Neumann)),
+but it's much more efficient on large inputs.
+
+For our purposes, naive code comes from 
+an enthusiastic but inexperienced user trying to solve a problem at the 
+edge of their abilities. 
+Naive code is fascinating. It is rarely good, since its authors know little 
+of sound practices or language conventions. It contains strange design choices 
+and sometimes outright errors. But these same defects make it 
+oddly charming, as we'll see.
+
+# An Analogy
+
+Obviously, the best way to illustrate this is to analyze some ABBA lyrics. 
+Here are the opening lines of "Dancing Queen" ([here](https://www.youtube.com/watch?v=xFrGuyw1V8s), if somehow you haven't heard it before):
+```
+You can dance
+You can jive
+Having the time of your life
+Ooh, see that girl
+Watch that scene
+Digging the dancing queen
+```
+
+It's easy to miss on a first listen, but these lyrics don't sound natural 
+in any widely spoken form of English.
+"Jive" isn't typically used as a verb. "Scene" isn't typically used to mean 
+"situation";
+you would say "check it out" or "look over there," not "watch that scene."
+Who is the singer addressing, anyway? It seems like the first three lines 
+refer to the "dancing queen" herself, but the last three address an observer 
+who is "digging" her.
+
+The reason for this is simple. ABBA hail from Sweden; they are songwriters whose first language is Swedish trying hard to sound like 
+Americans, but not quite passing.
+But it's hard to notice this beneath the song's amazing arrangement and vocal 
+performances.
+What's more, I think the song would be _worse_ if it used more idiomatic English. 
+ Laden with dated slang they may be, the lyrics feel oddly timeless, because they don't sound like any common form of English.
+Songs written in authentic 1970s American English usually aren't so lucky. The words 
+somehow convey the song's message perfectly even though, taken literally, they barely make 
+sense. 
+
+(Related: it bothers me more than it should that [another ABBA song](https://www.youtube.com/watch?v=Sj_9CiNkkn4) incorrectly claims Napoleon 
+surrendered at Waterloo. His army was routed there, but he actually surrendered to a 
+British warship about a month later. Then again, I doubt even ABBA could make "At Waterloo, Napoleon was decisively defeated" scan). 
+
+# Naive Code
+
+Naive code is compelling in quite a similar way. I could give examples from 
+people I've helped, but I won't; they didn't volunteer to be included in my ramblings.
+Instead, I'll use some very naive code I wrote long ago. 
+Here is `coivd_19_us.R`, a snippet of R that does some simple data processing.  
+Like everyone else in April 2020, I made some visualizations of COVID-19 
+data (though unlike most others, I managed to misspell the name of the disease).
+(If you don't know R, the problems with the code below will still be obvious if you have any programming experience). 
+
+```{r, eval = FALSE}
+state_pop <- read_xlsx("states_pop_data.xlsx", col_names = F, skip = 9)[1:51,] %>% 
+  select(...1, ...13) %>%
+  mutate(...1 = str_remove(...1, "."), ...13 = ...13/1000) %>%
+  rename("state" = ...1, "state_pop" = ...13) 
+
+county_pop <- read_xlsx("county_pop_data.xlsx", col_names = F, skip = 5)[1:3142,] %>% 
+  select(...1, ...12) %>%
+  separate(...1, into = c("county", "state"), sep = ",\\s")  %>%
+  rename(county_pop = ...12) %>% mutate(county = str_replace(str_replace(county, "\\s[A-Z][a-z]*\\s*[A-Z]*[a-z]*$", ""), "^\\.", ""), county_pop = county_pop/1000)
+
+
+combined_pop <- left_join(county_pop, state_pop, by = "state")
+combined_pop <- nest_join(combined_pop, us_county, by = c("county", "state"))
+```
+
+Regrettably, I have a vague memory of what this code was supposed to do. 
+It reads `.csv`s containing some state and county population data and does some 
+basic cleaning. The structure of the code is fine, but the implementation is a mess.
+Magic numbers crop up everywhere (note the obscure `...n` syntax for selecting the 
+`n`th column). The column transformations are convoluted, especially 
+the double regex replacement applied to `county_pop`. The last line uses 
+a nested join, a special `dplyr` function that groups the matched rows in the 
+right-hand data frame in a list column. I remember thinking that was an 
+appropriate way to handle many-to-many relationships.
+
+It's easy to tell the author of this snippet was blissfully unaware anyone 
+would have to read or maintain his code. (Don't snicker - everyone has had Past You pull that that 
+on Present You at some point). Not only did he not know his language's conventions, 
+he did not know _of_ them. 
+
+The code is bad, no doubt. But its innocent sincerity is charming. It 
+reminds me of the days when there seemed nothing wrong with dashing off a chunk 
+of with no clue how it fit into the project it was part of. Naive code 
+can contain other unexpected delights, too. I've seen attempts to add factors 
+(an R class for categoricals that cannot be added), heroic attempts to do 
+with `for` loops what could easily be done with vectorized functions, and 
+every nonstandard variable naming scheme you could think of. Novice 
+programmers so often write logic experienced ones would never even think 
+to try, and I can only respect them for it.
+
+# Conclusion
+This analogy is strained, I admit. ABBA's unique brand of lyrics may have got them to #1, but 
+naive code as I describe it above more often leads to frustration and 
+searching for an experienced person to debug it. Helping can be a lot of work, 
+but if you find yourself asked to 
+help, do so. It might have weeks ago, it might have been decades, but 
+you once wrote naive code, too. We all did.

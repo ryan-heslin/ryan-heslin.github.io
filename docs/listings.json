@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/naive-code/index.html",
       "/posts/erica-albright/index.html",
       "/posts/aoc-complete/index.html",
       "/posts/chatGPT-test/index.html",
