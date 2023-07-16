@@ -10,12 +10,15 @@ about:
     - icon: github
       text: Github
       href: https://github.com/ryan-heslin
-format:
-    html:
-        css: styles.css
-
+engine: knitr
 ---
 
+```{css, echo = FALSE}
+.justify {
+  text-align: left;
+}
+```
+::: {.justify}
 # Welcome
 Welcome to my blog! My name is Ryan Heslin, and I recently graduated from
 American University with a master's in data science. While I work in Python
@@ -36,3 +39,4 @@ it's got an R.
 Verso was built with [Quarto](https://quarto.org/) and deployed using Github Pages with
 a standard Quarto [GitHub workflow](https://quarto.org/docs/publishing/github-pages.html#publish-command). A previous version of this site was built with rendered Rmarkdown and the
 `blogdown` R package.
+:::

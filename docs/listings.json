@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/why-quarto/index.html",
       "/posts/naive-code/index.html",
       "/posts/erica-albright/index.html",
       "/posts/aoc-complete/index.html",
