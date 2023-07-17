@@ -3,6 +3,8 @@ project:
   output-dir: docs
 website:
   title: "Verso"
+  site-url: "https://ryan-heslin.github.io/"
+  description: "Home of my blog, Verso"
   navbar:
     right:
       - about.qmd
@@ -10,6 +12,8 @@ website:
         href: https://github.com/ryan-heslin
       - text: LinkedIn
         href: https://www.linkedin.com/in/ryan-heslin/
+      - text: RSS 
+        href: index.html
   search:
     collapse-after: 3
     copy-button: true
@@ -17,5 +21,6 @@ format:
   html:
     theme: journal
     css: "styles.css"
+    embed-resources: true
 execute: 
   freeze: auto

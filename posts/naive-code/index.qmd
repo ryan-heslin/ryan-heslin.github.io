@@ -2,7 +2,7 @@
 title: "The Unexpected Pleasures of Naive Code"
 author: "Ryan Heslin"
 date: "2023-07-13"
-categories: ["miscellany"]
+categories: ["Miscellany"]
 urlcolor: "blue"
 ---
 

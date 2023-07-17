@@ -2,7 +2,7 @@
 title: "Erica Albright was Right"
 author: "Ryan Heslin"
 date: "2023-06-13"
-categories: ["miscellany"]
+categories: ["Miscellany"]
 urlcolor: "blue"
 ---
 
