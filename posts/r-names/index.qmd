@@ -1,0 +1,87 @@
+---
+title: "Renaming Things in R"
+author: "Ryan Heslin"
+date: "2023-07-29"
+categories: ["r"]
+urlcolor: "blue"
+---
+
+Naming things is one of the [two hard problems of computer science](https://skeptics.stackexchange.com/questions/19836/has-phil-karlton-ever-said-there-are-only-two-hard-things-in-computer-science). It seems like it should be easy. 
+Then you start coding, try to come up with names that are consistent, succinct, precise, and evocative, and fail. 
+
+R adds another layer of difficulty: internal names. Vectors (which most R objects
+are) can store names for each element, including recursively. This 
+makes it easier to understand objects' structure and allows you to subset by 
+name rather than position:
+
+```{r}
+x <- list(a = 4, b = "q", c = c(a = 1, b = 2), 1:5)
+x$a
+x$c[["a"]]
+```
+
+(You can't use `$` to subset atomic vectors).
+
+R also has a system for altering the names of existing objects - or so it seems.
+That system is the subject of this post.
+
+You can do this with the syntax `names(x) <- new_names`. If the new vector of names is shorter than the old one, 
+R will just fill the new names with `NA`. You can also use subassignment to change only some 
+names, subject to the same rules. Thus:
+
+```{r}
+names(x)[c(1, 3)]  <- c("w", "z")
+x
+# Legal but silly
+names(x) <- "a"
+x
+```
+
+This is awkward but workable. It also creates the misleading impression that 
+you are changing an object's names in place. 
+R experts will know that R generally copies objects on modification, except environments.
+The code above isn't really setting the names to a new value.
+Rather, you're calling the `names<-` function to return a new object with changed names.
+(You can also call it directly in that form, 
+if you hate whoever has to maintain your code).
+
+As shown in Hadley Wickham's _Advanced R_, 
+what really happens is [this](https://adv-r.hadley.nz/functions.html#replacement-functions):
+```{r, eval = FALSE}
+`*tmp*` <- x
+x <- `names<-`(`*tmp*`, `[<-`(names(`*tmp*`), c(1, 3), c("w", "z")))
+rm(`*tmp*`)
+```
+
+This spooky process happens behind the 
+scenes, and the deletion of `*tmp*` (yes, that's a legal variable name)
+destroys the evidence. The R user is none the wiser - at least until they 
+see something like the second line 
+in the above chunk in an error traceback and investigate.
+
+You can even create your own functions that work this way. Just add `<-` to the 
+end of the name and use certain reserved argument names, and you have a working 
+"replacement function." Presumably, the parser 
+gives them special treatment, in one of R's several "magic" syntax rules. Here is 
+a JavaScript-esque replacement function that fails silently if 
+the index passed is invalid:
+
+```{r}
+`nth<-` <- function(x, n, value) {
+    n <- as.integer(n)
+   if(n > 0 && n <= length(x)){
+       x[[n]] <- value
+   }
+   x
+}
+nth(x, 2) <- 3
+x
+```
+
+If you _really_ want to see how the 
+sausage is made, you can read the 
+relevant R source code [here](https://github.com/wch/r-source/blob/bf306acb97ec645063a076122340ad47a75442ec/src/main/attrib.c#L900). 
+
+Is this the most elegant way to handle 
+the delicate problems of naming and renaming? Maybe not. 
+But it works, and sometimes that's enough. 
