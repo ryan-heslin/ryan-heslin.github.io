@@ -1,0 +1,88 @@
+---
+title: "ChatGPT and the Advent of Code Leaderboard"
+author: "Ryan Heslin"
+date: "2022-09-10"
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+When is it cheating to use ChatGPT? 
+
+Many professions have confronted this question, such as 
+teachers and [lawyers](https://www.nytimes.com/2023/06/08/nyregion/lawyer-chatgpt-sanctions.html). 
+So too have some hobbies. That brings me to Advent of Code.
+
+I write this as someone with no hope of ever placing on the leaderboard. I can't 
+code fast enough, and what I love Advent of Code fort the art of 
+designing solutions, not writing them as fast as possible. 
+
+But I have earned all 400 stars to date, so I believe my opinion holds some weight.
+
+# The Situation
+
+ChatGPT became publicly available on November 30, 2022 - the day before that year's Advent of Code 
+began. Even so, people immediately saw its potential to solve puzzles.
+Some began using it to write solutions. If fed a puzzle description, it could 
+churn out a working solution in seconds, fast enough to beat even the quickest humans on the 
+leaderboard. For the first few days, ChatGPT solutions bested their human competitors.
+
+As December wore on, I saw the frequency of ChatGPT posts diminish. The model
+struggled with the later puzzles, which often feature complicated rules and 
+inputs large enough to frustrate naive solutions. While ChatGPT's success on the early 
+days still impresses me, it clearly could not take on subtler problems. 
+The emerging consensus on ChatGPT's usefulness as a coding assistant - passable for 
+churning out boilerplate to access an unfamiliar API, useless for 
+serious problems - seemed to confirm my impressions.
+
+# Is It Cheating?
+
+[The subreddit debated](https://www.reddit.com/r/adventofcode/comments/zbpq5g/gpt_openai_solutions_should_be_removed_from_the/) these events, and a 
+majority seemed to think using ChatGPT was unfair. I think they're right.
+
+In one sense, this debate is beside the point. The leaderboard isn't the main feature of 
+Advent of Code. It's a special arena reserved for the small fraction of players 
+with the speed and competitive drive to place on it. Then again, for many 
+players it provides much of Advent of Code's appeal. They stay up until midnight 
+(or, if in Europe, crawl out of bed at five or six in the morning) and 
+hack together a solution as fast as they can. It's a low-stakes but exhilarating 
+competition, one the best players describe as [deeply rewarding](https://blog.vero.site/post/advent-leaderboard).
+
+But fun is the _point_ of Advent of Code. It's meant to deliver the exciting parts 
+of programming - variations on algorithms, optimization problems, input parsing - 
+in an enjoyable package. Churning out an alogrithm as fast as possible is rarely 
+useful in the real world, but it makes for a fun competition. Beating the leaderboard with ChatGPT is no fun. 
+
+How could ChatGPT be banned, though? By design, the site has no way of verifying 
+how users get their answers. Previously, cheating  (if we consider using code you 
+didn't write cheating) required a collaborator - a 
+fast friend who got on the leaderboard legitimately and gave you their code to 
+run on your input. Now, there is nothing stopping anyone from using ChatGPT. 
+
+One option would be setting a secret cutoff time for each puzzle that 
+represented the theoretical minimum time it would take for a human to solve. Any correct answer 
+submitted before this time elapsed would be rejected as probably illegitimate.
+I doubt this would 
+be workable in practice. If the allotted time was too great, some fast players might have legitimate 
+scores rejected. If too small, then a cheater could easily defeat it by 
+solving the puzzle instantly and waiting to submit. The winners would be those 
+who used ChatGPT and guessed the cutoff score most accurately. This approach would just make 
+things worse.
+
+So the days of a human leaderboard may be ending. But I don't think it will hurt Advent of Code. The puzzles have always 
+offered endless opportunities to get creative. Every year sees solutions in esoteric languages, 
+ones that observe strict or bizarre constraints, compelling visualizations, 
+and in-depth discussion of the puzzles and the concepts needed to solve them. 
+It is these pursuits, more so than the leaderboard, that make Advent of Code 
+special. ChatGPT doesn't threaten any of them.
+
+So first place 
+will no longer belong to the quickest and cleverest, but to whoever uploads their 
+ChatGPT output the quickest. Humans may hold out on the harder puzzles, but more advanced versions of GPT may be able to tackle them, or at least give human solvers an 
+easier time.
+There is something sad about watching technology overtake human skill like this. I'm 
+reminded of the military elites 
+that became superfluous when the societies that once revered them obtained mass-produced guns. 
+
+ChatGPT certainly will not kill Advent of Code, any more than the invention of rifles
+killed fencing. But the leaderboard will never be what it was, and something 
+will be lost with it.

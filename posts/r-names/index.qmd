@@ -60,7 +60,7 @@ see something like the second line
 in the above chunk in an error traceback and investigate.
 
 You can even create your own functions that work this way. Just add `<-` to the 
-end of the name and use certain reserved argument names, and you have a working 
+end of the function name, call the first argument "x" and the last "value", and you have a working 
 "replacement function." Presumably, the parser 
 gives them special treatment, in one of R's several "magic" syntax rules. Here is 
 a JavaScript-esque replacement function that fails silently if 

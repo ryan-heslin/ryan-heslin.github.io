@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ryan Heslin">
-<meta name="dcterms.date" content="2022-10-15">
+<meta name="dcterms.date" content="2022-09-10">
 
-<title>Verso - Is R Hard to Learn?</title>
+<title>Verso - ChatGPT and the Advent of Code Leaderboard</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4527,9 +4527,9 @@ text-align: left;
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">Is R Hard to Learn?</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">ChatGPT and the Advent of Code Leaderboard</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
                                 <div class="quarto-categories">
-                <div class="quarto-category">R</div>
+                <div class="quarto-category">Advent of Code</div>
               </div>
                   </div>
   </div>
@@ -4547,7 +4547,7 @@ text-align: left;
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 15, 2022</p>
+        <p class="date">September 10, 2022</p>
       </div>
     </div>
     
@@ -4565,33 +4565,25 @@ text-align: left;
 
 
 
-<p>R has something of a reputation for being hard to learn. <a href="https://r4stats.com/articles/why-r-is-hard-to-learn/">Many</a> have speculated about the reasons why. With the possible exception of C, I can’t think of another language widely regarded in the same way. R is pointer-free (at least at the user level) and has much more forgiving typing, so why the similarly bad reputation?</p>
-<p>I think there is some truth to these claims: some features of R do make it unusually daunting for beginners. But the more important reason is that people often must learn R with little support or without much knowledge of programming. Learning the first language is hard; tutorials or teachers that present it the wrong way make it even harder.</p>
-<p>While I have extensive experience working with R beginners, I have no hard data, and speak as a mostly self-taught programmer. So tune your skepticism level accordingly.</p>
-<section id="my-own-experience" class="level1">
-<h1>My Own Experience</h1>
-<p>R was the first programming language I learned seriously. I learned some Java many years earlier in computer science class in high school, and a little Python from a college course, but in neither case did I set out to master the language and use it in my career. When I began learning R in early 2020, I planned to become a policy analyst after grad school; knowing a programming language would give me an advantage in that field. I considered learning Python instead, but I decided on R after maybe two minutes of thought because it had a reputation for being hard to learn, and I wanted a challenge.</p>
-<p>I had no idea what I was getting into, of course. I dived into a too-advanced tutorial that used <code>tidyverse</code> without even comprehending the difference between it and R itself. (I believe it’s <a href="https://datacarpentry.org/r-socialsci/03-dplyr-tidyr/index.html">this one</a>, though back then it used an older version of the <code>tidyverse</code> API). I gave up after a few hours, hopelessly confused. Further attempts went no better. I decided programming was beyond me, and put R aside.</p>
-<p>Then, in the surreal early months of the pandemic, I returned to it. I worked through different tutorials, this time going more slowly this time and no longer expecting rapid progress. (Would I have given up for good if the pandemic had not unexpectedly afforded me months of free time? Perhaps.) Intrigued by R’s plotting capabilities, I started making visualizations of pandemic-related data. (It was hard to think of anything else; the circumstances had not yet come to feel normal). As I began to encounter nontrivial problems, I realized enjoyed working through them. I remember spending hours fussing over a regular expression to extract county names from a column, or trying to transform data frames so I could plot them properly. (This was in the <code>gather</code>-<code>spread</code> days, so it was not easy!).</p>
-<p>I would not recommend this awkward, roundabout approach to learning the language, but a few months of it made me a competent user by the time grad school began, giving me a foundation to build on when I tackled more advanced topics.</p>
+<p>When is it cheating to use ChatGPT?</p>
+<p>Many professions have confronted this question, such as teachers and <a href="https://www.nytimes.com/2023/06/08/nyregion/lawyer-chatgpt-sanctions.html">lawyers</a>. So too have some hobbies. That brings me to Advent of Code.</p>
+<p>I write this as someone with no hope of ever placing on the leaderboard. I can’t code fast enough, and what I love Advent of Code fort the art of designing solutions, not writing them as fast as possible.</p>
+<p>But I have earned all 400 stars to date, so I believe my opinion holds some weight.</p>
+<section id="the-situation" class="level1">
+<h1>The Situation</h1>
+<p>ChatGPT became publicly available on November 30, 2022 - the day before that year’s Advent of Code began. Even so, people immediately saw its potential to solve puzzles. Some began using it to write solutions. If fed a puzzle description, it could churn out a working solution in seconds, fast enough to beat even the quickest humans on the leaderboard. For the first few days, ChatGPT solutions bested their human competitors.</p>
+<p>As December wore on, I saw the frequency of ChatGPT posts diminish. The model struggled with the later puzzles, which often feature complicated rules and inputs large enough to frustrate naive solutions. While ChatGPT’s success on the early days still impresses me, it clearly could not take on subtler problems. The emerging consensus on ChatGPT’s usefulness as a coding assistant - passable for churning out boilerplate to access an unfamiliar API, useless for serious problems - seemed to confirm my impressions.</p>
 </section>
-<section id="my-theory" class="level1">
-<h1>My Theory</h1>
-<p>Would the learning process have been easier had I chosen Python? Some aspects of R do make it harder to learn than comparable languages. One reason is that in R, unlike in Python, there is never one right way to do something. R comes with so many powerful functions (perhaps too many) that even simple problems can reasonably solved in many different ways. Veteran R users treasure this expressiveness, but it makes the learner’s task harder. How can you learn the way to do something when there <em>is</em> no one way to do it? When the repurposed StackOverflow solutions you patch together use different idioms whose merits you lack the knowledge to compare? When tutorials give contradictory advice? Only through experience, and there are no shortcuts to that.</p>
-<p>Another cause is R’s well-known inconsistencies and quirks, which I have discussed before. Its often unfriendly error messages, like the infamous “improper subset of object of type closure”, make working through obstacles harder than necessary.</p>
-<p>But I suspect the main reason for the perceived difficulty lies not in the language itself, but in the circumstances of the learning. Effective programming takes particular skills, and R learners are unlikely to have had the experiences that develop them.</p>
-<p>Writing code demands a kind of focused aggression. You start (or should) by devising a plan to achieve a technical goal. As you execute it by writing, modifying, and testing code, you quickly run into unexpected obstacles: confusing error messages, problems in code construction you can’t immediately solve, and perhaps changing requirements. You fight your way through, skimming documentation or StackOverflow for advice and experimenting with code. The experience tests your knowledge of the language and ability to analyze, but also your resourcefulness and determination. With sometimes painful experience, you develop the capacity to resolve errors relatively quickly, strong attention to detail, a knack for avoiding problems that stymied you in the past, and above all the will to persevere and turn half-formed ideas into useful code.</p>
-<p>But developing these abilities takes time and effort, and they don’t make you immune to frustration. I write this on a Friday, having spent much of the week trying to do a programming assignment in <a href="https://racket-lang.org/">Racket</a>, a language new to me. I spent more hours than I’d like to admit struggling with the syntax until suddenly, unaccountably, it started to make sense. Even though I had more than two years of experience and knew Racket had <em>simpler</em> syntax rules than most languages, it took time before I could write and read it fluently.</p>
-<p>The problem is that many, if not most, R learners have yet to make that effort, because they are new to programming. Think of an undergrad social science student taking a methods course, or a data analyst accustomed to Excel or SAS learning a new tool for their job. Learners of this kind have little or no programming experience or computer science education. The routine I described above is completely foreign to the first group. While the second group might have experience solving technical problems in their tool of choice, they do not know the idiom of a true programming language. So asking them to write nontrivial code is like throwing raw recruits into combat without sending them through basic training. Knowing this, designers of computer science programs typically start the major off with a “how to code” class that gently introduces naive students to programming (and typically in a general-purpose language like Python, not a specialized one like R). Learning from the ground up without that kind of instruction, or at least a knowledgeable mentor, is far harder - and impossible without strong motivation.</p>
-<p>Nor are they likely to know that making frequent errors is <em>normal</em>. For novices, unused to a programming language’s demands for absolute correctness, the early weeks can feel like an endless stream of mistakes: misspelled variable names, dangling parentheses, incorrect function calls. Even experienced programmers slip up now and again (literally two minutes before I wrote this, I lost points on an assignment submission because I put an extra letter in the name of a required function). For newcomers, even writing correct syntax is taxing. If not instructed otherwise, or exposed to people having the same problem, many will start to think, as I once did, <em>it means something is wrong with them</em>.</p>
-<p>In short, compared to other languages, the people asked to learn R are unusually likely to lack the background and support that make learning a new language relatively painless. It’s no wonder, then, that R has become known for being “hard to learn.”</p>
-</section>
-<section id="the-implications" class="level1">
-<h1>The Implications</h1>
-<p>This reputation threatens the language’s future. Being “hard to learn” can discourage enterprises an educators from using R or scare people away from trying to learn it themselves. Over time, as competitors like Python make usability improvements, R might decline in popularity if it fails to do the same. The situation is hardly desperate. There are almost embarrassingly many free tutorials available. The <a href="https://swirlstats.com/">swirl</a> package provides interactive lessons. Thousands of package developers, not to mention R core, work hard to improve existing interfaces and root out bugs.<br>
-But all of us who are experienced in R have a part to play. We can assist novices who come to us for help or advice, strive to write high-quality code ourselves, and above all remember that it was once very hard for us, too.</p>
-<p>(Caveat to all the above: a cursory search didn’t find any research comparing the difficulty of learning of different languages. I would be interested to read any if it existed, since I have no hard data to support or disprove my claims).</p>
-<p>So if you’re just starting out with R? Don’t go too fast or expect instant comprehension. Find an interesting problem you think you can solve to keep up your motivation. Have faith that your skills will improve with practice. Publish your code in some form, to seek feedback and demonstrate your growing proficiency. View your work as a creative outlet and an opportunity to refine your skill in solving problems. You don’t have to like it, or even programming in general, but there’s a good chance you’ll find you do.</p>
+<section id="is-it-cheating" class="level1">
+<h1>Is It Cheating?</h1>
+<p><a href="https://www.reddit.com/r/adventofcode/comments/zbpq5g/gpt_openai_solutions_should_be_removed_from_the/">The subreddit debated</a> these events, and a majority seemed to think using ChatGPT was unfair. I think they’re right.</p>
+<p>In one sense, this debate is beside the point. The leaderboard isn’t the main feature of Advent of Code. It’s a special arena reserved for the small fraction of players with the speed and competitive drive to place on it. Then again, for many players it provides much of Advent of Code’s appeal. They stay up until midnight (or, if in Europe, crawl out of bed at five or six in the morning) and hack together a solution as fast as they can. It’s a low-stakes but exhilarating competition, one the best players describe as <a href="https://blog.vero.site/post/advent-leaderboard">deeply rewarding</a>.</p>
+<p>But fun is the <em>point</em> of Advent of Code. It’s meant to deliver the exciting parts of programming - variations on algorithms, optimization problems, input parsing - in an enjoyable package. Churning out an alogrithm as fast as possible is rarely useful in the real world, but it makes for a fun competition. Beating the leaderboard with ChatGPT is no fun.</p>
+<p>How could ChatGPT be banned, though? By design, the site has no way of verifying how users get their answers. Previously, cheating (if we consider using code you didn’t write cheating) required a collaborator - a fast friend who got on the leaderboard legitimately and gave you their code to run on your input. Now, there is nothing stopping anyone from using ChatGPT.</p>
+<p>One option would be setting a secret cutoff time for each puzzle that represented the theoretical minimum time it would take for a human to solve. Any correct answer submitted before this time elapsed would be rejected as probably illegitimate. I doubt this would be workable in practice. If the allotted time was too great, some fast players might have legitimate scores rejected. If too small, then a cheater could easily defeat it by solving the puzzle instantly and waiting to submit. The winners would be those who used ChatGPT and guessed the cutoff score most accurately. This approach would just make things worse.</p>
+<p>So the days of a human leaderboard may be ending. But I don’t think it will hurt Advent of Code. The puzzles have always offered endless opportunities to get creative. Every year sees solutions in esoteric languages, ones that observe strict or bizarre constraints, compelling visualizations, and in-depth discussion of the puzzles and the concepts needed to solve them. It is these pursuits, more so than the leaderboard, that make Advent of Code special. ChatGPT doesn’t threaten any of them.</p>
+<p>So first place will no longer belong to the quickest and cleverest, but to whoever uploads their ChatGPT output the quickest. Humans may hold out on the harder puzzles, but more advanced versions of GPT may be able to tackle them, or at least give human solvers an easier time. There is something sad about watching technology overtake human skill like this. I’m reminded of the military elites that became superfluous when the societies that once revered them obtained mass-produced guns.</p>
+<p>ChatGPT certainly will not kill Advent of Code, any more than the invention of rifles killed fencing. But the leaderboard will never be what it was, and something will be lost with it.</p>
 
 
 <!-- -->
@@ -4884,167 +4876,93 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class>
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Is R Hard to Learn?&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;ChatGPT and the Advent of Code Leaderboard&quot;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;Ryan Heslin&quot;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;2022-10-15&quot;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [&quot;R&quot;]</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;2022-09-10&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [&quot;Advent of Code&quot;]</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">urlcolor:</span><span class="co"> &quot;blue&quot;</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>R has something of a reputation for being hard to learn. </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Many</span><span class="co">](https://r4stats.com/articles/why-r-is-hard-to-learn/)</span> have </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>speculated about the reasons why. With the possible </span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>exception of C, I can&#39;t think of another </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>language widely regarded in the same way. R is pointer-free (at least at the user level) and has </span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>much more forgiving typing, so </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>why the similarly bad reputation?</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>I think there is some truth to these claims: some features of R do</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>make it unusually daunting for beginners. But the more important reason is that </span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>people often must </span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>learn R with little support or without much knowledge of programming.</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>Learning the first language is hard; tutorials or teachers that present it </span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>the wrong way make it even harder.</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>While I have extensive experience working with R beginners, I </span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>have no hard data, and speak as a mostly self-taught programmer. </span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>So tune your skepticism level accordingly.</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu"># My Own Experience </span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>R was the first programming language I learned seriously. I learned some </span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>Java many years earlier in computer science class in high school, and a </span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>little Python from a college course, but in neither case did I set out to </span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>master the language and use it in my career. When I began learning R in early </span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>2020, I planned to become a policy analyst after grad school; knowing a </span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>programming language would give me an advantage in that field. I considered learning </span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>Python instead, but I decided on R after maybe two minutes of thought because </span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>it had a reputation for being hard to learn, and I wanted a challenge. </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>When is it cheating to use ChatGPT? </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>Many professions have confronted this question, such as </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>teachers and <span class="co">[</span><span class="ot">lawyers</span><span class="co">](https://www.nytimes.com/2023/06/08/nyregion/lawyer-chatgpt-sanctions.html)</span>. </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>So too have some hobbies. That brings me to Advent of Code.</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>I write this as someone with no hope of ever placing on the leaderboard. I can&#39;t </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>code fast enough, and what I love Advent of Code fort the art of </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>designing solutions, not writing them as fast as possible. </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>But I have earned all 400 stars to date, so I believe my opinion holds some weight.</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu"># The Situation</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>ChatGPT became publicly available on November 30, 2022 - the day before that year&#39;s Advent of Code </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>began. Even so, people immediately saw its potential to solve puzzles.</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>Some began using it to write solutions. If fed a puzzle description, it could </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>churn out a working solution in seconds, fast enough to beat even the quickest humans on the </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>leaderboard. For the first few days, ChatGPT solutions bested their human competitors.</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>As December wore on, I saw the frequency of ChatGPT posts diminish. The model</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>struggled with the later puzzles, which often feature complicated rules and </span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>inputs large enough to frustrate naive solutions. While ChatGPT&#39;s success on the early </span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>days still impresses me, it clearly could not take on subtler problems. </span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>The emerging consensus on ChatGPT&#39;s usefulness as a coding assistant - passable for </span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>churning out boilerplate to access an unfamiliar API, useless for </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>serious problems - seemed to confirm my impressions.</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu"># Is It Cheating?</span></span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>I had no idea what I was getting into, of course. I dived into a too-advanced </span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>tutorial that used <span class="in">`tidyverse`</span> without even comprehending the difference </span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>between it and R itself. (I believe it&#39;s <span class="co">[</span><span class="ot">this one</span><span class="co">](https://datacarpentry.org/r-socialsci/03-dplyr-tidyr/index.html)</span>, though back then it used an older version of the <span class="in">`tidyverse`</span> API).</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>I gave up after a few hours, hopelessly confused. Further attempts went no better. </span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>I decided programming was beyond me, and put R aside.</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>Then, in the surreal early months of the pandemic, I returned to it. I </span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>worked through different tutorials, this time going more slowly this time and no longer expecting rapid progress.</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>(Would I have given up for good if the pandemic had not unexpectedly afforded </span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>me months of free time? Perhaps.) Intrigued by R&#39;s plotting capabilities, I started making visualizations of </span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>pandemic-related data. (It was hard to think of anything else; the circumstances had </span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>not yet come to feel normal). As I began to encounter nontrivial problems, I realized enjoyed working through them. I remember spending hours fussing over a regular expression </span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>to extract county names from a column, or trying to transform data frames so </span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>I could plot them properly. (This was in the <span class="in">`gather`</span>-<span class="in">`spread`</span> days, so it was not </span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>easy!). </span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">The subreddit debated</span><span class="co">](https://www.reddit.com/r/adventofcode/comments/zbpq5g/gpt_openai_solutions_should_be_removed_from_the/)</span> these events, and a </span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>majority seemed to think using ChatGPT was unfair. I think they&#39;re right.</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>In one sense, this debate is beside the point. The leaderboard isn&#39;t the main feature of </span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>Advent of Code. It&#39;s a special arena reserved for the small fraction of players </span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>with the speed and competitive drive to place on it. Then again, for many </span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>players it provides much of Advent of Code&#39;s appeal. They stay up until midnight </span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>(or, if in Europe, crawl out of bed at five or six in the morning) and </span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>hack together a solution as fast as they can. It&#39;s a low-stakes but exhilarating </span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>competition, one the best players describe as <span class="co">[</span><span class="ot">deeply rewarding</span><span class="co">](https://blog.vero.site/post/advent-leaderboard)</span>.</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>But fun is the _point_ of Advent of Code. It&#39;s meant to deliver the exciting parts </span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>of programming - variations on algorithms, optimization problems, input parsing - </span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>in an enjoyable package. Churning out an alogrithm as fast as possible is rarely </span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>useful in the real world, but it makes for a fun competition. Beating the leaderboard with ChatGPT is no fun. </span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>I would not recommend this awkward, roundabout approach to learning the language, but a </span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>few months of it made me a competent user by the time grad school began, giving me a foundation </span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>to build on when I tackled more advanced topics.</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="fu"># My Theory</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>How could ChatGPT be banned, though? By design, the site has no way of verifying </span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>how users get their answers. Previously, cheating  (if we consider using code you </span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>didn&#39;t write cheating) required a collaborator - a </span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>fast friend who got on the leaderboard legitimately and gave you their code to </span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>run on your input. Now, there is nothing stopping anyone from using ChatGPT. </span>
 <span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>Would the learning process have been easier had I chosen Python? </span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>Some aspects of R do make it harder to learn than comparable languages.</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>One reason is that in R, unlike in Python, there is never one right way to </span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>do something. R comes with so many powerful functions (perhaps too many) that </span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>even simple problems can reasonably solved in many different ways. Veteran R </span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>users treasure this </span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>expressiveness, but it makes the learner&#39;s task harder. How can you learn the way to </span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>do something when there _is_ no one way to do it? When the repurposed </span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>StackOverflow solutions you patch together use different idioms whose </span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>merits you lack the knowledge to compare? When tutorials give contradictory advice? </span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>Only through experience, and </span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>there are no shortcuts to that.</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>Another cause is R&#39;s well-known inconsistencies and quirks, which I have discussed </span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>before. Its often unfriendly error messages, like the infamous </span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>&quot;improper subset of object of type closure&quot;, make working through obstacles </span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>harder than necessary.</span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>But I suspect the main reason for the perceived difficulty lies not in the </span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>language itself, but in the circumstances of the learning. Effective </span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>programming takes particular skills, and R learners are unlikely to have </span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>had the experiences that develop them.</span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>Writing code demands a kind of focused aggression. You start (or should) </span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>by devising a plan to achieve a technical goal. As you execute it </span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>by writing, modifying, and testing code, you quickly run into unexpected </span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>obstacles: confusing error messages, problems in code construction you can&#39;t </span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>immediately solve, and perhaps changing requirements. You fight your way </span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>through, skimming documentation or StackOverflow for advice and experimenting </span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>with code. The experience tests your knowledge of the language and ability </span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>to analyze, but also your resourcefulness and determination.</span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>With sometimes painful experience, you develop the capacity to resolve errors </span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>relatively quickly, strong attention to detail, a knack for avoiding problems that stymied you in the past, </span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>and above all the will to persevere and turn half-formed ideas into useful code.</span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>But developing these abilities takes time and effort, and they don&#39;t make you immune </span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>to frustration. I write this on a Friday, having spent much of the week trying to do </span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>a programming assignment in <span class="co">[</span><span class="ot">Racket</span><span class="co">](https://racket-lang.org/)</span>, a language new to me.</span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>I spent more hours than I&#39;d like to admit struggling with the syntax until </span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>suddenly, unaccountably, it started to make sense. Even though I had more </span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>than two years of experience and knew Racket had _simpler_ syntax rules than </span>
-<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>most languages, it took time before I could write and read it fluently. </span>
-<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>The problem is that many, if not most, R learners have yet to make that </span>
-<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>effort, because they are new to programming. Think of an</span>
-<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>undergrad social science student taking a methods course, </span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>or a data analyst accustomed to Excel or SAS learning a new tool for their job.</span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>Learners of this kind have little or no programming experience or computer science </span>
-<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>education.</span>
-<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>The routine I described above is completely foreign to the first group. While </span>
-<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>the second group might have experience solving technical problems in their tool </span>
-<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>of choice, they do not know the idiom of a true programming language. </span>
-<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>So asking them to write nontrivial code is like throwing raw recruits into </span>
-<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>combat without sending them through basic training. Knowing this, designers </span>
-<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>of computer science programs typically start the major off with a &quot;how to code&quot;</span>
-<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>class that gently introduces naive students to programming (and typically in </span>
-<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>a general-purpose language like Python, not a specialized one like R). Learning from </span>
-<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>the ground up without that kind of instruction, or at least a knowledgeable </span>
-<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>mentor, is far harder - and impossible without strong motivation.</span>
-<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>Nor are they likely to know that making frequent errors is _normal_.</span>
-<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>For novices, unused to a programming </span>
-<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>language&#39;s demands for absolute correctness, the early weeks </span>
-<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>can feel like an endless stream of mistakes: misspelled variable names, </span>
-<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>dangling parentheses, incorrect function calls. Even experienced programmers slip up </span>
-<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>now and again</span>
-<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>(literally two minutes before I wrote </span>
-<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>this, I lost points on an assignment submission because I put an extra letter </span>
-<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>in the name of a required function). For newcomers, even writing correct syntax </span>
-<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>is taxing. If not instructed otherwise, or exposed </span>
-<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>to people having the same problem, many will start to think, as I once did, _it means something </span>
-<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>is wrong with them_. </span>
-<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>In short, compared to other languages, the people asked to learn R are unusually likely to lack the background and support that make learning </span>
-<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>a new language relatively painless. It&#39;s no wonder, then, that R has become </span>
-<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>known for being &quot;hard to learn.&quot; </span>
-<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a><span class="fu"># The Implications</span></span>
-<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>This reputation threatens the language&#39;s future. Being &quot;hard to learn&quot; can </span>
-<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>discourage enterprises an educators from using R or scare people away from </span>
-<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>trying to learn it themselves. Over time, as competitors like Python </span>
-<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>make usability improvements, R might decline in popularity if it fails to do the same. </span>
-<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>The situation is hardly desperate. There are almost embarrassingly many </span>
-<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>free tutorials available. The <span class="co">[</span><span class="ot">swirl</span><span class="co">](https://swirlstats.com/)</span> package provides interactive lessons. Thousands of package developers, not to mention R core, work hard to </span>
-<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>improve existing interfaces and root out bugs.  </span>
-<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>But all of us who are experienced in R have a part to play. We can assist </span>
-<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>novices who come to us for help or advice, strive to write high-quality code ourselves, </span>
-<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>and above all remember that it was once very hard for us, too.</span>
-<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>(Caveat to all the above: a cursory search didn&#39;t find any research comparing the difficulty of learning </span>
-<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>of different languages. I would be interested to read any if it existed, since </span>
-<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>I have no hard data to support or disprove my claims).</span>
-<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>So if you&#39;re just starting out with R? Don&#39;t go too fast or expect instant </span>
-<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>comprehension. Find an interesting problem you think you can solve to </span>
-<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>keep up your motivation. Have faith that your skills will improve with practice. </span>
-<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>Publish your code in some form, to seek feedback and demonstrate your growing proficiency.</span>
-<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>View your work as a creative outlet and an opportunity to refine your </span>
-<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>skill in solving problems.</span>
-<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>You don&#39;t have to like it, or even programming in general, but there&#39;s a good </span>
-<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>chance you&#39;ll find you do.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>One option would be setting a secret cutoff time for each puzzle that </span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>represented the theoretical minimum time it would take for a human to solve. Any correct answer </span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>submitted before this time elapsed would be rejected as probably illegitimate.</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>I doubt this would </span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>be workable in practice. If the allotted time was too great, some fast players might have legitimate </span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>scores rejected. If too small, then a cheater could easily defeat it by </span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>solving the puzzle instantly and waiting to submit. The winners would be those </span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>who used ChatGPT and guessed the cutoff score most accurately. This approach would just make </span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>things worse.</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>So the days of a human leaderboard may be ending. But I don&#39;t think it will hurt Advent of Code. The puzzles have always </span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>offered endless opportunities to get creative. Every year sees solutions in esoteric languages, </span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>ones that observe strict or bizarre constraints, compelling visualizations, </span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>and in-depth discussion of the puzzles and the concepts needed to solve them. </span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>It is these pursuits, more so than the leaderboard, that make Advent of Code </span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>special. ChatGPT doesn&#39;t threaten any of them.</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>So first place </span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>will no longer belong to the quickest and cleverest, but to whoever uploads their </span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>ChatGPT output the quickest. Humans may hold out on the harder puzzles, but more advanced versions of GPT may be able to tackle them, or at least give human solvers an </span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>easier time.</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>There is something sad about watching technology overtake human skill like this. I&#39;m </span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>reminded of the military elites </span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>that became superfluous when the societies that once revered them obtained mass-produced guns. </span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>ChatGPT certainly will not kill Advent of Code, any more than the invention of rifles</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>killed fencing. But the leaderboard will never be what it was, and something </span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>will be lost with it.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

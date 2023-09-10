@@ -5821,11 +5821,11 @@ text-align: left;
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">4</span>, b <span class="op">=</span> <span class="st">&quot;q&quot;</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>
 <span class="va">x</span><span class="op">$</span><span class="va">a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="output"><code>-- [1] 4</code></pre>
+<pre><code>-- [1] 4</code></pre>
 </div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x</span><span class="op">$</span><span class="va">c</span><span class="op">[[</span><span class="st">&quot;a&quot;</span><span class="op">]</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="output"><code>-- [1] 1</code></pre>
+<pre><code>-- [1] 1</code></pre>
 </div>
 </div>
 <p>(You can’t use <code>$</code> to subset atomic vectors).</p>
@@ -5835,7 +5835,7 @@ text-align: left;
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">&quot;w&quot;</span>, <span class="st">&quot;z&quot;</span><span class="op">)</span>
 <span class="va">x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="output"><code>-- $w
+<pre><code>-- $w
 -- [1] 4
 -- 
 -- $b
@@ -5852,7 +5852,7 @@ text-align: left;
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">&quot;a&quot;</span>
 <span class="va">x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="output"><code>-- $a
+<pre><code>-- $a
 -- [1] 4
 -- 
 -- $&lt;NA&gt;
@@ -5874,7 +5874,7 @@ text-align: left;
 <span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">`*tmp*`</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This spooky process happens behind the scenes, and the deletion of <code>*tmp*</code> (yes, that’s a legal variable name) destroys the evidence. The R user is none the wiser - at least until they see something like the second line in the above chunk in an error traceback and investigate.</p>
-<p>You can even create your own functions that work this way. Just add <code>&lt;-</code> to the end of the name and use certain reserved argument names, and you have a working “replacement function.” Presumably, the parser gives them special treatment, in one of R’s several “magic” syntax rules. Here is a JavaScript-esque replacement function that fails silently if the index passed is invalid:</p>
+<p>You can even create your own functions that work this way. Just add <code>&lt;-</code> to the end of the function name, call the first argument “x” and the last “value”, and you have a working “replacement function.” Presumably, the parser gives them special treatment, in one of R’s several “magic” syntax rules. Here is a JavaScript-esque replacement function that fails silently if the index passed is invalid:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">`nth&lt;-`</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, <span class="va">value</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
@@ -5886,7 +5886,7 @@ text-align: left;
 <span class="fu">nth</span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">3</span>
 <span class="va">x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="output"><code>-- $a
+<pre><code>-- $a
 -- [1] 4
 -- 
 -- $&lt;NA&gt;
@@ -6253,7 +6253,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>in the above chunk in an error traceback and investigate.</span>
 <span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>You can even create your own functions that work this way. Just add <span class="in">`&lt;-`</span> to the </span>
-<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a>end of the name and use certain reserved argument names, and you have a working </span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a>end of the function name, call the first argument &quot;x&quot; and the last &quot;value&quot;, and you have a working </span>
 <span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>&quot;replacement function.&quot; Presumably, the parser </span>
 <span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a>gives them special treatment, in one of R&#39;s several &quot;magic&quot; syntax rules. Here is </span>
 <span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a>a JavaScript-esque replacement function that fails silently if </span>

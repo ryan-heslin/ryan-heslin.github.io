@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ryan-heslin.github.io/index.html</loc>
-    <lastmod>2023-07-31T12:11:54.321Z</lastmod>
+    <lastmod>2023-09-10T21:21:48.517Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/about.html</loc>
@@ -10,14 +10,98 @@
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/erica-albright/index.html</loc>
-    <lastmod>2023-07-16T12:05:22.074Z</lastmod>
+    <lastmod>2023-07-31T14:49:15.810Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/naive-code/index.html</loc>
-    <lastmod>2023-07-16T12:05:47.480Z</lastmod>
+    <lastmod>2023-07-31T14:49:41.686Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/r-names/index.html</loc>
-    <lastmod>2023-07-31T12:11:48.802Z</lastmod>
+    <lastmod>2023-07-31T14:53:46.610Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/welcome/index.html</loc>
+    <lastmod>2023-07-31T14:50:20.402Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/two-years/index.html</loc>
+    <lastmod>2023-07-31T14:50:17.662Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/that_kind_of_a_day/index.html</loc>
+    <lastmod>2023-07-31T14:50:10.050Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/R6-active/index.html</loc>
+    <lastmod>2023-07-31T14:50:04.590Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/next_language/index.html</loc>
+    <lastmod>2023-07-31T14:49:51.286Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/lexical-scope/index.html</loc>
+    <lastmod>2023-07-31T14:49:37.338Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/hard-to-learn/index.html</loc>
+    <lastmod>2023-07-31T14:49:24.382Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/a_star/index.html</loc>
+    <lastmod>2023-07-31T14:49:05.446Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/aoc-complete/index.html</loc>
+    <lastmod>2023-07-31T14:49:02.078Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/aoc-2022/index.html</loc>
+    <lastmod>2023-07-31T14:48:55.618Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/aoc_advice/index.html</loc>
+    <lastmod>2023-07-31T14:49:03.534Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/chatGPT-test/index.html</loc>
+    <lastmod>2023-07-31T14:49:11.130Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/ghost-machine/index.html</loc>
+    <lastmod>2023-07-31T14:49:22.726Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/lesser-known/index.html</loc>
+    <lastmod>2023-07-31T14:49:30.286Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/testthat/index.html</loc>
+    <lastmod>2023-07-31T14:50:08.894Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/triumph-travesty/index.html</loc>
+    <lastmod>2023-07-31T14:50:11.690Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/use-neovim/index.html</loc>
+    <lastmod>2023-07-31T14:50:19.250Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/why-quarto/index.html</loc>
+    <lastmod>2023-07-31T14:53:43.290Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/regression-algebra/index.html</loc>
+    <lastmod>2023-08-25T18:02:03.663Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/aoc-overview/index.html</loc>
+    <lastmod>2023-08-25T17:58:57.219Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/aoc-chatGPT/index.html</loc>
+    <lastmod>2023-09-10T21:21:43.005Z</lastmod>
   </url>
 </urlset>
