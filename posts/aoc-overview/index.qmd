@@ -1,0 +1,242 @@
+---
+title: "Advent of Code So Far"
+author: "Ryan Heslin"
+date: "2023-08-25"
+categories: ["Advent of Code" ]
+urlcolor: "blue"
+---
+
+# Introduction
+
+I really like [Advent of Code](https://adventofcode.com/), as you probably can guess.
+I've solved every one of the 200 puzzles available at the time I write this (in late summer 2023).
+With the ninth edition coming in a few months, it's a good time
+to review the eight existing years of Advent of Code and offer my impressions.
+
+# 2015
+
+The first installment of a long-running series is usually the strangest. 
+Rules of the setting are looser or unestablished. The writing 
+varies from the formula later installments will establish.
+So it is with Advent of Code's first year. According to [Eric Wastl](http://was.tl/), 
+the sole author of Advent of Code, the original idea was just to entertain his friends 
+with Chirstmas-themed puzzles. The first year accordingly has more informal feel than 
+what would come later. The difficulty spikes and troughs as with the surprisingly 
+easy [Aunt Sue](https://adventofcode.com/2015/day/16) puzzle. 
+Some puzzles lack the creative twists that became the series' hallmark. 
+[Day 9](https://adventofcode.com/2015/day/9), for instance, is just 
+a [traveling salesman problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem) small enough to brute-force. Overall, the year is probably the easiest of all; 
+perhaps Wastl underestimated just how determined people would be to get those gold stars.
+
+The narrative style is different, too.
+Later years would take the player on a convoluted adventure to 
+save Christmas, but 2015 instead offers a series of disconnected Christmas scenarios.
+This might seem like mere flavor, but for me it gives Advent of Code much of 
+its charm. Instead of a straightforward problem specification, you're told 
+to compute how long [a lost Elf would take to wander through a snowstorm](https://adventofcode.com/2022/day/24), or 
+[emulate Tetris for some angry elephants](https://adventofcode.com/2022/day/17.
+Uncovering the programming problem wrapped in the silly plotline is half the 
+fun, so I missed the absence of one to tie this year together.
+
+But the charms of the series shine through nonetheless. Most of the 
+classic puzzle topics appear: [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) variations, made-up assembly 
+languages, string manipulation, number theory, combinatorics, and deductive 
+logic. The wry tone of the series establishes itself, as do the clever part 2 
+twists. (My favorite is [day 13](https://adventofcode.com/2015/day/13). In part 1, 
+you have to seat people with strong opinions of each other at a dinner table in a way that maximizes 
+their total happiness. Part 2 reveals that you forgot to reserve a place for yourself, 
+but it's not too hard, since you're indifferent to who you sit next to). 
+And the website had its classic blue-and-gold look from the start.
+
+It's easy to see in hindsight how Advent of Code became far more popular than anyone expected.
+A new edition for 2016 had to happen. But how would it improve on what came before?
+
+# 2016
+
+With a fancier narrative and tougher, more complex puzzles, naturally. 
+As day 1 opens, you are airdropped a short distance from the Easter Bunny's 
+headquarters. He has stolen all 50 of Santa's stars, and you need to retrieve 
+them in time to save Christmas. This hilarious scenario (and my favorite from the seven years with proper plotlines) introduces the 
+standard Advent of Code plot: some calamity has befallen Santa and scattered his stars, and you have to 
+recover them before Christmas is ruined. 
+
+The puzzles start off harder than before. 2016's day 1, which involves tracking 
+the player's position over a two-dimensional grid, is in my opinion the hardest day 1 yet. 
+The first week or so of puzzles are tough but reasonable, but then comes [day 11](https://adventofcode.com/2016/day/11). This one requires you to find the most 
+efficient way of moving a set of microchips and [radioisotope thermoelectric generators](https://en.wikipedia.org/wiki/Radioisotope_thermoelectric_generator)
+through several floors of a building. The obvious method is to find a way 
+to represent states and do breadth-first search, but this gets complicated and finicky. 
+Part 2 is nigh impossible without doing a subtle optimization. Nothing about the puzzle 
+is unfair, but for a second-week puzzle, its difficulty is extreme. 
+
+That aside, the puzzles provided a welcome challenge after the relatively straightforward ones of 2015. The only days I disliked
+required the player to compute [MD5 hashes](https://en.wikipedia.org/wiki/MD5). 
+They resulted in unavoidably slow solutions that just required the player to call their 
+language's standard library function for MD5.
+
+# 2017
+
+By 2017, Advent of Code had found its classic formula. MD5 hashes were gone, as 
+were no-frills puzzle designs and sudden difficulty spikes. Everything 
+this year was executed smoothly.
+
+2017 turned down the difficulty from 2016. Many puzzles were simpler than the last year, 
+and nothing anywhere near as hard as 
+2016's day 11 appeared. 
+Perhaps Wastl wanted to broaden the series' appeal to inexperienced programmers. 
+At any rate, the easier challenges provided a welcome change of pace.
+
+Still, plenty of the puzzles offered a good challenge, such as [day 23](https://adventofcode.com/2017/day/23). This one asked you to implement a hideously inefficient program in a 
+made-up assembly language. To solve part 2 in a reasonable amount of time, you 
+had to reverse-engineer it.
+It was tough but fun to unravel the assembly code and discover a simple program 
+for counting composite numbers within a numeric range.
+
+Overall, I found 2017 fun and engaging. I should also note the ASCII art 
+for the year has stunning animation, in my view the best in the series.
+
+# 2018
+
+After something of a breather in 2017, 2018 brought perhaps the toughest
+set of puzzles yet. This year's plot involved traveling through time to recover 
+stars. Naturally, that adventure ran through some fiendishly complex puzzles.
+
+Several of the later puzzles pushed my skills to the limit. [Day 17](https://adventofcode.com/2018/day/17) is a notoriously hard physics simulation. 
+[Day 23](https://adventofcode.com/2018/day/23) is meant to be solved by 
+octary search, basically binary search in three dimensions. It was as hard (but fun) as 
+it sounds. [Day 15](https://adventofcode.com/2018/day/15) requires the player to implement a combat video game; it's 
+probably the most complicated puzzle ever. The high difficulty was exhausting 
+at times, but always rewarding.
+
+Overall, the year demonstrated that Advent of Code would emphasize unconventional 
+puzzle designs that rewarded a creative approach. The only hiccup was day 6. 
+For the only time in series history, a bug with some people's inputs made 
+the puzzle unsolvable for them before it was fixed. All scores for this puzzle were canceled 
+as a result. It's mostly notable for being the _one_ time there actually was 
+a bug with the website rather than users' code. Aside from that incident, this 
+year featured some of the best puzzles yet.
+
+# 2019
+
+2019 was the most ambitious year yet, and also the most controversial. 
+For the first and only time, Wastl changed the formula. 
+Almost half the puzzles in 2019 would require players to work with Intcode: an 
+invented programming language that uses integer [opcodes](https://en.wikipedia.org/wiki/Opcode) to manipulate 
+data and memory. To solve them, players would have to write an Intcode interpreter or compiler 
+and use it to execute the Intcode program provided as each puzzle's input.
+
+The Intcode puzzles started simple, but got more and more complex. By late December, 
+players found themselves using Intcode to implement simplified versions of [Frogger](https://en.wikipedia.org/wiki/Frogger) 
+and [Breakout](https://en.wikipedia.org/wiki/Breakout_(video_game)).Then came day 25. Most years have an easy problem on the last day, one
+meant to give you a relaxing diversion on Christmas morning. This year, 
+it was an Intcode program that implemented an interactive adventure game. 
+It has the genre's classic elements: unfair deaths, a confusing layout, and an item-swapping puzzle at the end. You could either solve it interactively or 
+write a script to do so automatically - a much richer challenge than a typical 
+day 25 puzzle.
+
+Intcode divided the community. If you search the [official subreddit](https://www.reddit.com/r/adventofcode/), you can find several threads debating its merits. 
+Those in favor argued that the Intcode puzzles rewarded players for writing 
+reusable code and offered a progressive challenge the classic puzzle format did not. 
+Those against responded that Intcode was convoluted and hard to understand, locking out players who couldn't keep up 
+with the puzzles. 
+
+I think both claims are right. As original and interesting as Intcode was, it 
+was also finicky and unforgiving. I remember wasting a few hours because I misunderstood 
+a minor point in the specification. Overall, I think it succeeded in giving 
+2019 some unique puzzles, but I don't blame people for disliking the concept. 
+It probably would have been a lot easier if I'd taken a compilers class, as 
+many participants probably have.
+All the same, I think it's good to shake up a well-established formula. 
+I'd like to see an experiment like Intcode again.
+
+# 2020 
+
+2020 is special. It was the first year I took part in while it was ongoing. 
+I stumbled across a link to a puzzle near the end of my fall semester of graduate school, and I 
+decided to try solving it. It was [day 12](https://adventofcode.com/2020/day/12), 
+a fairly easy puzzle that asks you to simulate moving a navigation beacon according 
+to instructions. I had fun solving it, though I wasted a lot of time trying to 
+implement a general rotation matrix to model switching orientation. (I had yet to learn 
+that Advent of Code only requires integral computations, so I only had to deal 
+with multiples of 90 degrees).
+
+I spent the rest of that winter break solving as many puzzles as I could, learning 
+Python as I went. I had found Advent of Code at exactly the right time in my life. 
+I had just switched from pursuing a master's in public policy to a master's in data science, 
+and I knew I would have to learn to write effective code fast. Doing the puzzles 
+increased my confidence that I could do that and confirmed to me that I would enjoy it. 
+
+Sentimentality aside, this was a good year, one that returned to the classic format after 
+the Intcode experiment of 2019. There were yet more Game of Life 
+variations, this time [in four dimensions](https://adventofcode.com/2020/day/17)
+or [with hexagonal coordinates](https://adventofcode.com/2020/day/24). It was
+a fitting tribute to John Conway, who died that year. While the overall difficulty 
+was reduced from the past two years, one puzzle broke the trend. (If you 
+took part in this year, you already know which it is). [Day 20](https://adventofcode.com/2020/day/20), "Jurassic Jigsaw", requires you to assemble dozens of tiles into an 
+image by matching the patterns on their edges. Part 2 asks you to scan the image 
+for the [Loch Ness Monster](https://en.wikipedia.org/wiki/Loch_Ness_Monster), which can be recognized by a telltale pattern. It ranks among the very 
+hardest puzzles, but I had fun designing a very complex depth-first 
+search to solve it.
+
+The year's plot, which involves the player frantically trying to salvage a 
+vacation plan gone awry, is the most realistic so far. Aside from the part with the Loch Ness 
+Monster, anyway.
+
+# 2021
+
+I began 2021 with far more experience than I had in 2020. And I needed that experience, 
+because this year cranked the difficulty back up to near-2018 levels. I kept up for the first week 
+or so, but I began to fall behind when the puzzles began requiring graph traversal. 
+I knew nothing about graphs or pathfinding algorithms back then, and had to learn fast.
+I fumbled my way through [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) well enough to solve some of 
+the early puzzles, but I soon fell several days behind. 
+
+I persevered, making steady progress as 2022 began. 
+I had to put Advent of Code aside when grad school resumed, but by 
+late spring I had earned all 50 stars. 
+It was the first year I finished completely, and by far the most satisfying to complete. 
+
+It took weeks to crawl through days 21 through 24, one of the toughest stretches 
+of puzzles in the whole series. Most of these puzzles demand creativity to pare down 
+huge problem spaces. Day 24, for instance, asks you to find the highest number that meets 
+a condition from trillions of possibilities. I solved it only after painfully 
+reverse-engineering the made-up assembly langueage provided as the input.
+Day 23, to me, is the hardest puzzle in the entire series. 
+It asks you to solve a variation on the  [Towers of Hanoi](https://en.wikipedia.org/wiki/Tower_of_Hanoi) puzzle. The secret is that it's pretty easy to solve by hand. 
+(I used cut-up Post-it notes as game pieces). But I couldn't resist the challenge of 
+writing a program to solve it, one that would work on a general input.
+It took a week of focused effort to do so. 
+It was painful at time, but I grew so much as a programmer from these
+puzzles that it was all worth it.
+
+# 2022 
+
+The most recent year, as of this writing, has the player accompany a jungle 
+expedition searching for star fruit, which the reindeer apparently eat. 
+The more relaxed narrative suits the puzzles, which are a bit easier than 
+the previous year's. The puzzle design seemed more thoughtful than ever; 
+most of this year's puzzles had simple rules that lacked [accidental complexity](https://en.wikipedia.org/wiki/No_Silver_Bullet). Instead, the difficulty emerged organically
+from the constraints of the problems. 
+
+[Day 16](https://adventofcode.com/2022/day/16), perhaps the hardest puzzle, is a good example. 
+It asks you to open a series of pressure valves in rooms connected by tunnels 
+in a way that releases as much pressure as possible. Representing the situation as a simple 
+graph isn't enough; the number of possible states quickly becomes unmanageable.
+After asking for advice, I solved the problem by creating a simpler graph that represented 
+distances between pairs of valves, then writing a traverse algorithm that 
+discarded paths that had no chance of releasing the most pressure. This
+complex design process emerged from a simple problem statement, and I found 
+it more satisfying than trying to meet a complicated specification.
+
+# Conclusion
+
+Advent of Code continues to grow more popular. In all likelihood, it will 
+do so for many years to come. Looking back over the eight years and 200 puzzles 
+so far, it's easy to see why. The puzzles offer endless variations on 
+classic computer science problems, often with an inventive "part 2 twist." 
+The story tying each year together, while inessential, keeps the mood light. 
+The design of the website makes it easy to check answers, and the carefully 
+worded puzzle descriptions provide enough guidance to find a solution.
+It success reminds me how many computer science discoveries came from just playing 
+around with interesting problems.
+I'll probably keep participating as long as I can, because it never stops being fun. 

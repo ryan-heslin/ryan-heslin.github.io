@@ -1,7 +1,7 @@
 ---
 title: "ChatGPT and the Advent of Code Leaderboard"
 author: "Ryan Heslin"
-date: "2022-09-10"
+date: "2023-09-11"
 categories: ["Advent of Code"]
 urlcolor: "blue"
 ---

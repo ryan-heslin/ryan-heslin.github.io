@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.450">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Ryan Heslin">
 <meta name="dcterms.date" content="2022-09-08">
@@ -5931,7 +5931,7 @@ text-align: left;
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">letters</span>, <span class="st">&quot; is letter #&quot;</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, <span class="st">&quot; of the alphabet&quot;</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>--  [1] &quot;a is letter #1 of the alphabet&quot; 
+<pre class="output"><code>--  [1] &quot;a is letter #1 of the alphabet&quot; 
 --  [2] &quot;b is letter #2 of the alphabet&quot; 
 --  [3] &quot;c is letter #3 of the alphabet&quot; 
 --  [4] &quot;d is letter #4 of the alphabet&quot; 
@@ -5971,23 +5971,23 @@ everything else required to get messy input into a form that can be analyzed. If
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mtcars</span><span class="op">$</span><span class="va">cyl</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- [1] 6</code></pre>
+<pre class="output"><code>-- [1] 6</code></pre>
 </div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mtcars</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- [1] 6</code></pre>
+<pre class="output"><code>-- [1] 6</code></pre>
 </div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mtcars</span><span class="op">[</span><span class="fl">4</span>, <span class="st">&quot;cyl&quot;</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- [1] 6</code></pre>
+<pre class="output"><code>-- [1] 6</code></pre>
 </div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mtcars</span><span class="op">[[</span><span class="st">&quot;cyl&quot;</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- [1] 6</code></pre>
+<pre class="output"><code>-- [1] 6</code></pre>
 </div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mtcars</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span>, <span class="st">&quot;cyl&quot;</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- [1] 6</code></pre>
+<pre class="output"><code>-- [1] 6</code></pre>
 </div>
 </div>
 <p>A successor to R might develop a smaller set of operators, and smooth out some oddities (like <code>drop = FALSE</code>). But it should not go too far in this Emphasizing readability and separating tasks into different functions, as <code>dplyr</code> has done, would make code more readable and easier to debug, but also more verbose. Too radical a departure from R’s approach would fail to replicate what makes it special.</p>
@@ -6007,7 +6007,7 @@ everything else required to get messy input into a form that can be analyzed. If
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">*</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- 
+<pre class="output"><code>-- 
 -- Call:
 -- lm(formula = mpg ~ wt + cyl * disp, data = mtcars)
 -- 
@@ -6022,7 +6022,7 @@ everything else required to get messy input into a form that can be analyzed. If
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">`+`</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- [1] 4</code></pre>
+<pre class="output"><code>-- [1] 4</code></pre>
 </div>
 </div>
 <p>All this power comes with serious drawbacks - serious enough that it can be reasonably argued that non-standard evaluation is a bad paradigm. Manipulating expressions means code loses referential transparency (evaluating the same if variable names are changed). Controlled evaluation requires programmers to think about environment inheritance, creating the potential for a host of subtle bugs. Functions that quote some of their arguments but not all, or accept quoted and nonquoted forms of the same argument (like <code>library</code>), are harder to use. In the end, all this indirection makes code harder to write and reason about (hence the need for a vignette on simply programming with <code>dplyr</code>). I think the tradeoff is worthwhile; the convenience and flexibility of non-standard evaluation are too valuable to abandon. But unlike the other two characteristics I outlined above, a strong case can be made otherwise.</p>
@@ -6051,14 +6051,14 @@ actually <code>SIMPLIFY</code> and <code>USE.NAMES</code> (not without reason, b
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">&quot;d&quot;</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;d&quot;</code></pre>
+<pre class="output"><code>-- [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;d&quot;</code></pre>
 </div>
 </div>
 <p>Attempting to do factor arithmetic only triggers a warning, despite being nonsense (Note also that the factor warning preempts the “mismatched object lengths” warning this would normally trigger):</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x</span> <span class="op">+</span> <span class="fl">3</span><span class="op">:</span><span class="fl">6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- [1] NA NA NA NA</code></pre>
+<pre class="output"><code>-- [1] NA NA NA NA</code></pre>
 </div>
 </div>
 <p>Worst of all, and not widely known: R’s lexical sort order differs by system locale. (See <a href="https://stackoverflow.com/questions/31772185/language-dependent-sorting-with-r">here</a> for an example). When creating a factor, R defaults to ordering the levels lexically. Good luck with that reproducible research!</p>
@@ -6068,18 +6068,18 @@ actually <code>SIMPLIFY</code> and <code>USE.NAMES</code> (not without reason, b
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">&quot;abc&quot;</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- [1] &quot;TRUE&quot; &quot;abc&quot;</code></pre>
+<pre class="output"><code>-- [1] &quot;TRUE&quot; &quot;abc&quot;</code></pre>
 </div>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="cn">TRUE</span> <span class="op">+</span> <span class="fl">3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- [1] 4</code></pre>
+<pre class="output"><code>-- [1] 4</code></pre>
 </div>
 </div>
 <p>But sometimes R will allow operations that have no sensible result:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">&quot;abc&quot;</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>--  [1] &quot;c(21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4)abc&quot;                    
+<pre class="output"><code>--  [1] &quot;c(21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4)abc&quot;                    
 --  [2] &quot;c(6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4)abc&quot;                                                                                                            
 --  [3] &quot;c(160, 160, 108, 258, 360, 225, 360, 146.7, 140.8, 167.6, 167.6, 275.8, 275.8, 275.8, 472, 460, 440, 78.7, 75.7, 71.1, 120.1, 318, 304, 350, 400, 79, 120.3, 95.1, 351, 145, 301, 121)abc&quot;                       
 --  [4] &quot;c(110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205, 215, 230, 66, 52, 65, 97, 150, 150, 245, 175, 66, 91, 113, 264, 175, 335, 109)abc&quot;                                                     
@@ -6106,10 +6106,10 @@ actually <code>SIMPLIFY</code> and <code>USE.NAMES</code> (not without reason, b
 </section><section id="string-manipulation" class="level2"><h2 class="anchored" data-anchor-id="string-manipulation">String Manipulation</h2>
 <p>R’s string manipulation facilities leave something to be desired. In other languages, strings are array types or feature array-like subsetting. R, however, handles strings (i.e., the raw character data that make up the elements of character vectors) with an <a href="https://cran.r-project.org/doc/manuals/r-release/R-ints.html#SEXPTYPEs">internal type</a>. You can’t extract string elements the way you can in Python:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">&quot;A typical string&quot;</span></span>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python source code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">&quot;A typical string&quot;</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- &#39;A&#39;</code></pre>
+<pre class="output"><code>-- &#39;A&#39;</code></pre>
 </div>
 </div>
 <p>You have to use <code>substr</code> or <code>substring</code> (barely distinguishable functions again!)</p>
@@ -6117,7 +6117,7 @@ actually <code>SIMPLIFY</code> and <code>USE.NAMES</code> (not without reason, b
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="st">&quot;A typical string&quot;</span>
 <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- [1] &quot;A&quot;</code></pre>
+<pre class="output"><code>-- [1] &quot;A&quot;</code></pre>
 </div>
 </div>
 <p>The rationale is obvious - the unpalatable alternative would be to implement character vectors as list-like recursive vectors - but it has annoying consequences for the interface, such as <code>strsplit</code> returning a list:</p>
@@ -6125,7 +6125,7 @@ actually <code>SIMPLIFY</code> and <code>USE.NAMES</code> (not without reason, b
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">&quot;This is a typical&quot;</span>, <span class="st">&quot;character vector&quot;</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">x</span>, split <span class="op">=</span> <span class="st">&quot;\\s&quot;</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- [[1]]
+<pre class="output"><code>-- [[1]]
 -- [1] &quot;This&quot;    &quot;is&quot;      &quot;a&quot;       &quot;typical&quot;
 -- 
 -- [[2]]
@@ -6143,7 +6143,7 @@ actually <code>SIMPLIFY</code> and <code>USE.NAMES</code> (not without reason, b
 <span class="va">name.rex</span> <span class="op">&lt;-</span> <span class="st">&quot;(?&lt;first&gt;[[:upper:]][[:lower:]]+) (?&lt;last&gt;[[:upper:]][[:lower:]]+)&quot;</span>
 <span class="op">(</span><span class="va">parsed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">regexpr</a></span><span class="op">(</span><span class="va">name.rex</span>, <span class="va">notables</span>, perl <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- [1] 3 2
+<pre class="output"><code>-- [1] 3 2
 -- attr(,&quot;match.length&quot;)
 -- [1] 12 16
 -- attr(,&quot;index.type&quot;)
@@ -6163,7 +6163,7 @@ actually <code>SIMPLIFY</code> and <code>USE.NAMES</code> (not without reason, b
 </div>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gregexpr</a></span><span class="op">(</span><span class="va">name.rex</span>, <span class="va">notables</span>, perl <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- [1] 2
+<pre class="output"><code>-- [1] 2
 -- attr(,&quot;match.length&quot;)
 -- [1] 16
 -- attr(,&quot;index.type&quot;)
@@ -6192,18 +6192,18 @@ actually <code>SIMPLIFY</code> and <code>USE.NAMES</code> (not without reason, b
 <span class="op">}</span>
 <span class="fu">parse.one</span><span class="op">(</span><span class="va">notables</span>, <span class="va">parsed</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>--      first     last      
+<pre class="output"><code>--      first     last      
 -- [1,] &quot;Ben&quot;     &quot;Franklin&quot;
 -- [2,] &quot;Millard&quot; &quot;Fillmore&quot;</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re </span>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python source code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re </span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>notables <span class="op">=</span> [<span class="st">&quot;Ben Franklin and Jefferson Davis&quot;</span>,  <span class="st">&quot;</span><span class="ch">\t</span><span class="st">Millard Fillmore&quot;</span>]</span>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>[re.match(<span class="st">&quot;.*(?P&lt;first&gt;[A-Z][a-z]+).*(?P&lt;last&gt;[A-Z][a-z]+)&quot;</span>, x).groupdict() <span class="cf">for</span> x <span class="kw">in</span> notables]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-- [{&#39;first&#39;: &#39;Jefferson&#39;, &#39;last&#39;: &#39;Davis&#39;}, {&#39;first&#39;: &#39;Millard&#39;, &#39;last&#39;: &#39;Fillmore&#39;}]</code></pre>
+<pre class="output"><code>-- [{&#39;first&#39;: &#39;Jefferson&#39;, &#39;last&#39;: &#39;Davis&#39;}, {&#39;first&#39;: &#39;Millard&#39;, &#39;last&#39;: &#39;Fillmore&#39;}]</code></pre>
 </div>
 </div>
 <p>(Is Fillmore’s inclusion a sly joke? He is chiefly notable for being a bottom-tier president).</p>
