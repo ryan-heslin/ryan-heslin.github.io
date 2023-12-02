@@ -1,0 +1,37 @@
+---
+title: "The Best Data Visualization of All Time"
+author: "Ryan Heslin"
+date: "2022-06-18"
+categories: ["R"]
+params:
+    title: "R Tricks I Wish I'd Known as a Beginner"
+---
+
+Most data visualizations are simple and utilitarian. 
+
+
+The chart was the work of [Charles Joseph Minard](https://en.wikipedia.org/wiki/Charles_Joseph_Minard), 
+a French civil engineer who spent his retirement years making innovative 
+visualizations. The chart in question, "Carte figurative des pertes successives en hommes de l'Armée Française dans la campagne de Russie 1812–1813,"
+shows what its title describes: "successive manpower losses in the French Army's 
+campaign in Russia, 1812-1813." 
+
+A broad strip, representing Napoleon's army, stretches across the map before 
+doubling back. You realize it represents the progress of his army. Then 
+you understand why it gets thinner as it meanders across the map: French soldiers dying, 
+day after day. You realize that the plot on the bottom shows the recorded low 
+temperature on selected days. 
+
+The chart does what all great visualizations do: highlight an important 
+pattern in a morass of data. It shows plainly why Napoleon lost the campaign. 
+From the start, disease, starvation, and Russian resistance ate away at his army.
+The Russian army refused to oblige his plan to destroy it. By the time his 
+diminshed forces marched unopposed into Moscow, their defeat was sealed. 
+Most of those who remained succumbed to cold or Cossacks on the long retreat. 
+
+The ever-narrowing strip tells this brutal story more vividly than pages of tables 
+or narrative prose could. (It also neatly dispels the misconception that the winter cost Napoleon the campaign. It just 
+turned a fiasco into a catastrophe).
+Few modern analysts (me included) could come up with such an original and striking 
+way of displaying the data. Minard's work still stands as the best data visualization of 
+all time.

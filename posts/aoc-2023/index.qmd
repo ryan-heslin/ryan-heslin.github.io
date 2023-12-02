@@ -1,0 +1,65 @@
+---
+title: "Advent Time Again"
+author: "Ryan Heslin"
+date: "2023-12-1"
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+It's [Advent of Code](https://adventofcode.com/) time again! 
+
+Once again, thousands of programmers around the world are rearranging their lives 
+to solve a series of Christmas-themed puzzles. As I write this, only one puzzle 
+has been released, but this already promises to be an interesting year. 
+This Day 1 puzzle was unexpectedly hard.
+
+Part 1 is a simple string manipulation problem. The input consists of a file where each 
+line has lowercase letters and single digits. You just have to read the first 
+and last integers on each line of a file, combine them, read the resulting integers, 
+and sum them.
+
+```{{python}}
+import re
+
+from utils.utils import split_lines
+
+raw = split_lines("inputs/day1.txt")
+# No zeroes
+naturals = r"[1-9]"
+stripped = [re.sub("[a-z]+", "", line) for line in raw]
+part1 = sum(int(line[0] + line[-1]) for line in stripped)
+print(part1)
+```
+
+Part 2 reveals a nasty surprise. You no longer have to just search for digits, 
+but _written numbers_. `one` and `1` now both mean `1`. I created an awkward regular 
+expression to handle this, then confidently submitted my answer. Wrong. I 
+checked my code on the provided test case, and it was correct. 
+
+This happens to me several times each year, but rarely on day 1! I racked my mind 
+for a pathological edge case that would break my code. Immediately, I thought 
+of overlapping matches. By the rules, a string like `eightwo` should be parsed 
+as `82`, but a conventional pattern would match `eight`, move on to `w`, and 
+fail to match any more substrings from the string. I needed an overlapping pattern 
+to get the correct answer. 
+
+As with most problems, the answer to this one turned out to lie in [a purple StackOverflow link](https://stackoverflow.com/questions/5616822/how-to-use-regex-to-find-all-overlapping-matches). I tweaked my pattern, reran my code, and submitted a new, slightly higher answer. 
+Correct!
+
+```{{python}}
+nums = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+n = len(nums)
+parts = "|".join(nums + [naturals])
+pattern = f"(?=({parts}))"
+chars = list(map(str, range(1, 1 + n)))
+keys = dict(zip(nums, chars))
+
+matches = [re.findall(pattern, line) for line in raw]
+part2 = sum(
+    int(keys.get(r[0], r[0]) + keys.get(r[-1], r[-1])) if r else 0 for r in matches
+)
+print(part2)
+```
+
+All in all, it was a typical Day 7 or 8 puzzle, which made it a nasty surprise as 
+a Day 1 puzzle. So Day 2 should be easy by comparison - right?
