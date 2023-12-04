@@ -1,0 +1,59 @@
+---
+title: "Advent of Code 2023 Day 3"
+author: "Ryan Heslin"
+date: "2023-12-3"
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+Day 3 seemed to confirm this would be a tough year. The puzzle gives a grid 
+with numbers and punctuation characters like this:
+
+
+```
+467..114..
+...*......
+..35..633.
+......#...
+617*......
+.....+.58.
+..592.....
+......755.
+...$.*....
+.664.598..
+```
+
+Part 1 asks you to sum the numbers adjacent to one or more non-`"."` characters. 
+Parsing was nontrivial. I eventually decided to create two dicts, one mapping coordinates 
+to symbols and one mapping each coordinate with a digit to the number's value.
+I used complex numbers as Cartesian coordinates.
+So `1+0j` maps to 467.
+
+Part 2 adds a wrinkle: you now must find each space with `"*"`. For each that 
+has exactly two adjacent numbers, multiply those numbers and sum up the products. 
+
+I wrote a complicated function to do both at once:
+
+```python
+def solve(numbers, symbols, neighbors):
+    gear = "*"
+    counted = set()
+    part1 = part2 = 0
+
+    for coord, symbol in symbols.items():
+        gear_neighbors = set()
+        for neighbor in neighbors(coord):
+            if neighbor in numbers:
+                number = numbers[neighbor]
+                if neighbor not in counted:
+                    part1 += number.val
+                    counted.update(number.coords)
+                if symbol == gear:
+                    gear_neighbors.add(frozenset(number.coords))
+        if len(gear_neighbors) == 2:
+            part2 += prod(numbers[next(iter(c))].val for c in gear_neighbors)
+
+    return part1, part2
+```
+
+The difficulty is higher than usual, but manageable - so far.

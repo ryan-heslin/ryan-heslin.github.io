@@ -1,0 +1,48 @@
+---
+title: "Advent of Code 2023 Day 3"
+author: "Ryan Heslin"
+date: "2023-12-4"
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+Day 4, thankfully, simplifies the input parsing. 
+Each line of the input contains winning numbers and drawn numbers for 
+a lottery game. Part 1 simply asks you to compute a score from the quantity  
+of winning numbers on each card: 
+
+```
+Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
+Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19
+Card 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1
+Card 4: 41 92 73 84 69 | 59 84 76 51 58  5 54 83
+Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
+Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
+```
+
+Part 2 switches up the rules in an interesting way. Now, if card $n$ has 
+$k$ winning numbers, you get copies of cards $n+1$ through $n+k$ inclusive. 
+After simulating this process, you count the total number of cards. The difficulty 
+comes from the fact that multiple copies of card $n$ may exist. Since each card 
+has an identical result, I can just multiply by the number of cards. The resulting 
+loop runs quickly.
+
+```r
+draw <- function(cards, won) {
+    n <- length(cards)
+    held <- rep(1, length.out = n)
+
+    for (current in seq_len(n - 1)) {
+        draws <- held[[current]]
+        result <- won[[current]]
+        if (result > 0) {
+            received <- seq(current + 1, current + result, 1)
+            # Clamp to number of cards
+            received <- received[received <= n]
+            held[received] <- held[received] + draws
+        }
+    }
+    sum(held)
+}
+
+```

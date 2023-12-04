@@ -11,11 +11,14 @@ It's [Advent of Code](https://adventofcode.com/) time again!
 Once again, thousands of programmers around the world are rearranging their lives 
 to solve a series of Christmas-themed puzzles. As I write this, only one puzzle 
 has been released, but this already promises to be an interesting year. 
-This Day 1 puzzle was unexpectedly hard.
 
+This year, I'll write a brief post explaining how I solved each puzzle. We start with 
+day 1.
+
+This year's first puzzle was unexpectedly hard.
 Part 1 is a simple string manipulation problem. The input consists of a file where each 
 line has lowercase letters and single digits. You just have to read the first 
-and last integers on each line of a file, combine them, read the resulting integers, 
+and last integers on each line of a file, combine them into a string, read the resulting integer, 
 and sum them.
 
 ```{{python}}
