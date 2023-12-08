@@ -1,0 +1,47 @@
+---
+title: "Advent of Code 2023 Day 5"
+author: "Ryan Heslin"
+date: "2023-12-6"
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+Today saw a harsh difficulty spike. The puzzle described a series of 
+integer intervals (e.g., `[2, 5]`) that each shifted input values by a constant 
+if they fell in the interval, but otherwise left them alone. The input consisted 
+of several layers of intervals.
+Part 1 the smallest output value possible from a few input values.
+Since there were only a few inputs, each could be manually checked by computing 
+the interval transformations.
+
+Part 2 "revealed" that the input values were actually _intervals_. Now a naive 
+solution would have billions of values to check. I instead reversed the interval 
+data and checked each possible output value. Mercifully, the answer ended up 
+being less than 10 million, so my brute-force approach took only a few minutes. 
+
+(I'll spare you the class that actually does the interval checking.)
+
+```py
+
+def solve_part2(data, seeds):
+    current = 0
+    mappings = Mappings(data, [], True)
+    zipped = list(zip(*seeds))
+    lower = min(zipped[0])
+    upper = max(zipped[1])
+
+    while True:
+        result = mappings.verify_seed(current)
+        for number in result:
+            if not (lower <= number <= upper):
+                continue
+            for rnge in seeds:
+                if rnge[0] <= number <= rnge[1]:
+                    return current
+        current += 1
+
+```
+
+I found out later that the "smart" way of solving it relied on finicky interval 
+splitting. All in all, a wakeup call.
+

@@ -9,7 +9,7 @@
 <meta name="author" content="Ryan Heslin">
 <meta name="dcterms.date" content="2023-12-04">
 
-<title>Verso - Advent of Code 2023 Day 4</title>
+<title>Verso - Advent of Code 2023 Day 6</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4637,7 +4637,7 @@ text-align: left;
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">Advent of Code 2023 Day 4</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">Advent of Code 2023 Day 6</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Advent of Code</div>
               </div>
@@ -4675,31 +4675,39 @@ text-align: left;
 
 
 
-<p>Day 4, thankfully, simplifies the input parsing. Each line of the input contains winning numbers and drawn numbers for a lottery game. Part 1 simply asks you to compute a score from the quantity<br>
-of winning numbers on each card:</p>
-<pre><code>Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
-Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19
-Card 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1
-Card 4: 41 92 73 84 69 | 59 84 76 51 58  5 54 83
-Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
-Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11</code></pre>
-<p>Part 2 switches up the rules in an interesting way. Now, if card <span class="math inline">\(n\)</span> has <span class="math inline">\(k\)</span> winning numbers, you get copies of cards <span class="math inline">\(n+1\)</span> through <span class="math inline">\(n+k\)</span> inclusive. After simulating this process, you count the total number of cards. The difficulty comes from the fact that multiple copies of card <span class="math inline">\(n\)</span> may exist. Since each card has an identical result, I can just multiply by the number of cards. The resulting loop runs quickly.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>draw <span class="ot">&lt;-</span> <span class="cf">function</span>(cards, won) {</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">&lt;-</span> <span class="fu">length</span>(cards)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    held <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="at">length.out =</span> n)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (current <span class="cf">in</span> <span class="fu">seq_len</span>(n <span class="sc">-</span> <span class="dv">1</span>)) {</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        draws <span class="ot">&lt;-</span> held[[current]]</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        result <span class="ot">&lt;-</span> won[[current]]</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (result <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            received <span class="ot">&lt;-</span> <span class="fu">seq</span>(current <span class="sc">+</span> <span class="dv">1</span>, current <span class="sc">+</span> result, <span class="dv">1</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Clamp to number of cards</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            received <span class="ot">&lt;-</span> received[received <span class="sc">&lt;=</span> n]</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            held[received] <span class="ot">&lt;-</span> held[received] <span class="sc">+</span> draws</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(held)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Another breather day!</p>
+<p>This puzzle describes a boat race. To win, you must get the boat at least <span class="math inline">\(d\)</span> distance within <span class="math inline">\(t\)</span> seconds. You power the boat by pressing a button for <span class="math inline">\(b\)</span> seconds; the boat then travels at <span class="math inline">\(b\)</span> units per second for the remaining <span class="math inline">\(b-t\)</span> seconds.</p>
+<p>I saw immediately that this could be represented in a quadratic equation <span class="math inline">\(-b^2 + bt - d = 0\)</span>, where <span class="math inline">\(t\)</span> is time, <span class="math inline">\(d\)</span> is distance, and <span class="math inline">\(b\)</span> is the length of the button press. All I had to do was find the roots of this equation, compute the lowest and highest integers in that interval, and subtract.</p>
+<p>Brute force probably would have worked, but math is so much more satisfying.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">quadratic</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">a</span><span class="op">,</span> <span class="va">b</span><span class="op">,</span> <span class="va">c</span><span class="op">)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">discrim</span> <span class="op">=</span> <span class="fu">math.sqrt</span><span class="op">((</span><span class="va">b</span> <span class="op">^</span> <span class="dv">2</span><span class="op">)</span> <span class="op">-</span> <span class="op">(</span><span class="dv">4</span> <span class="op">*</span> <span class="va">a</span> <span class="op">*</span> <span class="va">c</span><span class="op">))</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">denom</span> <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="va">a</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">{</span> <span class="op">(-</span><span class="va">b</span> <span class="op">+</span> <span class="va">discrim</span><span class="op">)</span> <span class="op">/</span> <span class="va">denom</span><span class="op">,</span> <span class="op">(-</span><span class="va">b</span> <span class="op">-</span> <span class="va">discrim</span><span class="op">)</span> <span class="op">/</span> <span class="va">denom</span> <span class="op">}</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">intercepts</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">time</span><span class="op">,</span> <span class="va">dist</span><span class="op">)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> quadratic<span class="op">(-</span><span class="dv">1</span><span class="op">,</span> <span class="va">time</span><span class="op">,</span> <span class="op">-</span><span class="va">dist</span><span class="op">)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">num_bool</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span><span class="va">e</span> <span class="kw">and</span> <span class="dv">1</span><span class="op">)</span> <span class="kw">or</span> <span class="dv">0</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">solve</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">result</span> <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="va">i</span><span class="op">,</span> <span class="cn">_</span> <span class="kw">in</span> <span class="fu">ipairs</span><span class="op">(</span><span class="va">data</span><span class="op">.</span><span class="va">time</span><span class="op">)</span> <span class="cf">do</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="kw">local</span> <span class="va">points</span> <span class="op">=</span> intercepts<span class="op">(</span><span class="va">data</span><span class="op">.</span><span class="va">time</span><span class="op">[</span><span class="va">i</span><span class="op">],</span> <span class="va">data</span><span class="op">.</span><span class="va">distance</span><span class="op">[</span><span class="va">i</span><span class="op">])</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">-- Need to handle case where intercepts are integers and therefore invalid</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="kw">local</span> <span class="va">left_i</span> <span class="op">=</span> <span class="fu">math.min</span><span class="op">(</span><span class="va">points</span><span class="op">[</span><span class="dv">1</span><span class="op">],</span> <span class="va">points</span><span class="op">[</span><span class="dv">2</span><span class="op">])</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="kw">local</span> <span class="va">left</span> <span class="op">=</span> <span class="fu">math.max</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="fu">math.ceil</span><span class="op">(</span><span class="va">left_i</span> <span class="op">+</span> num_bool<span class="op">(</span><span class="va">left_i</span> <span class="op">%</span> <span class="dv">1</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)))</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="kw">local</span> <span class="va">right_i</span> <span class="op">=</span> <span class="fu">math.max</span><span class="op">(</span><span class="va">points</span><span class="op">[</span><span class="dv">1</span><span class="op">],</span> <span class="va">points</span><span class="op">[</span><span class="dv">2</span><span class="op">])</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="kw">local</span> <span class="va">right</span> <span class="op">=</span> <span class="fu">math.min</span><span class="op">(</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            <span class="fu">math.floor</span><span class="op">(</span><span class="va">right_i</span> <span class="op">-</span> num_bool<span class="op">(</span><span class="va">right_i</span> <span class="op">%</span> <span class="dv">1</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)),</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>            <span class="va">data</span><span class="op">.</span><span class="va">time</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">)</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="va">result</span> <span class="op">=</span> <span class="va">result</span> <span class="op">*</span> <span class="op">(</span><span class="va">right</span> <span class="op">-</span> <span class="va">left</span> <span class="op">+</span> <span class="dv">1</span><span class="op">)</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">result</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 <!-- -->
@@ -4990,54 +4998,61 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class>
-<div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Advent of Code 2023 Day 4&quot;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;Ryan Heslin&quot;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;2023-12-4&quot;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [&quot;Advent of Code&quot;]</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="an">urlcolor:</span><span class="co"> &quot;blue&quot;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>Day 4, thankfully, simplifies the input parsing. </span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>Each line of the input contains winning numbers and drawn numbers for </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>a lottery game. Part 1 simply asks you to compute a score from the quantity  </span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>of winning numbers on each card: </span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="in">Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="in">Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="in">Card 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="in">Card 4: 41 92 73 84 69 | 59 84 76 51 58  5 54 83</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="in">Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="in">Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>Part 2 switches up the rules in an interesting way. Now, if card $n$ has </span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>$k$ winning numbers, you get copies of cards $n+1$ through $n+k$ inclusive. </span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>After simulating this process, you count the total number of cards. The difficulty </span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>comes from the fact that multiple copies of card $n$ may exist. Since each card </span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>has an identical result, I can just multiply by the number of cards. The resulting </span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>loop runs quickly.</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>draw <span class="ot">&lt;-</span> <span class="cf">function</span>(cards, won) {</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">&lt;-</span> <span class="fu">length</span>(cards)</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    held <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="at">length.out =</span> n)</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (current <span class="cf">in</span> <span class="fu">seq_len</span>(n <span class="sc">-</span> <span class="dv">1</span>)) {</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>        draws <span class="ot">&lt;-</span> held[[current]]</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>        result <span class="ot">&lt;-</span> won[[current]]</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (result <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>            received <span class="ot">&lt;-</span> <span class="fu">seq</span>(current <span class="sc">+</span> <span class="dv">1</span>, current <span class="sc">+</span> result, <span class="dv">1</span>)</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Clamp to number of cards</span></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>            received <span class="ot">&lt;-</span> received[received <span class="sc">&lt;=</span> n]</span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>            held[received] <span class="ot">&lt;-</span> held[received] <span class="sc">+</span> draws</span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(held)</span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Advent of Code 2023 Day 6&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;Ryan Heslin&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;2023-12-4&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [&quot;Advent of Code&quot;]</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="an">urlcolor:</span><span class="co"> &quot;blue&quot;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>Another breather day!</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>This puzzle describes a boat race. To win, you must get the boat at least $d$ </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>distance within $t$ seconds. You power the boat by pressing a button for $b$ </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>seconds; the boat then travels at $b$ units per second for the remaining $b-t$ </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>seconds.</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>I saw immediately that this could be represented in a quadratic equation $-b^2 + bt - d = 0$, </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>where $t$ is time, $d$ is distance, and $b$ is the length of the button press. </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>All I had to do was find the roots of this equation, compute the lowest and highest </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>integers in that interval, and subtract.</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>Brute force probably would have worked, but math is so much more satisfying.</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="in">```lua </span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="in">local quadratic = function(a, b, c)</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="in">    local discrim = math.sqrt((b ^ 2) - (4 * a * c))</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="in">    local denom = 2 * a</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="in">    return { (-b + discrim) / denom, (-b - discrim) / denom }</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="in">end</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="in">local intercepts = function(time, dist)</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="in">    return quadratic(-1, time, -dist)</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="in">end</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="in">local num_bool = function(e)</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="in">    return (e and 1) or 0</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="in">end</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="in">local solve = function(data)</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="in">    local result = 1</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="in">    for i, _ in ipairs(data.time) do</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="in">        local points = intercepts(data.time[i], data.distance[i])</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="in">        -- Need to handle case where intercepts are integers and therefore invalid</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="in">        local left_i = math.min(points[1], points[2])</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="in">        local left = math.max(1, math.ceil(left_i + num_bool(left_i % 1 == 0)))</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="in">        local right_i = math.max(points[1], points[2])</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="in">        local right = math.min(</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="in">            math.floor(right_i - num_bool(right_i % 1 == 0)),</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="in">            data.time[i] - 1</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="in">        )</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="in">        result = result * (right - left + 1)</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="in">    end</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="in">    return result</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

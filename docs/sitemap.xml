@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ryan-heslin.github.io/index.html</loc>
-    <lastmod>2023-12-04T23:11:03.083Z</lastmod>
+    <lastmod>2023-12-07T23:52:20.352Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/about.html</loc>
@@ -18,7 +18,7 @@
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/r-names/index.html</loc>
-    <lastmod>2023-09-11T13:51:59.172Z</lastmod>
+    <lastmod>2023-12-06T18:27:30.950Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/welcome/index.html</loc>
@@ -94,7 +94,7 @@
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/regression-algebra/index.html</loc>
-    <lastmod>2023-12-01T20:37:57.517Z</lastmod>
+    <lastmod>2023-12-06T23:34:06.864Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/aoc-overview/index.html</loc>
@@ -118,7 +118,7 @@
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/aoc-2023-4/index.html</loc>
-    <lastmod>2023-12-04T23:10:57.667Z</lastmod>
+    <lastmod>2023-12-07T23:03:59.781Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/aoc-2023-3/index.html</loc>
@@ -127,5 +127,17 @@
   <url>
     <loc>https://ryan-heslin.github.io/posts/aoc-2023-1/index.html</loc>
     <lastmod>2023-12-04T22:40:28.559Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/aoc-2023-5/index.html</loc>
+    <lastmod>2023-12-07T23:06:08.539Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/aoc-2023-6/index.html</loc>
+    <lastmod>2023-12-07T23:25:17.902Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/aoc-2023-7/index.html</loc>
+    <lastmod>2023-12-07T23:52:14.936Z</lastmod>
   </url>
 </urlset>

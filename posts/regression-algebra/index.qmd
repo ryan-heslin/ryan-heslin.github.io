@@ -34,8 +34,8 @@ squared errors. $\beta_0$ provides the intercept of the line.
 Here is a model with the residuals shown:
 
 ```{r}
+#| classes: preview-image
 library(ggplot2)
-set.seed(1)
 
 X <- rnorm(100, 10, 5)
 Y <- X * 7 + 4 + rnorm(100, 20, 4) 

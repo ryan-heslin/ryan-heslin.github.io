@@ -1,0 +1,55 @@
+---
+title: "Advent of Code 2023 Day 6"
+author: "Ryan Heslin"
+date: "2023-12-4"
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+Another breather day!
+
+This puzzle describes a boat race. To win, you must get the boat at least $d$ 
+distance within $t$ seconds. You power the boat by pressing a button for $b$ 
+seconds; the boat then travels at $b$ units per second for the remaining $b-t$ 
+seconds.
+
+I saw immediately that this could be represented in a quadratic equation $-b^2 + bt - d = 0$, 
+where $t$ is time, $d$ is distance, and $b$ is the length of the button press. 
+All I had to do was find the roots of this equation, compute the lowest and highest 
+integers in that interval, and subtract.
+
+
+Brute force probably would have worked, but math is so much more satisfying.
+
+
+```lua 
+local quadratic = function(a, b, c)
+    local discrim = math.sqrt((b ^ 2) - (4 * a * c))
+    local denom = 2 * a
+    return { (-b + discrim) / denom, (-b - discrim) / denom }
+end
+
+local intercepts = function(time, dist)
+    return quadratic(-1, time, -dist)
+end
+
+local num_bool = function(e)
+    return (e and 1) or 0
+end
+
+local solve = function(data)
+    local result = 1
+    for i, _ in ipairs(data.time) do
+        local points = intercepts(data.time[i], data.distance[i])
+        -- Need to handle case where intercepts are integers and therefore invalid
+        local left_i = math.min(points[1], points[2])
+        local left = math.max(1, math.ceil(left_i + num_bool(left_i % 1 == 0)))
+        local right_i = math.max(points[1], points[2])
+        local right = math.min(
+            math.floor(right_i - num_bool(right_i % 1 == 0)),
+            data.time[i] - 1
+        )
+        result = result * (right - left + 1)
+    end
+    return result
+```

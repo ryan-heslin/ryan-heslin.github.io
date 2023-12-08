@@ -1,5 +1,5 @@
 ---
-title: "Advent of Code 2023 Day 3"
+title: "Advent of Code 2023 Day 4"
 author: "Ryan Heslin"
 date: "2023-12-4"
 categories: ["Advent of Code"]
