@@ -1,0 +1,88 @@
+---
+title: "Advent of Code 2023 Day 8"
+author: "Ryan Heslin"
+date: "2023-12-8"
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+At last Advent of Code offers its starkest choice: math or pain. Today could be 
+solved in a split second using the right formula, or in weeks with brute force.
+
+The input consists of a graph with nodes, plus instrucitons to move left or right. 
+Each step moves to the node in the direction indicated on by the current instruction index. 
+After each step, the index is advanced 1, wrapping around where needed.
+
+Part 1 simply asks for the distance from the start node to the `"ZZZ"` node. 
+This is easy to compute. Part 2 "establishes" that you actually track the movements 
+of several ghosts. You have to find the fewest steps until the time that each ghost 
+is in a node ending in `"Z"`. (This ghost-convergence stuff was obviously inspired by _Pac-Man_). 
+
+I guessed that brute force would be unworkable, but a mathematical shortcut would 
+solve the puzzle quickly. Since the ghosts were independent, I hit upon computing 
+each cycle length and computing the least common multiple. I implemented the 
+classic algorithm to do this, and it worked.
+
+```js
+const fs = require('fs');
+
+function parse_lines(lines) { 
+    let result = {};
+    for(line of lines) { 
+        let nodes = [...line.matchAll(/[A-Z]{3}/g)];
+        result[nodes[0][0]] = [nodes[1][0], nodes[2][0]];
+    }
+    return result;
+}
+
+function find(directions, indices, start, test){ 
+    let current = start;
+    let goal = "ZZZ";
+    let n_indices = indices.length;
+    let steps = 0;
+    
+    while (!(test(current))){ 
+        let choice = indices[steps % n_indices];
+        let next = directions[current][choice];
+        current = next;
+        steps ++;
+    }
+    return steps;
+}
+
+function gcd(a, b){ 
+    while (b != 0){ 
+        let t = b;
+        b = a % b;
+        a = t;
+    }
+    return a;
+}
+
+function lcm(a, b){ 
+    return Math.abs(a) * (Math.abs(b) / gcd(a, b));
+}
+
+function solve_ghost(directions, indices, targets){ 
+    let periods = targets.map((x) => find(directions, indices, x, (x) => x.substr(2, 3) == "Z"))
+    return periods.reduce(lcm);
+}
+
+const raw_input = fs.readFileSync('inputs/day8.txt', 'utf-8').toString().split("\n\n");
+let indices = raw_input[0].split("").map((x) => x == "R" ? 1 : 0);
+let directions = parse_lines(raw_input[1].replace(/\n+$/, "").split("\n"));
+let start = "AAA";
+const part1 = find(directions, indices, start, (x) => x == "ZZZ");
+console.log(part1);
+
+
+let starts = [...Object.keys(directions)].filter((x) => x.substring(2, 3) == "A");
+const part2 = solve_ghost(directions, indices, starts)
+console.log(part2)
+```
+
+I realized at the last moment that this simple method would only work if each 
+ghost visited only one node in a repeating cycle. I had no idea if every input 
+obeyed that rule, but it seems they do. On the subreddit, some are objecting to  
+this, since a general solution is much, much harder.
+

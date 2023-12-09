@@ -1,0 +1,36 @@
+---
+title: "Advent of Code 2023 Day 9"
+author: "Ryan Heslin"
+date: "2023-12-8"
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+To my surprise, the weekend difficulty spike failed to materialize. Today's puzzle 
+just requires you to compute successive differences of vectors and add the last term 
+of each iteration. (I mean the operation that takes subtracts from every element the 
+previous one, turning `(1, 3, 6)` into `(2, 3)`). Part two requires the process in 
+reverse on the first element of each iteration. 
+
+After some tinkering, I got both on a single pass:
+```{r}
+#| eval: false
+impute <- function(sequence) {
+    modulus <- 1
+    part1 <- sequence[[length(sequence)]]
+    part2 <- sequence[[1]]
+
+    while (any(sequence)) {
+        # To avoid numeric(0)
+        sequence <- diff(sequence)
+        part1 <- part1 + sequence[[length(sequence)]]
+        part2 <- part2 + (sequence[[1]] * (1 - (2 * modulus)))
+        modulus <- (modulus + 1) %% 2
+    }
+    c(part1, part2)
+}
+```
+
+
+I felt pretty slick until I learned the "slick" way to solve the problem is 
+to use [Lagrange interpolation](https://en.wikipedia.org/wiki/Lagrange_polynomial).
