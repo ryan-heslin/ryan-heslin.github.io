@@ -1,0 +1,51 @@
+---
+title: "Advent of Code Day 11"
+date: "`r format(Sys.Date(), '%B %e, %Y')`"
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+---
+
+Today was a classic "naive solution of part 1 dooms you for part 2 problem."
+You're given a grid of galaxies. You have to double each empty column and 
+sum the Manhattan distance between each pair of galaxies.
+
+
+```
+...#......
+.......#..
+#.........
+..........
+......#...
+.#........
+.........#
+..........
+.......#..
+#...#.....
+```
+
+Naturally, I just counted the blank rows and columns between each pair and 
+added the sum to the distance.
+
+Part 2, predictably, asks you to do this for 1000000 iterations. Solving it is 
+as simple as multiplying the counts of blank rows and columns by 999999. (An  
+obvious trap for an off-by-one error).
+
+```{r}
+distance <- function(pair, empty_rows, empty_cols, iterations = 1) {
+    # browser()
+    pair <- rbind(pair[[1]], pair[[2]])
+    # if (all(sort(pair[, 1]) == c(1, 9))) browser()
+    xes <- sort(pair[, 2])
+    ys <- sort(pair[, 1])
+    sum(abs(pair[1, ] - pair[2, ])) + (iterations * (sum(empty_cols > xes[[1]] & empty_cols < xes[[2]]) + sum(empty_rows > ys[[1]] & empty_rows < ys[[2]])))
+}
+
+solve <- function(grid, iterations = 1) {
+    pairs <- which(grid, arr.ind = TRUE)
+    rows <- which(rowSums(grid) == 0)
+    cols <- which(colSums(grid) == 0)
+    asplit(pairs, MARGIN = 1) |>
+        combn(m = 2, FUN = \(x) distance(x, rows, cols, iterations = iterations)) |>
+        sum()
+}
+```

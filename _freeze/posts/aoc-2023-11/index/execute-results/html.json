@@ -1,0 +1,18 @@
+{
+  "hash": "f59a7f340a8e931e0362c7b294381bc6",
+  "result": {
+    "markdown": "---\ntitle: \"Advent of Code Day 11\"\ndate: \"December 11, 2023\"\n# freeze computational output\n# (see https://quarto.org/docs/projects/code-execution.html#freeze)\n---\n\n\nToday was a classic \"naive solution of part 1 dooms you for part 2 problem.\"\nYou're given a grid of galaxies. You have to double each empty column and \nsum the Manhattan distance between each pair of galaxies.\n\n\n```\n...#......\n.......#..\n#.........\n..........\n......#...\n.#........\n.........#\n..........\n.......#..\n#...#.....\n```\n\nNaturally, I just counted the blank rows and columns between each pair and \nadded the sum to the distance.\n\nPart 2, predictably, asks you to do this for 1000000 iterations. Solving it is \nas simple as multiplying the counts of blank rows and columns by 999999. (An  \nobvious trap for an off-by-one error).\n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .source .cell-code}\ndistance <- function(pair, empty_rows, empty_cols, iterations = 1) {\n  # browser()\n  pair <- rbind(pair[[1]], pair[[2]])\n  # if (all(sort(pair[, 1]) == c(1, 9))) browser()\n  xes <- sort(pair[, 2])\n  ys <- sort(pair[, 1])\n  sum(abs(pair[1, ] - pair[2, ])) + (iterations * (sum(empty_cols > xes[[1]] & empty_cols < xes[[2]]) + sum(empty_rows > ys[[1]] & empty_rows < ys[[2]])))\n}\n\nsolve <- function(grid, iterations = 1) {\n  pairs <- which(grid, arr.ind = TRUE)\n  rows <- which(rowSums(grid) == 0)\n  cols <- which(colSums(grid) == 0)\n  asplit(pairs, MARGIN = 1) |>\n    combn(m = 2, FUN = \\(x) distance(x, rows, cols, iterations = iterations)) |>\n    sum()\n}\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../site_libs/pagedtable-1.1/css/pagedtable.css\" rel=\"stylesheet\" />\n<script src=\"../../site_libs/pagedtable-1.1/js/pagedtable.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
