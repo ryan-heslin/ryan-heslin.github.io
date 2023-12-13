@@ -1,0 +1,66 @@
+---
+title: "Advent of Code 2023 Day 10"
+date: "13-12-2023"
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+freeze: auto
+---
+
+
+After a few days' delay, I've finally solved this vexing puzzle. 
+You are given a large grid strewn with characters - `-`, `|`, `J`, `F`, `7`, and `L` - 
+that represent pieces of pipe that point in different directions. The pipe contains 
+a large loop that starts at a given point. Part 1 simply asks for the size of the loop. 
+
+Part 2 "reveals" that you actually want to find the area enclosed by the pipe loop, 
+including disconnected pipe pieces lying around. Just one problem: it's possible 
+to squeeze _between_ pipes, (e.g., two parallel lines of pipe) meaning an area completely surrounded by pipe tiles 
+might be accessible. 
+
+I struggled to deal with this before finding the obvious solution: convert each
+grid square into nine, so squeezing between pipes can be directly modeled.
+Then use flood-fill to find all coordinates enclosed by the grid, convert them 
+back to the original coordinates by integer-dividing by 3, then count them.
+
+After more debugging than I would like, I got it right:
+
+
+```{python}
+def flood_fill(grid, xmin, xmax, ymin, ymax, get_neighbors, traversed):
+    exposed = set()
+    enclosed = set()
+    for coord, el in grid.items():
+        if (el and downscale(el, 3) not in traversed) or (coord in enclosed or coord in exposed):
+            continue
+        queue = deque()
+        queue.append(coord)
+        visited = set()
+        open = False
+
+        while queue:
+            new = queue.pop()
+            visited.add(new)
+            open = open or (
+                new in exposed
+                or (
+                    new.real == xmin
+                    or new.real == xmax
+                    or new.imag == ymin
+                    or new.imag == ymax
+                )
+            )
+            new_neighbors = get_neighbors(new)
+
+            for neighbor in new_neighbors:
+                # if neighbor in exposed:
+                #     open = True
+                if not ((grid[neighbor] and downscale(neighbor, 3) in traversed) or neighbor in visited):
+                    queue.append(neighbor)
+        if open:
+            exposed.update(visited)
+        else:
+            enclosed.update(visited)
+    return enclosed
+
+
+```

@@ -1,0 +1,33 @@
+---
+title: "Advent of Code 2023 Day 13"
+date: "10-12-2023"
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+freeze: auto
+---
+
+Today brought another breather puzzle. You're given a series of matrices like this:
+
+```
+#.##..##.
+..#.##.#.
+##......#
+##......#
+..#.##.#.
+..##..##.
+#.#.##.#.
+
+#...##..#
+#....#..#
+..##..###
+#####.##.
+#####.##.
+..##..###
+#....#..#
+```
+You have to find the vertical and horizontal line of symmetry in each. In the 
+first example above, the vertical line is after the fourth column. Part two 
+adds the twist that each matrix has a hidden line of symmetry, one that holds 
+if just one element is altered. This is easy to compute by converting the character matrices 
+to numeric, adding the reflected elements 
+and checking if the sum is one.
