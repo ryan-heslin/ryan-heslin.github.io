@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ryan-heslin.github.io/index.html</loc>
-    <lastmod>2023-12-13T22:38:25.083Z</lastmod>
+    <lastmod>2023-12-14T22:51:47.035Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/about.html</loc>
@@ -159,5 +159,9 @@
   <url>
     <loc>https://ryan-heslin.github.io/posts/aoc-2023-13/index.html</loc>
     <lastmod>2023-12-13T22:38:18.583Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/aoc-2023-14/index.html</loc>
+    <lastmod>2023-12-14T22:51:40.495Z</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,67 @@
+---
+title: "Advent of Code 2023 Day 14"
+date: "10-14-2023"
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+freeze: auto
+---
+
+So much for the breather. Today asks you to simulate the motion of round rocks 
+in a grid. Each round rock should move upward until it hits another rock or the 
+edge of the space. Part 1 is a little fiddly, but simple enough to solve using 
+a dict of complex numbers to represent coordinates, with an enum type for the 
+different types of rock.
+
+Part 2 asks you to simulate a full "cycle" of rock movements - up, left, down, then 
+right - 1000000000 times. When Advent of Code asks you to simulate something a billion 
+times, it's really asking you to simulate a few times until you detect a cycle, 
+then do the arithmetic to determine the outcome after a billion iterations. 
+I messed up some of the fiddly math at first, but got it eventually:
+
+```{python}
+def total_load(grid, offset):
+    grid = dict(grid)
+    rounded = Coordinate.ROUND
+    closed = {rounded, Coordinate.CUBE}
+    load = 0
+    keys = {
+        1j: lambda x: (-x.imag, x.real),
+        -1: lambda x: (x.real, x.imag),
+        -1j: lambda x: (x.imag, x.real),
+        1: lambda x: (-x.real, x.imag),
+    }
+
+    for coord in sorted(grid.keys(), key=keys[offset]):
+        el = grid[coord]
+
+        if el == rounded:
+            current = coord
+            grid[current] = Coordinate.OPEN
+            while True:
+                new = current + offset
+                if new not in grid or grid[new] in closed:
+                    grid[current] = rounded
+                    load += current.imag + 1
+                    break
+                current = new
+
+    return grid, int(load)
+
+
+def predict(grid):
+    results = OrderedDict()
+    offsets = (1j, -1, -1j, 1)
+    load = 0
+
+    while True:
+        for offset in offsets:
+            grid, load = total_load(grid, offset)
+        hash = frozenset(zip(grid.keys(), grid.values()))
+        if hash in results:
+            print(load)
+            return results, tuple(i for i, k in enumerate(results.keys()) if k == hash)
+        results[hash] = load
+```
+
+[2022 day 17](https://adventofcode.com/2022/day/17) was a harder version of this 
+puzzle. And day 17 is in 3 days - on a weekend, no less...
