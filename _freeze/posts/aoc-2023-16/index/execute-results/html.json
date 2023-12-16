@@ -1,0 +1,11 @@
+{
+  "hash": "cf290db04f8e6bbda684fb9614f89801",
+  "result": {
+    "markdown": "---\ntitle: \"Advent of Code 2023 Day 10\"\ndate: \"2023-12-13\"\nfreeze: auto\ncategories: [\"Advent of Code\"]\nurlcolor: \"blue\"\n---\n\nToday's puzzle, like the final fight of _Enter the Dragon_, takes place in a hall \nof mirrors. Using the lenses from yesterday, you shine a beam of light into the \nhall. Part 1 asks you to track how many tiles it traverses as it bounces off \nmirrors. Mirrors either redirect (`/`, `\\`) or split (`|`,`-`) the beam. \n\nSimulating the beam proved tricky but not truly difficult. Part 2 asks you to \nshine a beam from all 440 edge tiles of the input and find the greatest number \nof illuminated tiles. This took a long time; I should go back and optimize my \nsolution. Nonetheless, the real difficulty spike has yet to come.\n\n\n```{py}\ndef simulate_beam(grid, start, initial):\n    # coord, direction\n    current = beam_dict()\n    current[start].add(initial)\n    traversed = set()\n    seen = set()\n\n    while current:\n        new = beam_dict()\n        for coord, directions in current.items():\n            for direction in directions:\n                new_coord = coord + direction\n                # Moving off grid\n                if new_coord not in grid:\n                    continue\n                traversed.add(new_coord)\n                new_directions = grid[new_coord][direction]\n\n                # Add to count of beam in relevant direction on tile if it exists, otherwise create new beam\n                new[new_coord].update(new_directions)\n        hashed = frozenset(\n            (coord, frozenset(d)) \n            for coord, d in new.items()\n        )\n        # print(hashed)\n        if hashed in seen:\n            break\n        seen.add(hashed)\n        current = new\n\n    return len(traversed)\n\n\n```\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

@@ -1,11 +1,10 @@
 ---
 title: "Advent of Code 2023 Day 10"
-date: "13-12-2023"
-# freeze computational output
-# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+date: "2023-12-13"
 freeze: auto
+categories: ["Advent of Code"]
+urlcolor: "blue"
 ---
-
 
 After a few days' delay, I've finally solved this vexing puzzle. 
 You are given a large grid strewn with characters - `-`, `|`, `J`, `F`, `7`, and `L` - 

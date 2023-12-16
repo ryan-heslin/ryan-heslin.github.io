@@ -1,0 +1,53 @@
+---
+title: "Advent of Code 2023 Day 10"
+date: "2023-12-13"
+freeze: auto
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+Today's puzzle, like the final fight of _Enter the Dragon_, takes place in a hall 
+of mirrors. Using the lenses from yesterday, you shine a beam of light into the 
+hall. Part 1 asks you to track how many tiles it traverses as it bounces off 
+mirrors. Mirrors either redirect (`/`, `\`) or split (`|`,`-`) the beam. 
+
+Simulating the beam proved tricky but not truly difficult. Part 2 asks you to 
+shine a beam from all 440 edge tiles of the input and find the greatest number 
+of illuminated tiles. This took a long time; I should go back and optimize my 
+solution. Nonetheless, the real difficulty spike has yet to come.
+
+```{py}
+def simulate_beam(grid, start, initial):
+    # coord, direction
+    current = beam_dict()
+    current[start].add(initial)
+    traversed = set()
+    seen = set()
+
+    while current:
+        new = beam_dict()
+        for coord, directions in current.items():
+            for direction in directions:
+                new_coord = coord + direction
+                # Moving off grid
+                if new_coord not in grid:
+                    continue
+                traversed.add(new_coord)
+                new_directions = grid[new_coord][direction]
+
+                # Add to count of beam in relevant direction on tile if it exists, otherwise create new beam
+                new[new_coord].update(new_directions)
+        hashed = frozenset(
+            (coord, frozenset(d)) 
+            for coord, d in new.items()
+        )
+        # print(hashed)
+        if hashed in seen:
+            break
+        seen.add(hashed)
+        current = new
+
+    return len(traversed)
+
+
+```

@@ -1,11 +1,11 @@
 ---
 title: "Advent of Code Day 11"
-date: "`r format(Sys.Date(), '%B %e, %Y')`"
-# freeze computational output
-# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+date: "2023-12-11"
+categories: ["Advent of Code"]
+urlcolor: "blue"
 ---
 
-Today was a classic "naive solution of part 1 dooms you for part 2 problem."
+Today was a classic "naive solution of part 1 dooms you for part 2" problem.
 You're given a grid of galaxies. You have to double each empty column and 
 sum the Manhattan distance between each pair of galaxies.
 

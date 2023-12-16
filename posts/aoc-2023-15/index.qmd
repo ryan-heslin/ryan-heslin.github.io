@@ -1,0 +1,63 @@
+---
+title: "Advent of Code 2023 Day 10"
+date: "2023-12-13"
+freeze: auto
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+The long-awaited difficulty spike probably falls tomorrow. Today was simple enough. The input is a comma-separated list like this: 
+
+```
+rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7
+```
+
+Part1 simply asks you to evaluate each token with a custom hash function (called HASH, naturally). Part 2 reveals that each token is actually an instruction. 
+There are 256 boxes, each of which can contain several labeled lenses. For each step, calling HASH on the label gives the index of the target box. 
+
+`{label}={num}` means to replace the lens in the target box with `{label}` with one with focal length `{num}`. `{label}-` means to remove 
+the lens with `{label}` from the target box.
+Once done, you apply a formula to a lens arrangement to get the answer.
+
+Executing these instructions in code proved fiddly but straightforward.
+
+```{js}
+function arrange(lenses){ 
+    let part1 = 0;
+    let length = 256;
+    let boxes =Array.from(Array(length), () => []); 
+    let pattern = /([a-z]+)(-|=)(\d+)?/
+
+    for(lens of lenses){ 
+        part1 += HASH(lens);
+        let parts = lens.match(pattern);
+        let label = parts[1];
+        let box = HASH(label);
+
+        if (parts[2] == "-"){ 
+            for(let i = 0; i < boxes[box].length; i++){
+                //Do nothing if no lens with label in box
+                if (boxes[box][i][0] == label){ 
+                    boxes[box].splice(i, 1);
+                }
+            }
+        }else{ 
+            let done = false;
+            let item = [label, parseInt(parts[3])];
+            for(let i = 0; i < boxes[box].length; i++){
+                //Do nothing if no lens with label in box
+                if (boxes[box][i][0] == label){ 
+                    boxes[box][i] = item;
+                    done = true;
+                    break
+                }
+            }
+            if (!done){ 
+                boxes[box].push(item);
+            }
+        }
+    }
+
+    return [part1, focusing_power(boxes)];
+}
+```

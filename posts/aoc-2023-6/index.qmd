@@ -1,7 +1,7 @@
 ---
 title: "Advent of Code 2023 Day 6"
 author: "Ryan Heslin"
-date: "2023-12-4"
+date: "2023-12-6"
 categories: ["Advent of Code"]
 urlcolor: "blue"
 ---

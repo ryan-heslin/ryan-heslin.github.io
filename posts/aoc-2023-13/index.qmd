@@ -1,9 +1,9 @@
 ---
 title: "Advent of Code 2023 Day 13"
-date: "10-12-2023"
-# freeze computational output
-# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+date: "2023-12-13"
 freeze: auto
+categories: ["Advent of Code"]
+urlcolor: "blue"
 ---
 
 Today brought another breather puzzle. You're given a series of matrices like this:

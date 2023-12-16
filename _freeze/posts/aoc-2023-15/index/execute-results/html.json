@@ -1,0 +1,11 @@
+{
+  "hash": "635e3429cbd22906dac1d8feea8ab24c",
+  "result": {
+    "markdown": "---\ntitle: \"Advent of Code 2023 Day 10\"\ndate: \"2023-12-13\"\nfreeze: auto\ncategories: [\"Advent of Code\"]\nurlcolor: \"blue\"\n---\n\nThe long-awaited difficulty spike probably falls tomorrow. Today was simple enough. The input is a comma-separated list like this: \n\n```\nrn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7\n```\n\nPart1 simply asks you to evaluate each token with a custom hash function (called HASH, naturally). Part 2 reveals that each token is actually an instruction. \nThere are 256 boxes, each of which can contain several labeled lenses. For each step, calling HASH on the label gives the index of the target box. \n\n`{label}={num}` means to replace the lens in the target box with `{label}` with one with focal length `{num}`. `{label}-` means to remove \nthe lens with `{label}` from the target box.\nOnce done, you apply a formula to a lens arrangement to get the answer.\n\nExecuting these instructions in code proved fiddly but straightforward.\n\n\n```{js}\nfunction arrange(lenses){ \n    let part1 = 0;\n    let length = 256;\n    let boxes =Array.from(Array(length), () => []); \n    let pattern = /([a-z]+)(-|=)(\\d+)?/\n\n    for(lens of lenses){ \n        part1 += HASH(lens);\n        let parts = lens.match(pattern);\n        let label = parts[1];\n        let box = HASH(label);\n\n        if (parts[2] == \"-\"){ \n            for(let i = 0; i < boxes[box].length; i++){\n                //Do nothing if no lens with label in box\n                if (boxes[box][i][0] == label){ \n                    boxes[box].splice(i, 1);\n                }\n            }\n        }else{ \n            let done = false;\n            let item = [label, parseInt(parts[3])];\n            for(let i = 0; i < boxes[box].length; i++){\n                //Do nothing if no lens with label in box\n                if (boxes[box][i][0] == label){ \n                    boxes[box][i] = item;\n                    done = true;\n                    break\n                }\n            }\n            if (!done){ \n                boxes[box].push(item);\n            }\n        }\n    }\n\n    return [part1, focusing_power(boxes)];\n}\n```\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

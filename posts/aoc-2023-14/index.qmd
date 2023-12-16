@@ -1,9 +1,9 @@
 ---
 title: "Advent of Code 2023 Day 14"
-date: "10-14-2023"
-# freeze computational output
-# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+date: "2023-12-14"
 freeze: auto
+categories: ["Advent of Code"]
+urlcolor: "blue"
 ---
 
 So much for the breather. Today asks you to simulate the motion of round rocks 
