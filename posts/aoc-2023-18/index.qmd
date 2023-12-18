@@ -1,0 +1,41 @@
+---
+title: "Advent of Code 2023 Day 10"
+date: "2023-12-13"
+freeze: auto
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+Today sees the return of polygon area, a topic already covered in day 10. 
+This time, the input consists of a series of instructions for digging a trench 
+that encloses an area.
+Part 1 asks you to compute the total area. I tried using the [shoelace formula](https://en.wikipedia.org/wiki/Shoelace_formula) 
+but couldn't get it to work. Like a lamb to the slaughter, I 
+solved it instead using flood-fill. 
+
+Part 2, of course, reveals that you misunderstood the instructions; in reality, 
+the total area should be in the hundreds of trillions, not the tens of thousands.
+(Why is the true meaning of the elves' instructions never to solve the problem on a smaller 
+input than part 1)?
+Flood-fill would be beyond hopeless.
+
+
+I asked for help on Discord, and someone quickly pointed me to [Pick's theorem](https://en.wikipedia.org/wiki/Pick%27s_theorem), an astoundingly simple formula to compute 
+the area of an arbitrary polygon with integer coordinates. Using this technique, 
+the answer came easily.
+
+```{python}
+def shoelace(vertices):
+    return 0.5 * sum(
+        (left.real * right.imag) - (left.imag * right.real)
+        for left, right in zip(vertices, vertices[1:] + [vertices[0]])
+    )
+
+# Pick's theorem
+def pick(interior, border):
+    return interior + border // 2 + 1
+
+def area(border, vertices):
+    return int(pick(shoelace(vertices), border))
+```
+

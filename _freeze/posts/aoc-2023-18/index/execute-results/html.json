@@ -1,0 +1,11 @@
+{
+  "hash": "42f2709c096090a70aca329253293808",
+  "result": {
+    "markdown": "---\ntitle: \"Advent of Code 2023 Day 10\"\ndate: \"2023-12-13\"\nfreeze: auto\ncategories: [\"Advent of Code\"]\nurlcolor: \"blue\"\n---\n\nToday sees the return of polygon area, a topic already covered in day 10. \nThis time, the input consists of a series of instructions for digging a trench \nthat encloses an area.\nPart 1 asks you to compute the total area. I tried using the [shoelace formula](https://en.wikipedia.org/wiki/Shoelace_formula) \nbut couldn't get it to work. Like a lamb to the slaughter, I \nsolved it instead using flood-fill. \n\nPart 2, of course, reveals that you misunderstood the instructions; in reality, \nthe total area should be in the hundreds of trillions, not the tens of thousands.\n(Why is the true meaning of the elves' instructions never to solve the problem on a smaller \ninput than part 1)?\nFlood-fill would be beyond hopeless.\n\n\nI asked for help on Discord, and someone quickly pointed me to [Pick's theorem](https://en.wikipedia.org/wiki/Pick%27s_theorem), an astoundingly simple formula to compute \nthe area of an arbitrary polygon with integer coordinates. Using this technique, \nthe answer came easily.\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\ndef shoelace(vertices):\n    return 0.5 * sum(\n        (left.real * right.imag) - (left.imag * right.real)\n        for left, right in zip(vertices, vertices[1:] + [vertices[0]])\n    )\n\n# Pick's theorem\ndef pick(interior, border):\n    return interior + border // 2 + 1\n\ndef area(border, vertices):\n    return int(pick(shoelace(vertices), border))\n```\n:::\n\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
