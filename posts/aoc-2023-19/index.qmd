@@ -1,0 +1,83 @@
+---
+title: "Advent of Code 2023 Day 10"
+date: "2023-12-27"
+freeze: auto
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+The last few days were brutal, so I've resorted to posting out of sequence as I 
+complete them.
+
+Today's puzzle, as ever, starts unassumingly. For part 1, you are given a number of 
+records like this:
+
+``` 
+{x=787,m=2655,a=1222,s=2876}
+```
+
+You also receive a table of rules, each of which assigns a record to 
+a new rule, accepts it (`A`), or rejects it (`R`) based on application of 
+Boolean tests:
+
+```
+px{a<2006:qkq,m>2090:A,rfg}
+```
+
+Writing a program to solve part 1 is easy enough. Part 2, as you should 
+have learned to expect by now, massively increases the search space. Now, 
+each field can take any value from 1 to 4000 inclusive, and you have to compute 
+how many of the `4000^4` combinations are valid according to the rules. 
+
+Brute force, since this is past day 15, is hopeless. Instead, you can use depth-first 
+search to follow each possible path through the rules and record each valid combination of 
+ranges. That leaves the problem of aggregating them. I struggled with this for 
+awhile before I found a hint on the subreddit that each rule partitioned the 
+space of acceptable intervals, so all the valid states were disjoint. That meant I 
+could just compute the combinations for each record and add them together.
+
+```py 
+def dfs(workflows):
+    start = {f: Interval(1, 4000) for f in FIELDS}
+    valid = []
+
+    def inner(state, workflow):
+        state = dict(state)
+        workflow = workflows[workflow]
+
+        for rule in workflow:
+            if type(rule) == dict:
+                field = rule["field"]
+                # Remember < x means x-1 is max value
+                new = state[field].narrow(rule["value"], rule["operator"])
+                if new.valid:
+                    new_state = state | ({field: new})
+                    target = rule["target"]
+                    # If invalid, reject here
+                    if target == "A":
+                        valid.append(new_state)
+                    elif target != "R":
+                        inner(new_state, target)
+
+                # Exclude any state caught by rule
+                if rule["operator"] == ">":
+                    state[field] = Interval(state[field].low, rule["value"])
+                else:
+                    # < case
+                    state[field] = Interval(rule["value"], state[field].high)
+
+                if not state[field].valid:
+                    return
+            # Catchall rule, so break
+            elif rule == "A":
+                valid.append(state)
+                return
+            elif rule == "R":
+                return
+            else:
+                inner(state, rule)
+
+    inner(start, "in")
+    return sum(prod(r.high - r.low + 1 for r in v.values()) for v in valid)
+```
+
