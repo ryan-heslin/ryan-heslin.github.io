@@ -1,0 +1,78 @@
+---
+title: "Advent of Code 2023 Day 23"
+date: "2024-01-20"
+freeze: auto
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+Every year, there's a puzzle past day 20 with an easy part 1 and brutal part 2. 
+I always feel a vague sense of dread while solving part 1, which makes them 
+psychologically interesting.
+
+This year, it was day 23. The puzzle asks you to find the _longest_ path through 
+a maze that does not visit any tile twice. Some tiles are marked with a steep slope that limits travel (e.g., `>` means 
+you can only go right on that tile). Brute-forcing was pretty easy. 
+
+
+Part 2, of course, changes that. Now you can go in any direction on sloped tiles. 
+The astute among you have already noted that the longest path in a graph with cycles 
+is an [NP-hard](https://en.wikipedia.org/wiki/NP-hardness) problem. That meant brute 
+force was hopeless. 
+
+I wasted a lot of time with alternative approaches before I found a guide that 
+recommended reducing the maze to a graph of intersections separated by distances.
+Once given the approach, implementing it was easy.
+
+```{{python}}
+def node_paths(start, neighbors, targets):
+    queue = deque([[start]])
+
+    while queue:
+        current = queue.pop()
+        current_coord = current[-1]
+
+        for neighbor in neighbors(current_coord):
+            if neighbor not in current:
+                # New path found to node, so end here
+                if neighbor in targets and neighbor != current_coord:
+                    # Longer path found
+                    yield start, neighbor, len(current)
+                else:
+                    queue.append(current + [neighbor])
+
+
+def reduce_graph(graph, start, goal, neighbors):
+    targets = {c for c  in graph.keys() if len(neighbors(c)) > 2} | {start, goal}
+    result = defaultdict(dict)
+    for target in targets:
+        gen = node_paths(target, neighbors, targets)
+        # Exhaust results from generator
+        while True:
+            try:
+                this = next(gen)
+                if this is not None:
+                    start, dest, length = this
+                    result[start][dest] = max(result[start].get(dest, -inf), length)
+                    result[dest][start] = max(result[dest].get(start, -inf), length)
+            except StopIteration:
+                break
+    return result
+
+
+def solve(graph, start, goal):
+    queue = deque([(set(), start,  0)])
+    result = -inf
+
+    while queue:
+        current, current_coord, current_dist = queue.pop()
+        if current_coord == goal:
+            result = max(result, current_dist)
+        else:
+            neighbors = graph[current_coord]
+            for neighbor, dist in neighbors.items():
+                if neighbor not in current:
+                    new_dist = current_dist + dist
+                    queue.append((current | {current_coord}, neighbor, new_dist))
+    return result
+```
