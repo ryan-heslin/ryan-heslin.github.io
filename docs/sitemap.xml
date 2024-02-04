@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ryan-heslin.github.io/index.html</loc>
-    <lastmod>2024-01-20T19:07:57.003Z</lastmod>
+    <lastmod>2024-02-04T20:59:25.344Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/about.html</loc>
@@ -187,5 +187,25 @@
   <url>
     <loc>https://ryan-heslin.github.io/posts/aoc-2023-23/index.html</loc>
     <lastmod>2024-01-20T19:07:47.235Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/aoc-2023-20/index.html</loc>
+    <lastmod>2024-02-04T20:19:18.357Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/aoc-2023-21/index.html</loc>
+    <lastmod>2024-02-04T20:53:14.420Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/aoc-2023-22/index.html</loc>
+    <lastmod>2024-02-04T20:55:32.519Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/aoc-2023-24/index.html</loc>
+    <lastmod>2024-02-04T20:57:13.358Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/aoc-2023-25/index.html</loc>
+    <lastmod>2024-02-04T20:59:16.444Z</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,68 @@
+---
+title: "Advent of Code 2023 Day 25"
+date: "2024-02-04"
+freeze: auto
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+The end at last! Day 25 of Advent of Code is traditionally a simple puzzle, 
+since no one wants a tough problem on Christmas morning. This year's kept 
+with that tradition, though it was a bit tougher than usual. 
+
+The question is simple: find a way to remove three edges of a graph such that 
+it splits into two components whose degrees make the largest product when multiplied. 
+I foolishly tried brute force, but the graph has several thousand edges; that 
+meant billions of possibilities to check, far too many. 
+
+I found a hint on the subreddit: just start with any node, then scan the remaining nodes 
+and add the one mostly densely connected to nodes already added. Once only three 
+nodes connect the processed nodes to the unprocessed nodes, the problem is solved. 
+I don't know if this would work on all possible graphs, but it worked well enough on mine.
+
+
+```{{python}}
+from collections import defaultdict
+from math import inf
+
+from utils.utils import split_lines
+
+
+def parse(lines):
+    result = defaultdict(set)
+    for line in lines:
+        source, dests = line.split(": ")
+        dests = set(dests.split(" "))
+        result[source].update(dests)
+
+        for dest in dests:
+            result[dest].add(source)
+    return result
+
+
+# Algorithm "borrowed" from https://www.reddit.com/r/adventofcode/comments/18qbsxs/2023_day_25_solutions/
+def partition(graph):
+    S = set(graph.keys())
+    n = len(S)
+
+    while True:
+        most = -inf
+        target = None
+        all_edges = set()
+        for node in S:
+            in_other = {n for n in graph[node] if n not in S}
+            found = len(in_other)
+            if found > most:
+                target = node
+                most = found
+            all_edges |= {tuple(sorted((node, dest))) for dest in in_other}
+        if len(all_edges) == 3:
+            return len(S) * (n - len(S))
+        S.remove(target)
+
+
+raw_input = split_lines("inputs/day25.txt")
+graph = parse(raw_input)
+part1 = partition(graph)
+print(part1)
+```
