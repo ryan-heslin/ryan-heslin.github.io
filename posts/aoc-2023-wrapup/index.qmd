@@ -1,7 +1,7 @@
 ---
 title: "Completing Advent of Code"
 author: "Ryan Heslin"
-date: "2023-02-18"
+date: "2024-02-18"
 categories: ["Advent of Code"]
 urlcolor: "blue"
 ---

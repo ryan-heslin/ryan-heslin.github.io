@@ -5863,7 +5863,7 @@ text-align: left;
 --     names(object) &lt;- nm
 --     object
 -- }
--- &lt;bytecode: 0x55c63e751f58&gt;
+-- &lt;bytecode: 0x55d652b3efd0&gt;
 -- &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">tapply</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -5916,7 +5916,7 @@ text-align: left;
 --     }
 --     ansmat
 -- }
--- &lt;bytecode: 0x55c63b3f63d0&gt;
+-- &lt;bytecode: 0x55d6533d8cd0&gt;
 -- &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -5961,7 +5961,7 @@ text-align: left;
 --     }
 --     invisible(x)
 -- }
--- &lt;bytecode: 0x55c63bffbd40&gt;
+-- &lt;bytecode: 0x55d6503f0310&gt;
 -- &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">mean.default</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -5990,7 +5990,7 @@ text-align: left;
 --     }
 --     .Internal(mean(x))
 -- }
--- &lt;bytecode: 0x55c63bebe278&gt;
+-- &lt;bytecode: 0x55d6502bcbf8&gt;
 -- &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -6008,7 +6008,7 @@ text-align: left;
 --         out
 --     }
 -- }
--- &lt;bytecode: 0x55c63ed47580&gt;
+-- &lt;bytecode: 0x55d6518f20f0&gt;
 -- &lt;environment: namespace:tidyselect&gt;</code></pre>
 </div>
 </div>
@@ -6470,7 +6470,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb34-104"><a href="#cb34-104" aria-hidden="true" tabindex="-1"></a>Here&#39;s what it looks like in practice. Try running this line yourself and see if you can</span>
 <span id="cb34-105"><a href="#cb34-105" aria-hidden="true" tabindex="-1"></a>pinpoint the subtle problem with it (though you can also guess it from <span class="in">`ave`</span>&#39;s signature).</span>
 <span id="cb34-106"><a href="#cb34-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-107"><a href="#cb34-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, error = TRUE}</span></span>
+<span id="cb34-107"><a href="#cb34-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, error = TRUE, tidy = FALSE}</span></span>
 <span id="cb34-108"><a href="#cb34-108" aria-hidden="true" tabindex="-1"></a><span class="fu">ave</span>(mtcars<span class="sc">$</span>mpg, mtcars<span class="sc">$</span>vs, mean)</span>
 <span id="cb34-109"><a href="#cb34-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb34-110"><a href="#cb34-110" aria-hidden="true" tabindex="-1"></a></span>
@@ -6498,40 +6498,41 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb34-132"><a href="#cb34-132" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(mpg <span class="sc">~</span> cyll <span class="sc">+</span> wt, <span class="at">data =</span> mtcars)</span>
 <span id="cb34-133"><a href="#cb34-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb34-134"><a href="#cb34-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-135"><a href="#cb34-135" aria-hidden="true" tabindex="-1"></a>but in that case, you can simply set <span class="in">`r options(error = NULL)`</span>.</span>
-<span id="cb34-136"><a href="#cb34-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-137"><a href="#cb34-137" aria-hidden="true" tabindex="-1"></a><span class="fu">## Get the Expressions Passed as Function Arguments</span></span>
-<span id="cb34-138"><a href="#cb34-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-139"><a href="#cb34-139" aria-hidden="true" tabindex="-1"></a>R passes function arguments by value, not by reference, yet it&#39;s possible to recover</span>
-<span id="cb34-140"><a href="#cb34-140" aria-hidden="true" tabindex="-1"></a>the symbol or expression passed to a function using this trick:</span>
-<span id="cb34-143"><a href="#cb34-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-144"><a href="#cb34-144" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb34-145"><a href="#cb34-145" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(x))</span>
-<span id="cb34-146"><a href="#cb34-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(x)</span>
-<span id="cb34-147"><a href="#cb34-147" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb34-148"><a href="#cb34-148" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="st">`</span><span class="at">I&#39;m a symbol!</span><span class="st">`</span>)</span>
-<span id="cb34-149"><a href="#cb34-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-150"><a href="#cb34-150" aria-hidden="true" tabindex="-1"></a><span class="in">`substitute`</span>, when called in a function, replaces its argument with the expression</span>
-<span id="cb34-151"><a href="#cb34-151" aria-hidden="true" tabindex="-1"></a>in the promise corresponding to that argument. (Promises are internal objects that implement function arguments). <span class="in">`deparse`</span></span>
-<span id="cb34-152"><a href="#cb34-152" aria-hidden="true" tabindex="-1"></a>converts that unevaluated R code into a character vector.</span>
-<span id="cb34-153"><a href="#cb34-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-154"><a href="#cb34-154" aria-hidden="true" tabindex="-1"></a>This could be used to</span>
-<span id="cb34-155"><a href="#cb34-155" aria-hidden="true" tabindex="-1"></a>make a function that</span>
-<span id="cb34-156"><a href="#cb34-156" aria-hidden="true" tabindex="-1"></a>automatically labels</span>
-<span id="cb34-157"><a href="#cb34-157" aria-hidden="true" tabindex="-1"></a>plot axes:</span>
-<span id="cb34-158"><a href="#cb34-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-161"><a href="#cb34-161" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-162"><a href="#cb34-162" aria-hidden="true" tabindex="-1"></a>descriptive_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb34-163"><a href="#cb34-163" aria-hidden="true" tabindex="-1"></a>  x_name <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(x))</span>
-<span id="cb34-164"><a href="#cb34-164" aria-hidden="true" tabindex="-1"></a>  y_name <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(y))</span>
-<span id="cb34-165"><a href="#cb34-165" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(x, y, <span class="at">xlab =</span> x_name, <span class="at">ylab =</span> y_name)</span>
-<span id="cb34-166"><a href="#cb34-166" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb34-167"><a href="#cb34-167" aria-hidden="true" tabindex="-1"></a>weight <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>wt</span>
-<span id="cb34-168"><a href="#cb34-168" aria-hidden="true" tabindex="-1"></a>mpg <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>mpg</span>
-<span id="cb34-169"><a href="#cb34-169" aria-hidden="true" tabindex="-1"></a><span class="fu">descriptive_plot</span>(mpg, weight)</span>
-<span id="cb34-170"><a href="#cb34-170" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-171"><a href="#cb34-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-172"><a href="#cb34-172" aria-hidden="true" tabindex="-1"></a>What are your favorite R tricks?</span>
+<span id="cb34-135"><a href="#cb34-135" aria-hidden="true" tabindex="-1"></a>but in that case, you can simply set `r options(error = NULL)</span>
+<span id="cb34-136"><a href="#cb34-136" aria-hidden="true" tabindex="-1"></a>`.</span>
+<span id="cb34-137"><a href="#cb34-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-138"><a href="#cb34-138" aria-hidden="true" tabindex="-1"></a><span class="fu">## Get the Expressions Passed as Function Arguments</span></span>
+<span id="cb34-139"><a href="#cb34-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-140"><a href="#cb34-140" aria-hidden="true" tabindex="-1"></a>R passes function arguments by value, not by reference, yet it&#39;s possible to recover</span>
+<span id="cb34-141"><a href="#cb34-141" aria-hidden="true" tabindex="-1"></a>the symbol or expression passed to a function using this trick:</span>
+<span id="cb34-144"><a href="#cb34-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-145"><a href="#cb34-145" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb34-146"><a href="#cb34-146" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(x))</span>
+<span id="cb34-147"><a href="#cb34-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(x)</span>
+<span id="cb34-148"><a href="#cb34-148" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-149"><a href="#cb34-149" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="st">`</span><span class="at">I&#39;m a symbol!</span><span class="st">`</span>)</span>
+<span id="cb34-150"><a href="#cb34-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-151"><a href="#cb34-151" aria-hidden="true" tabindex="-1"></a><span class="in">`substitute`</span>, when called in a function, replaces its argument with the expression</span>
+<span id="cb34-152"><a href="#cb34-152" aria-hidden="true" tabindex="-1"></a>in the promise corresponding to that argument. (Promises are internal objects that implement function arguments). <span class="in">`deparse`</span></span>
+<span id="cb34-153"><a href="#cb34-153" aria-hidden="true" tabindex="-1"></a>converts that unevaluated R code into a character vector.</span>
+<span id="cb34-154"><a href="#cb34-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-155"><a href="#cb34-155" aria-hidden="true" tabindex="-1"></a>This could be used to</span>
+<span id="cb34-156"><a href="#cb34-156" aria-hidden="true" tabindex="-1"></a>make a function that</span>
+<span id="cb34-157"><a href="#cb34-157" aria-hidden="true" tabindex="-1"></a>automatically labels</span>
+<span id="cb34-158"><a href="#cb34-158" aria-hidden="true" tabindex="-1"></a>plot axes:</span>
+<span id="cb34-159"><a href="#cb34-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-162"><a href="#cb34-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-163"><a href="#cb34-163" aria-hidden="true" tabindex="-1"></a>descriptive_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb34-164"><a href="#cb34-164" aria-hidden="true" tabindex="-1"></a>  x_name <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(x))</span>
+<span id="cb34-165"><a href="#cb34-165" aria-hidden="true" tabindex="-1"></a>  y_name <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(y))</span>
+<span id="cb34-166"><a href="#cb34-166" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(x, y, <span class="at">xlab =</span> x_name, <span class="at">ylab =</span> y_name)</span>
+<span id="cb34-167"><a href="#cb34-167" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-168"><a href="#cb34-168" aria-hidden="true" tabindex="-1"></a>weight <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>wt</span>
+<span id="cb34-169"><a href="#cb34-169" aria-hidden="true" tabindex="-1"></a>mpg <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>mpg</span>
+<span id="cb34-170"><a href="#cb34-170" aria-hidden="true" tabindex="-1"></a><span class="fu">descriptive_plot</span>(mpg, weight)</span>
+<span id="cb34-171"><a href="#cb34-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-172"><a href="#cb34-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-173"><a href="#cb34-173" aria-hidden="true" tabindex="-1"></a>What are your favorite R tricks?</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -1,5 +1,5 @@
 ---
-title: "Advent of Code 2023 Day 10"
+title: "Advent of Code 2023 Day 19"
 date: "2023-12-27"
 freeze: auto
 categories: ["Advent of Code"]
