@@ -90,7 +90,7 @@ That will allow you to inspect the state of the function that caused the error r
 Here's what it looks like in practice. Try running this line yourself and see if you can
 pinpoint the subtle problem with it (though you can also guess it from `ave`'s signature).
 
-```{r, error = TRUE, tidy = FALSE}
+```{r, error = TRUE}
 ave(mtcars$mpg, mtcars$vs, mean)
 ```
 
@@ -118,8 +118,11 @@ Of course, this can become annoying when it happens for a trivial error like
 lm(mpg ~ cyll + wt, data = mtcars)
 ```
 
-but in that case, you can simply set `r options(error = NULL)
-`.
+but in that case, you can simply do:
+
+```{r, eval = FALSE }
+options(error = NULL)
+```
 
 ## Get the Expressions Passed as Function Arguments
 
