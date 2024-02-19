@@ -1,0 +1,38 @@
+---
+title: "Completing Advent of Code"
+author: "Ryan Heslin"
+date: "2023-02-18"
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+Another year of Advent of Code draws to a close. This year, I made a post
+detailing my solution to each puzzle. Some were simple, some very hard, but all, 
+as ever, were interesting problems.
+
+From the start, this year was harder than the last. Day 1's puzzle set the stage.
+Part 1 is a straightforward regex problem, but part 2 requires you to read numbers written as both numerals (`1`) and words (`one`). This isn't hard in itself, but the input 
+contains _overlapping_ matches like `oneight`. I figured this out quickly, but 
+an inexperienced player might have been stuck for a long time.
+
+The early puzzles kept up the difficulty, with several containing special cases 
+to trip up the unwary. Day 10 in particular caused me a lot of trouble. 
+Part 2 requires you to find the area enclosed by the pipes, allowing that you 
+can "squeeze through" pipes (e.g., you can move horizontally along `---` but not vertically).
+This rules out the obvious approach of flood-filling the interior area.
+I eventually figured out you could expand each tile into nine, marking the tiles blocked 
+by pipes, compute the area, and divide by nine.
+
+I kept up until around day 20, when the toughest puzzles began to appear. I 
+came back to these one by one in early January, often consulting the [subreddit](https://www.reddit.com/r/adventofcode/) for help. In time, I solved them all.
+
+My favorites included [day 19](https://adventofcode.com/2023/day/19) (requiring a tricky 
+form of depth-first search) and [day 24](https://adventofcode.com/2023/day/24) 
+(finally, a puzzle that emphasized matrix algebra). Overall, the puzzles 
+were much tougher than last year's, in what I suspect was an intentional difficulty spike.
+Veteran players should be kept on their toes, after all. I wonder what new twists we'll 
+see next year, which will be the tenth (!) edition of Advent of Code.
+
+I write this in February, when it's hard to look forward to next winter. But it's not all bad. 
+Each November, I find myself wondering how the summer passed so quickly and knowing the 
+cold, drizzly weather will only get colder. But soon I'll have some puzzles to solve.
