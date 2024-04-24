@@ -3,8 +3,6 @@ title: "R Tricks I Wish I'd Known as a Beginner"
 author: "Ryan Heslin"
 date: "2022-06-18"
 categories: ["R"]
-params:
-    title: "R Tricks I Wish I'd Known as a Beginner"
 ---
 
 R is full of quirks, some of them obscure.
@@ -144,7 +142,7 @@ make a function that
 automatically labels
 plot axes:
 
-```{r}
+```{r, eval = FALSE}
 descriptive_plot <- function(x, y) {
   x_name <- deparse(substitute(x))
   y_name <- deparse(substitute(y))
@@ -154,5 +152,31 @@ weight <- mtcars$wt
 mpg <- mtcars$mpg
 descriptive_plot(mpg, weight)
 ```
+
+```{r, echo=FALSE}
+current_wd <- normalizePath(getwd())
+current_dir <- NULL
+while(current_dir != "Verso"){ 
+    current_dir <- basename(current_wd)
+    current_wd <- dirname(current_wd)
+}
+file <- normalizePath(file.path("../../img/labeled.png", mustWork = FALSE)
+if (!file.exists(file)){
+    png(filename = "../../img/labeled.png")
+    descriptive_plot <- function(x, y) {
+      x_name <- deparse(substitute(x))
+      y_name <- deparse(substitute(y))
+      plot(x, y, xlab = x_name, ylab = y_name)
+    }
+    weight <- mtcars$wt
+    mpg <- mtcars$mpg
+    descriptive_plot(mpg, weight)
+    dev.off()
+}
+data <- png::readPNG(file)
+plot.new() 
+rasterImage(data,0,0,1,1)
+```
+
 
 What are your favorite R tricks?

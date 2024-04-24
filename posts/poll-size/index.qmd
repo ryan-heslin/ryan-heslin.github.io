@@ -1,0 +1,165 @@
+---
+title: "How Do Polls Even Work?"
+author: "Ryan Heslin"
+date: "2024-04-24"
+categories: ["math"]
+---
+
+Some mathematical claims seem to defy intuition. How is it that every system of linear equations 
+has exactly zero, one, or infinitely many solutions? How can it be that `0.999... = 1`? 
+How can it be that $P(x = 0) = 0$ for all continuous distributions?
+But few defy common sense as much as poll sample sizes. Presidential election polls routinely 
+claim to estimate the fraction of support for each candidate with only hundreds or 
+a few thousand respondents, out of an electorate of more than a hundred million. How can 
+an accurate result be obtained from such a tiny fraction of the population? As it turns out, 
+the math all but guarantees it \em on certain conditions.
+
+# The Central Limit Theorem
+
+The justification comes from the ever-popular [Central Limit Theorem](https://en.wikipedia.org/wiki/Central_limit_theorem).
+Formally, the CLT states that a sum of independent and identically distributed 
+variables with finite mean and variance is a normally distributed random variable. Let $X_i$ 
+be the $i$th such random variable, $\mu$ the common mean of the $X_i$, and $\sigma^2$ their 
+common variance. Let $Z_n = \frac{\sum_{i=1}^n X_i - n \mu}{\sigma \sqrt n}$, or the centered and 
+standardized sum of $n$ samples of $X$.  Then for any two real numbers $a$ and $b$ that satisfy a < Z_n < b:
+
+$$
+\lim_{n \to \infty} P(a < Z_n < b) = \Phi(b) - \Phi(a)
+$$
+
+where $\Phi$ is the cumulative density function of the standard normal distribution.
+
+In other words, $Z_n$, representing the sample's deviation from the true sum, follows a 
+normal distribution, even if the $X_i$ don't! This means we can precisely state the uncertainty 
+of estimates, since we can compute the probability of an observation of $Z_n$ falling within some interval. Furthermore, if we divide the three numbers in the definition of $Z_n$ by $n$, 
+everything stated above applies to the sample mean just as to the sample sum.
+
+This follows from the fact that the variance of a sum of independent random variables is equal to 
+the sum of their variances, and the sum equal to the sum of their means (since $n \overline X = \sum_{i=1}^n X_i$). Since we assume the variables to be identically distributed with 
+common variance $\sigma^2$, $\text{Var}(\sum_{i=1}^nX_i) = \sum_{i=1}^n\sigma_2 = n \sigma^2$.
+So the true mean and variance can be reliably estimated from the sample.
+
+(See [here](https://www.probabilitycourse.com/chapter7/7_1_2_central_limit_theorem.php) and [this video](https://www.youtube.com/watch?v=zeJD6dqJ5lo) for more information on CLT theory).
+
+# Application to Public Opinion Polls
+
+In a survey measuring support for candidates in a two-candidate election, each respondent ($X_i$) can be modeled as a Bernoulli variable with probability of support $p$ for one candidate and $1-p$ for the other.  (If we were modeling voters' choice among more than two candidates, we would 
+have to use the [categorical distribution](https://en.wikipedia.org/wiki/Categorical_distribution) instead. I'll spare you this, since it's annoying to work with, and third-party and independent candidates are usually not important in American presidential elections). Plugging in the Bernoulli expected value and variance, we have this expression for the standardized population proportion:
+
+$$
+Z_n = \frac{\sum_{i=1}^n X_i - n p}{\sqrt {np(1-p)}}
+$$
+
+The term $1 / \sqrt n$ is often called the "standard error multiplier", since it determines the 
+size of the standard error of the sample mean. The inverse square root function shrinks quickly enough that even reasonably small samples cut down most of the standard error:
+
+```{r, echo = FALSE}
+theme_standard <- ggplot2::theme(
+    panel.background = ggplot2::element_blank(),
+    panel.border = ggplot2::element_rect(color = "black", fill = NA),
+    panel.grid = ggplot2::element_blank(),
+    panel.grid.major.x = ggplot2::element_line(color = "gray93"),
+    legend.background = ggplot2::element_rect(fill = "gray93"),
+    plot.title = ggplot2::element_text(
+        size = 15,
+        family = "sans",
+        face = "bold",
+        vjust = 1.3
+    ),
+    plot.title.position = "plot",
+    plot.subtitle = ggplot2::element_text(size = 10, family = "sans"),
+    legend.title = ggplot2::element_text(
+        size = 10,
+        family = "sans",
+        face = "bold"
+    ),
+    axis.title = ggplot2::element_text(
+        size = 9,
+        family = "sans",
+        face = "bold"
+    ),
+    axis.text = ggplot2::element_text(size = 8, family = "sans"),
+    strip.background = ggplot2::element_rect(
+        color = "black",
+        fill = "black"
+    ),
+    strip.text.x = ggplot2::element_text(color = "white"),
+    strip.text.y = ggplot2::element_text(color = "white")
+)
+ggplot2::theme_set(theme_standard)
+```
+
+For example, suppose  $p = 0.5$, so the standard deviation is $\sqrt{0.5(1 -0.5)} = 0.25$ (the highest Bernoulli variance possible).
+A poll of 100 respondents would have a standard error of `r 0.25 / sqrt(100 * 0.5 * (1- 0.5))`,
+while one of 1000 would have a standard error of `r 0.25 / sqrt(1000 * 0.5 * (1- 0.5))`. 
+Since a  95% confidence interval covers about 1.96 standard errors, this reduces the margin of error to a few percentage points, enough to make good predictions even in tight elections.
+
+```{r}
+suppressPackageStartupMessages(library(ggplot2))
+
+ggplot() + 
+    geom_function(fun = \(x) 1 / sqrt(x)) +
+    scale_y_continuous(labels =  scales::label_percent(), limits = c(0, 1)) + 
+    xlim(c(0, 1000)) +
+    labs(x = "n", y = "SE Multiplier", title = "SE Multiplier over Sample Sizes")
+```
+
+Here are simulations of this scenario, using larger and larger samples. The plots
+show how the sampling distribution approaches normality for sufficiently large $n$.
+
+```{r}
+suppressPackageStartupMessages(library(dplyr, quietly = TRUE))
+set.seed(1)
+
+n <- 500
+p <- 0.5
+EX <- 0.5 * n
+sizes <- c(5, 10, 30, 50, 500, 1000)
+trials <- rep(sizes, each = n)
+data <- data.frame(draw = rbinom(n * length(sizes), trials, p), size = trials)
+data$z <- (data$draw - (p * data$size)) / sqrt(data$size * p * (1 - p))
+
+group_by(data, size, z)  |>  
+    summarize(count = n(), .groups = "drop") |> 
+ggplot(aes(x = z, y = count)) + 
+   geom_col() + 
+   facet_wrap(~ size, scales = "free_y")
+
+```
+
+# Polling in Practice
+
+From the Central Limit Theorem, we know that the distribution of $\overline X$ is $\mathcal N(\mu, \sigma / \sqrt n)$. Using our estimate $\overline X$ of the population proportion $\mu$ and $\hat{\sigma}$ of the population standard deviation $\sigma$, we can compute quantiles for this normal distribution. For a typical 95% two-sided confidence interval, we would calculate the quantiles for the interval endpoints 0.025 and 0.975. In frequentist inference, this does not mean the true proportion $mu$ has a 95% probability of falling within the interval, but that an interval constructed this way would be expected to contain the true parameter on 95% of samples. 
+
+So the above is certainly true provided these conditions are fulfilled and the sample is random. But are they 
+fulfilled in real-world polls? The answer is, "it depends." Pollsters can't use simple random samples, as we assumed in our discussion above. Since different demographics (by race, gender, class, region, etc.) vote in different ways, polls try to make their samples represent the 
+national population as well as possible. They often use complicated demographic weights to correct biases in samples, but this isn't an exact science. Nonresponse error is another problem; very few people actually agree to 
+talk to pollsters cold-calling them, and if some demographic segments do so less often than 
+others, the results are biased. All of these factors contribute to total survey error: the overall deviation of a survey result from the true value from all causes.
+
+In short, the simple CLT margin of error is smaller than the true margin. It may not even account for most of the true uncertainty.
+As [one review](https://5harad.com/papers/polling-errors.pdf) of these problems (from which the above is drawn) noted (p. 608):
+
+```
+In contrast to errors due to sample variance, it is difficult—
+and perhaps impossible—to build a useful and general statistical
+theory for the remaining components of total survey error.
+Moreover, even empirically measuring total survey error can
+be difficult, as it involves comparing the results of repeated
+surveys to a ground truth obtained, for example, via a census.
+For these reasons, it is not surprising that many survey organi-
+zations continue to use estimates of error based on theoretical
+sampling variation, simply acknowledging the limitations of
+the approach. Indeed, Gallup (2007) explicitly states that their
+methodology assumes “other sources of error, such as nonre-
+sponse, by some members of the targeted sample are equal,” and
+further notes that “other errors that can affect survey validity
+include measurement error associated with the questionnaire,
+such as translation issues and coverage error, where a part or
+parts of the target population ... have a zero probability of being
+selected for the survey.”
+```
+
+In the 2020 election, national polls performed terribly. The average error was 4.5 percentage 
+points, about as big as Joe Biden's margin of victory in the popular vote. 
+[Investigation failed to uncover why](https://www.politico.com/news/2021/07/18/pollsters-2020-polls-all-wrong-500050), despite much speculation about the COVID-19 pandemic, higher nonresponse rates among Trump voters, and other possible causes. We will see whether pollsters will do better in 2024.

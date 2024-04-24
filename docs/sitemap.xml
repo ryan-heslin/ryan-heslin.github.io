@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ryan-heslin.github.io/index.html</loc>
-    <lastmod>2024-02-19T16:29:01.668Z</lastmod>
+    <lastmod>2024-04-24T17:44:18.637Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/about.html</loc>
@@ -74,7 +74,7 @@
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/lesser-known/index.html</loc>
-    <lastmod>2024-02-19T16:28:52.090Z</lastmod>
+    <lastmod>2024-04-23T17:27:30.744Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/testthat/index.html</loc>
@@ -110,7 +110,7 @@
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/best_viz/index.html</loc>
-    <lastmod>2024-02-19T15:00:15.288Z</lastmod>
+    <lastmod>2024-02-20T14:34:37.949Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/aoc-2023-2/index.html</loc>
@@ -214,6 +214,10 @@
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/aoc-2023-wrapup/index.html</loc>
-    <lastmod>2024-02-19T14:26:41.372Z</lastmod>
+    <lastmod>2024-04-23T17:29:51.688Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/poll-size/index.html</loc>
+    <lastmod>2024-04-24T17:44:08.143Z</lastmod>
   </url>
 </urlset>

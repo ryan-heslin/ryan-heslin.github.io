@@ -3,6 +3,7 @@ title: "The Best Data Visualization of All Time"
 author: "Ryan Heslin"
 date: "2022-06-18"
 categories: ["Visualization"]
+image: "/img/minard.png"
 ---
 
 Most data visualizations are simple and utilitarian. This one is _complicated_ and 
