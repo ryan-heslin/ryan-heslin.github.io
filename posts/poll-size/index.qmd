@@ -8,20 +8,20 @@ categories: ["math"]
 Some mathematical claims seem to defy intuition. How is it that every system of linear equations 
 has exactly zero, one, or infinitely many solutions? How can it be that `0.999... = 1`? 
 How can it be that $P(x = 0) = 0$ for all continuous distributions?
-But few defy common sense as much as poll sample sizes. Presidential election polls routinely 
-claim to estimate the fraction of support for each candidate with only hundreds or 
-a few thousand respondents, out of an electorate of more than a hundred million. How can 
-an accurate result be obtained from such a tiny fraction of the population? As it turns out, 
-the math all but guarantees it \em on certain conditions.
+But few things violate common sense as badly as poll sample sizes. In the United States, presidential election polls  
+claim to estimate each candidate's share of support using at most
+a few thousand respondents. Yet the American electorate has more than a hundred million voters. How could 
+anyone obtain an accurate result from such a tiny fraction of the population? As it turns out, 
+the math all but guarantees it, provided certain conditions are met. 
 
 # The Central Limit Theorem
 
-The justification comes from the ever-popular [Central Limit Theorem](https://en.wikipedia.org/wiki/Central_limit_theorem).
+The justification for polling sizes comes from the ever-popular [Central Limit Theorem](https://en.wikipedia.org/wiki/Central_limit_theorem).
 Formally, the CLT states that a sum of independent and identically distributed 
-variables with finite mean and variance is a normally distributed random variable. Let $X_i$ 
+random variables with finite mean and variance is a normally distributed random variable. Let $X_i$ 
 be the $i$th such random variable, $\mu$ the common mean of the $X_i$, and $\sigma^2$ their 
 common variance. Let $Z_n = \frac{\sum_{i=1}^n X_i - n \mu}{\sigma \sqrt n}$, or the centered and 
-standardized sum of $n$ samples of $X$.  Then for any two real numbers $a$ and $b$ that satisfy a < Z_n < b:
+standardized sum of $n$ samples of $X$.  Then for any two real numbers $a$ and $b$ that satisfy $a < Z_n < b$:
 
 $$
 \lim_{n \to \infty} P(a < Z_n < b) = \Phi(b) - \Phi(a)
@@ -35,7 +35,7 @@ of estimates, since we can compute the probability of an observation of $Z_n$ fa
 everything stated above applies to the sample mean just as to the sample sum.
 
 This follows from the fact that the variance of a sum of independent random variables is equal to 
-the sum of their variances, and the sum equal to the sum of their means (since $n \overline X = \sum_{i=1}^n X_i$). Since we assume the variables to be identically distributed with 
+the sum of their variances, and their sum equal to the sum of their means (since $n \overline X = \sum_{i=1}^n X_i$). Since we assume the variables to be identically distributed with 
 common variance $\sigma^2$, $\text{Var}(\sum_{i=1}^nX_i) = \sum_{i=1}^n\sigma_2 = n \sigma^2$.
 So the true mean and variance can be reliably estimated from the sample.
 
@@ -129,11 +129,11 @@ ggplot(aes(x = z, y = count)) +
 
 # Polling in Practice
 
-From the Central Limit Theorem, we know that the distribution of $\overline X$ is $\mathcal N(\mu, \sigma / \sqrt n)$. Using our estimate $\overline X$ of the population proportion $\mu$ and $\hat{\sigma}$ of the population standard deviation $\sigma$, we can compute quantiles for this normal distribution. For a typical 95% two-sided confidence interval, we would calculate the quantiles for the interval endpoints 0.025 and 0.975. In frequentist inference, this does not mean the true proportion $mu$ has a 95% probability of falling within the interval, but that an interval constructed this way would be expected to contain the true parameter on 95% of samples. 
+From the Central Limit Theorem, we know that the distribution of $\overline X$ is $\mathcal N(\mu, \sigma / \sqrt n)$. Using our estimate $\overline X$ of the population proportion $\mu$ and $\hat{\sigma}$ of the population standard deviation $\sigma$, we can compute quantiles for this normal distribution. For a typical 95% two-sided confidence interval, we would calculate the quantiles for the interval endpoints 0.025 and 0.975. (Recall this is equivalent to finding the 2.5th and 97.5th percentiles). In frequentist inference, this does not mean the true proportion $\mu$ has a 95% probability of falling within the interval, but that an interval constructed this way would be expected to contain the true parameter on 95% of samples. 
 
-So the above is certainly true provided these conditions are fulfilled and the sample is random. But are they 
-fulfilled in real-world polls? The answer is, "it depends." Pollsters can't use simple random samples, as we assumed in our discussion above. Since different demographics (by race, gender, class, region, etc.) vote in different ways, polls try to make their samples represent the 
-national population as well as possible. They often use complicated demographic weights to correct biases in samples, but this isn't an exact science. Nonresponse error is another problem; very few people actually agree to 
+The above holds true if the CLT assumptions are met. But are they 
+fulfilled in real-world polls? The answer is, "it depends." Pollsters can't use the simple random samples we assumed in our discussion above. Since different demographics (by race, gender, class, region, etc.) vote in different ways, polls try to make their samples represent the 
+national population as well as possible. They often use complicated demographic weights to correct biases in samples, but this isn't an exact science. Nonresponse error is another problem; very few people agree to 
 talk to pollsters cold-calling them, and if some demographic segments do so less often than 
 others, the results are biased. All of these factors contribute to total survey error: the overall deviation of a survey result from the true value from all causes.
 
@@ -162,4 +162,4 @@ selected for the survey.”
 
 In the 2020 election, national polls performed terribly. The average error was 4.5 percentage 
 points, about as big as Joe Biden's margin of victory in the popular vote. 
-[Investigation failed to uncover why](https://www.politico.com/news/2021/07/18/pollsters-2020-polls-all-wrong-500050), despite much speculation about the COVID-19 pandemic, higher nonresponse rates among Trump voters, and other possible causes. We will see whether pollsters will do better in 2024.
+[Investigation failed to uncover why](https://www.politico.com/news/2021/07/18/pollsters-2020-polls-all-wrong-500050), despite much speculation about possible causes, such as the COVID-19 pandemic and higher nonresponse rates among Trump voters. We will see whether pollsters do better in 2024.

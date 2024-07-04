@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ryan-heslin.github.io/index.html</loc>
-    <lastmod>2024-04-24T17:44:18.637Z</lastmod>
+    <lastmod>2024-07-04T17:03:54.229Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/about.html</loc>
@@ -74,7 +74,7 @@
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/lesser-known/index.html</loc>
-    <lastmod>2024-04-23T17:27:30.744Z</lastmod>
+    <lastmod>2024-07-04T17:03:43.109Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/testthat/index.html</loc>
@@ -218,6 +218,10 @@
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/poll-size/index.html</loc>
-    <lastmod>2024-04-24T17:44:08.143Z</lastmod>
+    <lastmod>2024-07-04T16:25:43.992Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/longest-battle/index.html</loc>
+    <lastmod>2024-07-04T17:03:44.543Z</lastmod>
   </url>
 </urlset>

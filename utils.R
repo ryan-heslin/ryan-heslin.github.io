@@ -1,3 +1,4 @@
+# Retrieve image saved at path, falling back on callback in failure
 get_image <- function(path, callback, save, caption) {
     path <- normalizePath(path, mustWork = FALSE)
     if (!file.exists(path)) {
