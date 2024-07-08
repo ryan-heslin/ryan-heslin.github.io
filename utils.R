@@ -1,11 +1,15 @@
 # Retrieve image saved at path, falling back on callback in failure
-get_image <- function(path, callback, save, caption) {
+get_image <- function(path, img_callback, save_callback = NULL, caption = "") {
     path <- normalizePath(path, mustWork = FALSE)
     if (!file.exists(path)) {
         result <- callback()
-        save(result)
+        if(!is.null(save_callback)){
+            save_callback(path, result)
+        }
     }
-    paste0("![", caption, "](", path, ")")
+    # Since relative path from project directory should be /img/${image}
+    path <- file.path(basename(dirname(path)), basename(path))
+    paste0("![", caption, "](/", path, "){}")
 }
 
 get_single_file <- function(repo, path, branch = "main", out_file) {

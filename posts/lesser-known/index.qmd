@@ -160,9 +160,9 @@ while(current_dir != "Verso"){
     current_dir <- basename(current_wd)
     current_wd <- dirname(current_wd)
 }
-file <- normalizePath(file.path("../../img/labeled.png"), mustWork = FALSE)
+file <- normalizePath(file.path("./img/labeled.png"), mustWork = FALSE)
 if (!file.exists(file)){
-    png(filename = "../../img/labeled.png")
+    png(filename = file)
     descriptive_plot <- function(x, y) {
       x_name <- deparse(substitute(x))
       y_name <- deparse(substitute(y))
@@ -177,6 +177,5 @@ data <- png::readPNG(file)
 plot.new() 
 rasterImage(data, 0, 0, 1, 1)
 ```
-
 
 What are your favorite R tricks?

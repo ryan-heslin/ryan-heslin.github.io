@@ -2,7 +2,8 @@
 title: "How Do Polls Even Work?"
 author: "Ryan Heslin"
 date: "2024-04-24"
-categories: ["math"]
+categories: ["Math"]
+image: ../../img/binom-trial.png
 ---
 
 Some mathematical claims seem to defy intuition. How is it that every system of linear equations 
@@ -107,7 +108,34 @@ ggplot() +
 Here are simulations of this scenario, using larger and larger samples. The plots
 show how the sampling distribution approaches normality for sufficiently large $n$.
 
-```{r}
+```{r, echo = FALSE}
+source("./utils.R")
+callback <- function() {
+suppressPackageStartupMessages(library(dplyr, quietly = TRUE))
+set.seed(1)
+
+n <- 500
+p <- 0.5
+EX <- 0.5 * n
+sizes <- c(5, 10, 30, 50, 500, 1000)
+trials <- rep(sizes, each = n)
+data <- data.frame(draw = rbinom(n * length(sizes), trials, p), size = trials)
+data$z <- (data$draw - (p * data$size)) / sqrt(data$size * p * (1 - p))
+
+group_by(data, size, z)  |>  
+    summarize(count = n(), .groups = "drop") |> 
+ggplot(aes(x = z, y = count)) + 
+   geom_col() + 
+   facet_wrap(~ size, scales = "free_y")
+}
+path  <- "./img/binom-trial.png"
+img_code <- get_image(path = path, img_callback = callback, 
+                      save_callback = \(x, y) suppressMessages(ggplot2::ggsave(filename = x, plot = y  )),
+                      #caption = "Graph showing that simulations of a binomial draw approach normality as the number of trials increases")  |>  
+                      caption = "")  
+```
+
+```{r, eval = FALSE}
 suppressPackageStartupMessages(library(dplyr, quietly = TRUE))
 set.seed(1)
 
@@ -126,6 +154,7 @@ ggplot(aes(x = z, y = count)) +
    facet_wrap(~ size, scales = "free_y")
 
 ```
+![](/img/binom-trial.png){fig-alt="Simulations of a binomial draw approach normality as the number of trials increases"}
 
 # Polling in Practice
 
