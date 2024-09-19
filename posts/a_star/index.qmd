@@ -20,24 +20,24 @@ the right way.
 
 # The Problem
 
-Day 23's puzzle is a variant of the classic [Towers of Hanoi](https://en.wikipedia.org/wiki/Tower_of_Hanoi).
-Instead of disks, the puzzle has players move different types of [amphipod](https://en.wikipedia.org/wiki/Amphipoda), in keeping with the year's ocean theme. More 
-importantly, the goal is to move each amphipod of each type into the 
+Day 23's puzzle is a variation of the classic [Towers of Hanoi](https://en.wikipedia.org/wiki/Tower_of_Hanoi) problem.
+Instead of disks, the puzzle has players move different types of [amphipod](https://en.wikipedia.org/wiki/Amphipoda), in keeping with the year's ocean theme. 
+The goal is to move each amphipod of each type into the 
 correct "side room" connected to the main board, or "hall", as efficiently as possible. 
 The second part of the puzzle doubles the number of amphipods, making it much tougher to solve 
 by hand. 
 
-A post on the [subreddit](https://www.reddit.com/r/adventofcode/comments/wl873a/aoc_and_professional_developers/) suggested using the A* ("A star") algorithm. [A*]()https://en.wikipedia.org/wiki/A*_search_algorithm) is a classic pathfinding algorithm that finds the shortest path between two 
-given nodes of a [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)). Implementations use a function called `d` to measure distances 
-between nodes, and a heuristic function called `h` to estimate the distance between 
+A post on the [subreddit](https://www.reddit.com/r/adventofcode/comments/wl873a/aoc_and_professional_developers/) suggested using the A* ("A star") algorithm. [A*]()https://en.wikipedia.org/wiki/A*_search_algorithm) is a classic pathfinding algorithm that calculates the shortest path between two 
+given nodes of a [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)). Implementations rely on two helper functions. `d` measures distances 
+between nodes, and a heuristic function called `h` estimates the distance between 
 a node and the goal. The algorithm is mathematically certain to return the 
-correct path if `h` never overestimates the distance to the goal. 
+correct path so long as `h` never overestimates the distance to the goal. 
 
 In the problem at hand, the nodes were clearly game states (legal configurations 
 of the board). Two nodes shared a connection if one could be reached from 
-the other by a legal move (luckily, no legal moves are reversible, so the graph 
-is acyclic --- no loops are possible). The puzzle required the only the minimal cost of completing the 
-game, not the actual sequence of moves, which further simplified things. 
+the other by a legal move. (Luckily, no legal moves are reversible, so the graph 
+is acyclic --- loops are impossible). Also, I only needed to find the 
+distance of the shortest path, not the path itself.
 
 Still, I faced several hard tasks: 
 
@@ -49,17 +49,20 @@ estimate any node's distance from the goal).
 # Into the Fray
 
 As is usual with Advent of Code, the first task was parsing the input.
-This was my raw input: 
+My input looked like this: 
 
 ```
 #############
 #...........#
-###A#D#A#B###
-  #B#C#D#C#
+###A#D#B#D###
+  #B#C#C#A#
   #########
 ```
+
+(This is the sample input given with the puzzle description, not the real one, which players 
+are discouraged from sharing).
 I made the crucial decision to represent positions on the board as tuples of `(x, y)` coordinates.
-Since I was using Python, I decided to use a zero-based index, with the leftmost hall space as the `x` origin and the bottom side room spaces as the `y` origin. So the leftmost `A` amphipod on the board above would be located at `(2, 2)`. I would have made my life much easier if I had used complex numbers instead of tuples of real numbers. In any 
+Since I was using Python, I decided to use a zero-based index, with the leftmost hall space as the `x` origin and the bottom side room spaces as the `y` origin. So the leftmost `A` amphipod on the board above would be located at `(2, 2)`. Using complex numbers instead of tuples would have made my life much easier. In any 
 case, I wrote a crude function to map each 
 amphipod type to a set containing its positions: 
 
@@ -71,17 +74,17 @@ def parse(inp, xmax=10):
     stripped = list(zip(*stripped))
     stripped = stripped[1 : (xmax + 1)]
     mapping = {i: set() for i in range(4)}
+
     for i in range(min(ends) + 2, max(ends) - 1, 2):
         this = stripped[i]
         for j in range(ymax):
             val = values_map[this[j]]
             mapping[val].add((i, j))  # Add position to set
-
     return mapping, ymax
 ```
 
-Then I wrote a complicated function I'll spare you. It computed, for each pair of coordinates it was legal to move between, the spaces spanning them. 
-That way, I could allow moves only after confirming that that space wasn't blocked. 
+Then I wrote a complicated that computed the coordinates of the spaces between each pair of coordinates it was legal to move between.
+That way, I could discard moves if I detected an amphipod blocking them.
 
 Next came designing an object to represent game states. It should own `h` 
 and `d`, the second of which would take another game state as argument. 
@@ -94,7 +97,7 @@ From there, `d` and `h` were surprisingly simple.
 differed by the position of just one amphipod, so 
 all I had to do was find the two coordinate tuples that disagreed in the instances' coordinate sets, measure the distance between them, and multiply by the cost of moving the relevant amphipod type one space. `h` was a bit trickier, but hardly brutal  --- I just computed the distance from each amphipod to the target side room, a simple approach  that would never underestimate the true cost.
 
-The real bear turned out to be finding the valid neighbors of each instance. It took me an embarrassingly long time to figure out the rules:
+The real bear turned out to be finding the valid neighbors of each instance. It took me an embarrassingly long time to figure out the unstated rules:
 
 1. Amphipods in side rooms may only move out if they are in the side room of the wrong type, or if an amphipod of the wrong type is positioned behind them.
 
@@ -102,7 +105,8 @@ The real bear turned out to be finding the valid neighbors of each instance. It 
 
 3. Amphipods in hall rooms may only move into the side room of their type, and only if a path to it is clear.
 
-4. A side room may only admit amphipods if it either contains no amphipods or only amphipods of its type. 
+4. A side room may only admit amphipods if has an open space and contains no amphipods 
+   of a different type.
 
 Translating these directives into conditions was pure hell, and the result turned into 
 pure write-only code. Here's a representative excerpt:
@@ -185,14 +189,13 @@ Then came the really hard part.
 I spent an embarrassing amount of time in the debugger getting everything to work correctly. 
 I fell into in a dispiriting loop of scanning output for evidence of bugs, stepping through 
 the debugger to track them down, and making painstaking changes to fix them. I came close to giving up, 
-and several times regretted starting. Then, one fine July Monday morning, I saw the code spit out a plausible-looking answer. Not expecting success, 
+and several times regretted starting. Then, as I worked one fine Monday morning in July, the code spat out a plausible-looking answer. Not expecting success, 
 I checked the Advent of Code website and gasped when I saw it was correct.
 
 I wasn't home free; my inefficient kludge algorithm might well be too slow for the second half of the problem. I modified `State` to handle 
-a larger game board, crossed my fingers, and ran the script again. It took a few minutes longer, but it spit out the correct answer for part 2. I had done it. 
+a larger game board, crossed my fingers, and ran the script again. It took a few minutes longer, but it returned the correct answer for part 2. I had done it. 
 
 I savored the feeling of blissful triumph, knowing it would not last. I might have just finished the worst implementation of `A*` of all time, 
 but it was _my_ implementation, and it solved the problem. Somehow, writing your own intricate kludge is far more satisfying then copying someone else's elegant solution. In any case, I was 
 at last done: I had finished all 25 puzzles for Advent of Code 2021 by myself. Perhaps an 
 achievement in pointlessness, but an achievement nonetheless.
-

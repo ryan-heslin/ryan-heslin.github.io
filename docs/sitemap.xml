@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ryan-heslin.github.io/index.html</loc>
-    <lastmod>2024-07-08T14:48:07.158Z</lastmod>
+    <lastmod>2024-09-19T17:41:52.452Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/about.html</loc>
@@ -50,7 +50,7 @@
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/a_star/index.html</loc>
-    <lastmod>2023-09-11T13:51:09.320Z</lastmod>
+    <lastmod>2024-09-19T16:48:39.045Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/aoc-complete/index.html</loc>
@@ -90,7 +90,7 @@
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/why-quarto/index.html</loc>
-    <lastmod>2023-09-11T13:52:32.368Z</lastmod>
+    <lastmod>2024-09-19T17:41:43.578Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/regression-algebra/index.html</loc>
@@ -98,7 +98,7 @@
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/aoc-overview/index.html</loc>
-    <lastmod>2023-09-11T13:51:05.076Z</lastmod>
+    <lastmod>2024-09-19T16:45:43.076Z</lastmod>
   </url>
   <url>
     <loc>https://ryan-heslin.github.io/posts/aoc-chatGPT/index.html</loc>
@@ -223,5 +223,9 @@
   <url>
     <loc>https://ryan-heslin.github.io/posts/longest-battle/index.html</loc>
     <lastmod>2024-07-04T17:03:44.543Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryan-heslin.github.io/posts/aoc-advice/index.html</loc>
+    <lastmod>2024-09-19T16:54:50.656Z</lastmod>
   </url>
 </urlset>

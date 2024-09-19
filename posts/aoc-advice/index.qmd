@@ -1,0 +1,91 @@
+---
+title: "Advice for Advent of Code Newcomers"
+author: "Ryan Heslin"
+date: "2024-09-18"
+categories: ["Advent of Code" ]
+urlcolor: "blue"
+---
+
+# Introduction
+
+I've introduced [Advent of Code](https://adventofcode.com/) enough times
+that you should know what it is by heart. If not, it's an annual series of programming 
+challenges with a Christmas theme. In advance of this year's edition, the 
+tenth since 2015, I thought I would offer some advice for new players.
+
+# Know the Fundamentals
+
+Advent of Code will test your knowledge of computer science. If you majored 
+in the field, most of what you learned in class will make an appearance.
+Here are some important subjects that will help you in puzzles again and again:
+
+* Good working knowledge of any general-purpose programming language.
+
+* String manipulation and regular expressions.
+
+* Standard data structures - lists, sets, hash maps, vectors, and so on. You'll have  
+  to make effective use of whatever your chosen language uses to organize data.
+
+* Recursion and recursive data structures.
+
+* [Dynamic programming](https://en.wikipedia.org/wiki/Dynamic_programming). Many puzzles are best approached by solving small pieces of the 
+  problem, caching the results, and using them to solve more subproblems until you find the complete solution.
+
+* Discrete math, especially modular arithmetic and the [Chinese remainder theorem](https://en.wikipedia.org/wiki/Chinese_remainder_theorem).
+
+* Graph structures and algorithms. You should be comfortable using [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm), and you should know how to transform 
+  input data into whatever data structure you use for it in your language.
+
+* [Analysis of algorithms](https://en.wikipedia.org/wiki/Analysis_of_algorithms). It's always helpful if you can tell by inspection whether a 
+  given approach will take minutes or months to compute.
+
+* Debugging. You didn't think you'd get every puzzle right first try, did you?
+
+Don't worry if you aren't familiar with everything above. Advent of Code is a 
+good way to learn these concepts, since few things provide better motivation to 
+learn something than an annoying problem you can't solve with what you already know.
+You can find plenty of resources about everything in this list.
+
+# Don't Get Tunnel Vision
+
+When working on a tough problem, it's easy to convince yourself that your approach 
+is the one right way to solve it. There is seldom one right way with Advent of Code, 
+but some ways are much better than others. If you aren't careful, you may wind up 
+spending hours optimizing a hopelessly slow algorithm or enforcing an nonexistent 
+constraint. You shouldn't hesitate to abandon a clever approach that isn't working.
+
+Many puzzles are designed to punish inflexibility. [2017 day 16](https://adventofcode.com/2017/day/16), for example, asks you to simulate a process described in instructions. Part 1 is 
+simple, but Part 2 
+asks you to compute the result after a ridiculous number of iterations, far too many to 
+compute directly. Since the problem is guaranteed to be solvable, this is a hint that the process 
+contains a cycle. You're meant to simulate until you find the period of the cycle,
+then use this information to calculate the answer. Anyone who fails to see this can
+only try in vain to brute-force the problem. 
+
+# Get Creative
+
+All the same, Advent of Code isn't Leetcode. Instead of a straightforward problem 
+statement, you get a problem wrapped in a narrative scenario. What's more, it's usually 
+not enough to apply a textbook algorithm. You have to adapt it to the unique constraints 
+of the puzzle, which may not be explicitly stated. 
+
+For example, [2022 day 16](https://adventofcode.com/2022/day/16) requires you to 
+find the costliest path of a given length through a graph, where each node  has a base cost 
+that diminishes the further from the start of the path it is visited. Given the size of the graph, 
+naive use of Dijkstra's algorithm is hopeless. After asking around for help, I used 
+the [Floyd-Warshall algorithm](https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm)
+to reduce the graph to distances between pairs of nodes. Using this information, I 
+wrote a variation of Dijkstra's algorithm that traversed the graph while tracking the current node, the distance from the start node, and set of previous 
+visited nodes. By pruning states that could not possibly generate the optimal value, this 
+approach quickly found the right answer.
+
+Advent of Code puzzles aren't usually _that_ involved, but it rarely hurts to 
+search for a clever optimization or unconventional use of data structures that could 
+make your solution better.
+
+# Have Fun
+
+Above all, Advent of Code is for fun. If a puzzle becomes a chore, don't feel 
+obliged to keep solving it. If you burn out in the third week (as I often do), 
+take a break. Most programming tasks are serious business; it's a relief to 
+undertake one that doesn't take itself too seriously.

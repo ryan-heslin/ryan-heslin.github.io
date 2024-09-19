@@ -16,12 +16,12 @@ to review the eight existing years of Advent of Code and offer my impressions.
 # 2015
 
 The first installment of a long-running series is usually the strangest. 
-Rules of the setting are looser or unestablished. The writing 
+Rules of the setting are looser or not established. The writing 
 varies from the formula later installments will establish.
 So it is with Advent of Code's first year. According to [Eric Wastl](http://was.tl/), 
 the sole author of Advent of Code, the original idea was just to entertain his friends 
-with Chirstmas-themed puzzles. The first year accordingly has more informal feel than 
-what would come later. The difficulty spikes and troughs as with the surprisingly 
+with Christmas-themed puzzles. The first year accordingly has a more informal feel than 
+what would come later. The difficulty spikes and troughs unexpectedly, as with the surprisingly 
 easy [Aunt Sue](https://adventofcode.com/2015/day/16) puzzle. 
 Some puzzles lack the creative twists that became the series' hallmark. 
 [Day 9](https://adventofcode.com/2015/day/9), for instance, is just 
@@ -156,7 +156,7 @@ I stumbled across a link to a puzzle near the end of my fall semester of graduat
 decided to try solving it. It was [day 12](https://adventofcode.com/2020/day/12), 
 a fairly easy puzzle that asks you to simulate moving a navigation beacon according 
 to instructions. I had fun solving it, though I wasted a lot of time trying to 
-implement a general rotation matrix to model switching orientation. (I had yet to learn 
+implement a general rotation matrix to model changes of orientation. (I had yet to learn 
 that Advent of Code only requires integral computations, so I only had to deal 
 with multiples of 90 degrees).
 
@@ -200,7 +200,7 @@ It took weeks to crawl through days 21 through 24, one of the toughest stretches
 of puzzles in the whole series. Most of these puzzles demand creativity to pare down 
 huge problem spaces. Day 24, for instance, asks you to find the highest number that meets 
 a condition from trillions of possibilities. I solved it only after painfully 
-reverse-engineering the made-up assembly langueage provided as the input.
+reverse-engineering the made-up assembly language provided as the input.
 Day 23, to me, is the hardest puzzle in the entire series. 
 It asks you to solve a variation on the  [Towers of Hanoi](https://en.wikipedia.org/wiki/Tower_of_Hanoi) puzzle. The secret is that it's pretty easy to solve by hand. 
 (I used cut-up Post-it notes as game pieces). But I couldn't resist the challenge of 
