@@ -1,0 +1,30 @@
+---
+title: "Advent of Code 2023 Day 12"
+date: "2024-01-18"
+freeze: auto
+categories: ["Advent of Code"]
+urlcolor: "blue"
+---
+
+Nelson's decision endangered no one but himself. It made his subordinates safer by drawing fire 
+away from them. He  judgmed that keeping up morale was worth risking his life. 
+(Or maybe he just had no fear of death: he had already lost vision in one eye and arm to combat wounds).
+
+Perhaps Britain would have been better off in a 
+world where he fled belowdecks and survived. (The United States, had he lived to serve in the War of 1812, might not have). But his victory 
+at Trafalgar was more than enough to crush Napoleon's hopes of invading England and 
+end the French challenge to the Royal Navy.
+
+But where Nelson only sacrificed himself, Cradock chose to sacrifice his whole command. 
+Would the thousands of sailors he commanded have given their lives to save 
+his honor? 
+History was not kind to his decision. Today, Cradock is mainly remembered as the first Royal 
+Navy officer to lose a major surface action since the Napoleonic Wars.
+
+Cradock's defeat had no material impact on World War I. The two ships he lost were 
+obsolescent and expendable. His only tactical achievement was the worst insult that can be applied to a commander: he made the enemy exhaust their ammunition. A few weeks later, 
+a force of British battlecruisers annihilated Spee's squadron as easily as it 
+annihilated Cradock's.
+
+Nelson's behavior may have inspired Cradock. Revered as 
+Nelson's sacrifice _bought_ the peace the Victorian-Edwardian Royal Navy enjoyed.
